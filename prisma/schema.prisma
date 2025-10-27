@@ -3,7 +3,6 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../lib/generated/prisma"
   // use default output used by @prisma/client package
 }
 
