@@ -1,6 +1,9 @@
 "use client"
 
 import type React from "react"
+import Image from "next/image"
+import cretaEv from "../assets1/creata electric.avif"
+import ioniq5 from "../assets1/ioniq 5.png"
 
 import { useState, useCallback, useEffect } from "react"
 import { ChevronRight } from "lucide-react"
@@ -12,6 +15,10 @@ import SuvImageSlider from "./suv-image-slider"
 const SEGMENTS: Segment[] = ["hatchback", "sedan", "suv", "electric"]
 
 export default function CarAccordionSlider() {
+  const ELECTRIC_IMAGES = [
+    { src: cretaEv as any, alt: "Creta Electric" },
+    { src: ioniq5 as any, alt: "IONIQ 5" },
+  ]
   const counts: Record<Segment, number> = {
     hatchback: MODELS.filter((m) => m.segment === "hatchback").length,
     sedan: MODELS.filter((m) => m.segment === "sedan").length,
@@ -20,6 +27,7 @@ export default function CarAccordionSlider() {
   }
   const [active, setActive] = useState<number>(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true)
+  const [electricIndex, setElectricIndex] = useState<number>(0)
 
   // Auto-play animation
   useEffect(() => {
@@ -31,6 +39,18 @@ export default function CarAccordionSlider() {
     
     return () => clearInterval(interval)
   }, [isAutoPlaying])
+
+  // Cycle electric images when Electric segment is active
+  useEffect(() => {
+    if (!isAutoPlaying) return
+    if (SEGMENTS[active] !== "electric") return
+
+    const id = setInterval(() => {
+      setElectricIndex((i) => (i + 1) % ELECTRIC_IMAGES.length)
+    }, 3000)
+
+    return () => clearInterval(id)
+  }, [active, isAutoPlaying])
 
   const onKey = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
     setIsAutoPlaying(false)
@@ -96,19 +116,38 @@ export default function CarAccordionSlider() {
                   <SedanImageSlider />
                 ) : seg === "suv" && isActive ? (
                   <SuvImageSlider />
+                ) : seg === "electric" && isActive ? (
+                  <div className="absolute inset-0 overflow-hidden">
+                    {ELECTRIC_IMAGES.map((img, idx) => (
+                      <Image
+                        key={img.src + idx}
+                        src={img.src}
+                        alt={img.alt}
+                        fill
+                        sizes="100vw"
+                        className={`absolute inset-0 object-cover transition-opacity duration-500 ${
+                          idx === electricIndex ? "opacity-100" : "opacity-0"
+                        }`}
+                      />
+                    ))}
+                  </div>
                 ) : (
-                  <img
-                    src={segmentHeroImage(seg) || "/placeholder.svg?height=760&width=1200&query=hyundai+segment"}
-                    alt=""
-                    aria-hidden="true"
-                    className={[
-                      "h-full w-full object-cover",
-                      "transition-[filter,transform] duration-700 ease-in-out",
-                      isActive 
-                        ? "scale-110 filter-none brightness-100" 
-                        : "scale-100 grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105",
-                    ].join(" ")}
-                  />
+                  seg === "electric" ? (
+                    <div className="h-full w-full bg-gradient-to-br from-gray-900 via-black to-black" aria-hidden="true" />
+                  ) : (
+                    <img
+                      src={segmentHeroImage(seg) || "/placeholder.svg?height=760&width=1200&query=hyundai+segment"}
+                      alt=""
+                      aria-hidden="true"
+                      className={[
+                        "h-full w-full object-cover",
+                        "transition-[filter,transform] duration-700 ease-in-out",
+                        isActive 
+                          ? "scale-110 filter-none brightness-100" 
+                          : "scale-100 grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105",
+                      ].join(" ")}
+                    />
+                  )
                 )}
               </div>
               

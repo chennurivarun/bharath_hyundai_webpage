@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import WhatsAppButton from "@/components/whatsapp-button"
 import "./globals.css"
 
 import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="en-IN" className="dark" suppressHydrationWarning>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
         <Suspense fallback={null}>{children}</Suspense>
+        <WhatsAppButton />
         <Analytics />
       </body>
     </html>

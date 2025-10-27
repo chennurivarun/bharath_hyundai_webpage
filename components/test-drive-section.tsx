@@ -64,18 +64,34 @@ export default function TestDriveSection() {
                   <button
                     key={model.id}
                     onClick={() => setSelectedModel(model.name)}
-                    className={`group relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                    className={`group relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-300 ${
                       selectedModel === model.name
                         ? "border-red-500 scale-105"
                         : "border-white/20 hover:border-red-500/50"
                     }`}
                   >
-                    <img
-                      src={model.image}
-                      alt={model.name}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-2">
+                    <div className="w-full h-full overflow-hidden">
+                      <img
+                        src={model.image}
+                        alt={model.name}
+                        className="w-full h-full object-cover transition-all duration-500"
+                        style={{
+                          filter: selectedModel === model.name ? 'grayscale(0%)' : 'grayscale(100%)',
+                          transform: 'scale(1)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.filter = 'grayscale(0%)';
+                          e.currentTarget.style.transform = 'scale(1.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          if (selectedModel !== model.name) {
+                            e.currentTarget.style.filter = 'grayscale(100%)';
+                          }
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-2 pointer-events-none">
                       <span className="text-white text-xs font-semibold">{model.name}</span>
                     </div>
                   </button>

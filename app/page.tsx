@@ -6,6 +6,12 @@ import type { Model } from "@/lib/models"
 import CarAccordionSlider from "@/components/car-accordion-slider"
 import NLineImageSlider from "@/components/nline-image-slider"
 import TestDriveSection from "@/components/test-drive-section"
+import { OffersCarousel } from "@/components/offers-carousel"
+import { TestimonialsSection } from "@/components/testimonials-section"
+import { NewsletterSection } from "@/components/newsletter-section"
+import { EMICalculator } from "@/components/emi-calculator"
+import { ScrollToTop } from "@/components/scroll-to-top"
+import { FloatingActions } from "@/components/floating-actions"
 
 type NavItem = { label: string; href: string }
 type Branch = { id: string; name: string; address: string; phone: string }
@@ -68,23 +74,33 @@ export default function Page() {
         <main id="main" className="min-h-screen space-y-16 lg:space-y-24">
           <HeroBH />
 
+          <OffersCarousel />
+
           <CarAccordionSlider />
 
           <NLineSection />
 
           <TestDriveSection />
 
+          <EMICalculator />
+
           <WhyBharathHyundai />
+
+          <TestimonialsSection />
 
           <ServiceCTA />
 
           <LocationsRow branches={BRANCHES} />
+
+          <NewsletterSection />
         </main>
 
         <SiteFooter />
       </div>
 
       <WhatsappFab />
+      <ScrollToTop />
+      <FloatingActions />
     </>
   )
 }
@@ -315,16 +331,19 @@ function ModelCard({ model }: { model: Model }) {
 function NLineSection() {
   const nLineModels = [
     { 
+      id: 'i20-nline',
       name: "i20 N Line", 
       priceBand: "₹9.98–12.06L*",
       desc: "Sporty hatchback with race-inspired styling"
     },
     { 
+      id: 'venuen',
       name: "Venue N Line", 
       priceBand: "₹11.24–12.45L*",
       desc: "Performance-tuned compact SUV"
     },
     { 
+      id: 'cretan',
       name: "Creta N Line", 
       priceBand: "₹16.34–20.09L*",
       desc: "Premium SUV with N Line performance"
@@ -408,6 +427,18 @@ function NLineSection() {
                     <button className="px-4 py-2 bg-red-600/20 hover:bg-red-600/30 text-red-400 text-sm rounded-lg transition-colors border border-red-500/30">
                       Test Drive
                     </button>
+                    <a
+                      href={
+                        model.id === 'venuen' ? '/venue-nline' :
+                        model.id === 'cretan' ? '/creta-nline' :
+                        model.id === 'i20-nline' ? '/model/i20-nline' :
+                        `/model/${(model as any).id}`
+                      }
+                      className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm rounded-lg transition-colors border border-white/10"
+                      aria-label={`Know more about ${model.name}`}
+                    >
+                      Know More
+                    </a>
                   </div>
                 </div>
 
