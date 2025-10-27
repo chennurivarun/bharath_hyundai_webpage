@@ -62,60 +62,60 @@ const Chip = ({ children }: { children: React.ReactNode }) => (
 
 // i20 specific data
 const HL = [
-  { title: "Bold & Magnetic Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Highlights/pc/i20-highlight-1.jpg" },
-  { title: "Premium Interiors", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Highlights/pc/i20-highlight-2.jpg" },
-  { title: "Smart Connectivity", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Highlights/pc/i20-highlight-3.jpg" },
-  { title: "Advanced Safety", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Highlights/pc/i20-highlight-4.jpg" },
-  { title: "Sporty Performance", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Highlights/pc/i20-highlight-5.jpg" },
-  { title: "Knight Edition", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Highlights/knight/i20knightbig.jpg" },
+  { title: "Bold & Magnetic Design", img: "/images/i20/i20-hatchback.png" },
+  { title: "Premium Interiors", img: "/images/i20/i20-hatchback1.jpg" },
+  { title: "Smart Connectivity", img: "/images/i20/i20-hatchback2.jpg" },
+  { title: "Advanced Safety", img: "/images/i20/i20-hatchback.png" },
+  { title: "Sporty Performance", img: "/images/i20/i20-hatchback1.jpg" },
+  { title: "Knight Edition", img: "/images/i20/i20knightbig.jpg" },
 ];
 
 const EX = [
-  { title: "Front Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Exterior/pc/i20-exterior-1.jpg" },
-  { title: "Side Profile", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Exterior/pc/i20-exterior-2.jpg" },
-  { title: "Rear Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Exterior/pc/i20-exterior-3.jpg" },
-  { title: "LED Headlamps", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Exterior/pc/i20-exterior-4.jpg" },
-  { title: "Alloy Wheels", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Exterior/pc/i20-exterior-5.jpg" },
-  { title: "LED Tail Lamps", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Exterior/pc/i20-exterior-6.jpg" },
+  { title: "Front Design", img: "/images/i20/i20-hatchback.png" },
+  { title: "Side Profile", img: "/images/i20/i20-hatchback1.jpg" },
+  { title: "Rear Design", img: "/images/i20/i20-hatchback2.jpg" },
+  { title: "LED Headlamps", img: "/images/i20/i20-hatchback.png" },
+  { title: "Alloy Wheels", img: "/images/i20/i20-hatchback1.jpg" },
+  { title: "LED Tail Lamps", img: "/images/i20/i20-hatchback2.jpg" },
 ];
 
 const IN = [
-  { title: "Dashboard Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Interior/pc/i20-interior-1.jpg" },
-  { title: "Premium Seats", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Interior/pc/i20-interior-2.jpg" },
-  { title: "Touchscreen Display", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Interior/pc/i20-interior-3.jpg" },
-  { title: "Steering Wheel", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Interior/pc/i20-interior-4.jpg" },
-  { title: "Climate Control", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Interior/pc/i20-interior-5.jpg" },
+  { title: "Dashboard Design", img: "/images/i20/i20-hatchback.png" },
+  { title: "Premium Seats", img: "/images/i20/i20-hatchback1.jpg" },
+  { title: "Touchscreen Display", img: "/images/i20/i20-hatchback2.jpg" },
+  { title: "Steering Wheel", img: "/images/i20/i20-hatchback.png" },
+  { title: "Climate Control", img: "/images/i20/i20-hatchback1.jpg" },
 ];
 
 const PF = [
-  { title: "1.2 Kappa Petrol", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Performance/pc/i20-performance-1.jpg" },
-  { title: "1.0 Turbo GDi", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Performance/pc/i20-performance-2.jpg" },
-  { title: "CVT Transmission", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Performance/pc/i20-performance-3.jpg" },
-  { title: "Drive Modes", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Performance/pc/i20-performance-4.jpg" },
+  { title: "1.2 Kappa Petrol", img: "/images/i20/i20-hatchback.png" },
+  { title: "1.0 Turbo GDi", img: "/images/i20/i20-hatchback1.jpg" },
+  { title: "CVT Transmission", img: "/images/i20/i20-hatchback2.jpg" },
+  { title: "Drive Modes", img: "/images/i20/i20-hatchback.png" },
 ];
 
 const SF = [
-  { title: "6 Airbags", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Safety/pc/i20-safety-1.jpg" },
-  { title: "ABS with EBD", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Safety/pc/i20-safety-2.jpg" },
-  { title: "ESC & VSM", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Safety/pc/i20-safety-3.jpg" },
-  { title: "Hill Start Assist", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Safety/pc/i20-safety-4.jpg" },
-  { title: "TPMS", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Safety/pc/i20-safety-5.jpg" },
-  { title: "Rear Camera", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Safety/pc/i20-safety-6.jpg" },
+  { title: "6 Airbags", img: "/images/i20/i20-hatchback.png" },
+  { title: "ABS with EBD", img: "/images/i20/i20-hatchback1.jpg" },
+  { title: "ESC & VSM", img: "/images/i20/i20-hatchback2.jpg" },
+  { title: "Hill Start Assist", img: "/images/i20/i20-hatchback.png" },
+  { title: "TPMS", img: "/images/i20/i20-hatchback1.jpg" },
+  { title: "Rear Camera", img: "/images/i20/i20-hatchback2.jpg" },
 ];
 
 const CON = [
-  { title: "Wireless Charging", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Convenience/pc/i20-convenience-1.jpg" },
-  { title: "Push Button Start", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Convenience/pc/i20-convenience-2.jpg" },
-  { title: "Smart Trunk", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Convenience/pc/i20-convenience-3.jpg" },
-  { title: "Cruise Control", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Convenience/pc/i20-convenience-4.jpg" },
-  { title: "Auto AC", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Convenience/pc/i20-convenience-5.jpg" },
-  { title: "Bluetooth", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Convenience/pc/i20-convenience-6.jpg" },
+  { title: "Wireless Charging", img: "/images/i20/i20-hatchback.png" },
+  { title: "Push Button Start", img: "/images/i20/i20-hatchback1.jpg" },
+  { title: "Smart Trunk", img: "/images/i20/i20-hatchback2.jpg" },
+  { title: "Cruise Control", img: "/images/i20/i20-hatchback.png" },
+  { title: "Auto AC", img: "/images/i20/i20-hatchback1.jpg" },
+  { title: "Bluetooth", img: "/images/i20/i20-hatchback2.jpg" },
 ];
 
 const KNIGHT = [
-  { title: "Knight Edition", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Highlights/knight/i20knightbig.jpg" },
-  { title: "All Black Inserts", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Highlights/knight/i20knightallblackinserts.jpg" },
-  { title: "All Black Seats", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Highlights/knight/i20knightallblackseats.jpg" },
+  { title: "Knight Edition", img: "/images/i20/i20knightbig.jpg" },
+  { title: "All Black Inserts", img: "/images/i20/i20knightallblackinserts.jpg" },
+  { title: "All Black Seats", img: "/images/i20/i20knightallblackseats.jpg" },
 ];
 
 const FEATURES: Record<string, { magna: boolean; sportz: boolean; asta: boolean }> = {
@@ -226,7 +226,7 @@ export default function I20Page() {
           </div>
           <div className="relative aspect-[21/9] overflow-hidden">
             <img
-              src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Highlights/pc/i20-highlight-banner.jpg"
+              src="/images/i20/i20-hatchback.png"
               alt="Hyundai i20 hero"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -293,7 +293,7 @@ export default function I20Page() {
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
             <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border:white/10">
               <div className="relative aspect-[21/9] bg-gray-100">
-                <img src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/i20/Interior/pc/i20-interior-main.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
+                <img src="/images/i20/i20-hatchback1.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
             </div>
           </div>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
