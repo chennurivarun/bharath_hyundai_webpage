@@ -253,15 +253,93 @@ const Diagnostics: React.FC = () => {
 };
 
 export default function I20NLineRedesign() {
+  const [manifest, setManifest] = React.useState<null | { categories: Record<string, { src: string; title?: string }[]> }>(null);
+
+  const CAPTION_MAP: Record<string, string> = {
+    // Highlights
+    'i20nlineradiogrille.jpg': 'Radiator grille with N Line logo',
+    'i20nlinezshapeline.jpg': 'Z‑shaped LED tail lamps',
+    'i20-nline-highlight-big-section-pc3.jpg': 'N Line highlight',
+    'i20nlinefrontgrille.jpg': 'Front grille — N Line',
+    'i20-nline-highlight-small-section-pc3.jpg': 'Highlight',
+    'i20-nline-highlight-small-section-pc4.jpg': 'Highlight',
+    // Exterior
+    'hyundai-i20-nline-exterior-small-section-pc-800x530-1.jpg': 'Exterior — front angle',
+    'hyundai-i20-nline-exterior-small-section-pc-800x530-3.jpg': 'Exterior detail',
+    'hyundai-i20-nline-exterior-small-section-pc-800x530-4.jpg': 'Exterior detail',
+    'hyundai-i20-nline-exterior-small-section-pc-800x530-5.jpg': 'Exterior detail',
+    'hyundai-i20-nline-exterior-small-section-pc-800x530-6.jpg': 'Exterior rear angle',
+    // Interior
+    'i20-nline-interior-big1.jpg': 'Interior — hero',
+    'i20-nline-interior-big2.jpg': 'Interior — seats & trim',
+    'hyundai-i20-nline-interior-small-section-pc-800x530-1-r.jpg': 'Interior detail',
+    'hyundai-i20nline-interior-bottom-pc-512x340-2.jpg': 'Interior controls',
+    'hyundai-i20-nline-interior-small-section-pc-800x530-3.jpg': 'Interior detail',
+    'hyundai-i20nline-interior-bottom-pc-512x340-5.jpg': 'Interior detail',
+    'hyundai-i20nline-interior-bottom-pc-512x340-6.jpg': 'Interior detail',
+    'hyundai-i20-nline-interior-small-section-pc-800x530-6.jpg': 'Interior detail',
+    // Performance
+    'i20-nlinebig-pc.jpg': '1.0 l Turbo GDi petrol',
+    'i20-nlineperfsmall-pc1.jpg': '7‑speed DCT',
+    'i20-nlineperfsmall-pc2.jpg': '6‑speed MT',
+    'i20-nlineperfsmall-pc3.jpg': 'Drive modes',
+    'i20-nlineperfsmall-pc5.jpg': 'Performance highlight',
+    'i20-nlineperfsmall-pc6.jpg': 'Performance highlight',
+    // Safety
+    'hyundai-i20-nline-safety-big-section-pc-1120x600-2.jpg': 'Safety overview',
+    'i20nlineshutterestock.jpg': 'Safety feature image',
+    'hyundai-i20-nline-safety-big-section-pc-1120x600-3.jpg': 'Safety systems',
+    'hyundai-i20-nline-safety-small-section-pc-512x340-1.jpg': 'TPMS Highline',
+    'hyundai-i20-nline-safety-small-section-pc-512x340-2.jpg': 'ESC / VSM',
+    'hyundai-i20-nline-safety-small-section-pc-512x340-3.jpg': 'HAC',
+    'hyundai-i20-nline-safety-small-section-pc-512x340-4.jpg': 'Rear camera',
+    // Convenience
+    'i20-nline-convbig-pc-1.jpg': 'Bose 7‑speaker system',
+    'i20-nline-convbig-pc-2.jpg': '10.25″ HD touchscreen',
+    'i20nlinealexa.jpg': 'Home‑to‑Car with Alexa',
+    'hyundai-i20nline-conveniance-middle-mob-tab-800x530-1.jpg': 'Convenience highlight',
+    'i20-nline-convsmall-pc-2.jpg': 'Wireless charger',
+    'hyundai-i20nline-conveniance-middle-mob-tab-800x530-4.jpg': 'Convenience highlight',
+    'hyundai-i20nline-conveniance-middle-mob-tab-800x530-5.jpg': 'Convenience highlight',
+    'i20nlinepuddlelamps.jpg': 'Puddle lamps',
+    // Spec
+    'i20nlineinnerkv-pc.jpg': 'Specification key visual',
+  };
+
+  React.useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const res = await fetch('/images/cars/i20-nline/manifest.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!cancelled) setManifest(json);
+      } catch {}
+    }
+    load();
+    return () => { cancelled = true; };
+  }, []);
+
+  const mapFromManifest = (key: string, fallback: Array<{ title: string; img: string; text?: string }>) => {
+    const arr = manifest?.categories?.[key] as { src: string; title?: string }[] | undefined;
+    if (!arr || arr.length === 0) return fallback;
+    return arr.map((it) => {
+      const file = (it.src || '').split('/').pop() || '';
+      const title = CAPTION_MAP[file.toLowerCase()] || it.title || file;
+      return { title, img: it.src };
+    });
+  };
+
+  const mappedHighlights = mapFromManifest('highlights', highlights.map(h => ({ title: h.title, img: h.img, text: h.text })));
+  const mappedExterior = mapFromManifest('exterior', exterior.map(h => ({ title: h.title, img: h.img, text: h.text })));
+  const mappedInterior = mapFromManifest('interior', interior.map(h => ({ title: h.title, img: h.img, text: h.text })));
+  const mappedPerformance = mapFromManifest('performance', performance.map(h => ({ title: h.title, img: h.img, text: h.text })));
+  const mappedSafety = mapFromManifest('safety', safety.map(h => ({ title: h.title, img: h.img, text: h.text })));
+  const mappedConvenience = mapFromManifest('convenience', convenience.map(h => ({ title: h.title, img: h.img, text: h.text })));
+
   const allImages = Array.from(new Set([
-    IMGS.interior_dashboard,
-    ...highlights.map((h) => h.img).filter(Boolean),
-    ...exterior.map((h) => h.img).filter(Boolean),
-    ...interior.map((h) => h.img).filter(Boolean),
-    ...performance.map((h) => h.img).filter(Boolean),
-    ...safety.map((h) => h.img).filter(Boolean),
-    ...convenience.map((h) => h.img).filter(Boolean),
-  ].filter(Boolean))) as string[];
+    ...mappedHighlights, ...mappedExterior, ...mappedInterior, ...mappedPerformance, ...mappedSafety, ...mappedConvenience,
+  ].map(i => i.img).filter(Boolean))) as string[];
 
   return (
     <main className="min-h-screen bg-transparent text-zinc-100">
@@ -310,15 +388,15 @@ export default function I20NLineRedesign() {
 
       <Section id="highlights" title="Highlights" subtitle="Pulled from the official Highlights page, with imagery swapped into clean cards.">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {highlights.map((h, i) => (
-            <Card key={i} img={h.img} title={h.title} k={h.k}>{h.text}</Card>
+          {mappedHighlights.map((h, i) => (
+            <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
           ))}
         </div>
       </Section>
 
       <Section id="exterior" title="Exterior" subtitle="Signature N Line cues and red accents for an athletic stance.">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {exterior.map((h, i) => (
+          {mappedExterior.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
           ))}
         </div>
@@ -335,7 +413,7 @@ export default function I20NLineRedesign() {
 
       <Section id="interior" title="Interior" subtitle="All‑black theme with red inserts, N branding and tech‑forward cockpit.">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {interior.map((h, i) => (
+          {mappedInterior.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
           ))}
         </div>
@@ -343,7 +421,7 @@ export default function I20NLineRedesign() {
 
       <Section id="performance" title="Performance" subtitle="Turbo power, your choice of DCT or MT, and selectable drive modes.">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {performance.map((h, i) => (
+          {mappedPerformance.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
           ))}
         </div>
@@ -351,7 +429,7 @@ export default function I20NLineRedesign() {
 
       <Section id="safety" title="Safety" subtitle="Advanced active and passive safety, standard across the range.">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {safety.map((h, i) => (
+          {mappedSafety.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
           ))}
         </div>
@@ -359,7 +437,7 @@ export default function I20NLineRedesign() {
 
       <Section id="convenience" title="Convenience & Connectivity" subtitle="Bose audio, 10.25&quot; HD touchscreen and H2C with Alexa for seamless control.">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {convenience.map((h, i) => (
+          {mappedConvenience.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
           ))}
         </div>

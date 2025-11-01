@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // -----------------------------
 // HYUNDAI VENUE — FULL REDESIGN (ALL SUBPAGES)
@@ -13,104 +13,104 @@ import React from "react";
 
 // If you plan to self-host images, drop them in /public/assets/venue and switch to those paths.
 const ASSETS = {
-  hero: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue-knight-big.jpg",
+  hero: "/images/cars/venue/venue-knight-big.jpg",
   // HIGHLIGHTS (already had a subset)
   knight: {
-    interior: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue-knight-small-interior.jpg",
-    seats: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue-knight-small-seating.jpg",
-    irvm: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue-knight-small-iRVM.jpg",
-    grille: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue-knight-small-Grille.jpg",
-    alloys: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue-knight-small-Tyre.jpg",
-    dashcam: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue-knight-small-dashcam.jpg",
+    interior: "/images/cars/venue/venue-knight-small-interior.jpg",
+    seats: "/images/cars/venue/venue-knight-small-seating.jpg",
+    irvm: "/images/cars/venue/venue-knight-small-iRVM.jpg",
+    grille: "/images/cars/venue/venue-knight-small-Grille.jpg",
+    alloys: "/images/cars/venue/venue-knight-small-Tyre.jpg",
+    dashcam: "/images/cars/venue/venue-knight-small-dashcam.jpg",
   },
   tech: {
-    alexa: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/venue-exteriormid-2.jpg",
-    ambientSounds: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/venue-suv-exteriormid-5.jpg",
-    bluelink: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/venue-suv-exteriormid-3.jpg",
-    regionalLanguages: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/venue-suv-exteriormid-4.jpg",
-    tailLamps: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue_exterior_2_1120x600.jpg",
+    alexa: "/images/cars/venue/venue-exteriormid-2.jpg",
+    ambientSounds: "/images/cars/venue/venue-suv-exteriormid-5.jpg",
+    bluelink: "/images/cars/venue/venue-suv-exteriormid-3.jpg",
+    regionalLanguages: "/images/cars/venue/venue-suv-exteriormid-4.jpg",
+    tailLamps: "/images/cars/venue/venue_exterior_2_1120x600.jpg",
   },
   comfort: {
-    driveModes: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/Hyundai-venue-suv-highlight-small-pc-544x360_1.jpg",
-    sunroof: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue_highlights_544x360.jpg",
-    ambientLighting: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/Hyundai-venue-suv-highlight-small-pc-544x360_3.jpg",
-    purifier: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/Hyundai-venue-suv-highlight-small-pc-544x360_4.jpg",
+    driveModes: "/images/cars/venue/Hyundai-venue-suv-highlight-small-pc-544x360_1.jpg",
+    sunroof: "/images/cars/venue/venue_highlights_544x360.jpg",
+    ambientLighting: "/images/cars/venue/Hyundai-venue-suv-highlight-small-pc-544x360_3.jpg",
+    purifier: "/images/cars/venue/Hyundai-venue-suv-highlight-small-pc-544x360_4.jpg",
   },
   gallery: [
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue-gallery-12.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue_highlights_gallery_1120x600.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue_exterior_1120x600.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue-gallery-1.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue_exterior_3_1120x600.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue-gallery-6.jpg"
+    "/images/cars/venue/venue-gallery-12.jpg",
+    "/images/cars/venue/venue_highlights_gallery_1120x600.jpg",
+    "/images/cars/venue/venue_exterior_1120x600.jpg",
+    "/images/cars/venue/venue-gallery-1.jpg",
+    "/images/cars/venue/venue_exterior_3_1120x600.jpg",
+    "/images/cars/venue/venue-gallery-6.jpg"
   ],
   // EXTERIOR
   exterior: {
-    front: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue_exterior_1120x600.jpg",
-    headlampClose: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Exterior/tab/Hyundai-venue-suv-exterior-middle-1120x600-15-revised.jpg",
-    side1: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/exterior/venue-exterior-side%202.jpg",
-    rear: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/exterior/venue-exterior-rear%203.jpg",
-    tailLamps: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue_exterior_2_1120x600.jpg",
-    sharkFin: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/exterior/venue-exterior-rear%203.jpg",
-    puddle: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Exterior/pc/Hyundai-venue-suv-exterior-bottom-2.jpg",
-    alloys: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Exterior/tab/Hyundai-venue-suv-exterior-bottom-10-revised.jpg",
-    cornering: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/safety/venue-safety-mid-2.jpg",
-    ledProjector: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Exterior/tab/Hyundai-venue-suv-exterior-bottom-10-revised.jpg",
+    front: "/images/cars/venue/venue_exterior_1120x600.jpg",
+    headlampClose: "/images/cars/venue/Hyundai-venue-suv-exterior-middle-1120x600-15-revised.jpg",
+    side1: "/images/cars/venue/venue-exterior-side 2.jpg",
+    rear: "/images/cars/venue/venue-exterior-rear 3.jpg",
+    tailLamps: "/images/cars/venue/venue_exterior_2_1120x600.jpg",
+    sharkFin: "/images/cars/venue/venue-exterior-rear 3.jpg",
+    puddle: "/images/cars/venue/Hyundai-venue-suv-exterior-bottom-2.jpg",
+    alloys: "/images/cars/venue/Hyundai-venue-suv-exterior-bottom-10-revised.jpg",
+    cornering: "/images/cars/venue/venue-safety-mid-2.jpg",
+    ledProjector: "/images/cars/venue/Hyundai-venue-suv-exterior-bottom-10-revised.jpg",
   },
   // INTERIOR
   interior: {
-    powerSeat: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/interior-bottom4.jpg",
-    recline: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/venue_interiorsaf.jpg",
-    digitalCluster: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/interior/venue-suv-interior-bottom-3.jpg",
-    airPurifier: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/convenience/venue-convenience-bottom-a5.jpg",
-    ambient: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/interior/venue-suv-interior-bottom-2.jpg",
-    seatbackScoop: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/interior/Hyundai-venue-suv-interior-middle-873x500-2_800x530.jpg",
+    powerSeat: "/images/cars/venue/interior-bottom4.jpg",
+    recline: "/images/cars/venue/venue_interiorsaf.jpg",
+    digitalCluster: "/images/cars/venue/venue-suv-interior-bottom-3.jpg",
+    airPurifier: "/images/cars/venue/venue-convenience-bottom-a5.jpg",
+    ambient: "/images/cars/venue/venue-suv-interior-bottom-2.jpg",
+    seatbackScoop: "/images/cars/exter/Hyundai-venue-suv-interior-middle-873x500-2_800x530.jpg",
   },
   // PERFORMANCE
   performance: {
-    diesel15: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Performance/pc/venue_performance_1120x600.jpg",
-    turbo10: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Performance/pc/venue_turbo2.jpg",
-    petrol12: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/performance/kappa%201.2%20petrol.jpg",
-    driveModes: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Performance/pc/Hyundai-venue-suv-performance-top-1120x600-1-revised.jpg",
-    aero: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/performance/venue-performance-1.jpg",
-    rearDeflector: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/performance/venue-performance-5.jpg",
+    diesel15: "/images/cars/venue/venue_performance_1120x600.jpg",
+    turbo10: "/images/cars/venue/venue_turbo2.jpg",
+    petrol12: "/images/cars/venue/kappa 1.2 petrol.jpg",
+    driveModes: "/images/cars/venue/Hyundai-venue-suv-performance-top-1120x600-1-revised.jpg",
+    aero: "/images/cars/venue/venue-performance-1.jpg",
+    rearDeflector: "/images/cars/venue/venue-performance-5.jpg",
   },
   // SAFETY (incl. ADAS imagery from VENUE / N Line pages)
   safety: {
-    banner: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/safety/venue_safetypc.png",
-    sixAirbags: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/safety/venue-safety-top-2.jpg",
-    ahss: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/safety/venue-safety-mid-1.jpg",
-    camera: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/safety/venue-safety-mid-4.jpg",
-    cornering: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/safety/venue-safety-mid-2.jpg",
-    autoHeadlamps: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/safety/venue-safety-mid-5.jpg",
-    vsm: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/safety/venue-safety-mid-6.jpg",
-    hac: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/safety/venue-suv-safety-mid-7.jpg",
-    tpms: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/safety/venue-suv-safety-mid-7.jpg",
+    banner: "/images/cars/venue/venue_safetypc.png",
+    sixAirbags: "/images/cars/venue/venue-safety-top-2.jpg",
+    ahss: "/images/cars/venue/venue-safety-mid-1.jpg",
+    camera: "/images/cars/venue/venue-safety-mid-4.jpg",
+    cornering: "/images/cars/venue/venue-safety-mid-2.jpg",
+    autoHeadlamps: "/images/cars/venue/venue-safety-mid-5.jpg",
+    vsm: "/images/cars/venue/venue-safety-mid-6.jpg",
+    hac: "/images/cars/venue/venue-suv-safety-mid-7.jpg",
+    tpms: "/images/cars/venue/venue-suv-safety-mid-7.jpg",
     adas: {
-      fcw: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-image-1.jpg",
-      ldw: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-image-2.jpg",
-      fcaCar: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-image-3.jpg",
-      fcaPed: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-image-4.jpg",
-      fcaCycle: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-image-5.jpg",
-      hba: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/vneu-image-6.jpg",
-      lka: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-image-7.jpg",
-      lfa: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-image-8.jpg",
-      daw: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/vneue-image-9.jpg",
-      lvda: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-image-10.jpg",
+      fcw: "/images/cars/venue/venue-image-1.jpg",
+      ldw: "/images/cars/venue/venue-image-2.jpg",
+      fcaCar: "/images/cars/venue/venue-image-3.jpg",
+      fcaPed: "/images/cars/venue/venue-image-4.jpg",
+      fcaCycle: "/images/cars/venue/venue-image-5.jpg",
+      hba: "/images/cars/venue/vneu-image-6.jpg",
+      lka: "/images/cars/venue/venue-image-7.jpg",
+      lfa: "/images/cars/venue/venue-image-8.jpg",
+      daw: "/images/cars/venue/vneue-image-9.jpg",
+      lvda: "/images/cars/venue/venue-image-10.jpg",
     },
   },
   // CONVENIENCE
   convenience: {
-    h2cAlexa: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/venue-exteriormid-2.jpg",
-    bluelink: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/venue-suv-exteriormid-3.jpg",
-    languages10: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/venue-suv-exteriormid-4.jpg",
-    ambientSounds: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/venue-suv-exteriormid-5.jpg",
-    splitSeat: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/highlights/venue_interiorsaf1.png",
-    recline2Step: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Venue/Highlights/pc/venue_interiorsaf.jpg",
-    wirelessCharger: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/convenience/venue-convenience-bottom-a10.jpg",
-    smartKeyStart: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/convenience/venue-convenience-bottom-a7.jpg",
-    gloveboxCooling: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/convenience/venue-convenience-bottom-a8.jpg",
-    rearACVents: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue/convenience/venue-convenience-bottom-a9.jpg",
+    h2cAlexa: "/images/cars/venue/venue-exteriormid-2.jpg",
+    bluelink: "/images/cars/venue/venue-suv-exteriormid-3.jpg",
+    languages10: "/images/cars/venue/venue-suv-exteriormid-4.jpg",
+    ambientSounds: "/images/cars/venue/venue-suv-exteriormid-5.jpg",
+    splitSeat: "/images/cars/venue/venue_interiorsaf1.png",
+    recline2Step: "/images/cars/venue/venue_interiorsaf.jpg",
+    wirelessCharger: "/images/cars/venue/venue-convenience-bottom-a10.jpg",
+    smartKeyStart: "/images/cars/venue/venue-convenience-bottom-a7.jpg",
+    gloveboxCooling: "/images/cars/venue/venue-convenience-bottom-a8.jpg",
+    rearACVents: "/images/cars/venue/venue-convenience-bottom-a9.jpg",
   },
   // E‑BROCHURE (PDF)
   brochurePDF: "https://www.hyundai.com/content/dam/hyundai/in/en/data/brochure/VenuedigitalBrochure.pdf",
@@ -237,6 +237,24 @@ const VARIANTS = [
 ];
 
 export default function VenueFullRedesign() {
+  const [gallery, setGallery] = useState<string[]>(ASSETS.gallery);
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch('/images/cars/venue/manifest.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const m = await res.json();
+        const cats = m?.categories || {};
+        const list: string[] = [];
+        Object.keys(cats).forEach((k) => {
+          const arr = Array.isArray(cats[k]) ? cats[k] : [];
+          arr.forEach((it: any) => list.push(it.src));
+        });
+        if (list.length) setGallery(list);
+      } catch {}
+    };
+    load();
+  }, []);
   return (
     <div className="min-h-screen w-full bg-transparent text-white">
       <StickyNav />
@@ -461,7 +479,7 @@ export default function VenueFullRedesign() {
       {/* GALLERY */}
       <Section id="gallery" title="Gallery">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {ASSETS.gallery.map((src, i) => (
+          {gallery.map((src, i) => (
             <div key={i} className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
               <img src={src} alt={`VENUE gallery ${i + 1}`} className="h-56 w-full object-cover" />
             </div>

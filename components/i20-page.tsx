@@ -60,14 +60,14 @@ const Chip = ({ children }: { children: React.ReactNode }) => (
   </span>
 );
 
-// i20 specific data
+// i20 specific data (fallbacks used if manifest not present)
 const HL = [
   { title: "Bold & Magnetic Design", img: "/images/i20/i20-hatchback.png" },
   { title: "Premium Interiors", img: "/images/i20/i20-hatchback1.jpg" },
   { title: "Smart Connectivity", img: "/images/i20/i20-hatchback2.jpg" },
   { title: "Advanced Safety", img: "/images/i20/i20-hatchback.png" },
   { title: "Sporty Performance", img: "/images/i20/i20-hatchback1.jpg" },
-  { title: "Knight Edition", img: "/images/i20/i20knightbig.jpg" },
+  { title: "Knight Edition", img: "/images/cars/i20/knight/i20knightbig.jpg" },
 ];
 
 const EX = [
@@ -113,9 +113,9 @@ const CON = [
 ];
 
 const KNIGHT = [
-  { title: "Knight Edition", img: "/images/i20/i20knightbig.jpg" },
-  { title: "All Black Inserts", img: "/images/i20/i20knightallblackinserts.jpg" },
-  { title: "All Black Seats", img: "/images/i20/i20knightallblackseats.jpg" },
+  { title: "Knight Edition", img: "/images/cars/i20/knight/i20knightbig.jpg" },
+  { title: "All Black Inserts", img: "/images/cars/i20/knight/i20knightallblackinserts.jpg" },
+  { title: "All Black Seats", img: "/images/cars/i20/knight/i20knightallblackseats.jpg" },
 ];
 
 const FEATURES: Record<string, { magna: boolean; sportz: boolean; asta: boolean }> = {
@@ -135,15 +135,128 @@ const SPECS = [
   { k: 'Transmission', v: '5MT / CVT' },
 ];
 
-const PRICING: Array<{ variant: string; powertrain: string; price: string }> = [
-  { variant: 'Magna', powertrain: '1.2 Petrol 5MT', price: '₹ TBD*' },
-  { variant: 'Sportz', powertrain: '1.2 Petrol 5MT/CVT', price: '₹ TBD*' },
-  { variant: 'Asta', powertrain: '1.0 Turbo CVT', price: '₹ TBD*' },
-];
+type PricingGroups = Record<string, Array<{ variant: string; price: string }>>;
+
+const PRICING_GROUPS: PricingGroups = {
+  'Manual (1.2 Petrol)': [
+    { variant: 'Magna Executive', price: '₹6.87 lakh' },
+    { variant: 'Magna', price: '₹7.12 lakh' },
+    { variant: 'Sportz', price: '₹7.74 lakh' },
+    { variant: 'Sportz DT (Dual Tone)', price: '₹7.84 lakh' },
+    { variant: 'Sportz Opt', price: '₹8.28 lakh' },
+    { variant: 'Sportz Opt Knight', price: '₹8.37 lakh' },
+    { variant: 'Asta', price: '₹8.61 lakh' },
+    { variant: 'Asta Opt', price: '₹9.15 lakh' },
+    { variant: 'Asta Opt DT (Dual Tone)', price: '₹9.31 lakh' },
+  ],
+  'IVT (Automatic, 1.2 Petrol)': [
+    { variant: 'Magna IVT', price: '₹8.13 lakh' },
+    { variant: 'Sportz IVT', price: '₹8.70 lakh' },
+    { variant: 'Sportz Opt IVT', price: '₹9.15 lakh' },
+    { variant: 'Asta Opt IVT', price: '₹10.29 lakh' },
+    { variant: 'Asta Opt iVT Knight', price: '₹10.38 lakh' },
+    { variant: 'Asta Opt IVT DT (Top Model)', price: '₹10.43 lakh' },
+  ],
+};
 
 export default function I20Page() {
   const [activeTab, setActiveTab] = useState('highlights');
   const exteriorRef = useRef<HTMLDivElement | null>(null);
+  const [manifest, setManifest] = useState<null | { categories: Record<string, { src: string; title?: string }[]> }>(null);
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
+
+  const CAPTION_MAP: Record<string, string> = {
+    // Knight
+    'i20knightbig.jpg': 'Knight — hero view',
+    'i20knightallblackinserts.jpg': 'All black inserts',
+    'i20knightallblackseats.jpg': 'All black seats',
+    'i20-metalpedals.jpg': 'Metal pedals',
+    'i20knightalloywheel.jpg': 'Alloy wheel',
+    'i20-emblem.jpg': 'i20 emblem',
+    'i20-knight-frontmattelogo-highres-final.jpg': 'Knight front matte logo',
+
+    // Highlights
+    'i20highlight_tab1.jpg': 'Highlight overview',
+    'i20interiordashbig1.jpg': 'Interior dashboard',
+    'i20dashcam.jpg': 'Dashcam',
+    'i20sportytailgate.jpg': 'Sporty tailgate',
+    'i20knightsunproof.jpg': 'Sunroof',
+    'i20highlight_small1.jpg': 'Highlight',
+    'i20highsmall2.jpg': 'Highlight',
+
+    // Exterior
+    'i20pe_exttab11.jpg': 'Exterior detail',
+    'i20pe_exttab1.jpg': 'Front design',
+    'i20pe_exttab2.jpg': 'Exterior detail',
+    'i20sidestudiobig.jpg': 'Side studio view',
+    'i20pe_exttab5.jpg': 'Exterior detail',
+    'i20pe_exttab6.jpg': 'Exterior detail',
+    'i20pe_exttab7.jpg': 'Exterior detail',
+    'i20finbig.jpg': 'Exterior — fin detail',
+    'i20pe1_ext.jpg': 'Exterior view',
+    'i20pe2_ext.jpg': 'Exterior view',
+    'i20pe3_ext.jpg': 'Exterior view',
+    'i20pe4_ext.jpg': 'Exterior view',
+
+    // Interior
+    'big-image1.jpg': 'Interior — hero',
+    'i20peint2.jpg': 'Interior view',
+    'smart_entry_with_push_button_startstop.jpg': 'Smart entry with push button',
+    'front_rear_usb_charger.jpg': 'Front & rear USB charger',
+    'fully_automatic_temperature_control.jpg': 'Fully automatic temperature control',
+    'leather_wrapped_steering_wheel.jpg': 'Leather wrapped steering wheel',
+    'i20_rearseats.jpg': 'Rear seats',
+
+    // Performance
+    'engine_1120x600_01.jpg': 'Engine',
+    'i20pe_per2.jpg': 'Performance',
+    'i20pe_per1.jpg': 'Performance',
+    'performance_544x360_01.jpg': 'Performance',
+    'performance_544x360_02.jpg': 'Performance',
+    'performance_544x360_03.jpg': 'Performance',
+
+    // Safety
+    'i20safetybig1.jpg': 'Safety overview',
+    'i20safetybig2.jpg': 'Safety overview',
+    'i20hacbig.jpg': 'Hill Assist Control',
+    'safety_airbags.jpg': 'Airbags',
+    'safety-bottom1.jpg': 'Safety',
+    'safety_isofix.jpg': 'ISOFIX',
+    'i20highsmall4.jpg': 'Safety highlight',
+
+    // Convenience
+    '1120x600_interior_3.jpg': 'Interior — feature',
+    'i20highsmall3.jpg': 'Convenience highlight',
+    'convenience_electric_sunroof_544x360.jpg': 'Electric sunroof',
+    'convenience_start_stop_544x360.jpg': 'Start/Stop',
+    'convenience_cruise_control_544x360.jpg': 'Cruise control',
+    'hyundai-i20-premium-hatchback-convenience-page-bottom-7.jpg': 'Convenience overview',
+    '544x360_interior_12.jpg': 'Interior — feature',
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const res = await fetch('/images/cars/i20/manifest.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!cancelled) setManifest(json);
+      } catch {}
+    }
+    load();
+    return () => { cancelled = true; };
+  }, []);
+
+  const mapFromManifest = (key: string, fallback: Array<{ title: string; img: string }>) => {
+    const arr = manifest?.categories?.[key] as { src: string; title?: string }[] | undefined;
+    if (!arr || arr.length === 0) return fallback;
+    return arr.map((it) => {
+      const file = (it.src || '').split('/').pop() || '';
+      const title = CAPTION_MAP[file.toLowerCase()] || it.title || file;
+      return { title, img: it.src };
+    });
+  };
 
   useEffect(() => {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
@@ -209,7 +322,7 @@ export default function I20Page() {
         muted
         playsInline
           className="fixed inset-0 w-full h-full object-cover -z-10"
-          src="/assets1/Hyundai i20 _ Born magnetic.mp4"
+          src="/videos/i20.mp4"
         />
         <header className="relative">
           {/* Top sticky nav */}
@@ -225,12 +338,6 @@ export default function I20Page() {
             <div className="h-0.5 bg-gradient-to-r from-transparent via-[color:var(--brand-primary)] to-transparent" />
           </div>
           <div className="relative aspect-[21/9] overflow-hidden">
-            <img
-              src="/images/i20/i20-hatchback.png"
-              alt="Hyundai i20 hero"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,.6),rgba(0,0,0,.1)_60%,transparent)]" />
             <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 text-white max-w-2xl">
               <div>
                 <div className="text-xs uppercase tracking-widest mb-3 opacity-90">Born Magnetic</div>
@@ -258,7 +365,7 @@ export default function I20Page() {
         <main className="max-w-7xl mx-auto px-4 pb-28">
           <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-              {HL.map((c, i) => (
+              {mapFromManifest('highlights', HL).map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
                   <Card title={c.title} img={c.img} />
                 </div>
@@ -275,7 +382,7 @@ export default function I20Page() {
               className="relative overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-4 pb-2"
               ref={exteriorRef}
             >
-              {EX.map((c, i) => (
+              {mapFromManifest('exterior', EX).map((c, i) => (
                 <motion.div
                   key={i}
                   initial={{ x: 40, opacity: 0 }}
@@ -293,11 +400,11 @@ export default function I20Page() {
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
             <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border:white/10">
               <div className="relative aspect-[21/9] bg-gray-100">
-                <img src="/images/i20/i20-hatchback1.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
+                <img src={(mapFromManifest('interior', IN)[0] || IN[0]).img} alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
             </div>
           </div>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {IN.map((c, i) => (
+              {mapFromManifest('interior', IN).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
             ))}
           </div>
@@ -305,7 +412,7 @@ export default function I20Page() {
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {PF.map((c, i) => (
+              {mapFromManifest('performance', PF).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
           ))}
         </div>
@@ -314,7 +421,7 @@ export default function I20Page() {
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {SF.map((c, i) => (
+              {mapFromManifest('safety', SF).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
           ))}
         </div>
@@ -322,7 +429,7 @@ export default function I20Page() {
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {CON.map((c, i) => (
+              {mapFromManifest('convenience', CON).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
           ))}
         </div>
@@ -330,7 +437,7 @@ export default function I20Page() {
 
           <Section id="knight" title="Knight Edition" icon={<Sparkles className="w-5 h-5" />}>
             <div className="grid md:grid-cols-3 gap-6">
-              {KNIGHT.map((c, i) => (
+              {mapFromManifest('knight', KNIGHT).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
           ))}
         </div>
@@ -362,14 +469,44 @@ export default function I20Page() {
           </Section>
 
           <Section id="pricing" title="Pricing" icon={<Activity className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-3 gap-6">
-              {PRICING.map((p, i) => (
-                <div key={i} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6">
-                  <div className="text-lg font-semibold mb-2">{p.variant}</div>
-                  <div className="text-sm text-gray-600 dark:text-white/70 mb-4">{p.powertrain}</div>
-                  <div className="text-2xl font-bold text-[color:var(--brand-primary)]">{p.price}</div>
-                </div>
-              ))}
+            <div className="space-y-4">
+              {Object.entries(PRICING_GROUPS).map(([group, items]) => {
+                const isOpen = expandedGroups.has(group);
+                return (
+                  <div key={group} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setExpandedGroups((prev) => {
+                          const next = new Set(prev);
+                          if (next.has(group)) next.delete(group); else next.add(group);
+                          return next;
+                        });
+                      }}
+                      className="w-full flex items-center justify-between px-5 py-4"
+                    >
+                      <div className="text-base md:text-lg font-semibold text-left">{group}</div>
+                      <ChevronRight className={cn('w-5 h-5 transition-transform', isOpen && 'rotate-90')} />
+                    </button>
+                    <motion.div
+                      initial={false}
+                      animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="border-t border-gray-200 dark:border-white/10 divide-y divide-gray-200 dark:divide-white/10">
+                        {items.map((it, idx) => (
+                          <div key={idx} className="flex items-center justify-between px-5 py-4">
+                            <div className="text-sm md:text-base font-medium">{it.variant}</div>
+                            <div className="text-base md:text-lg font-bold text-[color:var(--brand-primary)]">{it.price}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </div>
+                );
+              })}
+              <p className="text-xs text-gray-600 dark:text-white/70 text-center">*Ex‑showroom prices. May vary by city and dealer.</p>
             </div>
           </Section>
 

@@ -62,54 +62,54 @@ const Chip = ({ children }: { children: React.ReactNode }) => (
 
 // Nios specific data
 const HL = [
-  { title: "Bold & Stylish Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Ext_512x340_1.jpg" },
-  { title: "20.25 cm Touchscreen", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/Grandi10niosnew/high_1_512x340_2.jpg" },
-  { title: "Hy-CNG Dual Cylinder", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/big-image.jpg" },
-  { title: "Premium Cabin", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/niosafetypc1.jpg" },
-  { title: "Smart Connectivity", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/Grandi10niosnew/high_1_512x340_2.jpg" },
-  { title: "City-Friendly Performance", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/big-image-new.jpg" },
+  { title: "Bold & Stylish Design", img: "/images/cars/nios/Ext_512x340_1.jpg" },
+  { title: "20.25 cm Touchscreen", img: "/images/cars/nios/high_1_512x340_2.jpg" },
+  { title: "Hy-CNG Dual Cylinder", img: "/images/cars/nios/big-image.jpg" },
+  { title: "Premium Cabin", img: "/images/cars/nios/niosafetypc1.jpg" },
+  { title: "Smart Connectivity", img: "/images/cars/nios/high_1_512x340_2.jpg" },
+  { title: "City-Friendly Performance", img: "/images/cars/nios/big-image-new.jpg" },
 ];
 
 const EX = [
-  { title: "Front Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Ext_1120x600.jpg" },
-  { title: "Rear Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Ext_1120x600_7.jpg" },
-  { title: "Alloy Wheels", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Exterior_1120x600_Diamond%20cut%20alloy%20wheels.jpg" },
-  { title: "Lighting", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Ext_1120x600_1.jpg" },
-  { title: "Grille & Bumper", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Exterior_Front_1120x600.jpg" },
-  { title: "Roof Rails", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Ext_512x340_4.jpg" },
+  { title: "Front Design", img: "/images/cars/nios/Ext_1120x600.jpg" },
+  { title: "Rear Design", img: "/images/cars/nios/Ext_1120x600_7.jpg" },
+  { title: "Alloy Wheels", img: "/images/cars/nios/Exterior_1120x600_Diamond%20cut%20alloy%20wheels.jpg" },
+  { title: "Lighting", img: "/images/cars/nios/Ext_1120x600_1.jpg" },
+  { title: "Grille & Bumper", img: "/images/cars/nios/Exterior_Front_1120x600.jpg" },
+  { title: "Roof Rails", img: "/images/cars/nios/Ext_512x340_4.jpg" },
 ];
 
 const IN = [
-  { title: "Dashboard Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Interior/pc/nios_intpc_01.jpg" },
-  { title: "Seats & Upholstery", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/niosafetypc1.jpg" },
-  { title: "Rear AC Vents", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Interior/mob/NIOS-Rear-AC-Vent.jpg" },
-  { title: "Door Map Pocket", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Interior/pc/nios_intpc_01.jpg" },
-  { title: "Steering & Controls", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/niosafetypc1.jpg" },
+  { title: "Dashboard Design", img: "/images/cars/nios/nios_intpc_01.jpg" },
+  { title: "Seats & Upholstery", img: "/images/cars/nios/niosafetypc1.jpg" },
+  { title: "Rear AC Vents", img: "/images/cars/nios/NIOS-Rear-AC-Vent.jpg" },
+  { title: "Door Map Pocket", img: "/images/cars/nios/nios_intpc_01.jpg" },
+  { title: "Steering & Controls", img: "/images/cars/nios/niosafetypc1.jpg" },
 ];
 
 const PF = [
-  { title: "1.2 Kappa Petrol Engine", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/big-image-new.jpg" },
-  { title: "Factory-fitted CNG", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/big-image.jpg" },
-  { title: "AMT/Manual Options", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/small-image.jpg" },
-  { title: "City-Optimized Performance", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/small-image-new.jpg" },
+  { title: "1.2 Kappa Petrol Engine", img: "/images/cars/nios/big-image-new.jpg" },
+  { title: "Factory-fitted CNG", img: "/images/cars/nios/big-image.jpg" },
+  { title: "AMT/Manual Options", img: "/images/cars/nios/small-image.jpg" },
+  { title: "City-Optimized Performance", img: "/images/cars/nios/small-image-new.jpg" },
 ];
 
 const SF = [
-  { title: "6 Airbags (select variants)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/niosafetypc.jpg" },
-  { title: "ABS with EBD", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/Exterior_1120x600_Electronic%20Stability%20control%20(ESC).jpg" },
-  { title: "ESC / VSM", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/Exterior_1120x600_Electronic%20Stability%20control%20(ESC).jpg" },
-  { title: "Hill Hold Assist", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/Exterior_1120x600_Hill%20assist%20control.jpg" },
-  { title: "TPMS (Highline)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/niosafetypc_1.jpg" },
-  { title: "Rear Parking Camera", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/niosafetypc_1.jpg" },
+  { title: "6 Airbags (select variants)", img: "/images/cars/nios/niosafetypc.jpg" },
+  { title: "ABS with EBD", img: "/images/cars/nios/Exterior_1120x600_Electronic%20Stability%20control%20(ESC).jpg" },
+  { title: "ESC / VSM", img: "/images/cars/nios/Exterior_1120x600_Electronic%20Stability%20control%20(ESC).jpg" },
+  { title: "Hill Hold Assist", img: "/images/cars/nios/Exterior_1120x600_Hill%20assist%20control.jpg" },
+  { title: "TPMS (Highline)", img: "/images/cars/nios/niosafetypc_1.jpg" },
+  { title: "Rear Parking Camera", img: "/images/cars/nios/niosafetypc_1.jpg" },
 ];
 
 const CON = [
-  { title: "Smartphone Connectivity", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/Grandi10niosnew/high_1_512x340_2.jpg" },
-  { title: "Push-button Start", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Convenience/pc/niosconvpc_04.jpg" },
-  { title: "Wireless Charger", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Convenience/pc/Exterior_1120x600_Wireless%20phone%20charger.jpg" },
-  { title: "Fast USB-C", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Convenience/pc/Convenience_512x340_USB%20Charger.jpg" },
-  { title: "Rear AC Vents", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Interior/mob/NIOS-Rear-AC-Vent.jpg" },
-  { title: "Cruise Control", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Convenience/pc/niosconvpc_04.jpg" },
+  { title: "Smartphone Connectivity", img: "/images/cars/nios/high_1_512x340_2.jpg" },
+  { title: "Push-button Start", img: "/images/cars/nios/niosconvpc_04.jpg" },
+  { title: "Wireless Charger", img: "/images/cars/nios/Exterior_1120x600_Wireless%20phone%20charger.jpg" },
+  { title: "Fast USB-C", img: "/images/cars/nios/Convenience_512x340_USB%20Charger.jpg" },
+  { title: "Rear AC Vents", img: "/images/cars/nios/NIOS-Rear-AC-Vent.jpg" },
+  { title: "Cruise Control", img: "/images/cars/nios/niosconvpc_04.jpg" },
 ];
 
 const FEATURES: Record<string, { magna: boolean; sportz: boolean; asta: boolean }> = {
@@ -129,15 +129,97 @@ const SPECS = [
   { k: 'Transmission', v: '5MT / AMT' },
 ];
 
-const PRICING: Array<{ variant: string; powertrain: string; price: string }> = [
-  { variant: 'Magna', powertrain: '1.2 Petrol 5MT', price: '₹ TBD*' },
-  { variant: 'Sportz', powertrain: '1.2 Petrol 5MT/AMT', price: '₹ TBD*' },
-  { variant: 'Asta', powertrain: '1.2 Petrol 5MT/AMT', price: '₹ TBD*' },
-];
+type PricingGroups = Record<string, Array<{ variant: string; price: string }>>;
+
+const PRICING_GROUPS: PricingGroups = {
+  'Petrol • Manual (MT)': [
+    { variant: 'Era', price: '₹5.47 lakh' },
+    { variant: 'Magna', price: '₹6.26 lakh' },
+    { variant: 'Corporate', price: '₹6.49 lakh' },
+    { variant: 'Sportz', price: '₹6.79 lakh' },
+    { variant: 'Sportz DT (Dual Tone)', price: '₹7.01 lakh' },
+    { variant: 'Sportz Opt', price: '₹7.06 lakh' },
+    { variant: 'Asta', price: '₹7.40 lakh' },
+  ],
+  'Petrol • AMT': [
+    { variant: 'Magna AMT', price: '₹6.85 lakh' },
+    { variant: 'Corporate AMT', price: '₹7.08 lakh' },
+    { variant: 'Sportz AMT', price: '₹7.31 lakh' },
+    { variant: 'Sportz Opt AMT', price: '₹7.58 lakh' },
+    { variant: 'Asta AMT (Top Model)', price: '₹7.92 lakh' },
+  ],
+  'Hy-CNG Duo (MT)': [
+    { variant: 'Magna CNG', price: '₹7.17 lakh' },
+    { variant: 'Sportz CNG', price: '₹7.59 lakh' },
+    { variant: 'Sportz Duo CNG', price: '₹7.67 lakh' },
+  ],
+};
 
 export default function NiosPage() {
   const [activeTab, setActiveTab] = useState('highlights');
   const exteriorRef = useRef<HTMLDivElement | null>(null);
+  const [manifest, setManifest] = useState<null | { categories: Record<string, { src: string; title?: string }[]> }>(null);
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
+
+  const CAPTION_MAP: Record<string, string> = {
+    // Highlights
+    'ext_512x340_1.jpg': 'Projector headlamps',
+    'high_1_512x340_2.jpg': '20.25 cm touchscreen',
+    'cngsmall-1.jpg': 'Factory-fitted CNG — cylinder 1',
+    'cngsmall-2.jpg': 'Factory-fitted CNG — cylinder 2',
+    'cngsmall-3.jpg': 'Factory-fitted CNG — cylinder 3',
+    // Exterior
+    'ext_1120x600.jpg': 'Front design',
+    'ext_1120x600_1.jpg': 'Lighting signature',
+    'exterior_front_1120x600.jpg': 'Radiator grille & bumper',
+    'ext_1120x600_3.jpg': 'Side profile',
+    'ext_1120x600_7.jpg': 'Rear design',
+    'exterior_1120x600_rear.jpg': 'Rear bumper & lamps',
+    'ext_1120x600_8.jpg': 'Alloy wheels detail',
+    'ext_512x340_4.jpg': 'Roof rails',
+    // Interior
+    'niosafetypc1.jpg': 'Premium cabin',
+    'nios-rear-ac-vent.jpg': 'Rear AC vents',
+    'nios_intpc_06.jpg': 'Interior detail',
+    'nios_intpc_01.jpg': 'Dashboard layout',
+    // Performance
+    'big-image-new.jpg': '1.2 l Kappa petrol engine',
+    'big-image.jpg': 'Refined performance',
+    'small-image.jpg': 'City-friendly efficiency',
+    'small-image-new.jpg': 'Performance highlight',
+    // Safety
+    'niosafetypc.jpg': 'Safety highlights',
+    'niosafetypc_1.jpg': 'TPMS / rear camera',
+    // Convenience
+    'niosconvpc_04.jpg': 'Cruise control / push start',
+    'niosconvpc_05.jpg': 'USB charger',
+    'niosconvpc_07.jpg': 'Wireless charger',
+    'rdwconv_1.jpg': 'Multi information display',
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const res = await fetch('/images/cars/nios/manifest.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!cancelled) setManifest(json);
+      } catch {}
+    }
+    load();
+    return () => { cancelled = true; };
+  }, []);
+
+  const mapFromManifest = (key: string, fallback: Array<{ title: string; img: string }>) => {
+    const arr = manifest?.categories?.[key] as { src: string; title?: string }[] | undefined;
+    if (!arr || arr.length === 0) return fallback;
+    return arr.map((it) => {
+      const file = (it.src || '').split('/').pop() || '';
+      const title = CAPTION_MAP[file.toLowerCase()] || it.title || file;
+      return { title, img: it.src };
+    });
+  };
 
   useEffect(() => {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
@@ -246,7 +328,7 @@ export default function NiosPage() {
         <main className="max-w-7xl mx-auto px-4 pb-28">
           <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-              {HL.map((c, i) => (
+              {mapFromManifest('highlights', HL).map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
                   <Card title={c.title} img={c.img} />
               </div>
@@ -263,7 +345,7 @@ export default function NiosPage() {
               className="relative overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-4 pb-2"
               ref={exteriorRef}
             >
-              {EX.map((c, i) => (
+              {mapFromManifest('exterior', EX).map((c, i) => (
                 <motion.div
                   key={i}
                   initial={{ x: 40, opacity: 0 }}
@@ -279,13 +361,13 @@ export default function NiosPage() {
           </Section>
 
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
-            <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border:white/10">
+            <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10">
               <div className="relative aspect-[21/9] bg-gray-100">
-                <img src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/niosafetypc1.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
+                <img src={(mapFromManifest('interior', IN)[0] || IN[0]).img} alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
           </div>
         </div>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {IN.map((c, i) => (
+              {mapFromManifest('interior', IN).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
           ))}
         </div>
@@ -293,7 +375,7 @@ export default function NiosPage() {
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {PF.map((c, i) => (
+              {mapFromManifest('performance', PF).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
           </div>
@@ -302,7 +384,7 @@ export default function NiosPage() {
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {SF.map((c, i) => (
+              {mapFromManifest('safety', SF).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
                   ))}
                 </div>
@@ -310,7 +392,7 @@ export default function NiosPage() {
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {CON.map((c, i) => (
+              {mapFromManifest('convenience', CON).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
           ))}
         </div>
@@ -342,14 +424,44 @@ export default function NiosPage() {
           </Section>
 
           <Section id="pricing" title="Pricing" icon={<Activity className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-3 gap-6">
-              {PRICING.map((p, i) => (
-                <div key={i} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6">
-                  <div className="text-lg font-semibold mb-2">{p.variant}</div>
-                  <div className="text-sm text-gray-600 dark:text-white/70 mb-4">{p.powertrain}</div>
-                  <div className="text-2xl font-bold text-[color:var(--brand-primary)]">{p.price}</div>
-                </div>
-              ))}
+            <div className="space-y-4">
+              {Object.entries(PRICING_GROUPS).map(([group, items]) => {
+                const isOpen = expandedGroups.has(group);
+                return (
+                  <div key={group} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setExpandedGroups((prev) => {
+                          const next = new Set(prev);
+                          if (next.has(group)) next.delete(group); else next.add(group);
+                          return next;
+                        });
+                      }}
+                      className="w-full flex items-center justify-between px-5 py-4"
+                    >
+                      <div className="text-base md:text-lg font-semibold text-left">{group}</div>
+                      <ChevronRight className={cn('w-5 h-5 transition-transform', isOpen && 'rotate-90')} />
+                    </button>
+                    <motion.div
+                      initial={false}
+                      animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="border-t border-gray-200 dark:border-white/10 divide-y divide-gray-200 dark:divide-white/10">
+                        {items.map((it, idx) => (
+                          <div key={idx} className="flex items-center justify-between px-5 py-4">
+                            <div className="text-sm md:text-base font-medium">{it.variant}</div>
+                            <div className="text-base md:text-lg font-bold text-[color:var(--brand-primary)]">{it.price}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </div>
+                );
+              })}
+              <p className="text-xs text-gray-600 dark:text-white/70 text-center">*Ex‑showroom prices. May vary by city and dealer.</p>
             </div>
           </Section>
 
@@ -368,7 +480,7 @@ export default function NiosPage() {
         {/* Hero image above strip */}
         <div className="max-w-7xl mx-auto px-4 mb-6">
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-            <img src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/Grandi10niosnew/1120x600_2.jpg" alt="Hyundai Grand i10 NIOS hero" className="h-[50vh] w-full object-cover" />
+            <img src="/images/cars/nios/1120x600_2.jpg" alt="Hyundai Grand i10 NIOS hero" className="h-[50vh] w-full object-cover" />
             </div>
           </div>
 

@@ -6,7 +6,16 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "download-images": "node scripts/download-and-update-images.js",
+    "download-images-all": "node scripts/download-images-comprehensive.js",
+    "organize-images": "node scripts/organize-images.js",
+    "download-exter-images": "node scripts/download-exter-images.js",
+    "download-creta-nline-images": "node scripts/download-creta-nline-images.js",
+    "download-i20-images": "node scripts/download-i20-images.js",
+    "download-aura-images": "node scripts/download-aura-images.js",
+    "download-nios-images": "node scripts/download-nios-images.js",
+    "download-i20-nline-images": "node scripts/download-i20-nline-images.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

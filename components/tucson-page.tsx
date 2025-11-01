@@ -28,31 +28,53 @@ const Section = ({ id, title, icon, children }: { id: string; title: string; ico
   </section>
 );
 
-const Card = ({ title, img, desc }: { title: string; img: string; desc?: string }) => (
-  <motion.figure
-    initial={{ opacity: 0, y: 14 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.35 }}
-    className="group relative overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm"
-  >
-    <div className="relative aspect-[16/9]">
-      <img
-        src={img}
-        alt={title}
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-        loading="lazy"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-      <figcaption className="absolute bottom-0 left-0 right-0 p-4 md:p-5 text-white">
-        <div className="inline-block bg-white/10 backdrop-blur-md border border-white/10 rounded-lg px-3 py-2">
-          <div className="text-base md:text-lg font-semibold drop-shadow">{title}</div>
-          {desc && <p className="mt-1 text-xs md:text-sm text-white/90 max-w-prose">{desc}</p>}
-        </div>
-      </figcaption>
-    </div>
-  </motion.figure>
-);
+const Card = ({ title, img, desc }: { title: string; img: string; desc?: string }) => {
+  const [imageError, setImageError] = React.useState(false);
+  
+  // Fix URL encoding for filenames with %20 - need to double-encode or use exact match
+  // If filename contains %20, we need %2520 in URL so browser decodes to %20
+  let imgSrc = img.startsWith('/') ? img : `/${img}`;
+  
+  // Handle filenames that literally contain %20 (not spaces)
+  // The actual filenames are: tucson-R%202.0-image-2-pc.jpg and tucson-Nu%202.0-image-2-pc.jpg
+  // So we need %2520 in the URL path so browser decodes it to %20 which matches the filename
+  if (imgSrc.includes('tucson-R%202.0') || imgSrc.includes('tucson-Nu%202.0')) {
+    imgSrc = imgSrc.replace(/%20/g, '%2520');
+  }
+  
+  return (
+    <motion.figure
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.35 }}
+      className="group relative overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm"
+    >
+      <div className="relative aspect-[16/9]">
+        {!imageError ? (
+          <img
+            src={imgSrc}
+            alt={title}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            loading="lazy"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-300 dark:bg-gray-700">
+            <span className="text-gray-500 dark:text-gray-400 text-sm">Image not available</span>
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+        <figcaption className="absolute bottom-0 left-0 right-0 p-4 md:p-5 text-white">
+          <div className="inline-block bg-white/10 backdrop-blur-md border border-white/10 rounded-lg px-3 py-2">
+            <div className="text-base md:text-lg font-semibold drop-shadow">{title}</div>
+            {desc && <p className="mt-1 text-xs md:text-sm text-white/90 max-w-prose">{desc}</p>}
+          </div>
+        </figcaption>
+      </div>
+    </motion.figure>
+  );
+};
 
 const Chip = ({ children }: { children: React.ReactNode }) => (
   <span className="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full border border-white/15 bg-white/10 backdrop-blur-md">
@@ -61,69 +83,69 @@ const Chip = ({ children }: { children: React.ReactNode }) => (
 );
 
 const HL = [
-  { title: "Dark chrome parametric front grille with hidden DRLs & LED headlamps", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/mob/Hyundai-tucson-suv-highlight-bottom-800x530_1-dark-chrome-front-grille.jpg" },
-  { title: "Connecting LED tail lamps", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/pc/Hyundai-tucson-suv-highlight-bottom-800x530_2-connected-LED-tail-lamps.jpg" },
-  { title: "Virtual cockpit", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/mob/Hyundai-tucson-suv-highlight-bottom-800x530_3-virtual-cockpit.jpg" },
-  { title: "Premium black & light grey dual tone interiors", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/pc/Hyundai-tucson-suv-highlight-bottom-800x530_4-dual-tone-interior.jpg" },
-  { title: '26.03 cm (10.25") HD audio video navigation system', img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/tucson-suv-convenience-small-2.jpg" },
-  { title: "Hyundai Bluelink connected car technology", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/tucson-suv-convenience-small-5.jpg" },
+  { title: "Dark chrome parametric front grille with hidden DRLs & LED headlamps", img: "/images/cars/tucson/highlights/Hyundai-tucson-suv-highlight-bottom-800x530_1-dark-chrome-front-grille.jpg" },
+  { title: "Connecting LED tail lamps", img: "/images/cars/tucson/highlights/Hyundai-tucson-suv-highlight-bottom-800x530_2-connected-LED-tail-lamps.jpg" },
+  { title: "Virtual cockpit", img: "/images/cars/tucson/highlights/Hyundai-tucson-suv-highlight-bottom-800x530_3-virtual-cockpit.jpg" },
+  { title: "Premium black & light grey dual tone interiors", img: "/images/cars/tucson/highlights/Hyundai-tucson-suv-highlight-bottom-800x530_4-dual-tone-interior.jpg" },
+  { title: '26.03 cm (10.25") HD audio video navigation system', img: "/images/cars/tucson/convenience/tucson-suv-convenience-small-2.jpg" },
+  { title: "Hyundai Bluelink connected car technology", img: "/images/cars/tucson/convenience/tucson-suv-convenience-small-5.jpg" },
 ];
 
 const EX = [
-  { title: "Connecting LED tail lamps", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/pc/Hyundai-tucson-suv-highlight-bottom-800x530_2-connected-LED-tail-lamps.jpg" },
-  { title: "Front", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Exterior/mob/tucson-suv-exterior-top-2-image01.jpg" },
-  { title: "Side", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Exterior/mob/tucson-suv-exterior-top-2-image02.jpg" },
-  { title: "Rear", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Exterior/mob/tucson-suv-exterior-top-2-image03.jpg" },
-  { title: "Panoramic sunroof", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Exterior/mob/tucson-suv-exterior-top-2-image04.jpg" },
-  { title: "Alloys", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Exterior/mob/tucson-suv-exterior-top-2-image05.jpg" },
-  { title: "Tail lamps", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Exterior/mob/tucson-suv-exterior-top-2-image06.jpg" },
+  { title: "Connecting LED tail lamps", img: "/images/cars/tucson/highlights/Hyundai-tucson-suv-highlight-bottom-800x530_2-connected-LED-tail-lamps.jpg" },
+  { title: "Front", img: "/images/cars/tucson/exterior/tucson-suv-exterior-top-2-image01.jpg" },
+  { title: "Side", img: "/images/cars/tucson/exterior/tucson-suv-exterior-top-2-image02.jpg" },
+  { title: "Rear", img: "/images/cars/tucson/exterior/tucson-suv-exterior-top-2-image03.jpg" },
+  { title: "Panoramic sunroof", img: "/images/cars/tucson/exterior/tucson-suv-exterior-top-2-image04.jpg" },
+  { title: "Alloys", img: "/images/cars/tucson/exterior/tucson-suv-exterior-top-2-image05.jpg" },
+  { title: "Tail lamps", img: "/images/cars/tucson/exterior/tucson-suv-exterior-top-2-image06.jpg" },
 ];
 
 const IN = [
-  { title: "Front ventilated & heated seats", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Interior/pc/Hyundai-tucson-suv-interior-small-image-800x530-1.jpg" },
-  { title: "10-way power driver seat with lumbar & memory", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Interior/pc/Hyundai-tucson-suv-interior-small-image-800x530-2.jpg" },
-  { title: "Multi air mode", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/tucson-suv-convenience-top-5.jpg" },
-  { title: '26.03 cm (10.25") Floating type digital cluster', img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Interior/pc/Hyundai-tucson-suv-interior-small-image-800x530-4.jpg" },
-  { title: "Premium dual-tone interiors (wide)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/pc/Hyundai-tucson-suv-highlight-bottom-800x530_4-dual-tone-interior.jpg" },
+  { title: "Front ventilated & heated seats", img: "/images/cars/tucson/exterior/Hyundai-tucson-suv-interior-small-image-800x530-1.jpg" },
+  { title: "10-way power driver seat with lumbar & memory", img: "/images/cars/tucson/interior/Hyundai-tucson-suv-interior-small-image-800x530-2.jpg" },
+  { title: "Multi air mode", img: "/images/cars/tucson/convenience/tucson-suv-convenience-top-5.jpg" },
+  { title: '26.03 cm (10.25") Floating type digital cluster', img: "/images/cars/tucson/interior/Hyundai-tucson-suv-interior-small-image-800x530-4.jpg" },
+  { title: "Premium dual-tone interiors (wide)", img: "/images/cars/tucson/highlights/Hyundai-tucson-suv-highlight-bottom-800x530_4-dual-tone-interior.jpg" },
 ];
 
 const PF = [
-  { title: "R 2.0 l diesel engine", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Performance/pc/tucson-R%202.0-image-2-pc.jpg" },
-  { title: "Nu 2.0 l petrol engine", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Performance/pc/tucson-Nu%202.0-image-2-pc.jpg" },
-  { title: "Drive mode select – Eco", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Performance/pc/Hyundai-tucson-suv-performance-small-image-800x530-1.jpg" },
-  { title: "Drive mode select – Normal", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Performance/pc/Hyundai-tucson-suv-performance-small-image-800x530-2.jpg" },
-  { title: "Drive mode select – Sport", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Performance/pc/Hyundai-tucson-suv-performance-small-image-800x530-3.jpg" },
-  { title: "Drive mode select – Smart (HTRAC)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Performance/pc/Hyundai-tucson-suv-performance-small-image-800x530-4.jpg" },
+  { title: "R 2.0 l diesel engine", img: "/images/cars/tucson/performance/tucson-R%202.0-image-2-pc.jpg" },
+  { title: "Nu 2.0 l petrol engine", img: "/images/cars/tucson/performance/tucson-Nu%202.0-image-2-pc.jpg" },
+  { title: "Drive mode select – Eco", img: "/images/cars/tucson/performance/Hyundai-tucson-suv-performance-small-image-800x530-1.jpg" },
+  { title: "Drive mode select – Normal", img: "/images/cars/tucson/performance/Hyundai-tucson-suv-performance-small-image-800x530-2.jpg" },
+  { title: "Drive mode select – Sport", img: "/images/cars/tucson/performance/Hyundai-tucson-suv-performance-small-image-800x530-3.jpg" },
+  { title: "Drive mode select – Smart (HTRAC)", img: "/images/cars/tucson/performance/Hyundai-tucson-suv-performance-small-image-800x530-4.jpg" },
 ];
 
 const SF = [
-  { title: "Six airbags - driver, passenger, side & curtain", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Safety/pc/Hyundai-tucson-suv-safety-top-image-1120x600-1.jpg" },
-  { title: "Vehicle stability management (VSM)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Safety/pc/tucson-suv-safety-top-image1.jpg" },
-  { title: "Electric parking brake & front parking sensors", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Safety/pc/Hyundai-tucson-suv-safety-top-image-1120x600-3.jpg" },
-  { title: "Electronic stability control (ESC)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Safety/pc/Hyundai-tucson-suv-safety-top-image-1120x600-4.jpg" },
-  { title: "Hill-start Assist Control (HAC)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Safety/pc/Hyundai-tucson-suv-safety-small-image-800x530-2.jpg" },
-  { title: "TPMS (Highline)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Safety/pc/Hyundai-tucson-suv-safety-small-image-800x530-3.jpg" },
-  { title: "All four disc brakes", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Safety/pc/Hyundai-tucson-suv-safety-small-image-800x530-4.jpg" },
-  { title: "Forward collision-avoidance assist (FCA)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/pc/Safety-first.jpg" },
-  { title: "Blind-spot view monitor (BVM)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/pc/Safety-second.jpg" },
-  { title: "Driver attention warning (DAW)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/pc/Safety-third.jpg" },
-  { title: "360° Surround View Monitor (SVM)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/pc/Safety-twelve.jpg" },
+  { title: "Six airbags - driver, passenger, side & curtain", img: "/images/cars/tucson/exterior/Hyundai-tucson-suv-safety-top-image-1120x600-1.jpg" },
+  { title: "Vehicle stability management (VSM)", img: "/images/cars/tucson/safety/tucson-suv-safety-top-image1.jpg" },
+  { title: "Electric parking brake & front parking sensors", img: "/images/cars/tucson/exterior/Hyundai-tucson-suv-safety-top-image-1120x600-3.jpg" },
+  { title: "Electronic stability control (ESC)", img: "/images/cars/tucson/safety/Hyundai-tucson-suv-safety-top-image-1120x600-4.jpg" },
+  { title: "Hill-start Assist Control (HAC)", img: "/images/cars/tucson/safety/Hyundai-tucson-suv-safety-small-image-800x530-2.jpg" },
+  { title: "TPMS (Highline)", img: "/images/cars/tucson/safety/Hyundai-tucson-suv-safety-small-image-800x530-3.jpg" },
+  { title: "All four disc brakes", img: "/images/cars/tucson/safety/Hyundai-tucson-suv-safety-small-image-800x530-4.jpg" },
+  { title: "Forward collision-avoidance assist (FCA)", img: "/images/cars/tucson/safety/Safety-first.jpg" },
+  { title: "Blind-spot view monitor (BVM)", img: "/images/cars/tucson/safety/Safety-second.jpg" },
+  { title: "Driver attention warning (DAW)", img: "/images/cars/tucson/safety/Safety-third.jpg" },
+  { title: "360° Surround View Monitor (SVM)", img: "/images/cars/tucson/safety/Safety-twelve.jpg" },
 ];
 
 const CON = [
-  { title: "60+ Bluelink connected features", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Convenience/mob/Hyundai-tucson-suv-convenience1.jpg" },
-  { title: "Passenger seat walk-in device", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/tucson-suv-convenience-top-2.jpg" },
-  { title: "2nd row seat folding – boot lever", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Convenience/Hyundai-tucson-suv-convenience-top-image-1120x600-3.jpg" },
-  { title: "Bose premium sound – 8 speakers", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/tucson-suv-convenience-top-4.jpg" },
-  { title: "Wireless phone charger", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/tucson-suv-convenience-small-1.jpg" },
-  { title: "Longest wheelbase in the segment", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Convenience/Hyundai-tucson-suv-convenience-small-image-800x530-2.jpg" },
-  { title: "Embedded voice commands", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Convenience/pc/tucson-suv-convenience-small-image3.jpg" },
-  { title: "10 regional languages infotainment", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Convenience/pc/tucson-suv-convenience-small-image5.jpg" },
-  { title: "Ambient sounds of nature", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Convenience/pc/tucson-suv-convenience-small-image6.jpg" },
-  { title: "Smart power tailgate (height adjustable)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Convenience/pc/tucson-convenience-smart-tailgate.jpg" },
-  { title: "Wireless charger & auto-dimming IRVM", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Convenience/pc/tucson-convenience-wireless-charging.jpg" },
-  { title: "Remote engine start & ORVM controls", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Convenience/pc/tucson-convenience-remote-start.jpg" },
-  { title: "Door pocket lighting (illustrative)", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Convenience/pc/tucson-convenience-door-light.jpg" },
+  { title: "60+ Bluelink connected features", img: "/images/cars/tucson/convenience/Hyundai-tucson-suv-convenience1.jpg" },
+  { title: "Passenger seat walk-in device", img: "/images/cars/tucson/interior/tucson-suv-convenience-top-2.jpg" },
+  { title: "2nd row seat folding – boot lever", img: "/images/cars/tucson/interior/Hyundai-tucson-suv-convenience-top-image-1120x600-3.jpg" },
+  { title: "Bose premium sound – 8 speakers", img: "/images/cars/tucson/convenience/tucson-suv-convenience-top-4.jpg" },
+  { title: "Wireless phone charger", img: "/images/cars/tucson/convenience/tucson-suv-convenience-small-1.jpg" },
+  { title: "Longest wheelbase in the segment", img: "/images/cars/tucson/convenience/Hyundai-tucson-suv-convenience-small-image-800x530-2.jpg" },
+  { title: "Embedded voice commands", img: "/images/cars/tucson/convenience/tucson-suv-convenience-small-image3.jpg" },
+  { title: "10 regional languages infotainment", img: "/images/cars/tucson/convenience/tucson-suv-convenience-small-image5.jpg" },
+  { title: "Ambient sounds of nature", img: "/images/cars/tucson/convenience/tucson-suv-convenience-small-image6.jpg" },
+  { title: "Smart power tailgate (height adjustable)", img: "/images/cars/tucson/convenience/tucson-convenience-smart-tailgate.jpg" },
+  { title: "Wireless charger & auto-dimming IRVM", img: "/images/cars/tucson/convenience/tucson-convenience-wireless-charging.jpg" },
+  { title: "Remote engine start & ORVM controls", img: "/images/cars/tucson/performance/tucson-convenience-remote-start.jpg" },
+  { title: "Door pocket lighting (illustrative)", img: "/images/cars/tucson/convenience/tucson-convenience-door-light.jpg" },
 ];
 
 const FEATURES: Record<string, { platinum: boolean; signature: boolean }> = {
@@ -151,6 +173,93 @@ const PRICING: Array<{ variant: string; powertrain: string; price: string }> = [
   { variant: 'Signature', powertrain: '2.0 Diesel 8AT', price: '₹ TBD*' },
 ];
 
+// Collapsible Variants & Pricing Component
+function VariantsPricingSection() {
+  const [expandedVariants, setExpandedVariants] = useState<Set<string>>(new Set());
+
+  const toggleVariant = (variant: string) => {
+    setExpandedVariants((prev) => {
+      const next = new Set(prev);
+      if (next.has(variant)) {
+        next.delete(variant);
+      } else {
+        next.add(variant);
+      }
+      return next;
+    });
+  };
+
+  const groupedPricing = PRICING.reduce((acc, item) => {
+    if (!acc[item.variant]) {
+      acc[item.variant] = [];
+    }
+    acc[item.variant].push(item);
+    return acc;
+  }, {} as Record<string, typeof PRICING>);
+
+  return (
+    <div className="space-y-4">
+      {Object.entries(groupedPricing).map(([variant, items]) => (
+        <div
+          key={variant}
+          className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm overflow-hidden"
+        >
+          <button
+            onClick={() => toggleVariant(variant)}
+            className="w-full flex items-center justify-between p-6 text-left hover:bg-white/10 dark:hover:bg-white/5 transition-colors"
+          >
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{variant}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                {items.length} powertrain option{items.length > 1 ? 's' : ''}
+              </p>
+            </div>
+            <motion.div
+              animate={{ rotate: expandedVariants.has(variant) ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-gray-600 dark:text-gray-400"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </motion.div>
+          </button>
+          
+          <motion.div
+            initial={false}
+            animate={{
+              height: expandedVariants.has(variant) ? 'auto' : 0,
+              opacity: expandedVariants.has(variant) ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 pb-6 pt-0 space-y-3 border-t border-gray-200 dark:border-white/10">
+              {items.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center justify-between p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5"
+                >
+                  <div>
+                    <div className="text-sm font-medium text-gray-900 dark:text-white">{item.powertrain}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Powertrain</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xl font-bold text-[color:var(--brand-primary)]">{item.price}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Ex-showroom*</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      ))}
+      
+      <div className="mt-4 p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/30 dark:bg-white/5 text-sm text-gray-600 dark:text-gray-400 text-center">
+        *Ex-showroom prices. May vary by city. Please contact your nearest dealer for accurate pricing.
+      </div>
+    </div>
+  );
+}
+
 export default function TucsonFullImageSync() {
   const [activeTab, setActiveTab] = useState('highlights');
   const exteriorRef = useRef<HTMLDivElement | null>(null);
@@ -161,7 +270,7 @@ export default function TucsonFullImageSync() {
 
   useEffect(() => {
     const handler = () => {
-      const ids = ['highlights', 'exterior', 'interior', 'performance', 'safety', 'convenience', 'features', 'pricing', 'specs'];
+      const ids = ['knight', 'highlights', 'exterior', 'interior', 'performance', 'safety', 'convenience', 'features', 'pricing', 'specs'];
       const offsets = ids.map((id) => {
         const el = document.getElementById(id);
         if (!el) return { id, d: Infinity };
@@ -197,6 +306,7 @@ export default function TucsonFullImageSync() {
   }, []);
 
   const tabs = [
+    { id: 'knight', label: 'Knight Edition', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'highlights', label: 'Highlights', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'exterior', label: 'Exterior', icon: <Car className="w-4 h-4" /> },
     { id: 'interior', label: 'Interior', icon: <ImageIcon className="w-4 h-4" /> },
@@ -207,6 +317,40 @@ export default function TucsonFullImageSync() {
     { id: 'pricing', label: 'Pricing', icon: <Activity className="w-4 h-4" /> },
     { id: 'specs', label: 'Specs', icon: <Activity className="w-4 h-4" /> },
   ];
+
+  // Manifest-backed state (fallback to constants)
+  const [hl, setHl] = useState(HL);
+  const [ex, setEx] = useState(EX);
+  const [inn, setInn] = useState(IN);
+  const [pf, setPf] = useState(PF);
+  const [sf, setSf] = useState(SF);
+  const [con, setCon] = useState(CON);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch('/images/cars/tucson/manifest.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const m = await res.json();
+        const pick = (k: string) => Array.isArray(m?.categories?.[k]) ? m.categories[k].map((it: any) => ({ title: it.title || it.file, img: it.src })) : [];
+        const hlM = pick('highlights');
+        const exM = pick('exterior');
+        const inM = pick('interior');
+        const pfM = pick('performance');
+        const sfM = pick('safety');
+        const cvM = pick('convenience');
+        // Only update if manifest has items AND has at least as many as fallback (prevents incomplete replacements)
+        // For performance, require at least 6 images (current PF array length) to prevent missing images
+        if (hlM.length >= 4) setHl(hlM);
+        if (exM.length >= 1) setEx(exM);
+        if (inM.length >= 3) setInn(inM);
+        if (pfM.length >= 6) setPf(pfM); // Only replace if manifest has at least 6 performance images
+        if (sfM.length >= 3) setSf(sfM);
+        if (cvM.length >= 5) setCon(cvM);
+      } catch {}
+    };
+    load();
+  }, []);
 
   useEffect(() => {
     try {
@@ -257,7 +401,7 @@ export default function TucsonFullImageSync() {
           </div>
           <div className="relative aspect-[21/9] overflow-hidden">
             <img
-              src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/pc/Hyundai-tucson-suv-highlight-banner-1920x720.jpg"
+              src="/images/cars/tucson/highlights/Hyundai-tucson-suv-highlight-banner-1920x720.jpg"
               alt="Hyundai TUCSON hero"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -288,9 +432,17 @@ export default function TucsonFullImageSync() {
         </header>
 
         <main className="max-w-7xl mx-auto px-4 pb-28">
+          <Section id="knight" title="Knight Edition" icon={<Sparkles className="w-5 h-5" />}>
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {hl.slice(0, 5).map((c, i) => (
+                <Card key={i} title="Knight Edition" img={c.img} />
+              ))}
+            </div>
+          </Section>
+
           <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-              {HL.map((c, i) => (
+              {hl.slice(5).map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
                   <Card title={c.title} img={c.img} />
                 </div>
@@ -307,7 +459,7 @@ export default function TucsonFullImageSync() {
               className="relative overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-4 pb-2"
               ref={exteriorRef}
             >
-              {EX.map((c, i) => (
+              {ex.map((c, i) => (
                 <motion.div
                   key={i}
                   initial={{ x: 40, opacity: 0 }}
@@ -325,11 +477,11 @@ export default function TucsonFullImageSync() {
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
             <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border:white/10">
               <div className="relative aspect-[21/9] bg-gray-100">
-                <img src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Tucson/Highlights/tucsoninteriorinnerkv-pc.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
+                <img src="/images/cars/tucson/interior/tucsoninteriorinnerkv-pc.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
               </div>
             </div>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {IN.map((c, i) => (
+              {inn.map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
             </div>
@@ -337,7 +489,7 @@ export default function TucsonFullImageSync() {
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {PF.map((c, i) => (
+              {pf.map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
             </div>
@@ -346,7 +498,7 @@ export default function TucsonFullImageSync() {
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {SF.map((c, i) => (
+              {sf.map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
             </div>
@@ -354,10 +506,96 @@ export default function TucsonFullImageSync() {
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {CON.slice(0, -4).map((c, i) => (
+              {con.slice(0, -4).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
             </div>
+          </Section>
+
+          <Section id="specs" title="Specifications" icon={<Activity className="w-5 h-5" />}>
+            <div className="space-y-8">
+              {/* Performance Specifications */}
+              <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm p-6">
+                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Performance</h3>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
+                    <div className="text-sm opacity-80 mb-1">Engine Options</div>
+                    <div className="text-base font-medium">2.0 Petrol / 2.0 Diesel</div>
+                  </div>
+                  <div className="p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
+                    <div className="text-sm opacity-80 mb-1">Transmission</div>
+                    <div className="text-base font-medium">6AT (Petrol) / 8AT (Diesel)</div>
+                  </div>
+                  <div className="p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
+                    <div className="text-sm opacity-80 mb-1">Drive Modes</div>
+                    <div className="text-base font-medium">Eco • Normal • Sport • Smart (HTRAC)</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dimension Specifications */}
+              <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm p-6">
+                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Dimension</h3>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
+                    <div className="text-sm opacity-80 mb-1">Length × Width × Height</div>
+                    <div className="text-base font-medium">4630 × 1865 × 1665 mm</div>
+                  </div>
+                  <div className="p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
+                    <div className="text-sm opacity-80 mb-1">Wheelbase</div>
+                    <div className="text-base font-medium">2755 mm</div>
+                  </div>
+                  <div className="p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
+                    <div className="text-sm opacity-80 mb-1">Ground Clearance</div>
+                    <div className="text-base font-medium">N/A</div>
+                  </div>
+                  <div className="p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
+                    <div className="text-sm opacity-80 mb-1">Boot Space</div>
+                    <div className="text-base font-medium">N/A</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Wheels Specifications */}
+              <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm p-6">
+                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Wheels</h3>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
+                    <div className="text-sm opacity-80 mb-1">Tyres/Wheels</div>
+                    <div className="text-base font-medium">R18 alloys</div>
+                  </div>
+                  <div className="p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
+                    <div className="text-sm opacity-80 mb-1">Brakes</div>
+                    <div className="text-base font-medium">All-wheel disc brakes</div>
+                  </div>
+                  <div className="p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
+                    <div className="text-sm opacity-80 mb-1">EPB</div>
+                    <div className="text-base font-medium">Electric Parking Brake</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Specifications Table */}
+              <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm overflow-hidden">
+                <div className="p-6 border-b border-gray-200 dark:border-white/10">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Overview</h3>
+                </div>
+                <div className="p-6">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {SPECS.map((spec, i) => (
+                      <div key={i} className="flex justify-between items-center p-3 rounded-lg border border-gray-200 dark:border-white/10 bg-white/30 dark:bg-white/5">
+                        <span className="text-sm opacity-80">{spec.k}</span>
+                        <span className="text-base font-medium text-right">{spec.v}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Section>
+
+          <Section id="pricing" title="Variants & Pricing" icon={<Activity className="w-5 h-5" />}>
+            <VariantsPricingSection />
           </Section>
 
           
@@ -366,7 +604,7 @@ export default function TucsonFullImageSync() {
         {/* Front view image above strip */}
         <div className="max-w-7xl mx-auto px-4 mb-6">
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-            <img src={(EX.find(e=>e.title.toLowerCase().includes('front'))||EX[0]).img} alt="Tucson front view" className="h-[50vh] w-full object-cover" />
+            <img src={(ex.find(e=>e.title.toLowerCase().includes('front'))||ex[0]).img} alt="Tucson front view" className="h-[50vh] w-full object-cover" />
           </div>
         </div>
 
@@ -375,7 +613,7 @@ export default function TucsonFullImageSync() {
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 mb-24">
             <div className="relative">
               <div className="flex gap-4 animate-scroll-slow">
-                {[...HL, ...EX, ...IN, ...PF, ...SF, ...CON, ...HL, ...EX].map((c, i) => (
+                {[...hl, ...ex, ...inn, ...pf, ...sf, ...con, ...hl, ...ex].map((c, i) => (
                   <div key={i} className="h-44 w-72 shrink-0 overflow-hidden rounded-xl">
                     <img src={c.img} alt={`Tucson ${i + 1}`} className="h-full w-full object-cover" />
                   </div>

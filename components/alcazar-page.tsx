@@ -62,95 +62,95 @@ const Chip = ({ children }: { children: React.ReactNode }) => (
 
 // All existing images organized by section
 const HL = [
-  { title: "Convenience Features", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Convenience/pc/alcazarconvenience1120x600_2.jpg" },
-  { title: "ADAS Technology", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Highlights/pc/adasalcazar.jpg" },
-  { title: "IT Device Holder", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/ITdeviceholderandretractablecupholder.jpg" },
-  { title: "Magnetic Pad", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/Magneticpad.jpg" },
-  { title: "Technology Features", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/Tech512X340_4.jpg" },
-  { title: "Tech Integration", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/tech-alcazar.jpg" },
-  { title: "Passenger Seat Walk-in", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/tech-passenger-seat-walk-in.jpg" },
-  { title: "Paddle Shifters", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/paddleshifters.jpg" },
-  { title: "Traction Mode", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/transactionmodealcazar.jpg" },
-  { title: "MT/AT Choice", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Highlights/pc/choiceMTAT.jpg" },
-  { title: "1.5 Turbo Engine", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Highlights/pc/choice1.5turbo.jpg" }
+  { title: "Convenience Features", img: "/images/cars/alcazar/convenience/alcazarconvenience1120x600_2.jpg" },
+  { title: "ADAS Technology", img: "/images/cars/alcazar/safety/adasalcazar.jpg" },
+  { title: "IT Device Holder", img: "/images/cars/alcazar/ITdeviceholderandretractablecupholder.jpg" },
+  { title: "Magnetic Pad", img: "/images/cars/alcazar/Magneticpad.jpg" },
+  { title: "Technology Features", img: "/images/cars/alcazar/convenience/Tech512X340_4.jpg" },
+  { title: "Tech Integration", img: "/images/cars/alcazar/convenience/tech-alcazar.jpg" },
+  { title: "Passenger Seat Walk-in", img: "/images/cars/alcazar/interior/tech-passenger-seat-walk-in.jpg" },
+  { title: "Paddle Shifters", img: "/images/cars/alcazar/paddleshifters.jpg" },
+  { title: "Traction Mode", img: "/images/cars/alcazar/transactionmodealcazar.jpg" },
+  { title: "MT/AT Choice", img: "/images/cars/alcazar/choiceMTAT.jpg" },
+  { title: "1.5 Turbo Engine", img: "/images/cars/alcazar/performance/choice1.5turbo.jpg" }
 ];
 
 const EX = [
-  { title: "Exterior Design 1", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Teaser/512X340_1.jpg" },
-  { title: "Exterior Design 2", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Teaser/512X340_2.jpg" },
-  { title: "Exterior Design 3", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Teaser/512X340_3.jpg" },
-  { title: "Exterior Design 4", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Teaser/512X340_4.jpg" },
-  { title: "Exterior Design 5", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Teaser/512X340_5.jpg" },
-  { title: "Exterior Design 6", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Teaser/512X340_6.jpg" }
+  { title: "Exterior Design 1", img: "/images/cars/alcazar/exterior/512X340_1.jpg" },
+  { title: "Exterior Design 2", img: "/images/cars/alcazar/exterior/512X340_2.jpg" },
+  { title: "Exterior Design 3", img: "/images/cars/alcazar/exterior/512X340_3.jpg" },
+  { title: "Exterior Design 4", img: "/images/cars/alcazar/exterior/512X340_4.jpg" },
+  { title: "Exterior Design 5", img: "/images/cars/alcazar/exterior/512X340_5.jpg" },
+  { title: "Exterior Design 6", img: "/images/cars/alcazar/exterior/512X340_6.jpg" }
 ];
 
 const IN = [
-  { title: "Interior Feature", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Interior/pc/smriti_feature.jpg" },
-  { title: "Interior Overview", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/interiorsmall_v2.jpg" },
-  { title: "Interior Detail", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/512X340_7.jpg" },
-  { title: "2nd Row Seats", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/2ndrowseats.jpg" },
-  { title: "Ventilated Seats", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/1stand2ndventilatedseats.jpg" },
-  { title: "Power Seats", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/powerdriverpassengerseat.jpg" },
-  { title: "IT Device Holder", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/ITdeviceholderandretractablecupholder.jpg" },
-  { title: "Ambient Lighting", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/ambientlight.jpg" },
-  { title: "Memory Seats", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/Memoryseats.jpg" },
-  { title: "Wireless Charging", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/1strowand2ndrowcharge.jpg" },
-  { title: "AC Vents", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/ACvents.jpg" },
-  { title: "Magnetic Pad", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/booking-open/Magneticpad.jpg" }
+  { title: "Interior Feature", img: "/images/cars/alcazar/interior/smriti_feature.jpg" },
+  { title: "Interior Overview", img: "/images/cars/alcazar/interior/interiorsmall_v2.jpg" },
+  { title: "Interior Detail", img: "/images/cars/alcazar/interior/512X340_7.jpg" },
+  { title: "2nd Row Seats", img: "/images/cars/alcazar/interior/2ndrowseats.jpg" },
+  { title: "Ventilated Seats", img: "/images/cars/alcazar/interior/1stand2ndventilatedseats.jpg" },
+  { title: "Power Seats", img: "/images/cars/alcazar/interior/powerdriverpassengerseat.jpg" },
+  { title: "IT Device Holder", img: "/images/cars/alcazar/ITdeviceholderandretractablecupholder.jpg" },
+  { title: "Ambient Lighting", img: "/images/cars/alcazar/ambientlight.jpg" },
+  { title: "Memory Seats", img: "/images/cars/alcazar/interior/Memoryseats.jpg" },
+  { title: "Wireless Charging", img: "/images/cars/alcazar/1strowand2ndrowcharge.jpg" },
+  { title: "AC Vents", img: "/images/cars/alcazar/ACvents.jpg" },
+  { title: "Magnetic Pad", img: "/images/cars/alcazar/Magneticpad.jpg" }
 ];
 
 const PF = [
-  { title: "Engine Performance 1", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Performance/pc/alcazarperformance1120x600_engine_1.jpg" },
-  { title: "Engine Performance 2", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Performance/pc/alcazarperformance1120x600_engine_2.jpg" },
-  { title: "Performance Feature 1", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Performance/mob/alcazarperformance512X340_1.jpg" },
-  { title: "Performance Feature 2", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Performance/mob/alcazarperformance512X340_2.jpg" },
-  { title: "Performance Overview", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Performance/mob/alcazarperformance.jpg" },
-  { title: "Performance Feature 4", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Performance/mob/alcazarperformance512X340_4.jpg" },
-  { title: "Performance Feature 7", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Performance/mob/alcazarperformance512X340_7.jpg" },
-  { title: "Performance Feature 6", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Performance/mob/alcazarperformance512X340_6.jpg" }
+  { title: "Engine Performance 1", img: "/images/cars/alcazar/performance/alcazarperformance1120x600_engine_1.jpg" },
+  { title: "Engine Performance 2", img: "/images/cars/alcazar/performance/alcazarperformance1120x600_engine_2.jpg" },
+  { title: "Performance Feature 1", img: "/images/cars/alcazar/performance/alcazarperformance512X340_1.jpg" },
+  { title: "Performance Feature 2", img: "/images/cars/alcazar/performance/alcazarperformance512X340_2.jpg" },
+  { title: "Performance Overview", img: "/images/cars/alcazar/performance/alcazarperformance.jpg" },
+  { title: "Performance Feature 4", img: "/images/cars/alcazar/performance/alcazarperformance512X340_4.jpg" },
+  { title: "Performance Feature 7", img: "/images/cars/alcazar/performance/alcazarperformance512X340_7.jpg" },
+  { title: "Performance Feature 6", img: "/images/cars/alcazar/performance/alcazarperformance512X340_6.jpg" }
 ];
 
 const SF = [
-  { title: "Safety Overview", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/pc/alcazarsafety1120x600.jpg" },
-  { title: "Safety System 1", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/pc/alcazarsafety512X340_1.jpg" },
-  { title: "Safety System 2", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/pc/alcazarsafety512X340_2.jpg" },
-  { title: "Safety System 3", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/pc/alcazarsafety512X340_3.jpg" },
-  { title: "Safety System 4", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/pc/alcazarsafety512X340_4.jpg" },
-  { title: "Safety System 5", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/pc/alcazarsafety512X340_5.jpg" },
-  { title: "Safety System 6", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/pc/alcazarsafety512X340_6.jpg" },
-  { title: "Safety System 7", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/pc/alcazarsafety512X340_7.jpg" },
-  { title: "Safety System 8", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/pc/alcazarsafety512X340_8.jpg" },
-  { title: "Rear Cross Traffic Alert", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/rear-cross.jpg" },
-  { title: "Forward Collision Avoidance - Car", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/forward-collision-fca-car.jpg" },
-  { title: "Forward Collision Avoidance - Pedestrian", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/forward-collision-fca-ped.jpg" },
-  { title: "Forward Collision Avoidance - Cycle", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/forward-collision-fca-cyl.jpg" },
-  { title: "Forward Collision Avoidance - Junction Turning", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/forward-collision-fca-jt.jpg" },
-  { title: "Blind Spot Collision Avoidance", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/blind-spot-collision-bca-bcw.jpg" },
-  { title: "Lane Keeping Assist", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/lane-keeping-assist.jpg" },
-  { title: "Lane Departure Warning", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/lane-departure-warning.jpg" },
-  { title: "Driver Attention Warning", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/driver-attention-warning.jpg" },
-  { title: "Safe Exit Warning", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/safe-exit-warning.jpg" },
-  { title: "Smart Cruise Control", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/smart-cruise-control.jpg" },
-  { title: "Lane Following Assist", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/lane-following-assist.jpg" },
-  { title: "High Beam Assist", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/high-beam-assist.jpg" },
-  { title: "Leading Vehicle Departure Alert", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Safety/leading-vehicle-departure-alert.jpg" },
-  { title: "Convenience Feature 1", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Convenience/mob/alcazarconvenience512X340_1.jpg" },
-  { title: "Convenience Feature 2", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Convenience/mob/alcazarconvenience512X340_2.jpg" },
-  { title: "Convenience Feature 3", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Convenience/mob/alcazarconvenience512X340_3.jpg" },
-  { title: "Convenience Feature 11", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Convenience/mob/alcazarconvenience512X340_11.jpg" }
+  { title: "Safety Overview", img: "/images/cars/alcazar/safety/alcazarsafety1120x600.jpg" },
+  { title: "Safety System 1", img: "/images/cars/alcazar/safety/alcazarsafety512X340_1.jpg" },
+  { title: "Safety System 2", img: "/images/cars/alcazar/safety/alcazarsafety512X340_2.jpg" },
+  { title: "Safety System 3", img: "/images/cars/alcazar/safety/alcazarsafety512X340_3.jpg" },
+  { title: "Safety System 4", img: "/images/cars/alcazar/safety/alcazarsafety512X340_4.jpg" },
+  { title: "Safety System 5", img: "/images/cars/alcazar/safety/alcazarsafety512X340_5.jpg" },
+  { title: "Safety System 6", img: "/images/cars/alcazar/safety/alcazarsafety512X340_6.jpg" },
+  { title: "Safety System 7", img: "/images/cars/alcazar/safety/alcazarsafety512X340_7.jpg" },
+  { title: "Safety System 8", img: "/images/cars/alcazar/safety/alcazarsafety512X340_8.jpg" },
+  { title: "Rear Cross Traffic Alert", img: "/images/cars/alcazar/exterior/rear-cross.jpg" },
+  { title: "Forward Collision Avoidance - Car", img: "/images/cars/alcazar/forward-collision-fca-car.jpg" },
+  { title: "Forward Collision Avoidance - Pedestrian", img: "/images/cars/alcazar/forward-collision-fca-ped.jpg" },
+  { title: "Forward Collision Avoidance - Cycle", img: "/images/cars/alcazar/forward-collision-fca-cyl.jpg" },
+  { title: "Forward Collision Avoidance - Junction Turning", img: "/images/cars/alcazar/forward-collision-fca-jt.jpg" },
+  { title: "Blind Spot Collision Avoidance", img: "/images/cars/alcazar/blind-spot-collision-bca-bcw.jpg" },
+  { title: "Lane Keeping Assist", img: "/images/cars/alcazar/lane-keeping-assist.jpg" },
+  { title: "Lane Departure Warning", img: "/images/cars/alcazar/lane-departure-warning.jpg" },
+  { title: "Driver Attention Warning", img: "/images/cars/alcazar/driver-attention-warning.jpg" },
+  { title: "Safe Exit Warning", img: "/images/cars/alcazar/safe-exit-warning.jpg" },
+  { title: "Smart Cruise Control", img: "/images/cars/alcazar/smart-cruise-control.jpg" },
+  { title: "Lane Following Assist", img: "/images/cars/alcazar/lane-following-assist.jpg" },
+  { title: "High Beam Assist", img: "/images/cars/alcazar/high-beam-assist.jpg" },
+  { title: "Leading Vehicle Departure Alert", img: "/images/cars/alcazar/leading-vehicle-departure-alert.jpg" },
+  { title: "Convenience Feature 1", img: "/images/cars/alcazar/convenience/alcazarconvenience512X340_1.jpg" },
+  { title: "Convenience Feature 2", img: "/images/cars/alcazar/convenience/alcazarconvenience512X340_2.jpg" },
+  { title: "Convenience Feature 3", img: "/images/cars/alcazar/convenience/alcazarconvenience512X340_3.jpg" },
+  { title: "Convenience Feature 11", img: "/images/cars/alcazar/convenience/alcazarconvenience512X340_11.jpg" }
 ];
 
 const CON = [
-  { title: "Features Table", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Features/mob/alcazar_features_table_512x340.jpg" }
+  { title: "Features Table", img: "/images/cars/alcazar/alcazar_features_table_512x340.jpg" }
 ];
 
 const KNIGHT = [
-  { title: "Knight Emblem", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Highlights/pc/alcazarknightemblembig.jpg" },
-  { title: "Knight Skid Plate Bumper", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Highlights/pc/alcazar-skidplatebumper.jpg" },
-  { title: "Knight Bridge Tyre", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Highlights/pc/alcazar-knightbridgetyre.jpg" },
-  { title: "Knight Front Seat", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Highlights/pc/alcazarknightfrontseat.jpg" },
-  { title: "Knight Dashboard", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Highlights/pc/alcazarknightdashboard.jpg" },
-  { title: "Knight Alloy Wheels", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Highlights/pc/alcazar-alloy.jpg" }
+  { title: "Knight Emblem", img: "/images/cars/alcazar/knight/alcazarknightemblembig.jpg" },
+  { title: "Knight Skid Plate Bumper", img: "/images/cars/alcazar/knight/alcazar-skidplatebumper.jpg" },
+  { title: "Knight Bridge Tyre", img: "/images/cars/alcazar/knight/alcazar-knightbridgetyre.jpg" },
+  { title: "Knight Front Seat", img: "/images/cars/alcazar/exterior/alcazarknightfrontseat.jpg" },
+  { title: "Knight Dashboard", img: "/images/cars/alcazar/interior/alcazarknightdashboard.jpg" },
+  { title: "Knight Alloy Wheels", img: "/images/cars/alcazar/knight/alcazar-alloy.jpg" }
 ];
 
 const SPECS = [
@@ -162,13 +162,112 @@ const SPECS = [
 ];
 
 const PRICING: Array<{ variant: string; powertrain: string; price: string }> = [
-  { variant: 'Executive', powertrain: '1.5 Petrol 6MT', price: '₹ TBD*' },
-  { variant: 'Prestige', powertrain: '1.5 Petrol 6MT', price: '₹ TBD*' },
-  { variant: 'Corporate', powertrain: '1.5 Petrol 6MT', price: '₹ TBD*' },
-  { variant: 'Platinum', powertrain: '1.5 Petrol 6MT', price: '₹ TBD*' },
-  { variant: 'Signature', powertrain: '1.5 Petrol 6MT', price: '₹ TBD*' },
-  { variant: 'Knight', powertrain: '1.5 Petrol 6MT', price: '₹ TBD*' },
+  { variant: 'Executive', powertrain: '1.5L Petrol 6MT', price: '₹ 16.77 Lakh*' },
+  { variant: 'Executive', powertrain: '1.5L Diesel 6MT', price: '₹ 18.07 Lakh*' },
+  { variant: 'Prestige', powertrain: '1.5L Petrol 6MT', price: '₹ 18.67 Lakh*' },
+  { variant: 'Prestige', powertrain: '1.5L Petrol 7DCT', price: '₹ 20.67 Lakh*' },
+  { variant: 'Prestige', powertrain: '1.5L Diesel 6MT', price: '₹ 19.97 Lakh*' },
+  { variant: 'Prestige', powertrain: '1.5L Diesel 6AT', price: '₹ 21.97 Lakh*' },
+  { variant: 'Corporate', powertrain: '1.5L Petrol 6MT', price: '₹ 19.87 Lakh*' },
+  { variant: 'Corporate', powertrain: '1.5L Petrol 7DCT', price: '₹ 21.87 Lakh*' },
+  { variant: 'Corporate', powertrain: '1.5L Diesel 6MT', price: '₹ 21.17 Lakh*' },
+  { variant: 'Corporate', powertrain: '1.5L Diesel 6AT', price: '₹ 23.17 Lakh*' },
+  { variant: 'Platinum', powertrain: '1.5L Petrol 6MT', price: '₹ 21.27 Lakh*' },
+  { variant: 'Platinum', powertrain: '1.5L Petrol 7DCT', price: '₹ 23.27 Lakh*' },
+  { variant: 'Platinum', powertrain: '1.5L Diesel 6MT', price: '₹ 22.57 Lakh*' },
+  { variant: 'Platinum', powertrain: '1.5L Diesel 6AT', price: '₹ 24.57 Lakh*' },
+  { variant: 'Signature', powertrain: '1.5L Petrol 7DCT', price: '₹ 24.47 Lakh*' },
+  { variant: 'Signature', powertrain: '1.5L Diesel 6AT', price: '₹ 25.77 Lakh*' },
+  { variant: 'Knight', powertrain: '1.5L Petrol 7DCT', price: '₹ 25.47 Lakh*' },
+  { variant: 'Knight', powertrain: '1.5L Diesel 6AT', price: '₹ 26.77 Lakh*' },
 ];
+
+// Collapsible Variants & Pricing Component
+function VariantsPricingSection() {
+  const [expandedVariants, setExpandedVariants] = useState<Set<string>>(new Set());
+
+  const toggleVariant = (variant: string) => {
+    setExpandedVariants((prev) => {
+      const next = new Set(prev);
+      if (next.has(variant)) {
+        next.delete(variant);
+      } else {
+        next.add(variant);
+      }
+      return next;
+    });
+  };
+
+  const groupedPricing = PRICING.reduce((acc, item) => {
+    if (!acc[item.variant]) {
+      acc[item.variant] = [];
+    }
+    acc[item.variant].push(item);
+    return acc;
+  }, {} as Record<string, typeof PRICING>);
+
+  return (
+    <div className="space-y-4">
+      {Object.entries(groupedPricing).map(([variant, items]) => (
+        <div
+          key={variant}
+          className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm overflow-hidden"
+        >
+          <button
+            onClick={() => toggleVariant(variant)}
+            className="w-full flex items-center justify-between p-6 text-left hover:bg-white/10 dark:hover:bg-white/5 transition-colors"
+          >
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{variant}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                {items.length} powertrain option{items.length > 1 ? 's' : ''}
+              </p>
+            </div>
+            <motion.div
+              animate={{ rotate: expandedVariants.has(variant) ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-gray-600 dark:text-gray-400"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </motion.div>
+          </button>
+          
+          <motion.div
+            initial={false}
+            animate={{
+              height: expandedVariants.has(variant) ? 'auto' : 0,
+              opacity: expandedVariants.has(variant) ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 pb-6 pt-0 space-y-3 border-t border-gray-200 dark:border-white/10">
+              {items.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center justify-between p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5"
+                >
+                  <div>
+                    <div className="text-sm font-medium text-gray-900 dark:text-white">{item.powertrain}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Powertrain</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xl font-bold text-[color:var(--brand-primary)]">{item.price}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Ex-showroom*</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      ))}
+      
+      <div className="mt-4 p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/30 dark:bg-white/5 text-sm text-gray-600 dark:text-gray-400 text-center">
+        *Ex-showroom prices. May vary by city. Please contact your nearest dealer for accurate pricing and availability.
+      </div>
+    </div>
+  );
+}
 
 export default function AlcazarPage() {
   const [activeTab, setActiveTab] = useState('highlights');
@@ -226,6 +325,39 @@ export default function AlcazarPage() {
     { id: 'pricing', label: 'Pricing', icon: <Activity className="w-4 h-4" /> },
     { id: 'specs', label: 'Specs', icon: <Activity className="w-4 h-4" /> },
   ];
+
+  // Manifest-backed state with graceful fallback to existing arrays
+  const [hl, setHl] = useState(HL);
+  const [ex, setEx] = useState(EX);
+  const [inn, setInn] = useState(IN);
+  const [pf, setPf] = useState(PF);
+  const [sf, setSf] = useState(SF);
+  const [con, setCon] = useState(CON);
+  const [knight, setKnight] = useState(KNIGHT);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch('/images/cars/alcazar/manifest.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const m = await res.json();
+        const pick = (key: string) => Array.isArray(m?.categories?.[key]) ? m.categories[key].map((it: any) => ({ title: it.title || it.file, img: it.src })) : [];
+        const hlM = pick('highlights');
+        const exM = pick('exterior');
+        const inM = pick('interior');
+        const pfM = pick('performance');
+        const sfM = pick('safety');
+        const cvM = pick('convenience');
+        if (hlM.length) setHl(hlM);
+        if (exM.length) setEx(exM);
+        if (inM.length) setInn(inM);
+        if (pfM.length) setPf(pfM);
+        if (sfM.length) setSf(sfM);
+        if (cvM.length) setCon(cvM);
+      } catch {}
+    };
+    load();
+  }, []);
 
   useEffect(() => {
     try {
@@ -300,9 +432,9 @@ export default function AlcazarPage() {
         </header>
 
         <main className="max-w-7xl mx-auto px-4 pb-28">
-          <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
+      <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-              {HL.map((c, i) => (
+          {hl.map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
                   <Card title={c.title} img={c.img} />
                 </div>
@@ -319,7 +451,7 @@ export default function AlcazarPage() {
               className="relative overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-4 pb-2"
               ref={exteriorRef}
             >
-              {EX.map((c, i) => (
+          {ex.map((c, i) => (
                 <motion.div
                   key={i}
                   initial={{ x: 40, opacity: 0 }}
@@ -337,11 +469,11 @@ export default function AlcazarPage() {
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
             <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border:white/10">
               <div className="relative aspect-[21/9] bg-gray-100">
-                <img src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Interior/pc/smriti_feature.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
+                <img src="/images/cars/alcazar/interior/smriti_feature.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
               </div>
             </div>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {IN.map((c, i) => (
+          {inn.map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
             </div>
@@ -349,7 +481,7 @@ export default function AlcazarPage() {
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {PF.map((c, i) => (
+          {pf.map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
             </div>
@@ -358,7 +490,7 @@ export default function AlcazarPage() {
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {SF.map((c, i) => (
+          {sf.map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
             </div>
@@ -366,7 +498,7 @@ export default function AlcazarPage() {
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {CON.map((c, i) => (
+          {con.map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
             </div>
@@ -374,22 +506,14 @@ export default function AlcazarPage() {
 
           <Section id="features" title="Knight Edition" icon={<ListChecks className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {KNIGHT.map((c, i) => (
+          {knight.map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
             </div>
           </Section>
 
-          <Section id="pricing" title="Pricing" icon={<Activity className="w-5 h-5" />}>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {PRICING.map((p, i) => (
-                <div key={i} className="p-4 rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm">
-                  <div className="text-sm opacity-80">{p.variant}</div>
-                  <div className="text-lg font-medium">{p.powertrain}</div>
-                  <div className="text-2xl font-bold text-[color:var(--brand-primary)]">{p.price}</div>
-                </div>
-              ))}
-            </div>
+          <Section id="pricing" title="Variants & Pricing" icon={<Activity className="w-5 h-5" />}>
+            <VariantsPricingSection />
           </Section>
 
           <Section id="specs" title="Specifications" icon={<Activity className="w-5 h-5" />}>
@@ -408,7 +532,7 @@ export default function AlcazarPage() {
         <div className="max-w-7xl mx-auto px-4 mb-6">
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
             <img 
-              src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Alcazar/Teaser/AlcazarBanner1600X580_3.jpg" 
+              src="/images/cars/alcazar/AlcazarBanner1600X580_3.jpg" 
               alt="Hyundai ALCAZAR" 
               className="h-[50vh] w-full object-cover" 
             />
@@ -420,7 +544,7 @@ export default function AlcazarPage() {
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 mb-24">
             <div className="relative">
               <div className="flex gap-4 animate-scroll-slow">
-                {[...HL, ...EX, ...IN, ...PF, ...SF, ...CON, ...KNIGHT, ...HL, ...EX].map((c, i) => (
+                {[...hl, ...ex, ...inn, ...pf, ...sf, ...con, ...knight, ...hl, ...ex].map((c, i) => (
                   <div key={i} className="h-44 w-72 shrink-0 overflow-hidden rounded-xl">
                     <img src={c.img} alt={`Alcazar ${i + 1}`} className="h-full w-full object-cover" />
                   </div>

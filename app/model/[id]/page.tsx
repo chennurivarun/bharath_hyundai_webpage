@@ -12,8 +12,8 @@ import VenueFullRedesign from "@/components/venue-page"
 import CretaRedesignedPage from "@/components/creta-page"
 import CretaNLinePage from "@/components/creta-nline-page"
 
-export default async function ModelDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
+export default function ModelDetailPage({ params }: { params: { id: string } }) {
+  const { id } = params
 
   if (id === "ioniq5") {
     return <Ioniq5Page />

@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Car } from "lucide-react"
 import type { Model } from "@/lib/models"
 
-export default function SegmentPage({ params }: { params: Promise<{ segment: Segment }> }) {
+export default function SegmentPage({ params }: { params: { segment: Segment } }) {
   const [segment, setSegment] = useState<Segment>("hatchback") // Will be set from params
   const [filters, setFilters] = useState({
     priceRange: "all",
@@ -77,7 +77,7 @@ export default function SegmentPage({ params }: { params: Promise<{ segment: Seg
 
   // Set segment from params when component mounts
   useEffect(() => {
-    params.then(({ segment }) => setSegment(segment))
+    setSegment(params.segment)
   }, [params])
 
   return (

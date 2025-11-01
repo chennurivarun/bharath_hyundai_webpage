@@ -62,54 +62,54 @@ const Chip = ({ children }: { children: React.ReactNode }) => (
 
 // Aura specific data
 const HL = [
-  { title: "Premium Sedan Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/big-image-new.jpg" },
-  { title: "Comfortable Interiors", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/niosafetypc1.jpg" },
-  { title: "Smart Connectivity", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/Grandi10niosnew/high_1_512x340_2.jpg" },
-  { title: "Advanced Safety", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/niosafetypc.jpg" },
-  { title: "Efficient Performance", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/big-image.jpg" },
-  { title: "Premium Features", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/small-image.jpg" },
+  { title: "Premium Sedan Design", img: "/images/cars/nios/big-image-new.jpg" },
+  { title: "Comfortable Interiors", img: "/images/cars/nios/interior/niosafetypc1.jpg" },
+  { title: "Smart Connectivity", img: "/images/cars/nios/convenience/high_1_512x340_2.jpg" },
+  { title: "Advanced Safety", img: "/images/cars/nios/safety/niosafetypc.jpg" },
+  { title: "Efficient Performance", img: "/images/cars/nios/performance/big-image.jpg" },
+  { title: "Premium Features", img: "/images/cars/nios/small-image.jpg" },
 ];
 
 const EX = [
-  { title: "Front Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Ext_1120x600.jpg" },
-  { title: "Side Profile", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Ext_1120x600_7.jpg" },
-  { title: "Rear Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Exterior_1120x600_Diamond%20cut%20alloy%20wheels.jpg" },
-  { title: "LED Headlamps", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Ext_1120x600_1.jpg" },
-  { title: "Alloy Wheels", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Exterior_Front_1120x600.jpg" },
-  { title: "LED Tail Lamps", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Exterior/pc/Ext_512x340_4.jpg" },
+  { title: "Front Design", img: "/images/cars/nios/exterior/Ext_1120x600.jpg" },
+  { title: "Side Profile", img: "/images/cars/nios/exterior/Ext_1120x600_7.jpg" },
+  { title: "Rear Design", img: "/images/cars/nios/exterior/Exterior_1120x600_Diamond cut alloy wheels.jpg" },
+  { title: "LED Headlamps", img: "/images/cars/nios/Ext_1120x600_1.jpg" },
+  { title: "Alloy Wheels", img: "/images/cars/nios/exterior/Exterior_Front_1120x600.jpg" },
+  { title: "LED Tail Lamps", img: "/images/cars/nios/Ext_512x340_4.jpg" },
 ];
 
 const IN = [
-  { title: "Dashboard Design", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Interior/pc/nios_intpc_01.jpg" },
-  { title: "Premium Seats", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/niosafetypc1.jpg" },
-  { title: "Touchscreen Display", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/Grandi10niosnew/high_1_512x340_2.jpg" },
-  { title: "Steering Wheel", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/niosafetypc1.jpg" },
-  { title: "Climate Control", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Interior/mob/NIOS-Rear-AC-Vent.jpg" },
+  { title: "Dashboard Design", img: "/images/cars/nios/interior/nios_intpc_01.jpg" },
+  { title: "Premium Seats", img: "/images/cars/nios/interior/niosafetypc1.jpg" },
+  { title: "Touchscreen Display", img: "/images/cars/nios/convenience/high_1_512x340_2.jpg" },
+  { title: "Steering Wheel", img: "/images/cars/nios/interior/niosafetypc1.jpg" },
+  { title: "Climate Control", img: "/images/cars/nios/NIOS-Rear-AC-Vent.jpg" },
 ];
 
 const PF = [
-  { title: "1.2 Kappa Petrol", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/big-image-new.jpg" },
-  { title: "1.0 Turbo GDi", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/big-image.jpg" },
-  { title: "CVT Transmission", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/small-image.jpg" },
-  { title: "Drive Modes", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/pc/small-image-new.jpg" },
+  { title: "1.2 Kappa Petrol", img: "/images/cars/nios/big-image-new.jpg" },
+  { title: "1.0 Turbo GDi", img: "/images/cars/nios/performance/big-image.jpg" },
+  { title: "CVT Transmission", img: "/images/cars/nios/small-image.jpg" },
+  { title: "Drive Modes", img: "/images/cars/nios/small-image-new.jpg" },
 ];
 
 const SF = [
-  { title: "6 Airbags", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/niosafetypc.jpg" },
-  { title: "ABS with EBD", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/Exterior_1120x600_Electronic%20Stability%20control%20(ESC).jpg" },
-  { title: "ESC & VSM", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/Exterior_1120x600_Electronic%20Stability%20control%20(ESC).jpg" },
-  { title: "Hill Start Assist", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/Exterior_1120x600_Hill%20assist%20control.jpg" },
-  { title: "TPMS", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/niosafetypc_1.jpg" },
-  { title: "Rear Camera", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Safety/pc/niosafetypc_1.jpg" },
+  { title: "6 Airbags", img: "/images/cars/nios/safety/niosafetypc.jpg" },
+  { title: "ABS with EBD", img: "/images/cars/nios/exterior/Exterior_1120x600_Electronic%20Stability%20control%20(ESC).jpg" },
+  { title: "ESC & VSM", img: "/images/cars/nios/exterior/Exterior_1120x600_Electronic%20Stability%20control%20(ESC).jpg" },
+  { title: "Hill Start Assist", img: "/images/cars/nios/exterior/Exterior_1120x600_Hill%20assist%20control.jpg" },
+  { title: "TPMS", img: "/images/cars/nios/safety/niosafetypc_1.jpg" },
+  { title: "Rear Camera", img: "/images/cars/nios/safety/niosafetypc_1.jpg" },
 ];
 
 const CON = [
-  { title: "Wireless Charging", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Convenience/pc/Exterior_1120x600_Wireless%20phone%20charger.jpg" },
-  { title: "Push Button Start", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Convenience/pc/niosconvpc_04.jpg" },
-  { title: "Smart Trunk", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Convenience/pc/Convenience_512x340_USB%20Charger.jpg" },
-  { title: "Cruise Control", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Convenience/pc/Convenience_512x340_USB%20Charger.jpg" },
-  { title: "Auto AC", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Interior/mob/NIOS-Rear-AC-Vent.jpg" },
-  { title: "Bluetooth", img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Highlights/Grandi10niosnew/high_1_512x340_2.jpg" },
+  { title: "Wireless Charging", img: "/images/cars/nios/exterior/Exterior_1120x600_Wireless%20phone%20charger.jpg" },
+  { title: "Push Button Start", img: "/images/cars/nios/niosconvpc_04.jpg" },
+  { title: "Smart Trunk", img: "/images/cars/nios/convenience/Convenience_512x340_USB%20Charger.jpg" },
+  { title: "Cruise Control", img: "/images/cars/nios/convenience/Convenience_512x340_USB%20Charger.jpg" },
+  { title: "Auto AC", img: "/images/cars/nios/NIOS-Rear-AC-Vent.jpg" },
+  { title: "Bluetooth", img: "/images/cars/nios/convenience/high_1_512x340_2.jpg" },
 ];
 
 const FEATURES: Record<string, { magna: boolean; sportz: boolean; asta: boolean }> = {
@@ -130,14 +130,163 @@ const SPECS = [
 ];
 
 const PRICING: Array<{ variant: string; powertrain: string; price: string }> = [
-  { variant: 'Magna', powertrain: '1.2 Petrol 5MT', price: '₹ TBD*' },
-  { variant: 'Sportz', powertrain: '1.2 Petrol 5MT/CVT', price: '₹ TBD*' },
-  { variant: 'Asta', powertrain: '1.0 Turbo CVT', price: '₹ TBD*' },
+  { variant: 'E', powertrain: '1.2L Kappa Petrol 5MT', price: '₹ 5.98 Lakh*' },
+  { variant: 'EX', powertrain: '1.2L Kappa Petrol 5MT', price: '₹ 6.48 Lakh*' },
+  { variant: 'EX', powertrain: '1.2L Kappa Petrol CNG 5MT', price: '₹ 7.48 Lakh*' },
+  { variant: 'S (Sportz)', powertrain: '1.2L Kappa Petrol 5MT', price: '₹ 7.18 Lakh*' },
+  { variant: 'S (Sportz)', powertrain: '1.2L Kappa Petrol CVT', price: '₹ 7.98 Lakh*' },
+  { variant: 'S (Sportz)', powertrain: '1.2L Kappa Petrol CNG 5MT', price: '₹ 8.18 Lakh*' },
+  { variant: 'SX', powertrain: '1.2L Kappa Petrol 5MT', price: '₹ 8.18 Lakh*' },
+  { variant: 'SX', powertrain: '1.2L Kappa Petrol CVT', price: '₹ 8.98 Lakh*' },
+  { variant: 'SX', powertrain: '1.2L Kappa Petrol CNG 5MT', price: '₹ 9.18 Lakh*' },
+  { variant: 'SX(O)', powertrain: '1.2L Kappa Petrol 5MT', price: '₹ 8.78 Lakh*' },
+  { variant: 'SX(O)', powertrain: '1.2L Kappa Petrol CVT', price: '₹ 9.58 Lakh*' },
+  { variant: 'SX(O)', powertrain: '1.2L Kappa Petrol CNG 5MT', price: '₹ 9.78 Lakh*' },
+  { variant: 'Asta', powertrain: '1.0L Turbo Petrol CVT', price: '₹ 10.18 Lakh*' },
+  { variant: 'Asta (O)', powertrain: '1.0L Turbo Petrol CVT', price: '₹ 10.58 Lakh*' },
 ];
+
+// Collapsible Variants & Pricing Component
+function VariantsPricingSection() {
+  const [expandedVariants, setExpandedVariants] = useState<Set<string>>(new Set());
+
+  const toggleVariant = (variant: string) => {
+    setExpandedVariants((prev) => {
+      const next = new Set(prev);
+      if (next.has(variant)) {
+        next.delete(variant);
+      } else {
+        next.add(variant);
+      }
+      return next;
+    });
+  };
+
+  const groupedPricing = PRICING.reduce((acc, item) => {
+    if (!acc[item.variant]) {
+      acc[item.variant] = [];
+    }
+    acc[item.variant].push(item);
+    return acc;
+  }, {} as Record<string, typeof PRICING>);
+
+  return (
+    <div className="space-y-4">
+      {Object.entries(groupedPricing).map(([variant, items]) => (
+        <div
+          key={variant}
+          className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm overflow-hidden"
+        >
+          <button
+            onClick={() => toggleVariant(variant)}
+            className="w-full flex items-center justify-between p-6 text-left hover:bg-white/10 dark:hover:bg-white/5 transition-colors"
+          >
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{variant}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                {items.length} powertrain option{items.length > 1 ? 's' : ''}
+              </p>
+            </div>
+            <motion.div
+              animate={{ rotate: expandedVariants.has(variant) ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-gray-600 dark:text-gray-400"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </motion.div>
+          </button>
+          
+          <motion.div
+            initial={false}
+            animate={{
+              height: expandedVariants.has(variant) ? 'auto' : 0,
+              opacity: expandedVariants.has(variant) ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 pb-6 pt-0 space-y-3 border-t border-gray-200 dark:border-white/10">
+              {items.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center justify-between p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5"
+                >
+                  <div>
+                    <div className="text-sm font-medium text-gray-900 dark:text-white">{item.powertrain}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Powertrain</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xl font-bold text-[color:var(--brand-primary)]">{item.price}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Ex-showroom*</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      ))}
+      
+      <div className="mt-4 p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/30 dark:bg-white/5 text-sm text-gray-600 dark:text-gray-400 text-center">
+        *Ex-showroom prices. May vary by city. Please contact your nearest dealer for accurate pricing and availability.
+      </div>
+    </div>
+  );
+}
 
 export default function AuraPage() {
   const [activeTab, setActiveTab] = useState('highlights');
   const exteriorRef = useRef<HTMLDivElement | null>(null);
+  const [manifest, setManifest] = useState<null | { categories: Record<string, { src: string; title?: string }[]> }>(null);
+
+  const CAPTION_MAP: Record<string, string> = {
+    // Highlights
+    'aurahighlight_2_pc_1.jpg': 'LED DRLs and projector headlamps',
+    'aurahighlight_2_pc2.jpg': 'Parametric front grille',
+    'tyre-revised.jpg': 'Diamond-cut alloy wheels',
+    // Exterior (labels inferred from filenames)
+    'aura-front.jpg': 'Front fascia — Aura',
+    '1120x600_1.jpg': 'Exterior view — front angle',
+    '1120x600_3.jpg': 'Exterior view — rear angle',
+    '1120x600_4.jpg': 'Projector headlamps',
+    '1120x600_5.jpg': 'Chrome outside door handles',
+    '1120x600_6.jpg': 'Shark fin antenna',
+    '1120x600_7.jpg': 'LED tail lamps',
+    '1120x600_8.jpg': 'R15 alloy wheels',
+    '1120x600_9.jpg': 'Black radiator grille',
+    '1120x600_10.jpg': 'Body color outside mirrors',
+    '1120x600_11.jpg': 'Rear bumper garnish',
+    'exterior-image-1.jpg': 'Exterior profile',
+    '512x340.jpg': 'Exterior detail',
+    // Interior
+    'interior_pc1.jpg': 'Interior — dual tone cabin',
+    'interior-aura-page.jpg': 'Dashboard and infotainment',
+    'interior_1120x600_1.jpg': 'Seat upholstery and theme',
+    'interior_mid_2pc.jpg': 'Rear AC vents',
+    'interior_mid_3pc.jpg': 'Steering wheel and cluster',
+    'interior_mid_0pc.jpg': 'Center console & storage',
+    'auraint_3.jpg': 'Seat back pocket',
+    'auraint_04.jpg': 'Wireless phone charger',
+    'auraint_6.jpg': 'Adjustable rear headrests',
+    'auraint_5.jpg': '60:40 split rear seats',
+    'aurainterior_1.jpg': 'Cabin space overview',
+    'auraint_8.jpg': 'Driver armrest',
+    // Performance
+    'aurarevised-performance-aura-two.png': '1.2 l Kappa petrol engine',
+    'auraperf_3.jpg': 'Suspension & handling',
+    'highlight_2_512x340.jpg': 'Fuel efficiency highlight',
+    'highlight_2_512x340_1.jpg': 'Low NVH performance',
+    // Safety
+    'aurasafetypc.jpg': 'Safety highlights — Aura',
+    '512x340_1.jpg': 'Dual airbags',
+    '512x340_2.jpg': 'Rear parking sensors',
+    '512x340_3.jpg': 'ISOFIX child seat anchors',
+    // Convenience
+    'auraconve_.jpg': '8-inch touchscreen infotainment',
+    'auracovpc_6.jpg': 'Cruise control',
+    'auracovpc_2.jpg': 'Smart key with push button start',
+    'auravent.jpg': 'Rear AC vents',
+    'auraconven_1.jpg': 'Wireless charger',
+  };
 
   useEffect(() => {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
@@ -159,6 +308,31 @@ export default function AuraPage() {
     handler();
     return () => window.removeEventListener('scroll', handler);
   }, []);
+
+  // Load manifest
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const res = await fetch('/images/cars/aura/manifest.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!cancelled) setManifest(json);
+      } catch {}
+    }
+    load();
+    return () => { cancelled = true; };
+  }, []);
+
+  const mapFromManifest = (key: string, fallback: Array<{ title: string; img: string }>) => {
+    const arr = manifest?.categories?.[key] as { src: string; title?: string }[] | undefined;
+    if (!arr || arr.length === 0) return fallback;
+    return arr.map((it) => {
+      const file = (it.src || '').split('/').pop() || '';
+      const title = CAPTION_MAP[file.toLowerCase()] || it.title || file;
+      return { title, img: it.src };
+    });
+  };
 
   // Auto-slide Exterior scroller without any cursor interaction
   useEffect(() => {
@@ -196,11 +370,11 @@ export default function AuraPage() {
     <div>
       <div className="min-h-screen bg-transparent text-gray-900 dark:text-white">
         {/* Sticky Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="fixed inset-0 w-full h-full object-cover -z-10"
           src="/hyundai-aura.mp4"
         />
@@ -243,15 +417,15 @@ export default function AuraPage() {
         </div>
       </header>
 
-        <main className="max-w-7xl mx-auto px-4 pb-28">
+      <main className="max-w-7xl mx-auto px-4 pb-28">
           <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-              {HL.map((c, i) => (
+              {mapFromManifest('highlights', HL).map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
                   <Card title={c.title} img={c.img} />
-          </div>
+                </div>
               ))}
-        </div>
+            </div>
           </Section>
 
           <Section id="exterior" title="Exterior" icon={<Car className="w-5 h-5" />}>
@@ -263,7 +437,7 @@ export default function AuraPage() {
               className="relative overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-4 pb-2"
               ref={exteriorRef}
             >
-              {EX.map((c, i) => (
+              {mapFromManifest('exterior', EX).map((c, i) => (
                 <motion.div
                   key={i}
                   initial={{ x: 40, opacity: 0 }}
@@ -279,41 +453,41 @@ export default function AuraPage() {
           </Section>
 
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
-            <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border:white/10">
+            <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10">
               <div className="relative aspect-[21/9] bg-gray-100">
-                <img src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Grand-i10-Nios/Interior/pc/nios_intpc_01.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
+                <img src={(mapFromManifest('interior', IN)[0] || IN[0]).img} alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
               </div>
             </div>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {IN.map((c, i) => (
+              {mapFromManifest('interior', IN).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
-                </div>
+            </div>
           </Section>
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {PF.map((c, i) => (
+              {mapFromManifest('performance', []).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
-        </div>
+            </div>
             <p className="mt-4 text-sm text-gray-600 dark:text-white/70">Transmission options: 5MT · CVT. Efficient performance with excellent fuel economy.</p>
           </Section>
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {SF.map((c, i) => (
+              {mapFromManifest('safety', []).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
-          </div>
+            </div>
           </Section>
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {CON.map((c, i) => (
+              {mapFromManifest('convenience', []).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
-              </div>
+            </div>
           </Section>
 
           <Section id="features" title="Features" icon={<ListChecks className="w-5 h-5" />}>
@@ -341,16 +515,8 @@ export default function AuraPage() {
               </div>
           </Section>
 
-          <Section id="pricing" title="Pricing" icon={<Activity className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-3 gap-6">
-              {PRICING.map((p, i) => (
-                <div key={i} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6">
-                  <div className="text-lg font-semibold mb-2">{p.variant}</div>
-                  <div className="text-sm text-gray-600 dark:text-white/70 mb-4">{p.powertrain}</div>
-                  <div className="text-2xl font-bold text-[color:var(--brand-primary)]">{p.price}</div>
-        </div>
-                  ))}
-                </div>
+          <Section id="pricing" title="Variants & Pricing" icon={<Activity className="w-5 h-5" />}>
+            <VariantsPricingSection />
           </Section>
 
           <Section id="specs" title="Specifications" icon={<Activity className="w-5 h-5" />}>
@@ -368,29 +534,29 @@ export default function AuraPage() {
         {/* Front view image above strip */}
         <div className="max-w-7xl mx-auto px-4 mb-6">
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-            <img src={(EX.find(e=>e.title.toLowerCase().includes('front'))||EX[0]).img} alt="Aura front view" className="h-[50vh] w-full object-cover" />
-              </div>
-              </div>
+            <img src={(mapFromManifest('exterior', EX)[0] || EX[0]).img} alt="Aura front view" className="h-[50vh] w-full object-cover" />
+          </div>
+        </div>
 
         {/* Bottom slow-scrolling strip */}
         <div className="max-w-7xl mx-auto px-4">
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 mb-24">
             <div className="relative">
               <div className="flex gap-4 animate-scroll-slow">
-                {[...HL, ...EX, ...IN, ...PF, ...SF, ...CON, ...HL, ...EX].map((c, i) => (
+                {[...mapFromManifest('highlights', HL), ...mapFromManifest('exterior', EX), ...mapFromManifest('interior', IN), ...mapFromManifest('performance', []), ...mapFromManifest('safety', []), ...mapFromManifest('convenience', []), ...mapFromManifest('highlights', HL), ...mapFromManifest('exterior', EX)].map((c, i) => (
                   <div key={i} className="h-44 w-72 shrink-0 overflow-hidden rounded-xl">
                     <img src={c.img} alt={`Aura ${i + 1}`} className="h-full w-full object-cover" />
                   </div>
-                  ))}
-                </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
           <style jsx>{`
             .animate-scroll-slow { animation: scrollX 40s linear infinite; width: max-content; }
             @keyframes scrollX { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
           `}</style>
-          </div>
-          </div>
         </div>
+      </div>
+    </div>
   );
 }

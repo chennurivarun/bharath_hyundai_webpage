@@ -2,12 +2,117 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 // Use static path from public to avoid bundler loaders for media
 const VenueNLineVideoSrc = "/assets1/Hyundai N Line _ It s time to play.mp4";
+
+type CardItem = { src: string; name: string };
 
 export default function VenueNLineSinglePage() {
   const toId = (label: string) =>
     label.toLowerCase().replace(/ & /g, '-').replace(/\s+/g, '-');
+
+  // Fallback data (current inline arrays)
+  const FALLBACK = {
+    highlights: [
+      { src: "/images/cars/venue/venue_n_line_highlights_544x360.jpg", name: "N Line Highlights" },
+      { src: "/images/cars/unknown/highlight_small_800x530_2.jpg", name: "Sporty Design" },
+      { src: "/images/cars/unknown/highlight_small_800x530_3.jpg", name: "Performance Features" },
+      { src: "/images/cars/unknown/highlight_small_800x530_4.jpg", name: "Technology Integration" },
+      { src: "/images/cars/venue/venue_n_line_highlights_1_544x360.jpg", name: "N Line Styling" },
+      { src: "/images/cars/unknown/Hyundai-venue-N-line-highlight-big-image-PC-1120x600-1.jpg", name: "Premium Features" },
+    ] as CardItem[],
+    exterior: [
+      { src: "/images/cars/exter/exterior_2_1600x580.jpg", name: "Front Design" },
+      { src: "/images/cars/exter/exterior_1_1120x600_1.jpg", name: "Side Profile" },
+      { src: "/images/cars/exter/exterior_1_1120x600_2.jpg", name: "Rear Design" },
+      { src: "/images/cars/exter/exterior_1_1120x600_3.jpg", name: "N Line Grille" },
+      { src: "/images/cars/exter/exterior_1_1120x600_5.jpg", name: "LED Headlamps" },
+      { src: "/images/cars/exter/exterior_1_1120x600_6.jpg", name: "Alloy Wheels" },
+      { src: "/images/cars/exter/exterior_1_1120x600_7.jpg", name: "Sporty Bumper" },
+      { src: "/images/cars/exter/exterior_1_1120x600_8.jpg", name: "Red Accents" },
+      { src: "/images/cars/exter/exterior_1_1120x600_9.jpg", name: "N Line Badging" },
+      { src: "/images/cars/exter/exterior_1_1120x600_10.jpg", name: "Exterior Details" },
+    ] as CardItem[],
+    interior: [
+      { src: "/images/cars/venue/venue_n_line_highlights_1_544x360.jpg", name: "N Line Interior" },
+      { src: "/images/cars/unknown/interior_4_800x530_2.jpg", name: "Sport Seats" },
+      { src: "/images/cars/unknown/interior_4_800x530_3.jpg", name: "Dashboard Design" },
+      { src: "/images/cars/venue/venue_n_line_highlights_544x360.jpg", name: "Cabin Layout" },
+      { src: "/images/cars/unknown/interior_4_800x530_5.jpg", name: "Steering Wheel" },
+      { src: "/images/cars/unknown/interior_4_800x530_6.jpg", name: "Interior Details" },
+      { src: "/images/cars/venue/venuenlineinteriorinnerkv-pc.jpg", name: "Premium Interior" },
+    ] as CardItem[],
+    performance: [
+      { src: "/images/cars/venue/venue_turbo1.jpg", name: "Turbo Engine" },
+      { src: "/images/cars/unknown/per_1_1120x600_2.jpg", name: "Performance Features" },
+      { src: "/images/cars/unknown/per_1_1120x600_2.jpg", name: "Engine Technology" },
+      { src: "/images/cars/unknown/per_3_800x530_1.jpg", name: "Transmission" },
+      { src: "/images/cars/unknown/per_3_800x530_2.jpg", name: "Drive Modes" },
+    ] as CardItem[],
+    safety: [
+      { src: "/images/cars/venue/venue_n_line_safety.png", name: "Safety Overview" },
+      { src: "/images/cars/unknown/safety_1_1120x600_2.jpg", name: "Airbag System" },
+      { src: "/images/cars/unknown/safety_1_1120x600_3.jpg", name: "ESC System" },
+      { src: "/images/cars/unknown/safety_3_800x530_1.jpg", name: "Safety Features" },
+      { src: "/images/cars/unknown/safety_3_800x530_2.jpg", name: "Advanced Safety" },
+      { src: "/images/cars/unknown/revised-mid-image.jpg", name: "Safety Technology" },
+      { src: "/images/cars/venue/venue-n-line-10.jpg", name: "Driver Assistance" },
+      { src: "/images/cars/venue/venue-n-line-first-image.jpg", name: "Collision Avoidance" },
+      { src: "/images/cars/venue/venue-n-line-second.jpg", name: "Lane Keeping" },
+      { src: "/images/cars/venue/venue-n-line-3.jpg", name: "Blind Spot Monitor" },
+      { src: "/images/cars/venue/venue-n-line-4.jpg", name: "Rear Cross Traffic" },
+      { src: "/images/cars/venue/venue-n-line-5.jpg", name: "High Beam Assist" },
+      { src: "/images/cars/venue/venue-n-line-6.jpg", name: "Driver Attention" },
+      { src: "/images/cars/venue/venue-n-line-7.jpg", name: "Lane Following" },
+      { src: "/images/cars/venue/venue-n-line-8.jpg", name: "Forward Collision" },
+    ] as CardItem[],
+    convenience: [
+      { src: "/images/cars/venue/venue_n_line_convenience_1120x600.jpg", name: "Convenience Overview" },
+      { src: "/images/cars/unknown/conv_1_1120x600_2.jpg", name: "Smart Features" },
+      { src: "/images/cars/unknown/conv_1_1120x600_2.jpg", name: "Connectivity" },
+      { src: "/images/cars/unknown/conv_1_1120x600_3.jpg", name: "Infotainment" },
+      { src: "/images/cars/unknown/conv_1_1120x600_4.jpg", name: "Bluelink Features" },
+      { src: "/images/cars/unknown/conv_4_800x530_1.jpg", name: "Wireless Charging" },
+      { src: "/images/cars/unknown/conv_4_800x530_3.jpg", name: "Climate Control" },
+      { src: "/images/cars/venue/venue_n_line_consaf.png", name: "Convenience & Safety" },
+      { src: "/images/cars/unknown/conv_4_800x530_5.jpg", name: "Storage Solutions" },
+      { src: "/images/cars/unknown/conv_4_800x530_6.jpg", name: "Premium Convenience" },
+    ] as CardItem[],
+  } as const;
+
+  const [highlights, setHighlights] = useState<CardItem[]>(FALLBACK.highlights);
+  const [exterior, setExterior] = useState<CardItem[]>(FALLBACK.exterior);
+  const [interior, setInterior] = useState<CardItem[]>(FALLBACK.interior);
+  const [performance, setPerformance] = useState<CardItem[]>(FALLBACK.performance);
+  const [safety, setSafety] = useState<CardItem[]>(FALLBACK.safety);
+  const [convenience, setConvenience] = useState<CardItem[]>(FALLBACK.convenience);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch('/images/cars/venue-nline/manifest.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const m = await res.json();
+        const cats = m?.categories || {};
+        const map = (key: string): CardItem[] =>
+          Array.isArray(cats[key]) ? cats[key].map((it: any) => ({ src: it.src, name: it.title || it.file })) : [];
+        const hl = map('highlights');
+        const ex = map('exterior');
+        const inn = map('interior');
+        const pf = map('performance');
+        const sf = map('safety');
+        const cv = map('convenience');
+        if (hl.length) setHighlights(hl);
+        if (ex.length) setExterior(ex);
+        if (inn.length) setInterior(inn);
+        if (pf.length) setPerformance(pf);
+        if (sf.length) setSafety(sf);
+        if (cv.length) setConvenience(cv);
+      } catch {}
+    };
+    load();
+  }, []);
 
   return (
     <div className="bg-transparent text-white font-sans">
@@ -58,14 +163,7 @@ export default function VenueNLineSinglePage() {
           </ul>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/venue_n_line_highlights_544x360.jpg", name: "N Line Highlights" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/highlight_small_800x530_2.jpg", name: "Sporty Design" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/highlight_small_800x530_3.jpg", name: "Performance Features" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/highlight_small_800x530_4.jpg", name: "Technology Integration" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/venue_n_line_highlights_1_544x360.jpg", name: "N Line Styling" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/Hyundai-venue-N-line-highlight-big-image-PC-1120x600-1.jpg", name: "Premium Features" },
-          ].map((item,i)=>(
+          {highlights.map((item,i)=>(
             <div key={i} className="rounded-xl overflow-hidden shadow-xl hover:scale-105 transition-transform bg-white/10 backdrop-blur-md border border-white/10">
               <img src={item.src} alt={item.name} className="w-full h-64 object-cover"/>
               <div className="p-4">
@@ -86,18 +184,7 @@ export default function VenueNLineSinglePage() {
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/exterior/exterior_2_1600x580.jpg", name: "Front Design" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/exterior/exterior_1_1120x600_1.jpg", name: "Side Profile" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/exterior/exterior_1_1120x600_2.jpg", name: "Rear Design" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/exterior/exterior_1_1120x600_3.jpg", name: "N Line Grille" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/exterior/exterior_1_1120x600_5.jpg", name: "LED Headlamps" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/exterior/exterior_1_1120x600_6.jpg", name: "Alloy Wheels" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/exterior/exterior_1_1120x600_7.jpg", name: "Sporty Bumper" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/exterior/exterior_1_1120x600_8.jpg", name: "Red Accents" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/exterior/exterior_1_1120x600_9.jpg", name: "N Line Badging" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/exterior/exterior_1_1120x600_10.jpg", name: "Exterior Details" },
-          ].map((item,i)=>(
+          {exterior.map((item,i)=>(
             <div key={i} className="rounded-xl overflow-hidden shadow-xl hover:scale-105 transition-transform bg-white/10 backdrop-blur-md border border-white/10">
               <img src={item.src} alt={item.name} className="w-full h-64 object-cover"/>
               <div className="p-4">
@@ -118,15 +205,7 @@ export default function VenueNLineSinglePage() {
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/venue_n_line_highlights_1_544x360.jpg", name: "N Line Interior" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/interior/interior_4_800x530_2.jpg", name: "Sport Seats" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/interior/interior_4_800x530_3.jpg", name: "Dashboard Design" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/venue_n_line_highlights_544x360.jpg", name: "Cabin Layout" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/interior/interior_4_800x530_5.jpg", name: "Steering Wheel" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/interior/interior_4_800x530_6.jpg", name: "Interior Details" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/venuenlineinteriorinnerkv-pc.jpg", name: "Premium Interior" },
-          ].map((item,i)=>(
+          {interior.map((item,i)=>(
             <div key={i} className="rounded-xl overflow-hidden shadow-xl hover:scale-105 transition-transform bg-white/10 backdrop-blur-md border border-white/10">
               <img src={item.src} alt={item.name} className="w-full h-64 object-cover"/>
               <div className="p-4">
@@ -147,13 +226,7 @@ export default function VenueNLineSinglePage() {
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/performance/venue_turbo1.jpg", name: "Turbo Engine" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/performance/per_1_1120x600_2.jpg", name: "Performance Features" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/performance/per_1_1120x600_2.jpg", name: "Engine Technology" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/performance/per_3_800x530_1.jpg", name: "Transmission" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/performance/per_3_800x530_2.jpg", name: "Drive Modes" },
-          ].map((item,i)=>(
+          {performance.map((item,i)=>(
             <div key={i} className="rounded-xl overflow-hidden shadow-xl hover:scale-105 transition-transform bg-white/10 backdrop-blur-md border border-white/10">
               <img src={item.src} alt={item.name} className="w-full h-64 object-cover"/>
               <div className="p-4">
@@ -174,23 +247,7 @@ export default function VenueNLineSinglePage() {
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/venue_n_line_safety.png", name: "Safety Overview" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/safety_1_1120x600_2.jpg", name: "Airbag System" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/safety_1_1120x600_3.jpg", name: "ESC System" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/safety_3_800x530_1.jpg", name: "Safety Features" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/safety_3_800x530_2.jpg", name: "Advanced Safety" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised-mid-image.jpg", name: "Safety Technology" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-n-line-10.jpg", name: "Driver Assistance" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-n-line-first-image.jpg", name: "Collision Avoidance" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-n-line-second.jpg", name: "Lane Keeping" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-n-line-3.jpg", name: "Blind Spot Monitor" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-n-line-4.jpg", name: "Rear Cross Traffic" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-n-line-5.jpg", name: "High Beam Assist" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-n-line-6.jpg", name: "Driver Attention" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-n-line-7.jpg", name: "Lane Following" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/revised/venue-n-line-8.jpg", name: "Forward Collision" },
-          ].map((item,i)=>(
+          {safety.map((item,i)=>(
             <div key={i} className="rounded-xl overflow-hidden shadow-xl hover:scale-105 transition-transform bg-white/10 backdrop-blur-md border border-white/10">
               <img src={item.src} alt={item.name} className="w-full h-64 object-cover"/>
               <div className="p-4">
@@ -211,18 +268,7 @@ export default function VenueNLineSinglePage() {
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/safety/venue_n_line_convenience_1120x600.jpg", name: "Convenience Overview" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/convenience/conv_1_1120x600_2.jpg", name: "Smart Features" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/convenience/conv_1_1120x600_2.jpg", name: "Connectivity" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/convenience/conv_1_1120x600_3.jpg", name: "Infotainment" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/convenience/conv_1_1120x600_4.jpg", name: "Bluelink Features" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/convenience/conv_4_800x530_1.jpg", name: "Wireless Charging" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/convenience/conv_4_800x530_3.jpg", name: "Climate Control" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/highlights/venue_n_line_consaf.png", name: "Convenience & Safety" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/convenience/conv_4_800x530_5.jpg", name: "Storage Solutions" },
-            { src: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/venue-n-line/convenience/conv_4_800x530_6.jpg", name: "Premium Convenience" },
-          ].map((item,i)=>(
+          {convenience.map((item,i)=>(
             <div key={i} className="rounded-xl overflow-hidden shadow-xl hover:scale-105 transition-transform bg-white/10 backdrop-blur-md border border-white/10">
               <img src={item.src} alt={item.name} className="w-full h-64 object-cover"/>
               <div className="p-4">

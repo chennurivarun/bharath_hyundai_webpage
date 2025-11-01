@@ -1,10 +1,119 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Download, Phone, TestTube } from "lucide-react"
+import { Download, Phone, TestTube, ChevronRight, Activity } from "lucide-react"
+import { motion } from "framer-motion"
+
+// Verna Variants & Pricing Data
+const VERNA_PRICING: Array<{ variant: string; powertrain: string; price: string }> = [
+  { variant: 'EX', powertrain: '1.5L MPi Petrol 6MT', price: '₹ 10.69 Lakh*' },
+  { variant: 'S', powertrain: '1.5L MPi Petrol 6MT', price: '₹ 11.99 Lakh*' },
+  { variant: 'S', powertrain: '1.5L MPi Petrol CVT', price: '₹ 12.99 Lakh*' },
+  { variant: 'S', powertrain: '1.5L Turbo Petrol 6MT', price: '₹ 13.49 Lakh*' },
+  { variant: 'S', powertrain: '1.5L Turbo Petrol 7DCT', price: '₹ 14.99 Lakh*' },
+  { variant: 'SX', powertrain: '1.5L MPi Petrol 6MT', price: '₹ 13.49 Lakh*' },
+  { variant: 'SX', powertrain: '1.5L MPi Petrol CVT', price: '₹ 14.49 Lakh*' },
+  { variant: 'SX', powertrain: '1.5L Turbo Petrol 6MT', price: '₹ 14.99 Lakh*' },
+  { variant: 'SX', powertrain: '1.5L Turbo Petrol 7DCT', price: '₹ 16.49 Lakh*' },
+  { variant: 'SX', powertrain: '1.5L Diesel 6MT', price: '₹ 15.49 Lakh*' },
+  { variant: 'SX', powertrain: '1.5L Diesel 6AT', price: '₹ 16.99 Lakh*' },
+  { variant: 'SX(O)', powertrain: '1.5L MPi Petrol 6MT', price: '₹ 14.49 Lakh*' },
+  { variant: 'SX(O)', powertrain: '1.5L MPi Petrol CVT', price: '₹ 15.49 Lakh*' },
+  { variant: 'SX(O)', powertrain: '1.5L Turbo Petrol 6MT', price: '₹ 15.99 Lakh*' },
+  { variant: 'SX(O)', powertrain: '1.5L Turbo Petrol 7DCT', price: '₹ 17.49 Lakh*' },
+  { variant: 'SX(O)', powertrain: '1.5L Diesel 6MT', price: '₹ 16.49 Lakh*' },
+  { variant: 'SX(O)', powertrain: '1.5L Diesel 6AT', price: '₹ 17.99 Lakh*' },
+];
+
+// Collapsible Variants & Pricing Component
+function VariantsPricingSection() {
+  const [expandedVariants, setExpandedVariants] = useState<Set<string>>(new Set());
+
+  const toggleVariant = (variant: string) => {
+    setExpandedVariants((prev) => {
+      const next = new Set(prev);
+      if (next.has(variant)) {
+        next.delete(variant);
+      } else {
+        next.add(variant);
+      }
+      return next;
+    });
+  };
+
+  const groupedPricing = VERNA_PRICING.reduce((acc, item) => {
+    if (!acc[item.variant]) {
+      acc[item.variant] = [];
+    }
+    acc[item.variant].push(item);
+    return acc;
+  }, {} as Record<string, typeof VERNA_PRICING>);
+
+  return (
+    <div className="space-y-4">
+      {Object.entries(groupedPricing).map(([variant, items]) => (
+        <div
+          key={variant}
+          className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md shadow-sm overflow-hidden"
+        >
+          <button
+            onClick={() => toggleVariant(variant)}
+            className="w-full flex items-center justify-between p-6 text-left hover:bg-white/10 transition-colors text-white"
+          >
+            <div>
+              <h3 className="text-xl font-semibold text-white">{variant}</h3>
+              <p className="text-sm text-white/70 mt-1">
+                {items.length} powertrain option{items.length > 1 ? 's' : ''}
+              </p>
+            </div>
+            <motion.div
+              animate={{ rotate: expandedVariants.has(variant) ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-white/70"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </motion.div>
+          </button>
+          
+          <motion.div
+            initial={false}
+            animate={{
+              height: expandedVariants.has(variant) ? 'auto' : 0,
+              opacity: expandedVariants.has(variant) ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 pb-6 pt-0 space-y-3 border-t border-white/10">
+              {items.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm"
+                >
+                  <div>
+                    <div className="text-sm font-medium text-white">{item.powertrain}</div>
+                    <div className="text-xs text-white/70 mt-1">Powertrain</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xl font-bold text-red-500">{item.price}</div>
+                    <div className="text-xs text-white/70 mt-1">Ex-showroom*</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      ))}
+      
+      <div className="mt-4 p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm text-sm text-white/80 text-center">
+        *Ex-showroom prices. May vary by city. Please contact your nearest dealer for accurate pricing and availability.
+      </div>
+    </div>
+  );
+}
 
 export default function VernaPage() {
   const VernaVideoSrc = "/assets1/The all-new Hyundai VERNA _ Futuristic. Ferocious. _ TVC.mp4"
@@ -25,76 +134,96 @@ export default function VernaPage() {
   }
   const galleryImages: string[] = [
     // Hero
-    "https://concept.hyundaimotor.in/documents/d/global/verna-highlights-sporty",
+    "/images/cars/verna/highlights/verna-highlights-sporty.jpg",
     // Technology section
-    "https://concept.hyundaimotor.in/documents/20120/33945/Horizon%2BLED.jpg/e59a4fea-4dcf-e02b-1911-8bd6bacac8d1?t=1737053743184",
-    "https://concept.hyundaimotor.in/documents/20120/33945/26.03%2Bcm.jpg/ffd15bbb-a690-cb83-0bab-84780c1a2782?t=1737053742867",
-    "https://concept.hyundaimotor.in/documents/20120/33945/Bose%2BPremium.jpg/d309955f-5e4f-ce0b-0beb-adf3cb6b2634?t=1737053742954",
-    "https://concept.hyundaimotor.in/documents/20120/33945/Ambient%2Bsounds.jpg/756cbaaa-49b4-3609-9e15-6a2667110740?t=1737053742894",
-    "https://concept.hyundaimotor.in/documents/20120/33945/Switchable%2Btype.jpg/00844535-0967-cdd2-c033-93caf9f38a36?t=1737053795421",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/ledtaillamp_verna.jpg",
+    "/images/cars/verna/e59a4fea-4dcf-e02b-1911-8bd6bacac8d1.jpg",
+    "/images/cars/verna/ffd15bbb-a690-cb83-0bab-84780c1a2782.jpg",
+    "/images/cars/verna/d309955f-5e4f-ce0b-0beb-adf3cb6b2634.jpg",
+    "/images/cars/verna/756cbaaa-49b4-3609-9e15-6a2667110740.jpg",
+    "/images/cars/verna/00844535-0967-cdd2-c033-93caf9f38a36.jpg",
+    "/images/cars/verna/ledtaillamp_verna.jpg",
     // SmartSense ADAS section
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-lane-departure-warning.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-FCA-JT.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-forward-collision-warning-car.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-FCA-Cyl.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-FCA-Ped.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-high-beam-assist.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-lane-following-assist.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-lane-keeping-assist.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-safe-exit-warning.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-RCCW.jpg",
+    "/images/cars/verna/ADAS-lane-departure-warning.jpg",
+    "/images/cars/verna/ADAS-FCA-JT.jpg",
+    "/images/cars/verna/ADAS-forward-collision-warning-car.jpg",
+    "/images/cars/verna/ADAS-FCA-Cyl.jpg",
+    "/images/cars/verna/ADAS-FCA-Ped.jpg",
+    "/images/cars/verna/ADAS-high-beam-assist.jpg",
+    "/images/cars/verna/ADAS-lane-following-assist.jpg",
+    "/images/cars/verna/ADAS-lane-keeping-assist.jpg",
+    "/images/cars/verna/ADAS-safe-exit-warning.jpg",
+    "/images/cars/verna/exterior/ADAS-RCCW.jpg",
     // Exterior section
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/verna_ext_front.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/March/ex_2_1120x600_1.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/led-trail.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/exterior-vernaimage1.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/deadside_verna.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/March/ex_2_1120x600_5.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/March/ex_2_1120x600_6.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/March/ex_2_1120x600_7.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernarearside.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/March/ex_2_1120x600_9.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/taillampverna.jpg",
+    "/images/cars/verna/exterior/verna_ext_front.jpg",
+    "/images/cars/verna/exterior/ex_2_1120x600_1.jpg",
+    "/images/cars/verna/led-trail.jpg",
+    "/images/cars/verna/exterior/exterior-vernaimage1.jpg",
+    "/images/cars/verna/exterior/deadside_verna.jpg",
+    "/images/cars/verna/ex_2_1120x600_5.jpg",
+    "/images/cars/verna/exterior/ex_2_1120x600_6.jpg",
+    "/images/cars/verna/ex_2_1120x600_7.jpg",
+    "/images/cars/verna/exterior/vernarearside.jpg",
+    "/images/cars/verna/exterior/ex_2_1120x600_9.jpg",
+    "/images/cars/verna/taillampverna.jpg",
     // Interior section
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/pc/verna_int_1.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/800x530_2.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/vernasmallventipc.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/vernasmallimage1.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/interior-small-image-new-3.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/800x530_1.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/vernainterior-small-image2.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/800x530_5.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/1120x600_1.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/verna_1120x600_2.jpg",
+    "/images/cars/verna/interior/verna_int_1.jpg",
+    "/images/cars/verna/interior/800x530_2.jpg",
+    "/images/cars/verna/vernasmallventipc.jpg",
+    "/images/cars/verna/interior/vernasmallimage1.jpg",
+    "/images/cars/verna/interior/interior-small-image-new-3.jpg",
+    "/images/cars/verna/800x530_1.jpg",
+    "/images/cars/verna/interior/vernainterior-small-image2.jpg",
+    "/images/cars/verna/interior/800x530_5.jpg",
+    "/images/cars/verna/interior/1120x600_1.jpg",
+    "/images/cars/verna/verna_1120x600_2.jpg",
     // Performance section
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Convenience/per_Turbogdiengineverna1.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Performance/pc/per_MPiengine.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Performance/tab/performance_512x340_05.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Performance/tab/performance_512x340_03.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Performance/tab/performance_512x340_04.jpg",
+    "/images/cars/verna/performance/per_Turbogdiengineverna1.jpg",
+    "/images/cars/verna/performance/per_MPiengine.jpg",
+    "/images/cars/verna/performance/performance_512x340_05.jpg",
+    "/images/cars/verna/performance/performance_512x340_03.jpg",
+    "/images/cars/verna/performance/performance_512x340_04.jpg",
     // Safety section
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernaairbags.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernaElectronicStabilityControl.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernaparkingassist.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernahsac.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Safety/tab/safety_512x340_05.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Safety/tab/safety_512x340_06.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Safety/tab/safety_512x340_04.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/emergencystopverna.jpg",
+    "/images/cars/verna/safety/vernaairbags.jpg",
+    "/images/cars/verna/vernaElectronicStabilityControl.jpg",
+    "/images/cars/verna/vernaparkingassist.jpg",
+    "/images/cars/verna/vernahsac.jpg",
+    "/images/cars/verna/safety/safety_512x340_05.jpg",
+    "/images/cars/verna/safety/safety_512x340_06.jpg",
+    "/images/cars/verna/safety/safety_512x340_04.jpg",
+    "/images/cars/verna/emergencystopverna.jpg",
     // Convenience section
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Convenience/March/conv_1_1120x600.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Safety/ventilaterverna.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/Smarttrunkverna.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/touchscreenverna.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/Hometocar.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernawirelesscharger.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Convenience/March/conv_2_512x340_4.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Convenience/vernaconv_2.jpg",
-    "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Convenience/March/conv_2_512x340_3.jpg",
+    "/images/cars/verna/convenience/conv_1_1120x600.jpg",
+    "/images/cars/verna/interior/ventilaterverna.jpg",
+    "/images/cars/verna/Smarttrunkverna.jpg",
+    "/images/cars/verna/touchscreenverna.jpg",
+    "/images/cars/verna/Hometocar.jpg",
+    "/images/cars/verna/vernawirelesscharger.jpg",
+    "/images/cars/verna/convenience/conv_2_512x340_4.jpg",
+    "/images/cars/verna/convenience/vernaconv_2.jpg",
+    "/images/cars/verna/conv_2_512x340_3.jpg",
     // Space & Comfort section
-    "https://ss.hyundaimotor.in/documents/20120/33939/Longest%2Bwheelbase.jpg/6e80e029-90c9-5136-82ab-64e96abca50d?t=1734353856614",
+    "/images/cars/verna/exterior/6e80e029-90c9-5136-82ab-64e96abca50d.jpg",
   ]
+
+  const [images, setImages] = useState<string[]>(galleryImages)
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch('/images/cars/verna/manifest.json', { cache: 'no-store' })
+        if (!res.ok) return
+        const m = await res.json()
+        const cats = m?.categories || {}
+        const list: string[] = []
+        Object.keys(cats).forEach((k) => {
+          const arr = Array.isArray(cats[k]) ? cats[k] : []
+          arr.forEach((it: any) => list.push(it.src))
+        })
+        if (list.length) setImages(list)
+      } catch {}
+    }
+    load()
+  }, [])
   return (
     <div className="min-h-screen bg-transparent text-neutral-100 antialiased">
       {/* Sticky Background Video */}
@@ -134,6 +263,7 @@ export default function VernaPage() {
               { id: 'safety', label: 'Safety' },
               { id: 'convenience', label: 'Convenience' },
               { id: 'space', label: 'Space' },
+              { id: 'pricing', label: 'Pricing' },
             ].map(t => (
               <a key={t.id} href={`#${t.id}`} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border hover:bg-white/10">
                 <span>{t.label}</span>
@@ -187,7 +317,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://concept.hyundaimotor.in/documents/20120/33945/Horizon%2BLED.jpg/e59a4fea-4dcf-e02b-1911-8bd6bacac8d1?t=1737053743184" 
+                  src="/images/cars/verna/e59a4fea-4dcf-e02b-1911-8bd6bacac8d1.jpg" 
                   alt="Horizon LED positioning lamps and DRLs" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -201,7 +331,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://concept.hyundaimotor.in/documents/20120/33945/26.03%2Bcm.jpg/ffd15bbb-a690-cb83-0bab-84780c1a2782?t=1737053742867" 
+                  src="/images/cars/verna/ffd15bbb-a690-cb83-0bab-84780c1a2782.jpg" 
                   alt="26.03 cm AVN and Digital Cluster" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -215,7 +345,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://concept.hyundaimotor.in/documents/20120/33945/Bose%2BPremium.jpg/d309955f-5e4f-ce0b-0beb-adf3cb6b2634?t=1737053742954" 
+                  src="/images/cars/verna/d309955f-5e4f-ce0b-0beb-adf3cb6b2634.jpg" 
                   alt="Bose Premium Sound 8 Speaker system" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -229,7 +359,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://concept.hyundaimotor.in/documents/20120/33945/Ambient%2Bsounds.jpg/756cbaaa-49b4-3609-9e15-6a2667110740?t=1737053742894" 
+                  src="/images/cars/verna/756cbaaa-49b4-3609-9e15-6a2667110740.jpg" 
                   alt="Ambient sounds of nature on the infotainment" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -243,7 +373,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://concept.hyundaimotor.in/documents/20120/33945/Switchable%2Btype.jpg/00844535-0967-cdd2-c033-93caf9f38a36?t=1737053795421" 
+                  src="/images/cars/verna/00844535-0967-cdd2-c033-93caf9f38a36.jpg" 
                   alt="Switchable type infotainment and climate controller" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -257,7 +387,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/ledtaillamp_verna.jpg" 
+                  src="/images/cars/verna/ledtaillamp_verna.jpg" 
                   alt="Parametric Connected LED tail lamps" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -290,7 +420,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-lane-departure-warning.jpg" 
+                  src="/images/cars/verna/ADAS-lane-departure-warning.jpg" 
                   alt="LDW Lane Departure Warning" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -304,7 +434,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-FCA-JT.jpg" 
+                  src="/images/cars/verna/ADAS-FCA-JT.jpg" 
                   alt="FCA JT Forward Collision Avoidance Assist Junction Turning" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -318,7 +448,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-forward-collision-warning-car.jpg" 
+                  src="/images/cars/verna/ADAS-forward-collision-warning-car.jpg" 
                   alt="FCA Car and FCW Forward Collision Avoidance Car and Forward Collision Warning" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -332,7 +462,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-FCA-Cyl.jpg" 
+                  src="/images/cars/verna/ADAS-FCA-Cyl.jpg" 
                   alt="FCA Cyl Forward Collision Avoidance Assist Cycle" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -346,7 +476,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-FCA-Ped.jpg" 
+                  src="/images/cars/verna/ADAS-FCA-Ped.jpg" 
                   alt="FCA Ped Forward Collision Avoidance Assist Pedestrian" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -360,7 +490,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-high-beam-assist.jpg" 
+                  src="/images/cars/verna/ADAS-high-beam-assist.jpg" 
                   alt="HBA High Beam Assist" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -374,7 +504,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-lane-following-assist.jpg" 
+                  src="/images/cars/verna/ADAS-lane-following-assist.jpg" 
                   alt="LFA Lane Following Assist" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -388,7 +518,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-lane-keeping-assist.jpg" 
+                  src="/images/cars/verna/ADAS-lane-keeping-assist.jpg" 
                   alt="LKA Lane Keeping Assist" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -402,7 +532,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-safe-exit-warning.jpg" 
+                  src="/images/cars/verna/ADAS-safe-exit-warning.jpg" 
                   alt="SEW Safe Exit Warning" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -416,7 +546,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/safety/ADAS-RCCW.jpg" 
+                  src="/images/cars/verna/exterior/ADAS-RCCW.jpg" 
                   alt="RCCA and RCCW Rear Cross Traffic Collision Avoidance Warning" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -444,7 +574,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Convenience/per_Turbogdiengineverna1.jpg" 
+                  src="/images/cars/verna/performance/per_Turbogdiengineverna1.jpg" 
                   alt="Turbo GDi Engine" 
                   className="rounded-xl mb-4 aspect-video object-cover"
                 />
@@ -458,7 +588,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Performance/pc/per_MPiengine.jpg" 
+                  src="/images/cars/verna/performance/per_MPiengine.jpg" 
                   alt="MPi Engine" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -472,7 +602,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Performance/tab/performance_512x340_05.jpg" 
+                  src="/images/cars/verna/performance/performance_512x340_05.jpg" 
                   alt="Performance Feature" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -486,7 +616,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Performance/tab/performance_512x340_03.jpg" 
+                  src="/images/cars/verna/performance/performance_512x340_03.jpg" 
                   alt="Engine Technology" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -500,7 +630,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Performance/tab/performance_512x340_04.jpg" 
+                  src="/images/cars/verna/performance/performance_512x340_04.jpg" 
                   alt="Powertrain" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -528,7 +658,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernaairbags.jpg" 
+                  src="/images/cars/verna/safety/vernaairbags.jpg" 
                   alt="Airbags" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -542,7 +672,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernaElectronicStabilityControl.jpg" 
+                  src="/images/cars/verna/vernaElectronicStabilityControl.jpg" 
                   alt="Electronic Stability Control" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -556,7 +686,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernaparkingassist.jpg" 
+                  src="/images/cars/verna/vernaparkingassist.jpg" 
                   alt="Parking Assist" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -570,7 +700,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernahsac.jpg" 
+                  src="/images/cars/verna/vernahsac.jpg" 
                   alt="Hill Start Assist Control" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -584,7 +714,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Safety/tab/safety_512x340_05.jpg" 
+                  src="/images/cars/verna/safety/safety_512x340_05.jpg" 
                   alt="Safety System" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -598,7 +728,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Safety/tab/safety_512x340_06.jpg" 
+                  src="/images/cars/verna/safety/safety_512x340_06.jpg" 
                   alt="Safety Feature" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -612,7 +742,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Safety/tab/safety_512x340_04.jpg" 
+                  src="/images/cars/verna/safety/safety_512x340_04.jpg" 
                   alt="Safety Technology" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -626,7 +756,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/emergencystopverna.jpg" 
+                  src="/images/cars/verna/emergencystopverna.jpg" 
                   alt="Emergency Stop" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -654,7 +784,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Convenience/March/conv_1_1120x600.jpg" 
+                  src="/images/cars/verna/convenience/conv_1_1120x600.jpg" 
                   alt="Convenience Feature" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -668,7 +798,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Safety/ventilaterverna.jpg" 
+                  src="/images/cars/verna/interior/ventilaterverna.jpg" 
                   alt="Ventilated Seats" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -682,7 +812,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/Smarttrunkverna.jpg" 
+                  src="/images/cars/verna/Smarttrunkverna.jpg" 
                   alt="Smart Trunk" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -696,7 +826,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/touchscreenverna.jpg" 
+                  src="/images/cars/verna/touchscreenverna.jpg" 
                   alt="Touchscreen Display" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -710,7 +840,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/Hometocar.jpg" 
+                  src="/images/cars/verna/Hometocar.jpg" 
                   alt="Home to Car" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -724,7 +854,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernawirelesscharger.jpg" 
+                  src="/images/cars/verna/vernawirelesscharger.jpg" 
                   alt="Wireless Charger" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -738,7 +868,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Convenience/March/conv_2_512x340_4.jpg" 
+                  src="/images/cars/verna/convenience/conv_2_512x340_4.jpg" 
                   alt="Convenience System" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -752,7 +882,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Convenience/vernaconv_2.jpg" 
+                  src="/images/cars/verna/convenience/vernaconv_2.jpg" 
                   alt="Advanced Convenience" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -766,7 +896,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Convenience/March/conv_2_512x340_3.jpg" 
+                  src="/images/cars/verna/conv_2_512x340_3.jpg" 
                   alt="Smart Features" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -794,7 +924,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/verna_ext_front.jpg" 
+                  src="/images/cars/verna/exterior/verna_ext_front.jpg" 
                   alt="Front Design" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -808,7 +938,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/March/ex_2_1120x600_1.jpg" 
+                  src="/images/cars/verna/exterior/ex_2_1120x600_1.jpg" 
                   alt="Side Profile" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -822,7 +952,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/led-trail.jpg" 
+                  src="/images/cars/verna/led-trail.jpg" 
                   alt="LED Trail Lights" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -836,7 +966,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/exterior-vernaimage1.jpg" 
+                  src="/images/cars/verna/exterior/exterior-vernaimage1.jpg" 
                   alt="Exterior Detail" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -850,7 +980,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/deadside_verna.jpg" 
+                  src="/images/cars/verna/exterior/deadside_verna.jpg" 
                   alt="Side View" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -864,7 +994,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/March/ex_2_1120x600_5.jpg" 
+                  src="/images/cars/verna/ex_2_1120x600_5.jpg" 
                   alt="Wheel Design" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -878,7 +1008,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/March/ex_2_1120x600_6.jpg" 
+                  src="/images/cars/verna/exterior/ex_2_1120x600_6.jpg" 
                   alt="Exterior Feature" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -892,7 +1022,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/March/ex_2_1120x600_7.jpg" 
+                  src="/images/cars/verna/ex_2_1120x600_7.jpg" 
                   alt="Design Detail" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -906,7 +1036,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/vernarearside.jpg" 
+                  src="/images/cars/verna/exterior/vernarearside.jpg" 
                   alt="Rear Side View" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -920,7 +1050,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Exterior/pc/March/ex_2_1120x600_9.jpg" 
+                  src="/images/cars/verna/exterior/ex_2_1120x600_9.jpg" 
                   alt="Rear Design" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -934,7 +1064,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Highlights/taillampverna.jpg" 
+                  src="/images/cars/verna/taillampverna.jpg" 
                   alt="LED Tail Lamps" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -962,7 +1092,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/pc/verna_int_1.jpg" 
+                  src="/images/cars/verna/interior/verna_int_1.jpg" 
                   alt="Dashboard Design" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -976,7 +1106,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/800x530_2.jpg" 
+                  src="/images/cars/verna/interior/800x530_2.jpg" 
                   alt="Interior Layout" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -990,7 +1120,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/vernasmallventipc.jpg" 
+                  src="/images/cars/verna/vernasmallventipc.jpg" 
                   alt="Climate Control" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -1004,7 +1134,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/vernasmallimage1.jpg" 
+                  src="/images/cars/verna/interior/vernasmallimage1.jpg" 
                   alt="Interior Detail" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -1018,7 +1148,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/interior-small-image-new-3.jpg" 
+                  src="/images/cars/verna/interior/interior-small-image-new-3.jpg" 
                   alt="Seat Design" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -1032,7 +1162,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/800x530_1.jpg" 
+                  src="/images/cars/verna/800x530_1.jpg" 
                   alt="Cabin Space" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -1046,7 +1176,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/vernainterior-small-image2.jpg" 
+                  src="/images/cars/verna/interior/vernainterior-small-image2.jpg" 
                   alt="Interior Feature" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -1060,7 +1190,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/800x530_5.jpg" 
+                  src="/images/cars/verna/interior/800x530_5.jpg" 
                   alt="Premium Interior" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -1074,7 +1204,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/1120x600_1.jpg" 
+                  src="/images/cars/verna/interior/1120x600_1.jpg" 
                   alt="Interior Overview" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -1088,7 +1218,7 @@ export default function VernaPage() {
             <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
               <CardContent className="p-6">
                 <img 
-                  src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/Verna/Interior/March/verna_1120x600_2.jpg" 
+                  src="/images/cars/verna/verna_1120x600_2.jpg" 
                   alt="Cabin Design" 
                   className="rounded-xl mb-4 aspect-video object-cover" 
                 />
@@ -1110,7 +1240,7 @@ export default function VernaPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 items-center">
             <img 
-              src="https://ss.hyundaimotor.in/documents/20120/33939/Longest%2Bwheelbase.jpg/6e80e029-90c9-5136-82ab-64e96abca50d?t=1734353856614" 
+              src="/images/cars/verna/exterior/6e80e029-90c9-5136-82ab-64e96abca50d.jpg" 
               alt="Premium cabin with lounge-like rear comfort" 
               className="rounded-2xl shadow-xl border border-white/10" 
             />
@@ -1135,10 +1265,26 @@ export default function VernaPage() {
         </div>
       </section>
 
+      {/* Variants & Pricing Section */}
+      <section id="pricing" className="py-14 md:py-20 bg-transparent">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-6 mb-6">
+            <div className="flex items-center gap-3">
+              <Activity className="w-6 h-6 text-red-500" />
+              <h2 className="text-2xl md:text-3xl font-bold text-white">Variants & Pricing</h2>
+            </div>
+            <p className="text-white/70 mt-2">
+              Explore all Hyundai VERNA variants with their powertrain options and ex-showroom prices.
+            </p>
+          </div>
+          <VariantsPricingSection />
+        </div>
+      </section>
+
       {/* Front view above strip */}
       <section className="max-w-7xl mx-auto px-4 mb-6">
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-          <img src="https://concept.hyundaimotor.in/documents/d/global/verna-highlights-sporty" alt="Verna front view" className="h-[50vh] w-full object-cover" />
+          <img src="/images/cars/verna/highlights/verna-highlights-sporty.jpg" alt="Verna front view" className="h-[50vh] w-full object-cover" />
           </div>
       </section>
 
@@ -1147,7 +1293,7 @@ export default function VernaPage() {
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
             <div className="relative">
               <div className="flex gap-4 animate-scroll-slow">
-                {[...galleryImages, ...galleryImages].map((src, i) => (
+                {[...images, ...images].map((src, i) => (
                 <div key={i} className="h-44 w-72 shrink-0 overflow-hidden rounded-xl">
                   <img src={src} alt={`Verna strip ${i + 1}`} className="h-full w-full object-cover" loading="lazy" />
                   </div>

@@ -58,7 +58,7 @@ export default function CretaEVPage() {
           </div>
           <div className="relative">
             <div className="aspect-[16/10] rounded-2xl overflow-hidden ring-1 ring-white/10">
-              <img alt="CRETA Electric front three-quarter" className="w-full h-full object-cover" src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-front-1.jpg" />
+              <img alt="CRETA Electric front three-quarter" className="w-full h-full object-cover" src="/images/cars/creta-ev/creta-electric-front-1.jpg" />
             </div>
             <div className="absolute -bottom-6 right-4 bg-white/5 backdrop-blur-md rounded-xl px-4 py-3 grid gap-1">
               <div className="text-xs text-gray-400">Explore the exterior</div>
@@ -85,27 +85,27 @@ export default function CretaEVPage() {
           <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Exterior Highlights</h2>
           <div className="grid md:grid-cols-5 gap-4">
             <figure className="bg-black/40 backdrop-blur-md rounded-2xl p-4 ring-1 ring-white/10">
-              <img className="w-full h-36 object-cover rounded-xl" alt="Active air flaps" src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/highlights/cretaevsmallpix.jpg" />
+              <img className="w-full h-36 object-cover rounded-xl" alt="Active air flaps" src="/images/cars/creta-ev/cretaevsmallpix.jpg" />
               <figcaption className="mt-3 text-sm font-semibold">Active air flaps (AAF)</figcaption>
               <p className="text-xs text-gray-400">Improves aero efficiency by regulating airflow.</p>
             </figure>
             <figure className="bg-black/40 backdrop-blur-md rounded-2xl p-4 ring-1 ring-white/10">
-              <img className="w-full h-36 object-cover rounded-xl" alt="Pixelated graphic front grille" src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-front-1.jpg" />
+              <img className="w-full h-36 object-cover rounded-xl" alt="Pixelated graphic front grille" src="/images/cars/creta-ev/creta-electric-front-1.jpg" />
               <figcaption className="mt-3 text-sm font-semibold">Pixelated graphic front grille</figcaption>
               <p className="text-xs text-gray-400">Tech‑inspired signature face.</p>
             </figure>
             <figure className="bg-black/40 backdrop-blur-md rounded-2xl p-4 ring-1 ring-white/10">
-              <img className="w-full h-36 object-cover rounded-xl" alt="R17 Aero alloy" src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/highlights/cretaevsmall4.jpg" />
+              <img className="w-full h-36 object-cover rounded-xl" alt="R17 Aero alloy" src="/images/cars/creta-ev/cretaevsmall4.jpg" />
               <figcaption className="mt-3 text-sm font-semibold">R17 (D=436.6 mm) Aero alloys + LRR tyres</figcaption>
               <p className="text-xs text-gray-400">Low Rolling Resistance for efficiency.</p>
             </figure>
             <figure className="bg-black/40 backdrop-blur-md rounded-2xl p-4 ring-1 ring-white/10">
-              <img className="w-full h-36 object-cover rounded-xl" alt="Charging port surround" src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/highlights/cretaevsmall2.jpg" />
+              <img className="w-full h-36 object-cover rounded-xl" alt="Charging port surround" src="/images/cars/creta-ev/cretaevsmall2.jpg" />
               <figcaption className="mt-3 text-sm font-semibold">Charging port surround light + SOC indicator</figcaption>
               <p className="text-xs text-gray-400">Multi‑colour surround shows charging state.</p>
             </figure>
             <figure className="bg-black/40 backdrop-blur-md rounded-2xl p-4 ring-1 ring-white/10">
-              <img className="w-full h-36 object-cover rounded-xl" alt="Pixelated rear bumper" src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/highlights/cretaevsmall3.jpg" />
+              <img className="w-full h-36 object-cover rounded-xl" alt="Pixelated rear bumper" src="/images/cars/creta-ev/cretaevsmall3.jpg" />
               <figcaption className="mt-3 text-sm font-semibold">Pixelated graphic rear bumper</figcaption>
               <p className="text-xs text-gray-400">Distinctive tail graphic completes the look.</p>
             </figure>
@@ -255,28 +255,28 @@ function AnglesOrchestrator() {
     {
       title: "Front",
       images: [
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-front-1.jpg",
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-front-2.jpg",
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-front-3.jpg",
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-front-4.jpg",
+        "/images/cars/creta-ev/creta-electric-front-1.jpg",
+        "/images/cars/creta-ev/creta-electric-front-2.jpg",
+        "/images/cars/creta-ev/creta-electric-front-3.jpg",
+        "/images/cars/creta-ev/creta-electric-front-4.jpg",
       ],
     },
     {
       title: "Side",
       images: [
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-side1.jpg",
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-side2.jpg",
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-side3.jpg",
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-side4.jpg",
+        "/images/cars/creta-ev/creta-electric-side1.jpg",
+        "/images/cars/creta-ev/creta-electric-side2.jpg",
+        "/images/cars/creta-ev/creta-electric-side3.jpg",
+        "/images/cars/creta-ev/creta-electric-side4.jpg",
       ],
     },
     {
       title: "Rear",
       images: [
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-rear-1.jpg",
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-rear-2.jpg",
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-rear-3.jpg",
-        "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-electric/exterior/creta-electric-rear-4.jpg",
+        "/images/cars/creta-ev/creta-electric-rear-1.jpg",
+        "/images/cars/creta-ev/creta-electric-rear-2.jpg",
+        "/images/cars/creta-ev/creta-electric-rear-3.jpg",
+        "/images/cars/creta-ev/creta-electric-rear-4.jpg",
       ],
     },
   ]), [])

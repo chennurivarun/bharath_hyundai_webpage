@@ -1,40 +1,42 @@
 "use client"
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { ChevronRight, Activity } from "lucide-react";
 
 // CRETA N Line Showcase — built from Hyundai India reference pages
 // Sections: Highlights, Exterior, Interior, Performance, Safety, Convenience, Specifications, Features
 // TailwindCSS required. Drop this component into a React/Next.js project with Tailwind configured.
-// All images are pulled directly from Hyundai India public CDN (reference pages).
+// Images will be served locally via manifest when available; falls back to existing local paths.
 
 const EXTERIOR_IMAGES = [
   {
     src:
-      "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Exterior/tab/creta-n-line-exterior-small-tyre.jpg",
+      "/images/cars/creta-nline/creta-n-line-exterior-small-tyre.jpg",
     caption: "R18 diamond cut alloys with N logo & red caliper",
   },
   {
     src:
-      "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Exterior/tab/creta-n-line-exterior-small-frontsideview.jpg",
+      "/images/cars/creta-nline/creta-n-line-exterior-small-frontsideview.jpg",
     caption: "Quad beam LED headlamps with horizon LED positioning lamp & DRLs",
   },
   {
     src:
-      "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Exterior/tab/creta-n-line-exterior-small-rightsideview-1.jpg",
+      "/images/cars/creta-nline/creta-n-line-exterior-small-rightsideview-1.jpg",
     caption: "Sporty black radiator grille & bold stance",
   },
   {
     src:
-      "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Exterior/tab/creta-n-line-exterior-small.jpg",
+      "/images/cars/creta-nline/creta-n-line-exterior-small.jpg",
     caption: "Side sill with red inserts",
   },
   {
     src:
-      "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Exterior/tab/creta-n-line-exterior-small-1.jpg",
+      "/images/cars/creta-nline/creta-n-line-exterior-small-1.jpg",
     caption: "Twin-tip muffler & rear bumper with red inserts",
   },
   {
     src:
-      "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/highlights/knight/cretanlinediffuserdesign.jpg",
+      "/images/cars/creta-nline/cretanlinediffuserdesign.jpg",
     caption: "Sporty tailgate spoiler & aero diffuser",
   },
 ];
@@ -42,26 +44,21 @@ const EXTERIOR_IMAGES = [
 const INTERIOR_IMAGES = [
   {
     src:
-      "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Interior/pc/CRETA%20N%20Line%20-%20interior%20-top%20big%20image.jpg",
-    caption: "All-black sporty cockpit with red accents",
-  },
-  {
-    src:
-      "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Interior/pc/creta-n-line-interior-seatdesign.jpg",
+      "/images/cars/creta-nline/creta-n-line-interior-seatdesign.jpg",
     caption: "Front row ventilated seats",
   },
   {
     src:
-      "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Interior/pc/creta-n-line-interior-seatdesign1.jpg",
+      "/images/cars/creta-nline/creta-n-line-interior-seatdesign1.jpg",
     caption: "Leatherette upholstery seats with N logo",
   },
 ];
 
 // Hero slider images
 const HERO_IMAGES = [
-  "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Exterior/tab/creta-n-line-exterior-small-frontsideview.jpg",
-  "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Exterior/tab/creta-n-line-exterior-small-rightsideview-1.jpg",
-  "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/highlights/knight/cretanlinediffuserdesign.jpg",
+  "/images/cars/creta-nline/creta-n-line-exterior-small-frontsideview.jpg",
+  "/images/cars/creta-nline/creta-n-line-exterior-small-rightsideview-1.jpg",
+  "/images/cars/creta-nline/cretanlinediffuserdesign.jpg",
 ];
 
 const SPEC_TABLE = [
@@ -107,110 +104,110 @@ const HIGHLIGHTS_CARDS = [
   {
     title: "Dual 10.25″ displays",
     body: "Curvilinear 26.03 cm infotainment + 26.03 cm digital cluster.",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/convenience/pc/creta-n-line-suv-convenience-display.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-convenience-display.jpg",
   },
   {
     title: "Sporty N Line identity",
     body: "Black theme with red accents and N badging.",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Interior/pc/CRETA%20N%20Line%20-%20interior%20-top%20big%20image.jpg",
+    img: "/images/cars/creta-nline/CRETA N Line - interior -top big image.jpg",
   },
   {
     title: "Voice‑enabled sunroof",
     body: "Smart panoramic sunroof with voice control.",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Interior/pc/Convenience%20-%204%20-%20sunroof.jpg",
+    img: "/images/cars/creta-nline/Convenience - 4 - sunroof.jpg",
   },
   {
     title: "Connected car tech",
     body: "Bluelink, Alexa Home‑to‑Car, and more.",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/convenience/pc/creta-n-line-suv-convenience.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-convenience.jpg",
   },
   {
     title: "Safety suite",
     body: "6 airbags standard, ESC, EPB (Auto Hold), TPMS.",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/safety/pc/creta-n-line-suv-safety.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-safety.jpg",
   },
   {
     title: "Level 2 ADAS*",
     body: "On select variants, SmartSense assistance features.",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Interior/pc/Big-image-1st.jpg",
+    img: "/images/cars/creta-nline/Big-image-1st.jpg",
   },
 ];
 
 const CONVENIENCE_CARDS = [
   {
     title: "Home to car (H2C) with Alexa",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/convenience/pc/creta-n-line-suv-convenience.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-convenience.jpg",
   },
   {
     title: "26.03cm (10.25”) multi display digital cluster",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/convenience/pc/creta-n-line-suv-convenience-display.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-convenience-display.jpg",
   },
   {
     title: "Bose premium sound system (8 speakers)",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/convenience/pc/creta-n-line-suv-convenience-bosemusicsystem.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-convenience-bosemusicsystem.jpg",
   },
   {
     title: "Traction control modes (Snow, Mud, Sand)",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/convenience/pc/creta-n-line-suv-convenience-topview.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-convenience-topview.jpg",
   },
   {
     title: "Dual zone automatic temperature control (DATC)",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/highlights/knight/cretanlinedatc.jpg",
+    img: "/images/cars/creta-nline/cretanlinedatc.jpg",
   },
   {
     title: "Exciting red ambient lighting",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/convenience/mob/creta-n-line-suv-convenience-dashboard.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-convenience-dashboard.jpg",
   },
   {
     title: "Wireless phone charger",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/convenience/mob/creta-n-line-suv-convenience-wirelesscharger.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-convenience-wirelesscharger.jpg",
   },
   {
     title: "Voice enabled smart panoramic sunroof",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Interior/pc/Convenience%20-%204%20-%20sunroof.jpg",
+    img: "/images/cars/creta-nline/Convenience - 4 - sunroof.jpg",
   },
   {
     title: "USB charger (C type)",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/convenience/mob/creta-n-line-suv-convenience-poweroutlet.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-convenience-poweroutlet.jpg",
   },
 ];
 
 const SAFETY_CARDS = [
   {
     title: "SVM & BVM",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Interior/pc/Big-image-1st.jpg",
+    img: "/images/cars/creta-nline/Big-image-1st.jpg",
   },
   {
     title: "Six airbags (standard)",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Interior/pc/Big-image-2.jpg",
+    img: "/images/cars/creta-nline/Big-image-2.jpg",
   },
   {
     title: "Electric parking brake with Auto Hold",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/safety/pc/creta-n-line-suv-safety-ABS.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-safety-ABS.jpg",
   },
   {
     title: "Tyre Pressure Monitoring System (Highline)",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/safety/pc/creta-n-line-suv-safety-display.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-safety-display.jpg",
   },
   {
     title: "Hill Start Assist Control",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/safety/pc/creta-n-line-suv-safety.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-safety.jpg",
   },
   {
     title: "Electronic Stability Control & VSM",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Interior/pc/ESC.jpg",
+    img: "/images/cars/creta-nline/ESC.jpg",
   },
   {
     title: "Automatic headlamps",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/highlights/knight/cretanlineheadlamp.jpg",
+    img: "/images/cars/creta-nline/cretanlineheadlamp.jpg",
   },
   {
     title: "Emergency stop signal",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/safety/pc/creta-n-line-suv-safety-headlamp.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-safety-headlamp.jpg",
   },
   {
     title: "Front parking sensors",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/highlights/knight/cretanlinefrontparkingsensors.jpg",
+    img: "/images/cars/creta-nline/cretanlinefrontparkingsensors.jpg",
   },
 ];
 
@@ -218,27 +215,27 @@ const SAFETY_CARDS = [
 const PERFORMANCE_CARDS = [
   {
     title: "1.5l Turbo GDi petrol engine",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Performance/pc/creta-n-line%20suv%20performance-dieselengine-1.jpg",
+    img: "/images/cars/creta-nline/creta-n-line suv performance-dieselengine-1.jpg",
     caption: "Turbocharged GDi engine (official page hero image)",
   },
   {
     title: "7‑speed DCT (Dual clutch transmission)",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Performance/creta-n-line-suv-performance-automatictransmission.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-performance-automatictransmission.jpg",
     caption: "Quick, seamless gear shifts",
   },
   {
     title: "6‑speed MT (Manual transmission)",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Performance/creta-n-line-suv-performance-manualtransmission.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-performance-manualtransmission.jpg",
     caption: "Engaging stick-shift control",
   },
   {
     title: "Paddle shifters (DCT only)",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Performance/creta-n-line-suv-performance.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-performance.jpg",
     caption: "Manual override on the fly",
   },
   {
     title: "Traction control modes (Snow, Mud, Sand)",
-    img: "https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/Performance/creta-n-line-suv-performance-topview.jpg",
+    img: "/images/cars/creta-nline/creta-n-line-suv-performance-topview.jpg",
     caption: "Adapt grip for varying surfaces",
   },
 ];
@@ -305,8 +302,213 @@ function Pill({ children }: { children: React.ReactNode }) {
 // Optional smoke tests: flip to true to render test blocks in-page
 const __DEV_TESTS__ = false;
 
-export default function CretaNLinePage() {
+// CRETA N Line Variants & Pricing Data
+const CRETA_NLINE_PRICING: Array<{ variant: string; powertrain: string; price: string }> = [
+  { variant: 'N6', powertrain: '1.5L Turbo Petrol 6MT', price: '₹ 15.99 Lakh*' },
+  { variant: 'N8', powertrain: '1.5L Turbo Petrol 6MT', price: '₹ 17.99 Lakh*' },
+  { variant: 'N8', powertrain: '1.5L Turbo Petrol 7DCT', price: '₹ 19.99 Lakh*' },
+  { variant: 'N8(O)', powertrain: '1.5L Turbo Petrol 6MT', price: '₹ 19.99 Lakh*' },
+  { variant: 'N8(O)', powertrain: '1.5L Turbo Petrol 7DCT', price: '₹ 21.99 Lakh*' },
+  { variant: 'N8(O) Connect', powertrain: '1.5L Turbo Petrol 6MT', price: '₹ 21.99 Lakh*' },
+  { variant: 'N8(O) Connect', powertrain: '1.5L Turbo Petrol 7DCT', price: '₹ 23.99 Lakh*' },
+];
 
+// Collapsible Variants & Pricing Component
+function VariantsPricingSection() {
+  const [expandedVariants, setExpandedVariants] = useState<Set<string>>(new Set());
+
+  const toggleVariant = (variant: string) => {
+    setExpandedVariants((prev) => {
+      const next = new Set(prev);
+      if (next.has(variant)) {
+        next.delete(variant);
+      } else {
+        next.add(variant);
+      }
+      return next;
+    });
+  };
+
+  const groupedPricing = CRETA_NLINE_PRICING.reduce((acc, item) => {
+    if (!acc[item.variant]) {
+      acc[item.variant] = [];
+    }
+    acc[item.variant].push(item);
+    return acc;
+  }, {} as Record<string, typeof CRETA_NLINE_PRICING>);
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="space-y-4">
+        {Object.entries(groupedPricing).map(([variant, items]) => (
+          <div
+            key={variant}
+            className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md shadow-sm overflow-hidden"
+          >
+            <button
+              onClick={() => toggleVariant(variant)}
+              className="w-full flex items-center justify-between p-6 text-left hover:bg-white/10 transition-colors text-gray-900"
+            >
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900">{variant}</h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  {items.length} powertrain option{items.length > 1 ? 's' : ''}
+                </p>
+              </div>
+              <motion.div
+                animate={{ rotate: expandedVariants.has(variant) ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="text-gray-600"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </motion.div>
+            </button>
+            
+            <motion.div
+              initial={false}
+              animate={{
+                height: expandedVariants.has(variant) ? 'auto' : 0,
+                opacity: expandedVariants.has(variant) ? 1 : 0,
+              }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="overflow-hidden"
+            >
+              <div className="px-6 pb-6 pt-0 space-y-3 border-t border-white/10">
+                {items.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm"
+                  >
+                    <div>
+                      <div className="text-sm font-medium text-gray-900">{item.powertrain}</div>
+                      <div className="text-xs text-gray-600 mt-1">Powertrain</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-xl font-bold text-gray-900">{item.price}</div>
+                      <div className="text-xs text-gray-600 mt-1">Ex-showroom*</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        ))}
+        
+        <div className="mt-4 p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm text-sm text-gray-600 text-center">
+          *Ex-showroom prices. May vary by city. Please contact your nearest dealer for accurate pricing and availability.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function CretaNLinePage() {
+  const [manifestData, setManifestData] = useState<null | {
+    categories: Record<string, { title?: string; src: string }[]>;
+  }>(null);
+
+  // Curated captions keyed by filename to show precise names
+  const CAPTION_MAP: Record<string, string> = {
+    // Highlights (Knight)
+    "cretanlinebig2.jpg": "N Line Knight – hero view",
+    "cretanlinefrontgrilsplitter.jpg": "Front grille with splitter",
+    "cretanlinebatch.jpg": "N Line badge",
+    "cretanlinedashcam.jpg": "Dashcam",
+    "cretanlinedatc.jpg": "Dual zone automatic temperature control (DATC)",
+    "cretanlinemood.jpg": "Ambient mood lighting",
+    "cretanlinetailight.jpg": "Distinctive tail lamps",
+    "cretanlinediffuser.jpg": "Rear diffuser",
+    "cretanlinehorizonlamp.jpg": "Horizon LED positioning lamp",
+    "cretanlinescoopseats.jpg": "Sporty seat design",
+
+    // Exterior
+    "cretanlinebig3.jpg": "Exterior – dynamic stance",
+    "side.jpg": "Side profile",
+    "creta-n-line-exterior-small-rightsideview.jpg": "Right side view",
+    "creta-n-line-exterior-small-frontsideview.jpg": "Front side view",
+    "creta-n-line-exterior-small-rightsideview-1.jpg": "Right side view (alt)",
+    "creta-n-line-exterior-small.jpg": "Exterior detail",
+    "creta-n-line-exterior-small-tyre.jpg": "R18 diamond cut alloys with N logo",
+    "cretanlinediffuserdesign.jpg": "Aero diffuser design",
+    "creta-n-line-exterior-small-1.jpg": "Rear bumper with red inserts",
+
+    // Interior
+    "creta-n-line-interior-seatdesign.jpg": "Front row ventilated seats",
+    "creta-n-line-interior-seatdesign1.jpg": "Leatherette upholstery with N logo",
+    "creta-n-line-interior-airbag.jpg": "6 airbags (image)",
+    "creta-n-line-interior-seatcompactdesign.jpg": "Compact seat design",
+    "creta-n-line-compact-bootspace.jpg": "Boot space",
+    "creta-n-line-interior-flexibleseat.jpg": "Flexible seating",
+    "creta-n-line-interior.jpg": "Interior overview",
+    "creta-n-line-interior-mirror.jpg": "Interior mirror",
+    "creta-n-line-interior-babyseat.jpg": "Child seat compatibility",
+    "creta-n-line-interior-acvent.jpg": "AC vent detail",
+
+    // Performance
+    "creta-n-line-suv-performance-automatictransmission.jpg": "7‑speed DCT",
+    "creta-n-line-suv-performance-manualtransmission.jpg": "6‑speed MT",
+    "creta-n-line-suv-performance.jpg": "Paddle shifters",
+    "creta-n-line-suv-performance-topview.jpg": "Traction control modes (Snow/Mud/Sand)",
+
+    // Safety
+    "big-image-1st.jpg": "SVM & BVM",
+    "big-image-2.jpg": "Six airbags (standard)",
+    "creta-n-line-suv-safety-abs.jpg": "EPB with Auto Hold",
+    "creta-n-line-suv-safety-display.jpg": "TPMS Highline",
+    "creta-n-line-suv-safety.jpg": "ESC & VSM",
+    "esc.jpg": "Electronic Stability Control",
+    "cretanlineheadlamp.jpg": "Automatic headlamps",
+    "creta-n-line-suv-safety-headlamp.jpg": "Emergency stop signal",
+    "cretanlinefrontparkingsensors.jpg": "Front parking sensors",
+    "cretanlinefwdcollcar.jpg": "Forward Collision Avoidance (car)",
+    "cretanlinefwdcollman.jpg": "Forward Collision Avoidance (pedestrian)",
+    "creta-n-line-suv-safety-6.jpg": "Safety feature",
+    "fwcolljunctwarning.jpg": "Forward Collision Junction Warning",
+    "creta-n-line-suv-safety-3.jpg": "Safety feature",
+    "creta-n-line-suv-safety-11.jpg": "Safety feature",
+    "creta-n-line-suv-safety-10.jpg": "Safety feature",
+    "creta-n-line-suv-safety-2.jpg": "Safety feature",
+    "creta-n-line-suv-safety-12.jpg": "Safety feature",
+    "creta-n-line-suv-safety-14.jpg": "Safety feature",
+    "cretanlinelfa.jpg": "Lane Following Assist (LFA)",
+    "cretanlinescc.jpg": "Smart Cruise Control (SCC)",
+    "ctanlinesafeexist.jpg": "Safe Exit Warning",
+    "creta-n-line-suv-safety-display-1.jpg": "Cluster safety display",
+
+    // Convenience
+    "creta-n-line-suv-convenience.jpg": "Home‑to‑Car with Alexa",
+    "creta-n-line-suv-convenience-display.jpg": "Dual 10.25″ displays",
+    "creta-n-line-suv-convenience-bosemusicsystem.jpg": "Bose premium sound system",
+    "creta-n-line-suv-convenience-topview.jpg": "Traction control modes",
+    "creta-n-line-suv-convenience-dashboard.jpg": "Ambient lighting",
+    "creta-n-line-suv-convenience-wirelesscharger.jpg": "Wireless phone charger",
+    "convenience-4-sunroof.jpg": "Voice enabled smart panoramic sunroof",
+    "creta-n-line-suv-convenience-poweroutlet.jpg": "USB charger (C type)",
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const res = await fetch('/images/cars/creta-nline/manifest.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!cancelled) setManifestData(json);
+      } catch {}
+    }
+    load();
+    return () => { cancelled = true; };
+  }, []);
+
+  const getItems = (key: string, fallback: { src: string; caption?: string }[]) => {
+    const arr = manifestData?.categories?.[key] as { title?: string; src: string }[] | undefined;
+    if (!arr || arr.length === 0) return fallback;
+    return arr.map((it) => {
+      const file = (it.src || '').split('/').pop() || '';
+      const caption = CAPTION_MAP[file.toLowerCase()] || it.title || file;
+      return { src: it.src, caption };
+    });
+  };
   return (
     <div className="min-h-screen bg-transparent text-gray-900">
       {/* Fixed background video */}
@@ -335,6 +537,7 @@ export default function CretaNLinePage() {
               "Safety",
               "Convenience",
               "Specifications",
+              "Pricing",
               "Features",
             ].map((t) => (
               <a key={t} href={`#${t.toLowerCase()}`} className="hover:text-black/80">
@@ -396,31 +599,19 @@ export default function CretaNLinePage() {
       {/* Highlights */}
       <section id="highlights">
         <SectionHeading title="Highlights" subtitle="What stands out at a glance" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
-          {HIGHLIGHTS_CARDS.map((c, i) => (
-            <div key={i} className="rounded-2xl border bg-white overflow-hidden shadow-sm hover:shadow-md transition">
-              {c.img && (
-                <img src={c.img} alt={c.title} className="w-full h-40 object-cover" loading="lazy" />
-              )}
-              <div className="p-5">
-                <h3 className="font-semibold mb-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{c.title}</h3>
-                <p className="text-sm text-gray-600 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{c.body}</p>
-        </div>
-          </div>
-          ))}
-        </div>
+        <ImageGrid items={getItems('highlights', HIGHLIGHTS_CARDS.map((c) => ({ src: c.img, caption: c.title })))} />
       </section>
 
       {/* Exterior */}
       <section id="exterior">
         <SectionHeading title="Exterior" subtitle="Aggressive stance, red inserts, R18 alloys" />
-        <ImageGrid items={EXTERIOR_IMAGES} />
+        <ImageGrid items={getItems('exterior', EXTERIOR_IMAGES)} />
       </section>
 
       {/* Interior */}
       <section id="interior">
         <SectionHeading title="Interior" subtitle="All‑black sporty cabin with red accents" />
-        <ImageGrid items={INTERIOR_IMAGES} />
+        <ImageGrid items={getItems('interior', INTERIOR_IMAGES)} />
       </section>
 
       {/* Performance */}
@@ -428,12 +619,11 @@ export default function CretaNLinePage() {
         <SectionHeading title="Performance" subtitle="Turbocharged power with choice of MT/DCT" />
         {/* Performance image cards */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
-          {PERFORMANCE_CARDS.map((p, i) => (
+          {getItems('performance', PERFORMANCE_CARDS.map((p) => ({ src: p.img, caption: p.title }))).map((p, i) => (
             <figure key={i} className="rounded-2xl border bg-white overflow-hidden shadow-sm">
-              <img src={p.img} alt={p.title} className="w-full h-40 object-cover" loading="lazy" />
+              <img src={p.src} alt={p.caption || 'Performance'} className="w-full h-40 object-cover" loading="lazy" />
               <figcaption className="p-5">
-                <div className="font-semibold text-sm bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{p.title}</div>
-                {p.caption && <div className="text-xs text-gray-600 mt-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{p.caption}</div>}
+                <div className="font-semibold text-sm bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{p.caption || 'Performance'}</div>
               </figcaption>
             </figure>
           ))}
@@ -463,11 +653,11 @@ export default function CretaNLinePage() {
       <section id="safety">
         <SectionHeading title="Safety" subtitle="42+ standard features, 6 airbags, Level 2 ADAS*" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
-          {SAFETY_CARDS.map((s, i) => (
+          {getItems('safety', SAFETY_CARDS).map((s, i) => (
             <div key={i} className="rounded-2xl border bg-white overflow-hidden shadow-sm">
-              <img src={s.img} alt={s.title} className="w-full h-40 object-cover" loading="lazy" />
+              <img src={s.src || (s as any).img} alt={s.caption || (s as any).title} className="w-full h-40 object-cover" loading="lazy" />
               <div className="p-5">
-                <p className="text-sm font-medium bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{s.title}</p>
+                <p className="text-sm font-medium bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{s.caption || (s as any).title}</p>
         </div>
             </div>
           ))}
@@ -479,11 +669,11 @@ export default function CretaNLinePage() {
       <section id="convenience">
         <SectionHeading title="Convenience" subtitle="Comfort & everyday usability" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
-          {CONVENIENCE_CARDS.map((s, i) => (
+          {getItems('convenience', CONVENIENCE_CARDS.map((c) => ({ src: c.img, caption: c.title }))).map((s, i) => (
             <div key={i} className="rounded-2xl border bg-white overflow-hidden shadow-sm">
-              <img src={s.img} alt={s.title} className="w-full h-40 object-cover" loading="lazy" />
+              <img src={s.src} alt={s.caption} className="w-full h-40 object-cover" loading="lazy" />
               <div className="p-5">
-                <p className="text-sm font-medium bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{s.title}</p>
+                <p className="text-sm font-medium bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{s.caption}</p>
         </div>
           </div>
         ))}
@@ -494,6 +684,12 @@ export default function CretaNLinePage() {
       <section id="specifications">
         <SectionHeading title="Specifications" subtitle="Key technical details" />
         <KeyValueTable rows={SPEC_TABLE} />
+      </section>
+
+      {/* Variants & Pricing */}
+      <section id="pricing">
+        <SectionHeading title="Variants & Pricing" subtitle="Explore all CRETA N Line variants with powertrain options" />
+        <VariantsPricingSection />
       </section>
 
       {/* Features */}
@@ -537,7 +733,7 @@ export default function CretaNLinePage() {
       {/* Front view above strip */}
       <section className="max-w-7xl mx-auto px-4 mb-6">
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-          <img src="https://www.hyundai.com/content/dam/hyundai/in/en/data/find-a-car/creta-n-line/highlights/knight/cretanlinebig4.jpg" alt="Creta N Line front view" className="h-[50vh] w-full object-cover" />
+          <img src="/images/cars/creta-nline/creata-nline.avif" alt="Creta N Line front view" className="h-[50vh] w-full object-cover" />
         </div>
       </section>
 
