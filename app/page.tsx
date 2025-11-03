@@ -19,7 +19,6 @@ type Branch = { id: string; name: string; address: string; phone: string }
 const SALES_PHONE = "+91 7733888999"
 const SERVICE_PHONE = "+91 7997806806"
 const EMAIL = "bharathyundaidm@gmail.com"
-const HQ_ADDRESS = "#3,4,5,6 Survey No 58/1, Gowliddodi, Gopanpally, Financial District, Gachibowli – 500075"
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Models", href: "/models" },
@@ -94,8 +93,6 @@ export default function Page() {
 
           <NewsletterSection />
         </main>
-
-        <SiteFooter />
       </div>
 
       <WhatsappFab />
@@ -569,105 +566,6 @@ function LocationsRow({ branches }: { branches: Branch[] }) {
         ))}
       </div>
     </section>
-  )
-}
-
-function SiteFooter() {
-  return (
-    <footer className="mt-8 border-t border-white/10 bg-black/80 backdrop-blur-md">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-2 md:grid-cols-4 gap-10 text-sm">
-        <div>
-          <a href="#" className="flex items-center gap-2 font-semibold">
-            <span aria-hidden className="inline-block h-5 w-8 rounded-sm bg-white" />
-            <span className="text-white">Bharath Hyundai</span>
-          </a>
-          <address className="not-italic text-white/70 mt-4">{HQ_ADDRESS}</address>
-        </div>
-        <nav aria-label="Shop">
-          <p className="mb-3 font-semibold">Explore</p>
-          <ul className="space-y-2 text-white/70">
-            <li>
-              <a href="/models">Models</a>
-            </li>
-            <li>
-              <a href="/service">Service</a>
-            </li>
-            <li>
-              <a href="/accessories">Accessories</a>
-            </li>
-            <li>
-              <a href="/insurance">Insurance</a>
-            </li>
-          </ul>
-        </nav>
-        <nav aria-label="Company">
-          <p className="mb-3 font-semibold">Company</p>
-          <ul className="space-y-2 text-white/70">
-            <li>
-              <a href="/about">About Us</a>
-            </li>
-            <li>
-              <a href="/locations">Locations</a>
-            </li>
-            <li>
-              <a href="/contact">Contact</a>
-            </li>
-          </ul>
-        </nav>
-        <div aria-labelledby="contact-label">
-          <p id="contact-label" className="mb-3 font-semibold">
-            Contact
-          </p>
-          <p className="text-white/70">
-            Sales:{" "}
-            <a className="hover:text-white" href="tel:+917733888999">
-              {SALES_PHONE}
-            </a>
-            <br />
-            Service:{" "}
-            <a className="hover:text-white" href="tel:+917997806806">
-              {SERVICE_PHONE}
-            </a>
-            <br />
-            Email:{" "}
-            <a className="hover:text-white underline" href={`mailto:${EMAIL}`}>
-              {EMAIL}
-            </a>
-          </p>
-        </div>
-      </div>
-      <div className="border-t border-white/10">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 text-sm text-white/60 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <ul className="flex flex-wrap gap-x-6 gap-y-2">
-            <li>
-              <a href="#">Terms & Conditions</a>
-            </li>
-            <li>
-              <a href="#">Privacy Policy</a>
-            </li>
-            <li>
-              <a href="#">Cookie Policy</a>
-            </li>
-          </ul>
-          <div className="flex items-center gap-3">
-            <a aria-label="Facebook" href="#" className="hover:text-white">
-              Facebook
-            </a>
-            <a aria-label="Instagram" href="#" className="hover:text-white">
-              Instagram
-            </a>
-            <a aria-label="YouTube" href="#" className="hover:text-white">
-              YouTube
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="border-t border-white/10">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 text-center text-xs text-white/50">
-          © {new Date().getFullYear()} Bharath Hyundai. All rights reserved.
-        </div>
-      </div>
-    </footer>
   )
 }
 

@@ -12,9 +12,11 @@ import {
   ListChecks,
   Activity,
   ChevronRight,
+  Phone,
+  TestTube,
 } from "lucide-react";
 
-const brand = { primary: "#002c5f" } as const;
+const brand = { primary: "#dc2626" } as const;
 const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(" ");
 const isHttps = (url: string) => /^https:\/\//.test(url);
 
@@ -330,6 +332,10 @@ export default function CretaPage() {
   const [strip, setStrip] = useState<string[]>(BOTTOM_STRIP_IMAGES);
 
   useEffect(() => {
+    document.documentElement.style.setProperty('--brand-primary', brand.primary);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       const sections = ["highlights", "knight", "exterior", "interior", "performance", "safety", "convenience", "specs", "pricing", "features"];
       const scrollPosition = window.scrollY + 100;
@@ -409,8 +415,8 @@ export default function CretaPage() {
                   href={`#${item.id}`}
                   className={`px-3 py-2 rounded-lg transition-colors ${
                     activeSection === item.id
-                      ? "bg-white/20 text-white"
-                      : "text-white/70 hover:text-white hover:bg-white/10"
+                      ? "bg-[color:var(--brand-primary)] text-white"
+                      : "text-white/70 hover:text-white hover:bg-red-600/20"
                   }`}
                 >
                   {item.label}
@@ -445,7 +451,7 @@ export default function CretaPage() {
             <div className="flex flex-wrap justify-center gap-3 mt-8">
               <a
                 href="#highlights"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-white/90 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[color:var(--brand-primary)] text-white rounded-full font-semibold hover:bg-red-700 transition-colors shadow-lg shadow-red-600/30"
               >
                 Explore Highlights
                 <ChevronRight className="h-4 w-4" />
@@ -474,9 +480,12 @@ export default function CretaPage() {
 
         {/* Knight Section */}
         <Section id="knight" title="CRETA Knight" icon={<Car className="h-6 w-6" />}>
-          <div className="mb-8">
-            <p className="text-white/80 text-lg max-w-3xl">
-              Exclusive King Limited Edition features with premium accessories and unique styling elements.
+          <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              CRETA KING LIMITED EDITION
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              Decade of being the SUV of choice has made every single CRETA a legend in its own right. Each with its own story, with its own journey. And amongst these legends, a king is now born. The limited-edition CRETA King. It is everything that the legend is, and a lot more.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -488,11 +497,18 @@ export default function CretaPage() {
 
         {/* Exterior Section */}
         <Section id="exterior" title="Exterior" icon={<Car className="h-6 w-6" />}>
-          <div className="mb-8">
-            <p className="text-white/80 text-lg max-w-3xl">
-              Black chrome parametric grille, horizon LED DRLs, sequential turn signals, 
-              R17 diamond‑cut alloys, integrated roof rails, connected LED tail‑lamps.
+          <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              New Hyundai CRETA Car Exterior: What a legend looks like.
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              Bold. Charismatic. Extraordinary. The new Hyundai CRETA is symbolic of all things impressive no matter how you look at it. At first glance, its black chrome parametric grill makes a striking impression. Its new horizon LED positioning lamp & DRLs and quad beam LED headlamps in the front give the SUV an unmistakable presence on the road. The rear profile is also sculpted with refreshingly new elements like the connecting LED tail lamps that announce its departure.
             </p>
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                Experience the Hyundai CRETA exterior with bold and dynamic design.
+              </p>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {EX.map((item, i) => (
@@ -503,10 +519,18 @@ export default function CretaPage() {
 
         {/* Interior Section */}
         <Section id="interior" title="Interior" icon={<Settings className="h-6 w-6" />}>
-          <div className="mb-8">
-            <p className="text-white/80 text-lg max-w-3xl">
-              Premium cabin with new seats & piping, refined cockpit, generous second row.
+          <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              New Hyundai CRETA Car Interior: Discover spatial artistry.
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              Overwhelming presence and discreet glamour. With its symphony of space, the new Hyundai CRETA is a work of art. In the new Hyundai CRETA, every journey is a moving moment – even when stationary. Be it the refined cockpit or the comfortable second row, one always has the best seat. The interior is the soul of the new Hyundai CRETA.
             </p>
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                Explore Hyundai CRETA interior images and experience comfort like never before.
+              </p>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {IN.map((item, i) => (
@@ -517,10 +541,18 @@ export default function CretaPage() {
 
         {/* Performance Section */}
         <Section id="performance" title="Performance" icon={<Gauge className="h-6 w-6" />}>
-          <div className="mb-8">
-            <p className="text-white/80 text-lg max-w-3xl">
-              Three refined powertrains. Multiple drive modes. Your pick of transmissions.
+          <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              New Hyundai CRETA Car Performance: Adrenaline in DNA.
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              Powerfully distinctive design impressive dimensions – The new Hyundai CRETA is an impressive example of what happens when technological vision becomes a reality. It is as intrepid as it is agile. With the 1.5l petrol turbo under the hood, you would never be left wanting for power.
             </p>
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                The Hyundai CRETA offers smooth performance with power and efficiency.
+              </p>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {PF.map((item, i) => (
@@ -531,11 +563,18 @@ export default function CretaPage() {
 
         {/* Safety Section */}
         <Section id="safety" title="Safety" icon={<Shield className="h-6 w-6" />}>
-          <div className="mb-8">
-            <p className="text-white/80 text-lg max-w-3xl">
-              70+ safety features with <span className="font-semibold text-white">6 airbags standard</span>. 
-              Level 2 ADAS with SmartSense.
+          <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              New Hyundai CRETA Car Safety: Protect what Matters the Most.
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              The new Hyundai CRETA comes equipped with 70+ advanced safety features including six airbags, as standard. This SUV is reassuringly secure sanctuary for its occupants.
             </p>
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                The Hyundai CRETA car Safety Features ensure ultimate protection with 6 airbags, Hill-Start Assist, and more. Drive confidently with the Hyundai CRETA car Safety Features, designed for your peace of mind!
+              </p>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {SF.map((item, i) => (
@@ -546,11 +585,18 @@ export default function CretaPage() {
 
         {/* Convenience Section */}
         <Section id="convenience" title="Convenience & Connectivity" icon={<Activity className="h-6 w-6" />}>
-          <div className="mb-8">
-            <p className="text-white/80 text-lg max-w-3xl">
-              Bluelink with Alexa H2C, 10.25" digital cluster, Bose 8‑speaker system, 
-              traction control modes and more.
+          <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              New Hyundai CRETA Car Convenience: Always Forward Thinking.
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              Stand above it all and yet stay completely connected with your world. When it comes to technology, connectivity and infotainment, the new Hyundai CRETA is equipped with the most advanced features. The innovative Hyundai Bluelink app, Home-to-Car with Alexa gives you the power to control your car from the comfort of your home or office.
             </p>
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                The Hyundai CRETA car convenience features redefine every drive with smart connectivity and advanced infotainment.
+              </p>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {CON.map((item, i) => (
@@ -637,6 +683,24 @@ export default function CretaPage() {
           </p>
         </div>
       </footer>
+
+      {/* Quick Actions */}
+      <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+        <a 
+          href="/test-drive"
+          className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+        >
+          <TestTube className="h-5 w-5" />
+          Test Drive
+        </a>
+        <a 
+          href="tel:+917733888999"
+          className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+        >
+          <Phone className="h-5 w-5" />
+          Call Now
+        </a>
+      </div>
     </div>
   );
 }

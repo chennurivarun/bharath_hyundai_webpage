@@ -244,10 +244,6 @@ export default function VernaPage() {
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
             <a href="/" className="font-semibold tracking-wide">VERNA</a>
             <div className="hidden md:flex gap-2">
-              <Button variant="outline" size="sm" className="bg-white/5 border-white/20 text-white hover:bg-white/10">Prices</Button>
-              <Button variant="outline" size="sm" className="bg-white/5 border-white/20 text-white hover:bg-white/10">
-                <Download className="h-4 w-4 mr-2" /> e‑Brochure
-              </Button>
               <Button size="sm" className="bg-red-600 hover:bg-red-500">
                 <TestTube className="h-4 w-4 mr-2" /> Test Drive
               </Button>
@@ -310,6 +306,17 @@ export default function VernaPage() {
             <p className="text-white/70 mt-2 max-w-3xl">
               Designed for the future of smart mobility with immersive displays, premium audio and an elegant, 
               switchable control interface.
+            </p>
+          </div>
+          <div className="mb-8 max-w-4xl mx-auto mt-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              The Hyundai VERNA.
+            </h3>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Futuristic. Ferocious.
+            </h3>
+            <p className="text-lg text-white/90 mb-4">
+              Hyundai VERNA has mesmerising mystical magnetism and sensuous sportiness in its futuristic design that is truly tantalising. Complimented with a chiselled aerodynamic frame that gives it a furiously fast look. It can best be described in two words.
             </p>
           </div>
 
@@ -568,6 +575,14 @@ export default function VernaPage() {
             <p className="text-white/70 mt-2 max-w-3xl">
               Aerodynamic styling and responsive powertrains deliver a thrilling, refined drive.
             </p>
+          <div className="mb-8 max-w-4xl mx-auto mt-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Impeccable Performance of the Hyundai VERNA Car
+            </h3>
+            <p className="text-lg text-white/90 mb-4">
+              The 1.5 l Turbo under the hood is a finely tuned beast waiting to be unleashed at the push of a pedal. The responsiveness and the aerodynamic styling combine to deliver a truly thrilling drive. The Hyundai VERNA not only looks fast, it drives even faster.
+            </p>
+          </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -652,6 +667,14 @@ export default function VernaPage() {
             <p className="text-white/70 mt-2 max-w-3xl">
               Comprehensive safety systems for peace of mind on every journey.
             </p>
+          <div className="mb-8 max-w-4xl mx-auto mt-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Hyundai VERNA Car : Safety at Its Core
+            </h3>
+            <p className="text-lg text-white/90 mb-4">
+              The Hyundai VERNA packs in more than futuristic looks and power. With 65+ advanced safety features including 30 standard safety features, rest assured as you'll be safely transported in the lap of luxury.
+            </p>
+          </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -778,6 +801,14 @@ export default function VernaPage() {
             <p className="text-white/70 mt-2 max-w-3xl">
               Smart features and advanced technology for enhanced comfort and convenience.
             </p>
+          <div className="mb-8 max-w-4xl mx-auto mt-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Hyundai VERNA Car Convenience: At the Edge of Tech Connectivity
+            </h3>
+            <p className="text-lg text-white/90 mb-4">
+              The Hyundai VERNA roars to life with our voice using Home to car with Alexa . Once you step inside, everything is ergonomically arranged to provide a haven of tranquillity and order with an advanced seamlessly integrated 26.03 cm (10.25") HD audio video navigation system & digital cluster with color TFT MID. Add switchable type infotainment & climate controller and 65+ Bluelink connected features to that, and you get a sedan that is designed for an efficient drive.
+            </p>
+          </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -917,6 +948,14 @@ export default function VernaPage() {
             <h2 className="text-2xl md:text-3xl font-bold">Exterior Design</h2>
             <p className="text-white/70 mt-2 max-w-3xl">
               Bold, aerodynamic design with distinctive lighting signatures and premium detailing.
+            </p>
+          </div>
+          <div className="mb-8 max-w-4xl mx-auto mt-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Hyundai VERNA Car Exterior - Looks that Demand Your Attention
+            </h3>
+            <p className="text-lg text-white/90 mb-4">
+              The striking looks of the Hyundai VERNA are a true delight to the eyes. The front horizon LED positioning lamp doesn't just glow, it positively gleams. The Hyundai VERNA's fastback design gives visual expression to its exemplary aerodynamics like no other and it continues to impress till the last glance with its parametric connected LED tail lamps.
             </p>
           </div>
 
@@ -1086,6 +1125,14 @@ export default function VernaPage() {
             <p className="text-white/70 mt-2 max-w-3xl">
               Premium cabin with advanced technology and luxurious comfort features.
             </p>
+          <div className="mb-8 max-w-4xl mx-auto mt-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Hyundai VERNA Car Interior: Make Room for More.
+            </h3>
+            <p className="text-lg text-white/90 mb-4">
+              The Hyundai VERNA impresses with design and comfort features rich in unconventional ideas and characterized by great attention to detail. It comes with sense of spaciousness with the best in segment wheelbase that allows for extra legroom and cabin space.
+            </p>
+          </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -1324,18 +1371,8 @@ export default function VernaPage() {
           </div>
           <div className="flex flex-wrap gap-3">
             <Button variant="outline" className="bg-white/5 border-white/20 text-white hover:bg-white/10">
-              Prices
-            </Button>
-            <Button variant="outline" className="bg-white/5 border-white/20 text-white hover:bg-white/10">
               <TestTube className="h-4 w-4 mr-2" />
               Request Test Drive
-            </Button>
-            <Button variant="outline" className="bg-white/5 border-white/20 text-white hover:bg-white/10">
-              <Download className="h-4 w-4 mr-2" />
-              Download e‑Brochure
-            </Button>
-            <Button variant="outline" className="bg-white/5 border-white/20 text-white hover:bg-white/10">
-              Explore in 3D
             </Button>
           </div>
         </div>

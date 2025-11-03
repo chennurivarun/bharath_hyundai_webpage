@@ -12,9 +12,11 @@ import {
   ListChecks,
   Activity,
   ChevronRight,
+  Phone,
+  TestTube,
 } from "lucide-react";
 
-const brand = { primary: "#002c5f" } as const;
+const brand = { primary: "#dc2626" } as const;
 const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(" ");
 const isHttps = (url: string) => /^https:\/\//.test(url);
 
@@ -158,6 +160,7 @@ const PRICING_GROUPS: PricingGroups = {
 export default function NiosPage() {
   const [activeTab, setActiveTab] = useState('highlights');
   const exteriorRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [manifest, setManifest] = useState<null | { categories: Record<string, { src: string; title?: string }[]> }>(null);
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 
@@ -225,6 +228,21 @@ export default function NiosPage() {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
   }, []);
 
+  // Control video playback to restart 3 seconds before the end
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      if (video.duration && video.currentTime >= video.duration - 3) {
+        video.currentTime = 0;
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    return () => video.removeEventListener('timeupdate', handleTimeUpdate);
+  }, []);
+
   useEffect(() => {
     const handler = () => {
       const ids = ['highlights', 'exterior', 'interior', 'performance', 'safety', 'convenience', 'features', 'pricing', 'specs'];
@@ -279,8 +297,8 @@ export default function NiosPage() {
       <div className="min-h-screen bg-transparent text-gray-900 dark:text-white">
         {/* Sticky Background Video */}
       <video
+        ref={videoRef}
         autoPlay
-        loop
         muted
         playsInline
           className="fixed inset-0 w-full h-full object-cover -z-10"
@@ -327,6 +345,10 @@ export default function NiosPage() {
 
         <main className="max-w-7xl mx-auto px-4 pb-28">
           <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
+            <div className="mb-8 max-w-4xl mx-auto backdrop-blur-md bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 border border-red-200 dark:border-red-800 rounded-2xl p-6">
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-red-900 dark:text-red-100">Add more to life with the new Hyundai GRAND i10 NIOS Car</h3>
+              <p className="text-red-800 dark:text-red-200 leading-relaxed">Grand i10 NIOS seamlessly combined exuberant design with advanced technology to enhance your daily life.</p>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
               {mapFromManifest('highlights', HL).map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
@@ -337,6 +359,10 @@ export default function NiosPage() {
           </Section>
 
           <Section id="exterior" title="Exterior" icon={<Car className="w-5 h-5" />}>
+            <div className="mb-8 max-w-4xl mx-auto backdrop-blur-md bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 border border-red-200 dark:border-red-800 rounded-2xl p-6">
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-red-900 dark:text-red-100">Hyundai GRAND i10 NIOS Car Exteriors: Experience Beauty in Boldness</h3>
+              <p className="text-red-800 dark:text-red-200 leading-relaxed">Admire it from any angle, and The All New Hyundai Grand i10 NIOS car will catch your eye with its bold stance and contemporary design.  The new painted black radiator grille and LED daytime running lamps (DRLs) give it that refreshing new look. The new R15 diamond cut alloy wheels project an agile stance. And its new tail gate design with LED taillamp defines its sharp rear profile, giving it an unmistakable identity.</p>
+            </div>
             <motion.div
               initial={{ x: -80, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -361,12 +387,15 @@ export default function NiosPage() {
           </Section>
 
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
+            <div className="mb-8 max-w-4xl mx-auto backdrop-blur-md bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 border border-red-200 dark:border-red-800 rounded-2xl p-6">
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-red-900 dark:text-red-100">Hyundai GRAND i10 NIOS Car Interior: Crafted for Comfort</h3>
+            </div>
             <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10">
               <div className="relative aspect-[21/9] bg-gray-100">
                 <img src={(mapFromManifest('interior', IN)[0] || IN[0]).img} alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
           </div>
         </div>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('interior', IN).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
           ))}
@@ -374,7 +403,11 @@ export default function NiosPage() {
           </Section>
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="mb-8 max-w-4xl mx-auto backdrop-blur-md bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 border border-red-200 dark:border-red-800 rounded-2xl p-6">
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-red-900 dark:text-red-100">Hyundai GRAND i10 NIOS Car Performance: Fun to Drive</h3>
+              <p className="text-red-800 dark:text-red-200 leading-relaxed">Optimized chassis setting provides enhanced ride, handling, and steering feedback. And the new Grand i10 NIOS powertrains enable you to make the most of every drive.</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('performance', PF).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
               ))}
@@ -383,7 +416,11 @@ export default function NiosPage() {
           </Section>
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="mb-8 max-w-4xl mx-auto backdrop-blur-md bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 border border-red-200 dark:border-red-800 rounded-2xl p-6">
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-red-900 dark:text-red-100">Hyundai GRAND i10 NIOS Car Safety: Your safe place</h3>
+              <p className="text-red-800 dark:text-red-200 leading-relaxed">The new Grand i10 NIOS offers 30+ safety features and make it one of the safest cars. It features 6 airbags with side and curtain for added safety of the occupants. DVRM (Driver rear view monitor), Electronic Stability Control (ESC) and Vehicle Stability Management (VSM) give you the confidence to drive freely.</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('safety', SF).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
                   ))}
@@ -391,7 +428,11 @@ export default function NiosPage() {
           </Section>
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="mb-8 max-w-4xl mx-auto backdrop-blur-md bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 border border-red-200 dark:border-red-800 rounded-2xl p-6">
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-red-900 dark:text-red-100">Hyundai GRAND i10 NIOS Car Convenience: Absolute Comfort</h3>
+              <p className="text-red-800 dark:text-red-200 leading-relaxed">Enjoy comfort, control and elegance with driver-focused technological features that will make you enjoy a unique driving experience.</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('convenience', CON).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
           ))}
@@ -502,6 +543,24 @@ export default function NiosPage() {
             @keyframes scrollX { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
           `}</style>
             </div>
+
+        {/* Quick Actions */}
+        <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+          <a 
+            href="/test-drive"
+            className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+          >
+            <TestTube className="h-5 w-5" />
+            Test Drive
+          </a>
+          <a 
+            href="tel:+917733888999"
+            className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+          >
+            <Phone className="h-5 w-5" />
+            Call Now
+          </a>
+        </div>
       </div>
     </div>
   );

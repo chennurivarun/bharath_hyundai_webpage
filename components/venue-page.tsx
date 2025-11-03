@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { Phone, TestTube } from "lucide-react";
 
 // -----------------------------
 // HYUNDAI VENUE — FULL REDESIGN (ALL SUBPAGES)
@@ -578,6 +579,24 @@ export default function VenueFullRedesign() {
       <footer className="mx-auto max-w-7xl px-4 py-10 text-xs text-white/60 sm:px-6 lg:px-8">
         <p>Disclaimers: Connected features & Alexa depend on device compatibility, software & network. Feature availability varies by trim. Prices are indicative and may vary by city/variant.</p>
       </footer>
+
+      {/* Quick Actions */}
+      <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+        <a 
+          href="/test-drive"
+          className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+        >
+          <TestTube className="h-5 w-5" />
+          Test Drive
+        </a>
+        <a 
+          href="tel:+917733888999"
+          className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+        >
+          <Phone className="h-5 w-5" />
+          Call Now
+        </a>
+      </div>
     </div>
   );
 }

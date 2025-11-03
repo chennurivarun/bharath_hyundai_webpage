@@ -12,9 +12,11 @@ import {
   ListChecks,
   Activity,
   ChevronRight,
+  Phone,
+  TestTube,
 } from "lucide-react";
 
-const brand = { primary: "#002c5f" } as const;
+const brand = { primary: "#dc2626" } as const;
 const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(" ");
 const isHttps = (url: string) => /^https:\/\//.test(url);
 
@@ -271,7 +273,7 @@ function VariantsPricingSection() {
 
 export default function AlcazarPage() {
   const [activeTab, setActiveTab] = useState('highlights');
-  const exteriorRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
@@ -294,24 +296,19 @@ export default function AlcazarPage() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  // Auto-slide Exterior scroller without any cursor interaction
+  // Video playback control - skip last 2 seconds
   useEffect(() => {
-    const container = exteriorRef.current;
-    if (!container) return;
-
-    const interval = setInterval(() => {
-      const el = exteriorRef.current;
-      if (!el) return;
-      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
-      if (atEnd) {
-        el.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        const step = Math.max(240, Math.floor(el.clientWidth * 0.8));
-        el.scrollBy({ left: step, behavior: 'smooth' });
+    const video = videoRef.current;
+    if (!video) return;
+    const handleTimeUpdate = () => {
+      if (video.duration - video.currentTime <= 2) {
+        video.currentTime = 0;
       }
-    }, 3000);
-
-    return () => clearInterval(interval);
+    };
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
   }, []);
 
   const tabs = [
@@ -386,13 +383,15 @@ export default function AlcazarPage() {
       <div className="min-h-screen bg-transparent text-gray-900 dark:text-white">
         {/* Sticky Background Video */}
         <video
+          ref={videoRef}
           autoPlay
-          loop
           muted
           playsInline
           className="fixed inset-0 w-full h-full object-cover -z-10"
           src="/alcazar.mp4"
         />
+        {/* Premium Light Black Overlay */}
+        <div className="fixed inset-0 bg-black/20 -z-10" />
         <header className="relative">
           {/* Top sticky nav */}
           <div className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
@@ -433,6 +432,17 @@ export default function AlcazarPage() {
 
         <main className="max-w-7xl mx-auto px-4 pb-28">
       <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
+            <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              The bold new Hyundai ALCAZAR Car - Intelligent. Versatile. Intense.
+            </h3>
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              6 and 7 seater SUV.
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              Imagine carving through city streets, then effortlessly transitioning to conquer rugged landscapes. The bold new Hyundai ALCAZAR seamlessly blends power, comfort, and style with ease.
+            </p>
+          </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {hl.map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
@@ -443,27 +453,21 @@ export default function AlcazarPage() {
           </Section>
 
           <Section id="exterior" title="Exterior" icon={<Car className="w-5 h-5" />}>
-            <motion.div
-              initial={{ x: -80, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="relative overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-4 pb-2"
-              ref={exteriorRef}
-            >
+            <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              The bold new Hyundai ALCAZAR Car Exterior: Sculpted for greatness.
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              The bold new Hyundai ALCAZAR car is all about making a statement. Its imposing new dark chrome radiator grille design exudes confidence, while the quad beam LED headlamps technology pierces the night with exceptional clarity
+            </p>
+          </div>
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {ex.map((c, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ x: 40, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.08 }}
-                  className="min-w-[85%] sm:min-w-[55%] lg:min-w-[35%] snap-start"
-                >
+                <div key={i} className="mb-5 break-inside-avoid">
                   <Card title={c.title} img={c.img} />
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </Section>
 
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
@@ -472,42 +476,84 @@ export default function AlcazarPage() {
                 <img src="/images/cars/alcazar/interior/smriti_feature.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
               </div>
             </div>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              The bold new Hyundai ALCAZAR Car Interior: A symphony of elegance.
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              Step inside the bold new Hyundai ALCAZAR car and discover a haven designed to indulge your senses. The new dual tone noble brown & haze navy interiors create a sophisticated yet inviting ambiance. 
+            </p>
+          </div>
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {inn.map((c, i) => (
-                <Card key={i} title={c.title} img={c.img} />
+                <div key={i} className="mb-5 break-inside-avoid">
+                  <Card title={c.title} img={c.img} />
+                </div>
               ))}
             </div>
           </Section>
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              The bold new Hyundai ALCAZAR Car seamlessly blends performance: Boldly go forth
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              The bold new Hyundai ALCAZAR car isn't content with just getting you there; it empowers you to explore further. A powerful engine pulsates beneath the hood, delivering an exhilarating performance to conquer any landscape.
+            </p>
+          </div>
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {pf.map((c, i) => (
-                <Card key={i} title={c.title} img={c.img} />
+                <div key={i} className="mb-5 break-inside-avoid">
+                  <Card title={c.title} img={c.img} />
+                </div>
               ))}
             </div>
             <p className="mt-4 text-sm text-gray-600 dark:text-white/70">1.5L Turbo GDi petrol (MT/DCT) and 1.5L U2 CRDi diesel (MT/AT). Drive Modes and Traction Modes.</p>
           </Section>
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              The bold new Hyundai ALCAZAR Car Safety: Peace of mind with every drive.
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              From the moment you get behind the wheel, the bold new Hyundai ALCAZAR car puts your safety first. Hyundai ALCAZAR's strong body structure, SmartSense technology, 6 airbags, and multiple safety features, provide a cocoon of comfort and safety. Allowing you to drive with complete peace of mind, every time.
+            </p>
+          </div>
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {sf.map((c, i) => (
-                <Card key={i} title={c.title} img={c.img} />
+                <div key={i} className="mb-5 break-inside-avoid">
+                  <Card title={c.title} img={c.img} />
+                </div>
               ))}
             </div>
           </Section>
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="mb-8 max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              The bold new Hyundai ALCAZAR Car comfort and convenience technology that's intuitive.
+            </h3>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              The bold new Hyundai ALCAZAR car seamlessly blends convenience and connectivity. Unlock your car with your phone using the digital key, the voice-enabled smart panoramic sunroof bathes the interior in natural light, for an airy and connected feel. Adjust your car's temperature seamlessly with the dual zone automatic temperature control (DATC)
+            </p>
+          </div>
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {con.map((c, i) => (
-                <Card key={i} title={c.title} img={c.img} />
+                <div key={i} className="mb-5 break-inside-avoid">
+                  <Card title={c.title} img={c.img} />
+                </div>
               ))}
             </div>
           </Section>
 
           <Section id="features" title="Knight Edition" icon={<ListChecks className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {knight.map((c, i) => (
-                <Card key={i} title={c.title} img={c.img} />
+                <div key={i} className="mb-5 break-inside-avoid">
+                  <Card title={c.title} img={c.img} />
+                </div>
               ))}
             </div>
           </Section>
@@ -556,6 +602,24 @@ export default function AlcazarPage() {
             .animate-scroll-slow { animation: scrollX 40s linear infinite; width: max-content; }
             @keyframes scrollX { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
           `}</style>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+          <a 
+            href="/test-drive"
+            className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+          >
+            <TestTube className="h-5 w-5" />
+            Test Drive
+          </a>
+          <a 
+            href="tel:+917733888999"
+            className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+          >
+            <Phone className="h-5 w-5" />
+            Call Now
+          </a>
         </div>
       </div>
     </div>

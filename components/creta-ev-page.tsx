@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useMemo, useRef, useState } from "react"
+import { Phone, TestTube } from "lucide-react"
 
 export default function CretaEVPage() {
   return (
@@ -160,6 +161,24 @@ export default function CretaEVPage() {
           <p className="mt-2">© Hyundai — CRETA Electric (Redesigned showcase for demo)</p>
         </div>
       </footer>
+
+      {/* Quick Actions */}
+      <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+        <a 
+          href="/test-drive"
+          className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+        >
+          <TestTube className="h-5 w-5" />
+          Test Drive
+        </a>
+        <a 
+          href="tel:+917733888999"
+          className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+        >
+          <Phone className="h-5 w-5" />
+          Call Now
+        </a>
+      </div>
     </div>
   )
 }

@@ -12,6 +12,8 @@ import {
   ListChecks,
   Activity,
   ChevronRight,
+  Phone,
+  TestTube,
 } from "lucide-react";
 
 const brand = { primary: "#002c5f" } as const;
@@ -458,34 +460,42 @@ export default function AuraPage() {
                 <img src={(mapFromManifest('interior', IN)[0] || IN[0]).img} alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
               </div>
             </div>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
               {mapFromManifest('interior', IN).map((c, i) => (
-                <Card key={i} title={c.title} img={c.img} />
+                <div key={i} className="mb-5 break-inside-avoid">
+                  <Card title={c.title} img={c.img} />
+                </div>
               ))}
             </div>
           </Section>
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
               {mapFromManifest('performance', []).map((c, i) => (
-                <Card key={i} title={c.title} img={c.img} />
+                <div key={i} className="mb-5 break-inside-avoid">
+                  <Card title={c.title} img={c.img} />
+                </div>
               ))}
             </div>
             <p className="mt-4 text-sm text-gray-600 dark:text-white/70">Transmission options: 5MT · CVT. Efficient performance with excellent fuel economy.</p>
           </Section>
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
               {mapFromManifest('safety', []).map((c, i) => (
-                <Card key={i} title={c.title} img={c.img} />
+                <div key={i} className="mb-5 break-inside-avoid">
+                  <Card title={c.title} img={c.img} />
+                </div>
               ))}
             </div>
           </Section>
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
               {mapFromManifest('convenience', []).map((c, i) => (
-                <Card key={i} title={c.title} img={c.img} />
+                <div key={i} className="mb-5 break-inside-avoid">
+                  <Card title={c.title} img={c.img} />
+                </div>
               ))}
             </div>
           </Section>
@@ -555,6 +565,24 @@ export default function AuraPage() {
             .animate-scroll-slow { animation: scrollX 40s linear infinite; width: max-content; }
             @keyframes scrollX { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
           `}</style>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+          <a 
+            href="/test-drive"
+            className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+          >
+            <TestTube className="h-5 w-5" />
+            Test Drive
+          </a>
+          <a 
+            href="tel:+917733888999"
+            className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+          >
+            <Phone className="h-5 w-5" />
+            Call Now
+          </a>
         </div>
       </div>
     </div>

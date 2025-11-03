@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
+import { Phone, TestTube } from "lucide-react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -13,8 +14,8 @@ const fadeUp = {
 const Section: React.FC<React.PropsWithChildren<{ id: string; title: string; subtitle?: string }>> = ({ id, title, subtitle, children }) => (
   <section id={id} className="scroll-mt-24 py-12 md:py-16">
     <motion.div {...fadeUp} className="max-w-7xl mx-auto px-4">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
-      {subtitle && <p className="text-sm/6 md:text-base/7 text-zinc-400 mt-2 max-w-3xl">{subtitle}</p>}
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">{title}</h2>
+      {subtitle && <p className="text-sm/6 md:text-base/7 text-zinc-400 mt-2 max-w-3xl backdrop-blur-sm bg-white/5 px-3 py-2 rounded-lg border border-white/10">{subtitle}</p>}
       <div className="mt-6 md:mt-8">{children}</div>
     </motion.div>
   </section>
@@ -254,6 +255,7 @@ const Diagnostics: React.FC = () => {
 
 export default function I20NLineRedesign() {
   const [manifest, setManifest] = React.useState<null | { categories: Record<string, { src: string; title?: string }[]> }>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const CAPTION_MAP: Record<string, string> = {
     // Highlights
@@ -320,6 +322,21 @@ export default function I20NLineRedesign() {
     return () => { cancelled = true; };
   }, []);
 
+  // Control video playback to restart 3 seconds before the end
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      if (video.duration && video.currentTime >= video.duration - 3) {
+        video.currentTime = 0;
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    return () => video.removeEventListener('timeupdate', handleTimeUpdate);
+  }, []);
+
   const mapFromManifest = (key: string, fallback: Array<{ title: string; img: string; text?: string }>) => {
     const arr = manifest?.categories?.[key] as { src: string; title?: string }[] | undefined;
     if (!arr || arr.length === 0) return fallback;
@@ -344,8 +361,8 @@ export default function I20NLineRedesign() {
   return (
     <main className="min-h-screen bg-transparent text-zinc-100">
       <video
+        ref={videoRef}
         autoPlay
-        loop
         muted
         playsInline
         className="fixed inset-0 w-full h-full object-cover -z-10"
@@ -354,7 +371,7 @@ export default function I20NLineRedesign() {
       <Diagnostics />
       <div className="sticky top-0 z-40 backdrop-blur border-b border-white/10 bg-black/60">
         <div className="max-w-7xl mx-auto flex items-center gap-4 px-4 h-14">
-          <span className="text-xs font-medium tracking-wider text-lime-300">i20 N Line</span>
+          <span className="text-xs font-medium tracking-wider text-red-600">i20 N Line</span>
           <div className="hidden md:flex items-center gap-2 overflow-x-auto">
             <NavLink href="#highlights" label="Highlights" />
             <NavLink href="#exterior" label="Exterior" />
@@ -368,25 +385,32 @@ export default function I20NLineRedesign() {
             <NavLink href="#features" label="Features" />
           </div>
         </div>
+        <div className="h-0.5 bg-gradient-to-r from-transparent via-red-600 to-transparent" />
       </div>
 
       <header className="relative">
         <div className="absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_20%,rgba(100,200,255,0.12),transparent_60%),linear-gradient(to_bottom,rgba(255,255,255,0.06),transparent)]"/>
         <div className="max-w-7xl mx-auto px-4 py-16 md:py-28 lg:py-32 relative">
           <motion.h1 {...fadeUp} className="text-4xl md:text-6xl font-extrabold tracking-tight">
-            Hyundai i20 N Line — <span className="text-lime-300">It's time to play</span>
+            Hyundai i20 N Line — <span className="text-red-600">It's time to play</span>
           </motion.h1>
           <motion.p {...fadeUp} className="max-w-3xl text-zinc-300 mt-5 md:text-lg">
             A sportier take on the i20 with N Line design, tech and tuned performance. Built for everyday fun.
           </motion.p>
           <div className="mt-8 md:mt-10 flex flex-wrap gap-3">
-            <a href="#specs" className="px-4 py-2 rounded-xl bg-lime-300 text-black font-semibold">View Specs</a>
+            <a href="#specs" className="px-4 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-500">View Specs</a>
             <a href="#features" className="px-4 py-2 rounded-xl border border-zinc-700">Trim matrix</a>
           </div>
         </div>
       </header>
 
       <Section id="highlights" title="Highlights" subtitle="Pulled from the official Highlights page, with imagery swapped into clean cards.">
+        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Get set to play.</h3>
+          <p className="text-zinc-300 text-base leading-relaxed">
+            Created to maximise driving fun every time you hit the road, the new Hyundai i20 N Line delivers a sporty experience that will make you want to play. Featuring the perfect balance of motorsport styling and innovative technology, this car is built for every day fun, with an ex-showroom price starting at just Rs. 9.14* Lakh.
+          </p>
+        </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedHighlights.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
@@ -395,6 +419,12 @@ export default function I20NLineRedesign() {
       </Section>
 
       <Section id="exterior" title="Exterior" subtitle="Signature N Line cues and red accents for an athletic stance.">
+        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Hyundai i20 N Line Car Exteriors: Built to Entice.</h3>
+          <p className="text-zinc-300 text-base leading-relaxed">
+            Athletically aesthetic, the new Hyundai i20 N Line is built to command attention, all the way from the subtle chrome garnish on the foglamps to the tailgate spoiler with side wings. The sporty red highlights accentuate the performance inspired design, ensuring that all eyes are always on you.
+          </p>
+        </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedExterior.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
@@ -412,6 +442,12 @@ export default function I20NLineRedesign() {
       </Section>
 
       <Section id="interior" title="Interior" subtitle="All‑black theme with red inserts, N branding and tech‑forward cockpit.">
+        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Hyundai i20 N Line Interior: Always in Style on the Inside</h3>
+          <p className="text-zinc-300 text-base leading-relaxed">
+            As you step into the cockpit of the you're graced by the sleek design that's packed with technology. The iconic N badging on the steering wheel, leather wrapped gear knob, and the seats, along with the all black interiors with red inserts add to the sporty appeal.
+          </p>
+        </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedInterior.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
@@ -420,7 +456,13 @@ export default function I20NLineRedesign() {
       </Section>
 
       <Section id="performance" title="Performance" subtitle="Turbo power, your choice of DCT or MT, and selectable drive modes.">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Hyundai i20 N Line Car Performance: Play anywhere.</h3>
+          <p className="text-zinc-300 text-base leading-relaxed">
+            The distinctive roar of the exhaust sets the new Hyundai i20 N Line apart. It's the perfect blend of a finely tuned engine and highly responsive suspension and handling that delivers a smooth ride.
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedPerformance.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
           ))}
@@ -428,7 +470,13 @@ export default function I20NLineRedesign() {
       </Section>
 
       <Section id="safety" title="Safety" subtitle="Advanced active and passive safety, standard across the range.">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Hyundai i20 N Line Car Safety: Always play safe.</h3>
+          <p className="text-zinc-300 text-base leading-relaxed">
+            Packed with Hyundai's most advanced safety systems, the is built to keep you in total comfort and peace of mind.
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedSafety.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
           ))}
@@ -436,7 +484,13 @@ export default function I20NLineRedesign() {
       </Section>
 
       <Section id="convenience" title="Convenience & Connectivity" subtitle="Bose audio, 10.25&quot; HD touchscreen and H2C with Alexa for seamless control.">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Hyundai i20 N Line Car Convenience: Just press play.</h3>
+          <p className="text-zinc-300 text-base leading-relaxed">
+            Connectivity comes easy in the Equipped with cutting edge technology like home-to-car (H2C) with Alexa, fully automated temperature control, advanced infotainment with multilingual user interface, you've got the world at your fingertips.
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedConvenience.map((h, i) => (
             <Card key={i} img={h.img} title={h.title}>{h.text}</Card>
           ))}
@@ -546,6 +600,24 @@ export default function I20NLineRedesign() {
           </ul>
         </div>
       </footer>
+
+      {/* Quick Actions */}
+      <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+        <a 
+          href="/test-drive"
+          className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+        >
+          <TestTube className="h-5 w-5" />
+          Test Drive
+        </a>
+        <a 
+          href="tel:+917733888999"
+          className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+        >
+          <Phone className="h-5 w-5" />
+          Call Now
+        </a>
+      </div>
     </main>
   );
 }

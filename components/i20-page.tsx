@@ -12,9 +12,11 @@ import {
   ListChecks,
   Activity,
   ChevronRight,
+  Phone,
+  TestTube,
 } from "lucide-react";
 
-const brand = { primary: "#002c5f" } as const;
+const brand = { primary: "#dc2626" } as const;
 const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(" ");
 const isHttps = (url: string) => /^https:\/\//.test(url);
 
@@ -162,6 +164,7 @@ const PRICING_GROUPS: PricingGroups = {
 export default function I20Page() {
   const [activeTab, setActiveTab] = useState('highlights');
   const exteriorRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [manifest, setManifest] = useState<null | { categories: Record<string, { src: string; title?: string }[]> }>(null);
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 
@@ -299,6 +302,21 @@ export default function I20Page() {
     return () => clearInterval(interval);
   }, []);
 
+  // Control video to skip last 4 seconds
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      if (video.duration && video.currentTime >= video.duration - 4) {
+        video.currentTime = 0;
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    return () => video.removeEventListener('timeupdate', handleTimeUpdate);
+  }, []);
+
   const tabs = [
     { id: 'highlights', label: 'Highlights', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'exterior', label: 'Exterior', icon: <Car className="w-4 h-4" /> },
@@ -317,8 +335,8 @@ export default function I20Page() {
       <div className="min-h-screen bg-transparent text-gray-900 dark:text-white">
         {/* Sticky Background Video */}
       <video
+        ref={videoRef}
         autoPlay
-        loop
         muted
         playsInline
           className="fixed inset-0 w-full h-full object-cover -z-10"
@@ -364,16 +382,20 @@ export default function I20Page() {
 
         <main className="max-w-7xl mx-auto px-4 pb-28">
           <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
-            <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+            <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('highlights', HL).map((c, i) => (
-                <div key={i} className="mb-5 break-inside-avoid">
-                  <Card title={c.title} img={c.img} />
-                </div>
+                <Card key={i} title={c.title} img={c.img} />
               ))}
             </div>
           </Section>
 
           <Section id="exterior" title="Exterior" icon={<Car className="w-5 h-5" />}>
+            <div className="mb-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Hyundai i20 Car Exteriors: All Eyes on You</h3>
+              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                The new Hyundai i20 has it all. A sensuous sporty design, a majestic new grille and lights that are a showstopper. Turn heads as you whizz by on those alloy wheels and make an impression with the chrome lines. It's simply stunning from tip to toe.
+              </p>
+            </div>
             <motion.div
               initial={{ x: -80, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -398,49 +420,76 @@ export default function I20Page() {
           </Section>
 
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
-            <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border:white/10">
-              <div className="relative aspect-[21/9] bg-gray-100">
-                <img src={(mapFromManifest('interior', IN)[0] || IN[0]).img} alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="mb-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Hyundai i20 Car Interior: Magnetic space.</h3>
+              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                The interiors of the new Hyundai i20 mesmerize. Dual tone seats that look fabulous and enough space to lounge out in comfort. Ambient lighting that uplifts your mood and sliding front armrest that provides a more convenient way to relax.
+              </p>
             </div>
-          </div>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('interior', IN).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
-            ))}
-          </div>
+              ))}
+            </div>
           </Section>
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="mb-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Hyundai i20 Car Performance: Power on.</h3>
+              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                Great looks come with great power. The new Hyundai i20 comes with a powerful petrol engine and 2 driving modes that enhance your drive.
+              </p>
+              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mt-2">
+                The thrilling performance is supplemented with great drivability in the form of two transmission options IVT & MT. Power on. Drive on.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('performance', PF).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
-          ))}
-        </div>
-            <p className="mt-4 text-sm text-gray-600 dark:text-white/70">Transmission options: 5MT · CVT. Sporty performance with efficient fuel economy.</p>
+              ))}
+            </div>
           </Section>
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="mb-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Hyundai i20 Car Safety: Go safe.</h3>
+              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                The new Hyundai i20 ensures you drive safe wherever you go. It comes equipped with advanced safety features that are a cut above the rest. 6 airbags for maximum protection. Electronic stability control (ESC) with vehicle stability management (VSM) and emergency stop signal (ESS) ensure that you always drive stress free.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('safety', SF).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
-          ))}
-        </div>
+              ))}
+            </div>
           </Section>
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="mb-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Hyundai i20 Car Convenience: Smart. Connected.</h3>
+              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                Cutting edge technology is at the core of the new Hyundai i20. From Bluelink connectivity to Home-to-car (H2C), our smart tech ensures you're connected to your car and your world all the time. What's more, the voice recognition technology with multi-lingual capabilities add convenience to everything you do. All in all, it's one smart car.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('convenience', CON).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
-          ))}
-        </div>
+              ))}
+            </div>
           </Section>
 
           <Section id="knight" title="Knight Edition" icon={<Sparkles className="w-5 h-5" />}>
+            <div className="mb-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">i20 Knight. Born head-turner</h3>
+              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                There are cars, and then, there is the i20 Knight. Sleek, black, mystical. A stylish way to stand out among the ordinary. Designed to turn heads with its uber cool looks, blacked-out elements, and exclusive badging.
+              </p>
+            </div>
             <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('knight', KNIGHT).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
-          ))}
-        </div>
+              ))}
+            </div>
           </Section>
 
           <Section id="features" title="Features" icon={<ListChecks className="w-5 h-5" />}>
@@ -522,10 +571,10 @@ export default function I20Page() {
           </Section>
         </main>
 
-        {/* Front view image above strip */}
+        {/* Knight hero image above strip */}
         <div className="max-w-7xl mx-auto px-4 mb-6">
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-            <img src={(EX.find(e=>e.title.toLowerCase().includes('front'))||EX[0]).img} alt="i20 front view" className="h-[50vh] w-full object-cover" />
+            <img src={(mapFromManifest('knight', KNIGHT)[0] || KNIGHT[0]).img} alt="i20 Knight Edition hero" className="h-[50vh] w-full object-cover" />
           </div>
         </div>
 
@@ -534,7 +583,7 @@ export default function I20Page() {
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 mb-24">
             <div className="relative">
               <div className="flex gap-4 animate-scroll-slow">
-                {[...HL, ...EX, ...IN, ...PF, ...SF, ...CON, ...KNIGHT, ...HL, ...EX].map((c, i) => (
+                {[...mapFromManifest('highlights', HL), ...mapFromManifest('exterior', EX), ...mapFromManifest('interior', IN), ...mapFromManifest('performance', PF), ...mapFromManifest('safety', SF), ...mapFromManifest('convenience', CON), ...mapFromManifest('knight', KNIGHT), ...mapFromManifest('highlights', HL), ...mapFromManifest('exterior', EX)].map((c, i) => (
                   <div key={i} className="h-44 w-72 shrink-0 overflow-hidden rounded-xl">
                     <img src={c.img} alt={`i20 ${i + 1}`} className="h-full w-full object-cover" />
                   </div>
@@ -546,6 +595,23 @@ export default function I20Page() {
             .animate-scroll-slow { animation: scrollX 40s linear infinite; width: max-content; }
             @keyframes scrollX { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
           `}</style>
+        </div>
+        {/* Quick Actions */}
+        <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+          <a 
+            href="/test-drive"
+            className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+          >
+            <TestTube className="h-5 w-5" />
+            Test Drive
+          </a>
+          <a 
+            href="tel:+917733888999"
+            className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+          >
+            <Phone className="h-5 w-5" />
+            Call Now
+          </a>
         </div>
       </div>
     </div>

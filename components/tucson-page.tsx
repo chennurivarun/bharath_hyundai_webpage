@@ -12,9 +12,11 @@ import {
   ListChecks,
   Activity,
   ChevronRight,
+  Phone,
+  TestTube,
 } from "lucide-react";
 
-const brand = { primary: "#002c5f" } as const;
+const brand = { primary: "#dc2626" } as const;
 const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(" ");
 const isHttps = (url: string) => /^https:\/\//.test(url);
 
@@ -263,6 +265,7 @@ function VariantsPricingSection() {
 export default function TucsonFullImageSync() {
   const [activeTab, setActiveTab] = useState('highlights');
   const exteriorRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
@@ -270,14 +273,14 @@ export default function TucsonFullImageSync() {
 
   useEffect(() => {
     const handler = () => {
-      const ids = ['knight', 'highlights', 'exterior', 'interior', 'performance', 'safety', 'convenience', 'features', 'pricing', 'specs'];
+      const ids = ['highlet', 'exterior', 'interior', 'performance', 'safety', 'convenience', 'features', 'pricing', 'specs'];
       const offsets = ids.map((id) => {
         const el = document.getElementById(id);
         if (!el) return { id, d: Infinity };
         return { id, d: Math.abs(el.getBoundingClientRect().top - 120) };
       });
       offsets.sort((a, b) => a.d - b.d);
-      setActiveTab(offsets[0]?.id ?? 'highlights');
+      setActiveTab(offsets[0]?.id ?? 'highlet');
     };
 
     window.addEventListener('scroll', handler);
@@ -305,9 +308,27 @@ export default function TucsonFullImageSync() {
     return () => clearInterval(interval);
   }, []);
 
+  // Video playback control - skip last 4 seconds
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      // If video is within 4 seconds of the end, restart it
+      if (video.duration - video.currentTime <= 4) {
+        video.currentTime = 0;
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
+
   const tabs = [
-    { id: 'knight', label: 'Knight Edition', icon: <Sparkles className="w-4 h-4" /> },
-    { id: 'highlights', label: 'Highlights', icon: <Sparkles className="w-4 h-4" /> },
+    { id: 'highlet', label: 'Highlights', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'exterior', label: 'Exterior', icon: <Car className="w-4 h-4" /> },
     { id: 'interior', label: 'Interior', icon: <ImageIcon className="w-4 h-4" /> },
     { id: 'performance', label: 'Performance', icon: <Gauge className="w-4 h-4" /> },
@@ -379,13 +400,15 @@ export default function TucsonFullImageSync() {
       <div className="min-h-screen bg-transparent text-gray-900 dark:text-white">
         {/* Sticky Background Video */}
         <video
+          ref={videoRef}
           autoPlay
-          loop
           muted
           playsInline
           className="fixed inset-0 w-full h-full object-cover -z-10"
           src="/assets1/Hyundai TUCSON _ Wrap doors.mp4"
         />
+        {/* Premium Light Black Overlay */}
+        <div className="fixed inset-0 bg-black/20 -z-10" />
         <header className="relative">
           {/* Top sticky nav */}
           <div className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
@@ -418,7 +441,7 @@ export default function TucsonFullImageSync() {
                   <Chip>2.0 Diesel 8AT</Chip>
                 </div>
                 <div className="mt-6 flex gap-2">
-                  <a href="#highlights" className="inline-flex items-center gap-2 rounded-2xl bg-[color:var(--brand-primary)] px-5 py-2 text-sm font-medium text-white shadow-lg shadow-[color:var(--brand-primary)]/30">
+                  <a href="#highlet" className="inline-flex items-center gap-2 rounded-2xl bg-[color:var(--brand-primary)] px-5 py-2 text-sm font-medium text-white shadow-lg shadow-[color:var(--brand-primary)]/30">
                     Explore <ChevronRight className="w-4 h-4" />
                   </a>
                   <a href="#specs" className="inline-flex items-center gap-2 rounded-2xl border px-5 py-2 text-sm font-medium bg-white/10 backdrop-blur">
@@ -432,17 +455,31 @@ export default function TucsonFullImageSync() {
         </header>
 
         <main className="max-w-7xl mx-auto px-4 pb-28">
-          <Section id="knight" title="Knight Edition" icon={<Sparkles className="w-5 h-5" />}>
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {hl.slice(0, 5).map((c, i) => (
-                <Card key={i} title="Knight Edition" img={c.img} />
-              ))}
+          <Section id="highlet" title="Highlights" icon={<Sparkles className="w-5 h-5" />}>
+            {/* Description Text */}
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Hyundai TUCSON Car - Parametric, Progressive Design.
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                The all-new Hyundai TUCSON is a revolution in design. Sophisticated and progressive, it's the SUV taking modern aesthetics to the next level.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                Truly, the cutting-edge SUV design with advanced technology.
+              </p>
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                  Hyundai TUCSON Car starts at an ex-showroom price of just ₹.27.31* Lakh.
+                </p>
+                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                  Experience cutting-edge technology and sleek design at a good price.
+                </p>
+              </div>
             </div>
-          </Section>
 
-          <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
+            {/* Combined Highlights Gallery */}
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
-              {hl.slice(5).map((c, i) => (
+              {hl.map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
                   <Card title={c.title} img={c.img} />
                 </div>
@@ -451,6 +488,27 @@ export default function TucsonFullImageSync() {
           </Section>
 
           <Section id="exterior" title="Exterior" icon={<Car className="w-5 h-5" />}>
+            {/* Exterior Description */}
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Hyundai TUCSON Car Exteriors: Next Drives Now
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                For some, success is not a finishing line but a starting point. The all-new Hyundai TUCSON is their SUV of choice. With looks that redefine elegance and are complimented with state-of-the-art technology that stands apart.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                Add the unique Hyundai SmartSense features and it is virtually intuition on wheels. Truly, the next gen of SUVs.
+              </p>
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                  Experience the Hyundai TUCSON exterior with a futuristic design that turns heads.
+                </p>
+                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                  Look at the 360° view of TUCSON and explore stunning TUCSON images that redefine elegance and innovation!
+                </p>
+              </div>
+            </div>
+
             <motion.div
               initial={{ x: -80, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -475,6 +533,27 @@ export default function TucsonFullImageSync() {
           </Section>
 
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
+            {/* Interior Description */}
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Hyundai TUCSON Interior: Exquisite in Every Way
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                Step into the all-new Hyundai TUCSON and experience sheer luxury. The driver side houses a 26.03 cm (10.25") floating type digital cluster which builds on the SUVs advanced and modern design characteristics.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                Hit the right spot in your driving position with 10-way power adjustable ventilated & heated driver seat with memory function. The epitome of comfort, the embodiment of elegance.
+              </p>
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                  Explore Hyundai TUCSON interior images and explore every angle with the stunning TUCSON 360 view
+                </p>
+                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                  —where innovation meets elegance!
+                </p>
+              </div>
+            </div>
+
             <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border:white/10">
               <div className="relative aspect-[21/9] bg-gray-100">
                 <img src="/images/cars/tucson/interior/tucsoninteriorinnerkv-pc.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
@@ -488,6 +567,24 @@ export default function TucsonFullImageSync() {
           </Section>
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
+            {/* Performance Description */}
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                A Supreme Performance: Hyundai TUCSON Car's Outstanding Driving Experience
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                The all-new Hyundai TUCSON is ready for everything. HTRAC empowers you to take on challenging roads while different modes ensure all your journeys go smooth.
+              </p>
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                  The Hyundai TUCSON offers smooth performance with instant power and efficiency.
+                </p>
+                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                  With impressive TUCSON mileage, it lets you drive longer with fewer stops for charging.
+                </p>
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
               {pf.map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
@@ -497,6 +594,26 @@ export default function TucsonFullImageSync() {
           </Section>
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
+            {/* Safety Description */}
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                The all-new Hyundai TUCSON is loaded with advanced tech that ensures a better driving experience and a range of features to ensure your safety.
+              </p>
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800 mb-4">
+                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                  Hyundai TUCSON petrol has been awarded with 5 star BNCAP safety for adult and child occupants both which make it more safer than before.
+                </p>
+              </div>
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                  The Hyundai TUCSON car Safety Features ensure ultimate protection with 6 airbags, Hill-Start Assist, and more.
+                </p>
+                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                  Drive confidently with the Hyundai TUCSON car Safety Features, designed for your peace of mind.
+                </p>
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
               {sf.map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
@@ -505,6 +622,21 @@ export default function TucsonFullImageSync() {
           </Section>
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
+            {/* Convenience Description */}
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Hyundai TUCSON Car Convenience: Leading-edge Technology
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                Connections go beyond in the all-new Hyundai TUCSON. The 26.03 cm (10.25") HD audio video navigation system will always get an encore. The home to car (H2C) with Alexa allows you to stay connected with your car from home, while 60+ Bluelink connected features ensure you're connected with the world while on the move.
+              </p>
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                  The Hyundai TUCSON car comfort & convenience Features redefine every drive with a spacious cabin, advanced climate control, and smart connectivity.
+                </p>
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
               {con.slice(0, -4).map((c, i) => (
                 <Card key={i} title={c.title} img={c.img} />
@@ -629,7 +761,23 @@ export default function TucsonFullImageSync() {
 
         
 
-        
+        {/* Quick Actions */}
+        <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+          <a 
+            href="/test-drive"
+            className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+          >
+            <TestTube className="h-5 w-5" />
+            Test Drive
+          </a>
+          <a 
+            href="tel:+917733888999"
+            className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+          >
+            <Phone className="h-5 w-5" />
+            Call Now
+          </a>
+        </div>
       </div>
     </div>
   );
