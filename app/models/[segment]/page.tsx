@@ -84,7 +84,7 @@ export default function SegmentPage({ params }: { params: { segment: Segment } }
     <div className="min-h-screen bg-gray-50">
       <SiteNavigation />
       
-      <main className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <main className="pt-[120px] container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-8">
           <div className="flex items-center space-x-2 text-sm text-gray-600">

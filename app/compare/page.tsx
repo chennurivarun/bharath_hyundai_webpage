@@ -6,7 +6,7 @@ export default function ComparePage() {
     <div className="min-h-screen bg-black text-white">
       <SiteNavigation />
       
-      <main className="py-16">
+      <main className="pt-[120px] py-16">
         <ModelComparison />
       </main>
 

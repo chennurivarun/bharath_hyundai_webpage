@@ -31,7 +31,7 @@ export default function UsedCarsPage() {
   return (
     <>
       <SiteNavigation />
-      <main className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+      <main className="pt-[120px] min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
         
         {/* Hero Section */}
         <section className="relative py-20 lg:py-32 bg-gradient-to-r from-red-600/20 via-black to-red-600/20 overflow-hidden">

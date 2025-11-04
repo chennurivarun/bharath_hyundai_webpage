@@ -7,8 +7,8 @@ export default function CretaEVPage() {
   return (
     <div className="text-gray-200 relative">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/5 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/20 bg-gradient-to-b from-black/30 via-black/20 to-black/30 backdrop-blur-2xl shadow-xl shadow-black/30 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
+        <div className="relative max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="h-8 w-8 rounded bg-white/10 grid place-items-center text-xs font-bold">CE</div>
             <span className="text-sm text-gray-300">CRETA Electric — Exterior</span>
@@ -25,7 +25,7 @@ export default function CretaEVPage() {
       </header>
 
       {/* Hero / Overview with sticky video background */}
-      <section id="overview" className="relative">
+      <section id="overview" className="relative pt-[60px]">
         <div className="fixed inset-0 -z-10">
           <video
             className="h-full w-full object-cover"

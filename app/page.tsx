@@ -106,8 +106,8 @@ export default function Page() {
 
 function AnnouncementBar() {
   return (
-    <div role="region" aria-label="Promotions" className="bg-gradient-to-r from-black/90 via-black/85 to-black/90 backdrop-blur-lg text-white/90 text-xs border-b border-white/5">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+    <div role="region" aria-label="Promotions" className="relative fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-black/40 via-black/30 to-black/40 backdrop-blur-2xl text-white/90 text-xs border-b border-white/20 shadow-lg shadow-black/20 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/10 before:via-transparent before:to-transparent before:pointer-events-none">
+      <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between gap-4">
           {/* Contact Info */}
           <div className="flex items-center gap-4 flex-wrap">
@@ -158,8 +158,8 @@ function AnnouncementBar() {
 
 function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-gradient-to-b from-black/80 to-black/60 supports-[backdrop-filter]:bg-black/40 backdrop-blur-xl shadow-lg shadow-black/20">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <header className="relative fixed top-[40px] left-0 right-0 z-40 border-b border-white/30 bg-gradient-to-b from-black/20 via-black/15 to-black/20 supports-[backdrop-filter]:bg-black/10 backdrop-blur-3xl shadow-2xl shadow-black/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/15 before:via-white/5 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/20 after:via-transparent after:to-transparent after:pointer-events-none">
+      <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a 

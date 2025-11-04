@@ -240,8 +240,8 @@ export default function VernaPage() {
       />
       {/* Header + Section Tabs (Tucson-style) */}
       <header className="relative">
-        <div className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-black/30 border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="fixed top-0 left-0 right-0 z-40 border-b border-white/20 bg-gradient-to-b from-black/30 via-black/20 to-black/30 backdrop-blur-2xl shadow-xl shadow-black/30 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
+          <div className="relative max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
             <a href="/" className="font-semibold tracking-wide">VERNA</a>
             <div className="hidden md:flex gap-2">
               <Button size="sm" className="bg-red-600 hover:bg-red-500">

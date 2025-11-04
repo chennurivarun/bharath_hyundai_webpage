@@ -49,7 +49,7 @@ export default function ContactPage() {
   return (
     <>
       <SiteNavigation />
-      <main className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+      <main className="pt-[120px] min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-r from-red-600/20 via-black to-red-600/20">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
