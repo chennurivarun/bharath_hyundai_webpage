@@ -132,6 +132,25 @@ export default function VernaPage() {
     v.currentTime = 9
     v.play?.().catch(() => {})
   }
+
+  // Control video to skip last 2 seconds
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const handleTimeUpdate = () => {
+      if (video.duration && video.currentTime >= video.duration - 2) {
+        // Skip last 2 seconds by looping back to 9 seconds
+        video.currentTime = 9
+      }
+    }
+
+    video.addEventListener('timeupdate', handleTimeUpdate)
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate)
+    }
+  }, [])
+
   const galleryImages: string[] = [
     // Hero
     "/images/cars/verna/highlights/verna-highlights-sporty.jpg",
@@ -240,11 +259,11 @@ export default function VernaPage() {
       />
       {/* Header + Section Tabs (Tucson-style) */}
       <header className="relative">
-        <div className="fixed top-0 left-0 right-0 z-40 border-b border-white/20 bg-gradient-to-b from-black/30 via-black/20 to-black/30 backdrop-blur-2xl shadow-xl shadow-black/30 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
+        <div className="fixed top-0 left-0 right-0 z-40 border-b border-white/30 bg-gradient-to-b from-black/20 via-black/15 to-black/20 supports-[backdrop-filter]:bg-black/10 backdrop-blur-3xl shadow-2xl shadow-black/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/15 before:via-white/5 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/20 after:via-transparent after:to-transparent after:pointer-events-none">
           <div className="relative max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="/" className="font-semibold tracking-wide">VERNA</a>
+            <a href="/" className="font-semibold tracking-wide text-white">VERNA</a>
             <div className="hidden md:flex gap-2">
-              <Button size="sm" className="bg-red-600 hover:bg-red-500">
+              <Button size="sm" className="bg-red-600 hover:bg-red-500 text-white">
                 <TestTube className="h-4 w-4 mr-2" /> Test Drive
               </Button>
             </div>
@@ -261,13 +280,14 @@ export default function VernaPage() {
               { id: 'space', label: 'Space' },
               { id: 'pricing', label: 'Pricing' },
             ].map(t => (
-              <a key={t.id} href={`#${t.id}`} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border hover:bg-white/10">
+              <a key={t.id} href={`#${t.id}`} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border text-white/80 hover:text-white border-white/20 hover:bg-white/10">
                 <span>{t.label}</span>
               </a>
             ))}
           </nav>
-          <div className="h-0.5 bg-gradient-to-r from-transparent via-red-500/60 to-transparent" />
+          <div className="h-0.5 bg-gradient-to-r from-transparent via-red-600 to-transparent" />
         </div>
+        <div className="h-[60px]"></div>
       </header>
 
       {/* Hero (Tucson-style) */}
@@ -301,23 +321,24 @@ export default function VernaPage() {
       {/* Technology */}
       <section id="tech" className="py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-4">
-            <h2 className="text-2xl md:text-3xl font-bold">Experience Advanced Technology</h2>
-            <p className="text-white/70 mt-2 max-w-3xl">
-              Designed for the future of smart mobility with immersive displays, premium audio and an elegant, 
-              switchable control interface.
-            </p>
+          <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+            <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">
+              <Activity className="w-5 h-5" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">Experience Advanced Technology</h2>
           </div>
-          <div className="mb-8 max-w-4xl mx-auto mt-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              The Hyundai VERNA.
-            </h3>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Futuristic. Ferocious.
-            </h3>
-            <p className="text-lg text-white/90 mb-4">
-              Hyundai VERNA has mesmerising mystical magnetism and sensuous sportiness in its futuristic design that is truly tantalising. Complimented with a chiselled aerodynamic frame that gives it a furiously fast look. It can best be described in two words.
-            </p>
+          <div className="mb-8 text-center max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                The Hyundai VERNA.
+              </h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                Futuristic. Ferocious.
+              </h3>
+              <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                Hyundai VERNA has mesmerising mystical magnetism and sensuous sportiness in its futuristic design that is truly tantalising. Complimented with a chiselled aerodynamic frame that gives it a furiously fast look. It can best be described in two words.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -411,16 +432,11 @@ export default function VernaPage() {
       {/* SmartSense ADAS */}
       <section id="smartsense" className="py-14 md:py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-4 flex items-end justify-between gap-6 flex-wrap">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Hyundai SmartSense — Level 2 ADAS</h2>
-              <p className="text-white/70 mt-2 max-w-3xl">
-                Advanced sensors, radars and cameras assist in detecting hazards and respond with countermeasures for impact avoidance.
-              </p>
+          <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+            <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">
+              <Activity className="w-5 h-5" />
             </div>
-            <Button variant="outline" className="bg-white/5 border-white/20 text-white hover:bg-white/10">
-              Know More
-            </Button>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">Hyundai SmartSense — Level 2 ADAS</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -570,19 +586,21 @@ export default function VernaPage() {
       {/* Performance */}
       <section id="performance" className="py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-4">
-            <h2 className="text-2xl md:text-3xl font-bold">Ferocious Performance</h2>
-            <p className="text-white/70 mt-2 max-w-3xl">
-              Aerodynamic styling and responsive powertrains deliver a thrilling, refined drive.
-            </p>
-          <div className="mb-8 max-w-4xl mx-auto mt-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Impeccable Performance of the Hyundai VERNA Car
-            </h3>
-            <p className="text-lg text-white/90 mb-4">
-              The 1.5 l Turbo under the hood is a finely tuned beast waiting to be unleashed at the push of a pedal. The responsiveness and the aerodynamic styling combine to deliver a truly thrilling drive. The Hyundai VERNA not only looks fast, it drives even faster.
-            </p>
+          <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+            <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">
+              <Activity className="w-5 h-5" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">Ferocious Performance</h2>
           </div>
+          <div className="mb-8 text-center max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                Impeccable Performance of the Hyundai VERNA Car
+              </h3>
+              <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                The 1.5 l Turbo under the hood is a finely tuned beast waiting to be unleashed at the push of a pedal. The responsiveness and the aerodynamic styling combine to deliver a truly thrilling drive. The Hyundai VERNA not only looks fast, it drives even faster.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -662,19 +680,21 @@ export default function VernaPage() {
       {/* Safety */}
       <section id="safety" className="py-14 md:py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-4">
-            <h2 className="text-2xl md:text-3xl font-bold">Safety Features</h2>
-            <p className="text-white/70 mt-2 max-w-3xl">
-              Comprehensive safety systems for peace of mind on every journey.
-            </p>
-          <div className="mb-8 max-w-4xl mx-auto mt-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Hyundai VERNA Car : Safety at Its Core
-            </h3>
-            <p className="text-lg text-white/90 mb-4">
-              The Hyundai VERNA packs in more than futuristic looks and power. With 65+ advanced safety features including 30 standard safety features, rest assured as you'll be safely transported in the lap of luxury.
-            </p>
+          <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+            <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">
+              <Activity className="w-5 h-5" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">Safety Features</h2>
           </div>
+          <div className="mb-8 text-center max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                Hyundai VERNA Car : Safety at Its Core
+              </h3>
+              <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                The Hyundai VERNA packs in more than futuristic looks and power. With 65+ advanced safety features including 30 standard safety features, rest assured as you'll be safely transported in the lap of luxury.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -796,19 +816,21 @@ export default function VernaPage() {
       {/* Convenience */}
       <section id="convenience" className="py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-4">
-            <h2 className="text-2xl md:text-3xl font-bold">Convenience Features</h2>
-            <p className="text-white/70 mt-2 max-w-3xl">
-              Smart features and advanced technology for enhanced comfort and convenience.
-            </p>
-          <div className="mb-8 max-w-4xl mx-auto mt-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Hyundai VERNA Car Convenience: At the Edge of Tech Connectivity
-            </h3>
-            <p className="text-lg text-white/90 mb-4">
-              The Hyundai VERNA roars to life with our voice using Home to car with Alexa . Once you step inside, everything is ergonomically arranged to provide a haven of tranquillity and order with an advanced seamlessly integrated 26.03 cm (10.25") HD audio video navigation system & digital cluster with color TFT MID. Add switchable type infotainment & climate controller and 65+ Bluelink connected features to that, and you get a sedan that is designed for an efficient drive.
-            </p>
+          <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+            <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">
+              <Activity className="w-5 h-5" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">Convenience Features</h2>
           </div>
+          <div className="mb-8 text-center max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                Hyundai VERNA Car Convenience: At the Edge of Tech Connectivity
+              </h3>
+              <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                The Hyundai VERNA roars to life with our voice using Home to car with Alexa . Once you step inside, everything is ergonomically arranged to provide a haven of tranquillity and order with an advanced seamlessly integrated 26.03 cm (10.25") HD audio video navigation system & digital cluster with color TFT MID. Add switchable type infotainment & climate controller and 65+ Bluelink connected features to that, and you get a sedan that is designed for an efficient drive.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -944,19 +966,21 @@ export default function VernaPage() {
       {/* Exterior */}
       <section id="exterior" className="py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-4">
-            <h2 className="text-2xl md:text-3xl font-bold">Exterior Design</h2>
-            <p className="text-white/70 mt-2 max-w-3xl">
-              Bold, aerodynamic design with distinctive lighting signatures and premium detailing.
-            </p>
+          <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+            <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">
+              <Activity className="w-5 h-5" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">Exterior Design</h2>
           </div>
-          <div className="mb-8 max-w-4xl mx-auto mt-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Hyundai VERNA Car Exterior - Looks that Demand Your Attention
-            </h3>
-            <p className="text-lg text-white/90 mb-4">
-              The striking looks of the Hyundai VERNA are a true delight to the eyes. The front horizon LED positioning lamp doesn't just glow, it positively gleams. The Hyundai VERNA's fastback design gives visual expression to its exemplary aerodynamics like no other and it continues to impress till the last glance with its parametric connected LED tail lamps.
-            </p>
+          <div className="mb-8 text-center max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                Hyundai VERNA Car Exterior - Looks that Demand Your Attention
+              </h3>
+              <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                The striking looks of the Hyundai VERNA are a true delight to the eyes. The front horizon LED positioning lamp doesn't just glow, it positively gleams. The Hyundai VERNA's fastback design gives visual expression to its exemplary aerodynamics like no other and it continues to impress till the last glance with its parametric connected LED tail lamps.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -1120,19 +1144,21 @@ export default function VernaPage() {
       {/* Interior */}
       <section id="interior" className="py-14 md:py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-4">
-            <h2 className="text-2xl md:text-3xl font-bold">Interior Design</h2>
-            <p className="text-white/70 mt-2 max-w-3xl">
-              Premium cabin with advanced technology and luxurious comfort features.
-            </p>
-          <div className="mb-8 max-w-4xl mx-auto mt-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Hyundai VERNA Car Interior: Make Room for More.
-            </h3>
-            <p className="text-lg text-white/90 mb-4">
-              The Hyundai VERNA impresses with design and comfort features rich in unconventional ideas and characterized by great attention to detail. It comes with sense of spaciousness with the best in segment wheelbase that allows for extra legroom and cabin space.
-            </p>
+          <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+            <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">
+              <Activity className="w-5 h-5" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">Interior Design</h2>
           </div>
+          <div className="mb-8 text-center max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+              <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                Hyundai VERNA Car Interior: Make Room for More.
+              </h3>
+              <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                The Hyundai VERNA impresses with design and comfort features rich in unconventional ideas and characterized by great attention to detail. It comes with sense of spaciousness with the best in segment wheelbase that allows for extra legroom and cabin space.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -1282,8 +1308,11 @@ export default function VernaPage() {
       {/* Space & Comfort */}
       <section id="space" className="py-14 md:py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-4">
-            <h2 className="text-2xl md:text-3xl font-bold">Space & Comfort</h2>
+          <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+            <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">
+              <Activity className="w-5 h-5" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">Space & Comfort</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 items-center">
             <img 
@@ -1315,14 +1344,11 @@ export default function VernaPage() {
       {/* Variants & Pricing Section */}
       <section id="pricing" className="py-14 md:py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-6 mb-6">
-            <div className="flex items-center gap-3">
-              <Activity className="w-6 h-6 text-red-500" />
-              <h2 className="text-2xl md:text-3xl font-bold text-white">Variants & Pricing</h2>
+          <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+            <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">
+              <Activity className="w-5 h-5" />
             </div>
-            <p className="text-white/70 mt-2">
-              Explore all Hyundai VERNA variants with their powertrain options and ex-showroom prices.
-            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">Variants & Pricing</h2>
           </div>
           <VariantsPricingSection />
         </div>

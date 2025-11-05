@@ -22,9 +22,9 @@ const isHttps = (url: string) => /^https:\/\//.test(url);
 
 const Section = ({ id, title, icon, children }: { id: string; title: string; icon?: React.ReactNode; children: React.ReactNode }) => (
   <section id={id} className="scroll-mt-24 py-12">
-    <div className="flex items-center gap-3 mb-6 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2">
-      <div className="p-2 rounded-xl bg-white/10 text-[color:var(--brand-primary)] border border-white/10">{icon}</div>
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+    <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+      <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">{icon}</div>
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">{title}</h2>
     </div>
     {children}
   </section>
@@ -393,8 +393,8 @@ export default function AlcazarPage() {
         {/* Premium Light Black Overlay */}
         <div className="fixed inset-0 bg-black/20 -z-10" />
         <header className="relative">
-          {/* Top sticky nav */}
-          <div className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
+          {/* Top fixed nav */}
+          <div className="fixed top-0 left-0 right-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
             <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
               {tabs.map((t) => (
                 <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : 'hover:bg-gray-50 dark:hover:bg-white/10')}>
@@ -405,6 +405,7 @@ export default function AlcazarPage() {
             </nav>
             <div className="h-0.5 bg-gradient-to-r from-transparent via-[color:var(--brand-primary)] to-transparent" />
           </div>
+          <div className="h-[60px]"></div>
           <div className="relative aspect-[21/9] overflow-hidden bg-transparent">
             <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 text-white max-w-2xl">
               <div>
@@ -432,17 +433,19 @@ export default function AlcazarPage() {
 
         <main className="max-w-7xl mx-auto px-4 pb-28">
       <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
-            <div className="mb-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              The bold new Hyundai ALCAZAR Car - Intelligent. Versatile. Intense.
-            </h3>
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              6 and 7 seater SUV.
-            </h3>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              Imagine carving through city streets, then effortlessly transitioning to conquer rugged landscapes. The bold new Hyundai ALCAZAR seamlessly blends power, comfort, and style with ease.
-            </p>
-          </div>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  The bold new Hyundai ALCAZAR Car - Intelligent. Versatile. Intense.
+                </h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  6 and 7 seater SUV.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  Imagine carving through city streets, then effortlessly transitioning to conquer rugged landscapes. The bold new Hyundai ALCAZAR seamlessly blends power, comfort, and style with ease.
+                </p>
+              </div>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {hl.map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
@@ -453,14 +456,16 @@ export default function AlcazarPage() {
           </Section>
 
           <Section id="exterior" title="Exterior" icon={<Car className="w-5 h-5" />}>
-            <div className="mb-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              The bold new Hyundai ALCAZAR Car Exterior: Sculpted for greatness.
-            </h3>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              The bold new Hyundai ALCAZAR car is all about making a statement. Its imposing new dark chrome radiator grille design exudes confidence, while the quad beam LED headlamps technology pierces the night with exceptional clarity
-            </p>
-          </div>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  The bold new Hyundai ALCAZAR Car Exterior: Sculpted for greatness.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  The bold new Hyundai ALCAZAR car is all about making a statement. Its imposing new dark chrome radiator grille design exudes confidence, while the quad beam LED headlamps technology pierces the night with exceptional clarity
+                </p>
+              </div>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {ex.map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
@@ -476,14 +481,16 @@ export default function AlcazarPage() {
                 <img src="/images/cars/alcazar/interior/smriti_feature.jpg" alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
               </div>
             </div>
-            <div className="mb-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              The bold new Hyundai ALCAZAR Car Interior: A symphony of elegance.
-            </h3>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              Step inside the bold new Hyundai ALCAZAR car and discover a haven designed to indulge your senses. The new dual tone noble brown & haze navy interiors create a sophisticated yet inviting ambiance. 
-            </p>
-          </div>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  The bold new Hyundai ALCAZAR Car Interior: A symphony of elegance.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  Step inside the bold new Hyundai ALCAZAR car and discover a haven designed to indulge your senses. The new dual tone noble brown & haze navy interiors create a sophisticated yet inviting ambiance. 
+                </p>
+              </div>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {inn.map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
@@ -494,14 +501,16 @@ export default function AlcazarPage() {
           </Section>
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
-            <div className="mb-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              The bold new Hyundai ALCAZAR Car seamlessly blends performance: Boldly go forth
-            </h3>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              The bold new Hyundai ALCAZAR car isn't content with just getting you there; it empowers you to explore further. A powerful engine pulsates beneath the hood, delivering an exhilarating performance to conquer any landscape.
-            </p>
-          </div>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  The bold new Hyundai ALCAZAR Car seamlessly blends performance: Boldly go forth
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  The bold new Hyundai ALCAZAR car isn't content with just getting you there; it empowers you to explore further. A powerful engine pulsates beneath the hood, delivering an exhilarating performance to conquer any landscape.
+                </p>
+              </div>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {pf.map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
@@ -513,14 +522,16 @@ export default function AlcazarPage() {
           </Section>
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
-            <div className="mb-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              The bold new Hyundai ALCAZAR Car Safety: Peace of mind with every drive.
-            </h3>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              From the moment you get behind the wheel, the bold new Hyundai ALCAZAR car puts your safety first. Hyundai ALCAZAR's strong body structure, SmartSense technology, 6 airbags, and multiple safety features, provide a cocoon of comfort and safety. Allowing you to drive with complete peace of mind, every time.
-            </p>
-          </div>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  The bold new Hyundai ALCAZAR Car Safety: Peace of mind with every drive.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  From the moment you get behind the wheel, the bold new Hyundai ALCAZAR car puts your safety first. Hyundai ALCAZAR's strong body structure, SmartSense technology, 6 airbags, and multiple safety features, provide a cocoon of comfort and safety. Allowing you to drive with complete peace of mind, every time.
+                </p>
+              </div>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {sf.map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
@@ -531,14 +542,16 @@ export default function AlcazarPage() {
           </Section>
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
-            <div className="mb-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              The bold new Hyundai ALCAZAR Car comfort and convenience technology that's intuitive.
-            </h3>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              The bold new Hyundai ALCAZAR car seamlessly blends convenience and connectivity. Unlock your car with your phone using the digital key, the voice-enabled smart panoramic sunroof bathes the interior in natural light, for an airy and connected feel. Adjust your car's temperature seamlessly with the dual zone automatic temperature control (DATC)
-            </p>
-          </div>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  The bold new Hyundai ALCAZAR Car comfort and convenience technology that's intuitive.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  The bold new Hyundai ALCAZAR car seamlessly blends convenience and connectivity. Unlock your car with your phone using the digital key, the voice-enabled smart panoramic sunroof bathes the interior in natural light, for an airy and connected feel. Adjust your car's temperature seamlessly with the dual zone automatic temperature control (DATC)
+                </p>
+              </div>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
           {con.map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">

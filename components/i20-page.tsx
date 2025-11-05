@@ -22,9 +22,9 @@ const isHttps = (url: string) => /^https:\/\//.test(url);
 
 const Section = ({ id, title, icon, children }: { id: string; title: string; icon?: React.ReactNode; children: React.ReactNode }) => (
   <section id={id} className="scroll-mt-24 py-12">
-    <div className="flex items-center gap-3 mb-6 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2">
-      <div className="p-2 rounded-xl bg-white/10 text-[color:var(--brand-primary)] border border-white/10">{icon}</div>
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+    <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+      <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">{icon}</div>
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">{title}</h2>
     </div>
     {children}
   </section>
@@ -343,8 +343,8 @@ export default function I20Page() {
           src="/videos/i20.mp4"
         />
         <header className="relative">
-          {/* Top sticky nav */}
-          <div className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
+          {/* Top fixed nav */}
+          <div className="fixed top-0 left-0 right-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
             <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
               {tabs.map((t) => (
                 <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : 'hover:bg-gray-50 dark:hover:bg-white/10')}>
@@ -355,6 +355,7 @@ export default function I20Page() {
           </nav>
             <div className="h-0.5 bg-gradient-to-r from-transparent via-[color:var(--brand-primary)] to-transparent" />
           </div>
+          <div className="h-[60px]"></div>
           <div className="relative aspect-[21/9] overflow-hidden">
             <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 text-white max-w-2xl">
               <div>
@@ -390,11 +391,15 @@ export default function I20Page() {
           </Section>
 
           <Section id="exterior" title="Exterior" icon={<Car className="w-5 h-5" />}>
-            <div className="mb-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Hyundai i20 Car Exteriors: All Eyes on You</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-                The new Hyundai i20 has it all. A sensuous sporty design, a majestic new grille and lights that are a showstopper. Turn heads as you whizz by on those alloy wheels and make an impression with the chrome lines. It's simply stunning from tip to toe.
-              </p>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  Hyundai i20 Car Exteriors: All Eyes on You
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  The new Hyundai i20 has it all. A sensuous sporty design, a majestic new grille and lights that are a showstopper. Turn heads as you whizz by on those alloy wheels and make an impression with the chrome lines. It's simply stunning from tip to toe.
+                </p>
+              </div>
             </div>
             <motion.div
               initial={{ x: -80, opacity: 0 }}
@@ -420,11 +425,15 @@ export default function I20Page() {
           </Section>
 
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
-            <div className="mb-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Hyundai i20 Car Interior: Magnetic space.</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-                The interiors of the new Hyundai i20 mesmerize. Dual tone seats that look fabulous and enough space to lounge out in comfort. Ambient lighting that uplifts your mood and sliding front armrest that provides a more convenient way to relax.
-              </p>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  Hyundai i20 Car Interior: Magnetic space.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  The interiors of the new Hyundai i20 mesmerize. Dual tone seats that look fabulous and enough space to lounge out in comfort. Ambient lighting that uplifts your mood and sliding front armrest that provides a more convenient way to relax.
+                </p>
+              </div>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('interior', IN).map((c, i) => (
@@ -434,14 +443,18 @@ export default function I20Page() {
           </Section>
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
-            <div className="mb-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Hyundai i20 Car Performance: Power on.</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-                Great looks come with great power. The new Hyundai i20 comes with a powerful petrol engine and 2 driving modes that enhance your drive.
-              </p>
-              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mt-2">
-                The thrilling performance is supplemented with great drivability in the form of two transmission options IVT & MT. Power on. Drive on.
-              </p>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  Hyundai i20 Car Performance: Power on.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  Great looks come with great power. The new Hyundai i20 comes with a powerful petrol engine and 2 driving modes that enhance your drive.
+                </p>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  The thrilling performance is supplemented with great drivability in the form of two transmission options IVT & MT. Power on. Drive on.
+                </p>
+              </div>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('performance', PF).map((c, i) => (
@@ -451,11 +464,15 @@ export default function I20Page() {
           </Section>
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
-            <div className="mb-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Hyundai i20 Car Safety: Go safe.</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-                The new Hyundai i20 ensures you drive safe wherever you go. It comes equipped with advanced safety features that are a cut above the rest. 6 airbags for maximum protection. Electronic stability control (ESC) with vehicle stability management (VSM) and emergency stop signal (ESS) ensure that you always drive stress free.
-              </p>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  Hyundai i20 Car Safety: Go safe.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  The new Hyundai i20 ensures you drive safe wherever you go. It comes equipped with advanced safety features that are a cut above the rest. 6 airbags for maximum protection. Electronic stability control (ESC) with vehicle stability management (VSM) and emergency stop signal (ESS) ensure that you always drive stress free.
+                </p>
+              </div>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('safety', SF).map((c, i) => (
@@ -465,11 +482,15 @@ export default function I20Page() {
           </Section>
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
-            <div className="mb-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Hyundai i20 Car Convenience: Smart. Connected.</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-                Cutting edge technology is at the core of the new Hyundai i20. From Bluelink connectivity to Home-to-car (H2C), our smart tech ensures you're connected to your car and your world all the time. What's more, the voice recognition technology with multi-lingual capabilities add convenience to everything you do. All in all, it's one smart car.
-              </p>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  Hyundai i20 Car Convenience: Smart. Connected.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  Cutting edge technology is at the core of the new Hyundai i20. From Bluelink connectivity to Home-to-car (H2C), our smart tech ensures you're connected to your car and your world all the time. What's more, the voice recognition technology with multi-lingual capabilities add convenience to everything you do. All in all, it's one smart car.
+                </p>
+              </div>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('convenience', CON).map((c, i) => (
@@ -479,11 +500,15 @@ export default function I20Page() {
           </Section>
 
           <Section id="knight" title="Knight Edition" icon={<Sparkles className="w-5 h-5" />}>
-            <div className="mb-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">i20 Knight. Born head-turner</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-                There are cars, and then, there is the i20 Knight. Sleek, black, mystical. A stylish way to stand out among the ordinary. Designed to turn heads with its uber cool looks, blacked-out elements, and exclusive badging.
-              </p>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  i20 Knight. Born head-turner
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  There are cars, and then, there is the i20 Knight. Sleek, black, mystical. A stylish way to stand out among the ordinary. Designed to turn heads with its uber cool looks, blacked-out elements, and exclusive badging.
+                </p>
+              </div>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {mapFromManifest('knight', KNIGHT).map((c, i) => (

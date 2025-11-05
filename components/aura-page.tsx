@@ -21,10 +21,10 @@ const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join("
 const isHttps = (url: string) => /^https:\/\//.test(url);
 
 const Section = ({ id, title, icon, children }: { id: string; title: string; icon?: React.ReactNode; children: React.ReactNode }) => (
-  <section id={id} className="scroll-mt-24 py-12">
-    <div className="flex items-center gap-3 mb-6 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2">
-      <div className="p-2 rounded-xl bg-white/10 text-[color:var(--brand-primary)] border border-white/10">{icon}</div>
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+  <section id={id} className="scroll-mt-20 py-12">
+    <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+      <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">{icon}</div>
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">{title}</h2>
     </div>
     {children}
   </section>
@@ -238,6 +238,7 @@ function VariantsPricingSection() {
 export default function AuraPage() {
   const [activeTab, setActiveTab] = useState('highlights');
   const exteriorRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [manifest, setManifest] = useState<null | { categories: Record<string, { src: string; title?: string }[]> }>(null);
 
   const CAPTION_MAP: Record<string, string> = {
@@ -356,6 +357,25 @@ export default function AuraPage() {
     return () => clearInterval(interval);
   }, []);
 
+  // Video playback control - skip last 3 seconds
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      // If video is within 3 seconds of the end, restart it
+      if (video.duration - video.currentTime <= 3) {
+        video.currentTime = 0;
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
+
   const tabs = [
     { id: 'highlights', label: 'Highlights', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'exterior', label: 'Exterior', icon: <Car className="w-4 h-4" /> },
@@ -373,26 +393,27 @@ export default function AuraPage() {
       <div className="min-h-screen bg-transparent text-gray-900 dark:text-white">
         {/* Sticky Background Video */}
         <video
+          ref={videoRef}
           autoPlay
-          loop
           muted
           playsInline
           className="fixed inset-0 w-full h-full object-cover -z-10"
           src="/hyundai-aura.mp4"
         />
         <header className="relative">
-          {/* Top sticky nav */}
-          <div className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
+          {/* Top fixed nav */}
+          <div className="fixed top-0 left-0 right-0 z-40 border-b border-white/30 bg-gradient-to-b from-black/20 via-black/15 to-black/20 supports-[backdrop-filter]:bg-black/10 backdrop-blur-3xl shadow-2xl shadow-black/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/15 before:via-white/5 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/20 after:via-transparent after:to-transparent after:pointer-events-none">
             <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
               {tabs.map((t) => (
-                <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : 'hover:bg-gray-50 dark:hover:bg-white/10')}>
+                <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border text-white/80 hover:text-white transition-colors', activeTab === t.id ? 'bg-red-600 text-white border-transparent' : 'border-white/20 hover:bg-white/10')}>
                   {t.icon}
                   <span>{t.label}</span>
                 </a>
               ))}
             </nav>
-            <div className="h-0.5 bg-gradient-to-r from-transparent via-[color:var(--brand-primary)] to-transparent" />
+            <div className="h-0.5 bg-gradient-to-r from-transparent via-red-600 to-transparent" />
           </div>
+          <div className="h-[60px]"></div>
           <div className="relative aspect-[21/9] overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,.6),rgba(0,0,0,.1)_60%,transparent)]" />
             <div className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 text-white max-w-2xl">
@@ -407,10 +428,10 @@ export default function AuraPage() {
                   <Chip>1.2 Kappa Petrol</Chip>
                 </div>
                 <div className="mt-6 flex gap-2">
-                  <a href="#highlights" className="inline-flex items-center gap-2 rounded-2xl bg-[color:var(--brand-primary)] px-5 py-2 text-sm font-medium text-white shadow-lg shadow-[color:var(--brand-primary)]/30">
+                  <a href="#highlights" className="inline-flex items-center gap-2 rounded-2xl bg-red-600 hover:bg-red-500 px-5 py-2 text-sm font-medium text-white shadow-lg shadow-red-600/30 transition-all hover:scale-105">
                     Explore <ChevronRight className="w-4 h-4" />
                   </a>
-                  <a href="#specs" className="inline-flex items-center gap-2 rounded-2xl border px-5 py-2 text-sm font-medium bg-white/10 backdrop-blur">
+                  <a href="#specs" className="inline-flex items-center gap-2 rounded-2xl border border-white/30 px-5 py-2 text-sm font-medium text-white bg-white/10 backdrop-blur hover:bg-white/20 transition-all">
                     Specs
                   </a>
                 </div>
@@ -421,6 +442,16 @@ export default function AuraPage() {
 
       <main className="max-w-7xl mx-auto px-4 pb-28">
           <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}> 
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  Hyundai AURA Car - Feel the pride
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  Captivating at first glance, Hyundai AURA showcases style and is meticulously crafted. Revel in its enticing presence and breathtaking modern stance. Stand out in the crowd and enhance your family's style quotient to a new high.
+                </p>
+              </div>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
               {mapFromManifest('highlights', HL).map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
@@ -431,6 +462,16 @@ export default function AuraPage() {
           </Section>
 
           <Section id="exterior" title="Exterior" icon={<Car className="w-5 h-5" />}>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  A design story that flows front to back.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  Hyundai AURA looks elegant from every angle. After all, the front, rear and side designs harmonize so well, they feel like one. The look is graceful, the feel is modern.
+                </p>
+              </div>
+            </div>
             <motion.div
               initial={{ x: -80, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -455,6 +496,16 @@ export default function AuraPage() {
           </Section>
 
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  Indulge in Superior comfort
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  It's also the attention to detail that makes the AURA so special. Discover an exceptional level of comfort with a choice of high quality materials for a sensuous and refined feel throughout.
+                </p>
+              </div>
+            </div>
             <div className="mb-6 overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10">
               <div className="relative aspect-[21/9] bg-gray-100">
                 <img src={(mapFromManifest('interior', IN)[0] || IN[0]).img} alt="Interior main view" className="absolute inset-0 h-full w-full object-cover" />
@@ -470,6 +521,16 @@ export default function AuraPage() {
           </Section>
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  Discover the Hyundai AURA Car's Exceptional Performance.
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  There can't be a dull moment when you are in Hyundai AURA. For it gives you a choice of agile engines under its hood that will always bring a smile to your lips whenever you press down the accelerator.
+                </p>
+              </div>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
               {mapFromManifest('performance', []).map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
@@ -481,6 +542,16 @@ export default function AuraPage() {
           </Section>
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  Hyundai AURA Car: Surrounded with Safety Features
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  In addition to a strong body structure, the new Hyundai AURA is loaded with 30 plus safety features at work all the time to keep you and your family safe.
+                </p>
+              </div>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
               {mapFromManifest('safety', []).map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">
@@ -491,6 +562,16 @@ export default function AuraPage() {
           </Section>
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
+            <div className="mb-8 text-center max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+                  Class leading Hyundai AURA Car Convenience
+                </h3>
+                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+                  With primary focus on family comfort, Hyundai AURA makes your journey pleasant with convenience features that delight the whole family.
+                </p>
+              </div>
+            </div>
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
               {mapFromManifest('convenience', []).map((c, i) => (
                 <div key={i} className="mb-5 break-inside-avoid">

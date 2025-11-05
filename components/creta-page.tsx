@@ -330,6 +330,7 @@ const BOTTOM_STRIP_IMAGES = [
 export default function CretaPage() {
   const [activeSection, setActiveSection] = useState("highlights");
   const [strip, setStrip] = useState<string[]>(BOTTOM_STRIP_IMAGES);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
@@ -374,12 +375,30 @@ export default function CretaPage() {
     load();
   }, []);
 
+  // Control video to skip last 3 seconds
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      if (video.duration && video.currentTime >= video.duration - 3) {
+        // Skip last 3 seconds by looping back to start
+        video.currentTime = 0;
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-transparent text-white">
       {/* Background Video */}
       <video
+        ref={videoRef}
         autoPlay
-        loop
         muted
         playsInline
         className="fixed inset-0 w-full h-full object-cover -z-10"

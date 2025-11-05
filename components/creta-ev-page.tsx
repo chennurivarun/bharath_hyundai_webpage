@@ -2,8 +2,29 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import { Phone, TestTube } from "lucide-react"
+import { BatteryAnimationWithControls } from "@/components/battery-animation"
 
 export default function CretaEVPage() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Control video to skip last 3 seconds
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      if (video.duration && video.currentTime >= video.duration - 3) {
+        // Skip last 3 seconds by looping back to start
+        video.currentTime = 0;
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
+
   return (
     <div className="text-gray-200 relative">
       {/* Header */}
@@ -28,10 +49,10 @@ export default function CretaEVPage() {
       <section id="overview" className="relative pt-[60px]">
         <div className="fixed inset-0 -z-10">
           <video
+            ref={videoRef}
             className="h-full w-full object-cover"
             autoPlay
             muted
-            loop
             playsInline
             preload="auto"
           >
@@ -58,13 +79,7 @@ export default function CretaEVPage() {
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-[16/10] rounded-2xl overflow-hidden ring-1 ring-white/10">
-              <img alt="CRETA Electric front three-quarter" className="w-full h-full object-cover" src="/images/cars/creta-ev/creta-electric-front-1.jpg" />
-            </div>
-            <div className="absolute -bottom-6 right-4 bg-white/5 backdrop-blur-md rounded-xl px-4 py-3 grid gap-1">
-              <div className="text-xs text-gray-400">Explore the exterior</div>
-              <div className="text-xl font-bold">Undisputed. Ultimate. Now electric.</div>
-            </div>
+            <BatteryAnimationWithControls className="w-full" />
           </div>
         </div>
       </section>

@@ -2,8 +2,29 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import { Phone, TestTube } from "lucide-react"
+import { BatteryAnimationWithControls } from "@/components/battery-animation"
 
 export default function Ioniq5Page() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Control video to skip last 3 seconds
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      if (video.duration && video.currentTime >= video.duration - 3) {
+        // Skip last 3 seconds by looping back to start
+        video.currentTime = 0;
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
+
   return (
     <div className="text-gray-200 relative">
       {/* Header */}
@@ -36,10 +57,10 @@ export default function Ioniq5Page() {
       <section id="overview" className="relative pt-[60px]">
         <div className="fixed inset-0 -z-10">
           <video
+            ref={videoRef}
             className="h-full w-full object-cover"
             autoPlay
             muted
-            loop
             playsInline
             preload="auto"
           >
@@ -56,8 +77,9 @@ export default function Ioniq5Page() {
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">Hyundai <span className="text-emerald-300">IONIQ 5</span></h1>
             <p className="text-gray-300 max-w-prose">Born Electric. The IONIQ 5 revolutionizes EV design with its pixel-inspired lighting, parametric-pixel cladding, and V2L technology. A futuristic SUV that's ready to lead tomorrow.</p>
             <div className="flex gap-3 flex-wrap text-sm">
-              <div className="border border-white/10 px-3 py-2 rounded-xl">Pixel-inspired lighting</div>
-              <div className="border border-white/10 px-3 py-2 rounded-xl">Parametric-pixel cladding</div>
+              <div className="border border-white/10 px-3 py-2 rounded-xl">Up to 631 km Range</div>
+              <div className="border border-white/10 px-3 py-2 rounded-xl">0-100 km/h in 5.2s</div>
+              <div className="border border-white/10 px-3 py-2 rounded-xl">185 km/h Top Speed</div>
               <div className="border border-white/10 px-3 py-2 rounded-xl">V2L (Vehicle-to-Load)</div>
             </div>
             <div className="flex gap-3">
@@ -66,13 +88,7 @@ export default function Ioniq5Page() {
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-[16/10] rounded-2xl overflow-hidden ring-1 ring-white/10">
-              <img alt="IONIQ 5 front three-quarter" className="w-full h-full object-cover" src="/images/cars/ioniq5/front/ioniq5-front-1.avif" />
-            </div>
-            <div className="absolute -bottom-6 right-4 bg-white/5 backdrop-blur-md rounded-xl px-4 py-3 grid gap-1">
-              <div className="text-xs text-gray-400">Explore the exterior</div>
-              <div className="text-xl font-bold">Born Electric. Lead Tomorrow.</div>
-            </div>
+            <BatteryAnimationWithControls className="w-full" />
           </div>
         </div>
       </section>

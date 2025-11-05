@@ -1,8 +1,8 @@
-"use client";
+g"use client";
 
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { Phone, TestTube } from "lucide-react";
+import { Phone, TestTube, Sparkles, Car, Image as ImageIcon, Gauge, Shield, Settings, Activity, ListChecks } from "lucide-react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -11,13 +11,15 @@ const fadeUp = {
   transition: { duration: 0.5 }
 };
 
-const Section: React.FC<React.PropsWithChildren<{ id: string; title: string; subtitle?: string }>> = ({ id, title, subtitle, children }) => (
-  <section id={id} className="scroll-mt-24 py-12 md:py-16">
-    <motion.div {...fadeUp} className="max-w-7xl mx-auto px-4">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">{title}</h2>
-      {subtitle && <p className="text-sm/6 md:text-base/7 text-zinc-400 mt-2 max-w-3xl backdrop-blur-sm bg-white/5 px-3 py-2 rounded-lg border border-white/10">{subtitle}</p>}
+const Section: React.FC<React.PropsWithChildren<{ id: string; title: string; subtitle?: string; icon?: React.ReactNode }>> = ({ id, title, subtitle, icon, children }) => (
+  <section id={id} className="scroll-mt-24 py-12">
+    <div className="max-w-7xl mx-auto px-4">
+      <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
+        {icon && <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">{icon}</div>}
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">{title}</h2>
+      </div>
       <div className="mt-6 md:mt-8">{children}</div>
-    </motion.div>
+    </div>
   </section>
 );
 
@@ -368,7 +370,6 @@ export default function I20NLineRedesign() {
         className="fixed inset-0 w-full h-full object-cover -z-10"
         src="/assets1/Hyundai N Line _ It s time to play.mp4"
       />
-      <Diagnostics />
       <div className="sticky top-0 z-40 backdrop-blur border-b border-white/10 bg-black/60">
         <div className="max-w-7xl mx-auto flex items-center gap-4 px-4 h-14">
           <span className="text-xs font-medium tracking-wider text-red-600">i20 N Line</span>
@@ -404,12 +405,16 @@ export default function I20NLineRedesign() {
         </div>
       </header>
 
-      <Section id="highlights" title="Highlights" subtitle="Pulled from the official Highlights page, with imagery swapped into clean cards.">
-        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Get set to play.</h3>
-          <p className="text-zinc-300 text-base leading-relaxed">
-            Created to maximise driving fun every time you hit the road, the new Hyundai i20 N Line delivers a sporty experience that will make you want to play. Featuring the perfect balance of motorsport styling and innovative technology, this car is built for every day fun, with an ex-showroom price starting at just Rs. 9.14* Lakh.
-          </p>
+      <Section id="highlights" title="Highlights" icon={<Sparkles className="w-5 h-5" />}>
+        <div className="mb-8 text-center max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+            <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+              Get set to play.
+            </h3>
+            <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+              Created to maximise driving fun every time you hit the road, the new Hyundai i20 N Line delivers a sporty experience that will make you want to play. Featuring the perfect balance of motorsport styling and innovative technology, this car is built for every day fun, with an ex-showroom price starting at just Rs. 9.14* Lakh.
+            </p>
+          </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedHighlights.map((h, i) => (
@@ -418,12 +423,16 @@ export default function I20NLineRedesign() {
         </div>
       </Section>
 
-      <Section id="exterior" title="Exterior" subtitle="Signature N Line cues and red accents for an athletic stance.">
-        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Hyundai i20 N Line Car Exteriors: Built to Entice.</h3>
-          <p className="text-zinc-300 text-base leading-relaxed">
-            Athletically aesthetic, the new Hyundai i20 N Line is built to command attention, all the way from the subtle chrome garnish on the foglamps to the tailgate spoiler with side wings. The sporty red highlights accentuate the performance inspired design, ensuring that all eyes are always on you.
-          </p>
+      <Section id="exterior" title="Exterior" icon={<Car className="w-5 h-5" />}>
+        <div className="mb-8 text-center max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+            <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+              Hyundai i20 N Line Car Exteriors: Built to Entice.
+            </h3>
+            <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+              Athletically aesthetic, the new Hyundai i20 N Line is built to command attention, all the way from the subtle chrome garnish on the foglamps to the tailgate spoiler with side wings. The sporty red highlights accentuate the performance inspired design, ensuring that all eyes are always on you.
+            </p>
+          </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedExterior.map((h, i) => (
@@ -432,7 +441,7 @@ export default function I20NLineRedesign() {
         </div>
       </Section>
 
-      <Section id="colours" title="Colours" subtitle="Official body colours (dual-tone & mono-tone) from the Hyundai i20 N Line brochure.">
+      <Section id="colours" title="Colours" icon={<Activity className="w-5 h-5" />}>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {colours.map((c, i) => (
             <ColorCard key={i} name={c.name} tone={c.tone} swatch={c.swatch} />
@@ -441,12 +450,16 @@ export default function I20NLineRedesign() {
         <p className="text-xs text-zinc-500 mt-3">* Dual tone = body colour with Abyss Black roof. Colours and availability may vary by trim/production month.</p>
       </Section>
 
-      <Section id="interior" title="Interior" subtitle="All‑black theme with red inserts, N branding and tech‑forward cockpit.">
-        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Hyundai i20 N Line Interior: Always in Style on the Inside</h3>
-          <p className="text-zinc-300 text-base leading-relaxed">
-            As you step into the cockpit of the you're graced by the sleek design that's packed with technology. The iconic N badging on the steering wheel, leather wrapped gear knob, and the seats, along with the all black interiors with red inserts add to the sporty appeal.
-          </p>
+      <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
+        <div className="mb-8 text-center max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+            <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+              Hyundai i20 N Line Interior: Always in Style on the Inside
+            </h3>
+            <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+              As you step into the cockpit of the you're graced by the sleek design that's packed with technology. The iconic N badging on the steering wheel, leather wrapped gear knob, and the seats, along with the all black interiors with red inserts add to the sporty appeal.
+            </p>
+          </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedInterior.map((h, i) => (
@@ -455,12 +468,16 @@ export default function I20NLineRedesign() {
         </div>
       </Section>
 
-      <Section id="performance" title="Performance" subtitle="Turbo power, your choice of DCT or MT, and selectable drive modes.">
-        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Hyundai i20 N Line Car Performance: Play anywhere.</h3>
-          <p className="text-zinc-300 text-base leading-relaxed">
-            The distinctive roar of the exhaust sets the new Hyundai i20 N Line apart. It's the perfect blend of a finely tuned engine and highly responsive suspension and handling that delivers a smooth ride.
-          </p>
+      <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
+        <div className="mb-8 text-center max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+            <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+              Hyundai i20 N Line Car Performance: Play anywhere.
+            </h3>
+            <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+              The distinctive roar of the exhaust sets the new Hyundai i20 N Line apart. It's the perfect blend of a finely tuned engine and highly responsive suspension and handling that delivers a smooth ride.
+            </p>
+          </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedPerformance.map((h, i) => (
@@ -469,12 +486,16 @@ export default function I20NLineRedesign() {
         </div>
       </Section>
 
-      <Section id="safety" title="Safety" subtitle="Advanced active and passive safety, standard across the range.">
-        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Hyundai i20 N Line Car Safety: Always play safe.</h3>
-          <p className="text-zinc-300 text-base leading-relaxed">
-            Packed with Hyundai's most advanced safety systems, the is built to keep you in total comfort and peace of mind.
-          </p>
+      <Section id="safety" title="Safety" icon={<Shield className="w-5 h-5" />}>
+        <div className="mb-8 text-center max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+            <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+              Hyundai i20 N Line Car Safety: Always play safe.
+            </h3>
+            <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+              Packed with Hyundai's most advanced safety systems, the is built to keep you in total comfort and peace of mind.
+            </p>
+          </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedSafety.map((h, i) => (
@@ -483,12 +504,16 @@ export default function I20NLineRedesign() {
         </div>
       </Section>
 
-      <Section id="convenience" title="Convenience & Connectivity" subtitle="Bose audio, 10.25&quot; HD touchscreen and H2C with Alexa for seamless control.">
-        <div className="mb-8 max-w-4xl backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-6">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-b from-white to-white/80 bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(255,255,255,0.3)]">Hyundai i20 N Line Car Convenience: Just press play.</h3>
-          <p className="text-zinc-300 text-base leading-relaxed">
-            Connectivity comes easy in the Equipped with cutting edge technology like home-to-car (H2C) with Alexa, fully automated temperature control, advanced infotainment with multilingual user interface, you've got the world at your fingertips.
-          </p>
+      <Section id="convenience" title="Convenience & Connectivity" icon={<Settings className="w-5 h-5" />}>
+        <div className="mb-8 text-center max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
+            <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
+              Hyundai i20 N Line Car Convenience: Just press play.
+            </h3>
+            <p className="text-lg text-red-800 dark:text-red-200 mb-4">
+              Connectivity comes easy in the Equipped with cutting edge technology like home-to-car (H2C) with Alexa, fully automated temperature control, advanced infotainment with multilingual user interface, you've got the world at your fingertips.
+            </p>
+          </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {mappedConvenience.map((h, i) => (
@@ -497,7 +522,7 @@ export default function I20NLineRedesign() {
         </div>
       </Section>
 
-      <Section id="prices" title="Variants & Prices" subtitle="Average ex‑showroom prices across India; exact on‑road price varies by city, dealer & offers.">
+      <Section id="prices" title="Variants & Prices" icon={<Activity className="w-5 h-5" />}>
         <div className="overflow-x-auto rounded-2xl border border-zinc-800">
           <table className="min-w-[720px] w-full text-sm">
             <thead className="bg-zinc-900/60">
@@ -523,7 +548,7 @@ export default function I20NLineRedesign() {
         <p className="text-xs text-zinc-500 mt-3">* Sources: Public price listings; confirm with Hyundai dealer for your city. Prices on this page reflect averages as of Oct 14, 2025.</p>
       </Section>
 
-      <Section id="specs" title="Specifications" subtitle="Key numbers from the official Specification page and publicly listed dimensions.">
+      <Section id="specs" title="Specifications" icon={<Activity className="w-5 h-5" />}>
         <div className="grid lg:grid-cols-2 gap-6">
           <div className="rounded-2xl border border-zinc-800 p-4 md:p-6 bg-zinc-900/60">
             {specs.map((s, idx) => <SpecRow key={idx} k={s.k} v={s.v} />)}
@@ -535,7 +560,7 @@ export default function I20NLineRedesign() {
         </div>
       </Section>
 
-      <Section id="features" title="Features by Trim" subtitle="Selected safety & convenience items across N6 and N8 (S = Standard).">
+      <Section id="features" title="Features by Trim" icon={<ListChecks className="w-5 h-5" />}>
         <div className="overflow-x-auto rounded-2xl border border-zinc-800">
           <table className="min-w-[720px] w-full text-sm">
             <thead className="bg-zinc-900/60">

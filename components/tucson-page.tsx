@@ -308,14 +308,14 @@ export default function TucsonFullImageSync() {
     return () => clearInterval(interval);
   }, []);
 
-  // Video playback control - skip last 4 seconds
+  // Video playback control - skip last 2 seconds
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleTimeUpdate = () => {
-      // If video is within 4 seconds of the end, restart it
-      if (video.duration - video.currentTime <= 4) {
+      // If video is within 2 seconds of the end, restart it
+      if (video.duration && video.currentTime >= video.duration - 2) {
         video.currentTime = 0;
       }
     };
@@ -410,8 +410,8 @@ export default function TucsonFullImageSync() {
         {/* Premium Light Black Overlay */}
         <div className="fixed inset-0 bg-black/20 -z-10" />
         <header className="relative">
-          {/* Top sticky nav */}
-          <div className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
+          {/* Top fixed nav */}
+          <div className="fixed top-0 left-0 right-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
             <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
               {tabs.map((t) => (
                 <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : 'hover:bg-gray-50 dark:hover:bg-white/10')}>
@@ -422,6 +422,7 @@ export default function TucsonFullImageSync() {
             </nav>
             <div className="h-0.5 bg-gradient-to-r from-transparent via-[color:var(--brand-primary)] to-transparent" />
           </div>
+          <div className="h-[60px]"></div>
           <div className="relative aspect-[21/9] overflow-hidden">
             <img
               src="/images/cars/tucson/highlights/Hyundai-tucson-suv-highlight-banner-1920x720.jpg"
