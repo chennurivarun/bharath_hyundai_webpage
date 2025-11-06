@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -6,6 +7,22 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from "lucide-react"
 import { SiteNavigation } from "@/components/site-navigation"
+
+export const metadata: Metadata = {
+  title: "Contact Us | Bharath Hyundai | Hyderabad & Khammam",
+  description: "Get in touch with Bharath Hyundai. Contact us for sales, service, or any inquiries. Phone: +91 7733888999 (Sales), +91 7997806806 (Service). Multiple branches across Telangana.",
+  keywords: ["contact Hyundai dealer", "Bharath Hyundai contact", "Hyundai dealer phone", "Hyundai dealer email", "Hyderabad Hyundai dealer"],
+  openGraph: {
+    title: "Contact Us | Bharath Hyundai",
+    description: "Get in touch with Bharath Hyundai. Contact us for sales, service, or any inquiries.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Contact Us | Bharath Hyundai",
+    description: "Get in touch with Bharath Hyundai for sales and service.",
+  },
+}
 
 const CONTACT_INFO = [
   {

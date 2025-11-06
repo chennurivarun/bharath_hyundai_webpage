@@ -1,8 +1,25 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Phone, Clock, Car, Wrench, Navigation } from "lucide-react"
 import { SiteNavigation } from "@/components/site-navigation"
+
+export const metadata: Metadata = {
+  title: "Our Locations | Bharath Hyundai Showrooms | Hyderabad & Khammam",
+  description: "Find Bharath Hyundai showrooms and service centers across Hyderabad & Khammam. 8 branches: Gachibowli, Gopanpally, Nampally, Vikarabad, Khammam, Kothagudem, Sathupally, Bhadrachalam.",
+  keywords: ["Hyundai showroom", "Hyundai dealer locations", "Hyundai service center", "Hyundai dealer Hyderabad", "Hyundai dealer Khammam", "car showroom"],
+  openGraph: {
+    title: "Our Locations | Bharath Hyundai",
+    description: "Find Bharath Hyundai showrooms and service centers across Telangana.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Our Locations | Bharath Hyundai",
+    description: "Find Bharath Hyundai showrooms across Telangana.",
+  },
+}
 
 const BRANCHES = [
   {

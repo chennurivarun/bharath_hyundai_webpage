@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -5,6 +6,22 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Calendar, Clock, MapPin, Phone, Car, Users, Shield } from "lucide-react"
 import { SiteNavigation } from "@/components/site-navigation"
+
+export const metadata: Metadata = {
+  title: "Book Free Test Drive | Bharath Hyundai | Hyderabad & Khammam",
+  description: "Book a free test drive for your favorite Hyundai car. Experience i20, Verna, Creta, Tucson, and more. Available at multiple branches in Telangana.",
+  keywords: ["test drive", "book test drive", "Hyundai test drive", "free test drive", "car test drive", "Hyundai cars test drive"],
+  openGraph: {
+    title: "Book Free Test Drive | Bharath Hyundai",
+    description: "Book a free test drive for your favorite Hyundai car. Experience before you buy.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Book Free Test Drive | Bharath Hyundai",
+    description: "Book a free test drive for your favorite Hyundai car.",
+  },
+}
 
 const TEST_DRIVE_MODELS = [
   {

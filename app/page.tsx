@@ -1,6 +1,7 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Headset, MapPin, Phone, Search, Tag, User, MessageCircle } from "lucide-react"
+import { Headset, MapPin, Phone, Search, Tag, User, MessageCircle, Sparkles } from "lucide-react"
 import HeroVideoLocal from "@/components/hero-video-local"
 import type { Model } from "@/lib/models"
 import CarAccordionSlider from "@/components/car-accordion-slider"
@@ -12,6 +13,26 @@ import { NewsletterSection } from "@/components/newsletter-section"
 import { EMICalculator } from "@/components/emi-calculator"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { FloatingActions } from "@/components/floating-actions"
+
+export const metadata: Metadata = {
+  title: "Bharath Hyundai | Authorized Hyundai Dealer in Hyderabad & Khammam",
+  description: "Explore the latest Hyundai models, book a free test drive, and get service support across multiple branches in Telangana. Authorized Hyundai dealer since 2013.",
+  keywords: ["Hyundai dealer", "Hyundai Hyderabad", "Hyundai Khammam", "car dealer Telangana", "test drive", "Hyundai service"],
+  openGraph: {
+    title: "Bharath Hyundai | Authorized Hyundai Dealer",
+    description: "Authorized Hyundai dealer in Hyderabad & Khammam. Book test drive, service, and explore latest models.",
+    type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bharath Hyundai | Authorized Hyundai Dealer",
+    description: "Authorized Hyundai dealer in Hyderabad & Khammam",
+  },
+  alternates: {
+    canonical: "https://bharathyundai.com",
+  },
+}
 
 type NavItem = { label: string; href: string }
 type Branch = { id: string; name: string; address: string; phone: string }
@@ -67,8 +88,8 @@ export default function Page() {
 
       <div className="relative z-10">
         <div className="fixed top-0 left-0 right-0 z-50">
-          <AnnouncementBar />
-          <SiteHeader />
+        <AnnouncementBar />
+        <SiteHeader />
         </div>
 
         <main id="main" className="min-h-screen space-y-16 lg:space-y-24">
@@ -97,6 +118,7 @@ export default function Page() {
       </div>
 
       <WhatsappFab />
+      <FindPerfectCarFab />
       <ScrollToTop />
       <FloatingActions />
     </>
@@ -577,9 +599,28 @@ function WhatsappFab() {
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed right-4 bottom-6 z-50 rounded-full bg-green-600 p-3 text-white shadow-lg hover:bg-green-500 focus-visible:outline-none focus-visible:ring-2 ring-white/40"
+      className="fixed right-4 bottom-6 z-50 rounded-full bg-green-600 p-3 text-white shadow-lg hover:bg-green-500 focus-visible:outline-none focus-visible:ring-2 ring-white/40 transition-all hover:scale-110"
     >
       <MessageCircle className="h-5 w-5" />
+    </a>
+  )
+}
+
+function FindPerfectCarFab() {
+  return (
+    <a
+      href="/find-perfect-car"
+      aria-label="Find Your Perfect Car"
+      className="fixed left-4 bottom-6 z-50 rounded-full bg-gradient-to-br from-red-600 to-red-700 p-4 text-white shadow-lg shadow-red-600/40 hover:shadow-red-600/60 focus-visible:outline-none focus-visible:ring-2 ring-white/40 transition-all hover:scale-110 group"
+    >
+      <div className="relative">
+        <Sparkles className="h-6 w-6" />
+        <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+      </div>
+      {/* Tooltip */}
+      <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-gray-900 text-white text-sm rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+        Find Your Perfect Car
+      </span>
     </a>
   )
 }

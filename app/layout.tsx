@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import WhatsAppButton from "@/components/whatsapp-button"
 import GlobalFooter from "@/components/global-footer"
+import { CarSelectionPopup } from "@/components/car-selection-popup"
 import "./globals.css"
 
 import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
@@ -33,6 +34,7 @@ export default function RootLayout({
         <Suspense fallback={null}>{children}</Suspense>
         <GlobalFooter />
         <WhatsAppButton />
+        <CarSelectionPopup />
         <Analytics />
       </body>
     </html>

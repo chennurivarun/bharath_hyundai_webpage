@@ -101,8 +101,8 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">What's your budget range?</h3>
-              <p className="text-gray-600">Help us find the perfect car for your budget</p>
+              <h3 className="text-2xl font-bold text-white mb-2">What's your budget range?</h3>
+              <p className="text-white/80">Help us find the perfect car for your budget</p>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -112,15 +112,15 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
                   onClick={() => updatePreferences('budget', option.value)}
                   className={`p-4 rounded-xl border-2 text-left transition-all ${
                     preferences.budget === option.value
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-200 hover:border-blue-300"
+                      ? "border-red-500 bg-red-600/20 text-white"
+                      : "border-white/20 hover:border-red-400/50 text-white/90 bg-white/5"
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-4 h-4 rounded-full border-2 ${
                       preferences.budget === option.value
-                        ? "border-blue-500 bg-blue-500"
-                        : "border-gray-300"
+                        ? "border-red-500 bg-red-500"
+                        : "border-white/40"
                     }`} />
                     <span className="font-semibold">{option.label}</span>
                   </div>
@@ -134,8 +134,8 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">How will you use your car?</h3>
-              <p className="text-gray-600">This helps us match you with the right type of vehicle</p>
+              <h3 className="text-2xl font-bold text-white mb-2">How will you use your car?</h3>
+              <p className="text-white/80">This helps us match you with the right type of vehicle</p>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -145,8 +145,8 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
                   onClick={() => updatePreferences('usage', option.value)}
                   className={`p-4 rounded-xl border-2 text-left transition-all ${
                     preferences.usage === option.value
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-200 hover:border-blue-300"
+                      ? "border-red-500 bg-red-600/20 text-white"
+                      : "border-white/20 hover:border-red-400/50 text-white/90 bg-white/5"
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -163,8 +163,8 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">What features matter to you?</h3>
-              <p className="text-gray-600">Select all that apply</p>
+              <h3 className="text-2xl font-bold text-white mb-2">What features matter to you?</h3>
+              <p className="text-white/80">Select all that apply</p>
             </div>
             
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -179,8 +179,8 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
                   }}
                   className={`p-3 rounded-lg border-2 text-sm transition-all ${
                     preferences.features.includes(feature)
-                      ? "border-blue-500 bg-blue-50 text-blue-700"
-                      : "border-gray-200 hover:border-blue-300"
+                      ? "border-red-500 bg-red-600/20 text-white"
+                      : "border-white/20 hover:border-red-400/50 text-white/90 bg-white/5"
                   }`}
                 >
                   {feature}
@@ -194,16 +194,16 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Your Perfect Matches</h3>
-              <p className="text-gray-600">Based on your preferences, here are our top recommendations</p>
+              <h3 className="text-2xl font-bold text-white mb-2">Your Perfect Matches</h3>
+              <p className="text-white/80">Based on your preferences, here are our top recommendations</p>
             </div>
             
             <div className="space-y-4">
               {recommendations.map((rec, index) => (
-                <Card key={rec.model.id} className="overflow-hidden">
+                <Card key={rec.model.id} className="overflow-hidden bg-white/10 border-white/20 backdrop-blur-sm">
                   <CardContent className="p-0">
                     <div className="flex">
-                      <div className="w-32 h-24 bg-gray-100 flex-shrink-0">
+                      <div className="w-32 h-24 bg-white/5 flex-shrink-0 border-r border-white/10">
                         <img
                           src={rec.model.imageSrc}
                           alt={rec.model.name}
@@ -213,19 +213,19 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
                       <div className="flex-1 p-4">
                         <div className="flex items-start justify-between mb-2">
                           <div>
-                            <h4 className="font-bold text-gray-900">{rec.model.name}</h4>
-                            <p className="text-gray-600 text-sm">{rec.model.priceBand}</p>
+                            <h4 className="font-bold text-white">{rec.model.name}</h4>
+                            <p className="text-white/80 text-sm">{rec.model.priceBand}</p>
                           </div>
                           <div className="text-right">
-                            <Badge variant={index === 0 ? "default" : "secondary"}>
+                            <Badge className={index === 0 ? "bg-red-600 text-white" : "bg-white/20 text-white border-white/30"}>
                               {index === 0 ? "Best Match" : `${Math.round(rec.score)}% Match`}
                             </Badge>
                             <div className="mt-1">
-                              <Progress value={rec.score} className="w-16 h-2" />
+                              <Progress value={rec.score} className="w-16 h-2 bg-white/10" />
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-gray-600">
+                        <div className="flex items-center gap-4 text-sm text-white/80">
                           <div className="flex items-center gap-1">
                             <Users className="h-4 w-4" />
                             <span>5 Seats</span>
@@ -237,7 +237,7 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
                         </div>
                         <Button
                           size="sm"
-                          className="mt-3"
+                          className="mt-3 bg-red-600 hover:bg-red-500 text-white"
                           onClick={() => onModelSelect(rec.model)}
                         >
                           View Details
@@ -257,25 +257,25 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
   }
 
   return (
-    <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
+    <Card className="bg-gradient-to-br from-gray-900/95 via-black/90 to-gray-900/95 border-white/20 backdrop-blur-sm shadow-2xl">
       <CardContent className="p-6">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-green-100 rounded-lg">
-            <TrendingUp className="h-6 w-6 text-green-600" />
+          <div className="p-2 bg-red-600/20 rounded-lg border border-red-500/30">
+            <TrendingUp className="h-6 w-6 text-red-500" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-gray-900">Find Your Perfect Car</h3>
-            <p className="text-gray-600">Answer a few questions to get personalized recommendations</p>
+            <h3 className="text-xl font-bold text-white">Find Your Perfect Car</h3>
+            <p className="text-white/80">Answer a few questions to get personalized recommendations</p>
           </div>
         </div>
 
         {/* Progress Bar */}
         <div className="mb-6">
-          <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
+          <div className="flex items-center justify-between text-sm text-white/80 mb-2">
             <span>Step {currentStep} of 4</span>
             <span>{Math.round((currentStep / 4) * 100)}% Complete</span>
           </div>
-          <Progress value={(currentStep / 4) * 100} className="h-2" />
+          <Progress value={(currentStep / 4) * 100} className="h-2 bg-white/10" />
         </div>
 
         {/* Step Content */}
@@ -289,31 +289,41 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
             variant="outline"
             onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
             disabled={currentStep === 1}
+            className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Previous
           </Button>
           
           {currentStep < 3 ? (
-            <Button onClick={() => setCurrentStep(currentStep + 1)}>
+            <Button 
+              onClick={() => setCurrentStep(currentStep + 1)}
+              className="bg-red-600 hover:bg-red-500 text-white"
+            >
               Next
             </Button>
           ) : currentStep === 3 ? (
-            <Button onClick={generateRecommendations}>
+            <Button 
+              onClick={generateRecommendations}
+              className="bg-red-600 hover:bg-red-500 text-white"
+            >
               Get Recommendations
             </Button>
           ) : (
-            <Button onClick={() => {
-              setCurrentStep(1)
-              setPreferences({
-                budget: 8,
-                usage: "city",
-                fuelType: "petrol",
-                seating: 5,
-                transmission: "manual",
-                features: []
-              })
-              setRecommendations([])
-            }}>
+            <Button 
+              onClick={() => {
+                setCurrentStep(1)
+                setPreferences({
+                  budget: 8,
+                  usage: "city",
+                  fuelType: "petrol",
+                  seating: 5,
+                  transmission: "manual",
+                  features: []
+                })
+                setRecommendations([])
+              }}
+              className="bg-red-600 hover:bg-red-500 text-white"
+            >
               Start Over
             </Button>
           )}

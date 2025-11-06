@@ -39,6 +39,7 @@ export default function CretaEVPage() {
             <a href="#angles" className="hover:text-white">Angles</a>
             <a href="#highlights" className="hover:text-white">Highlights</a>
             <a href="#wheels-charging" className="hover:text-white">Wheels & Charging</a>
+            <a href="/creta-ev-accessories" className="hover:text-white">Accessories</a>
             <a href="#cta" className="hover:text-white">Enquire</a>
           </nav>
           <a href="#cta" className="px-3 py-2 text-sm rounded-lg bg-white text-black font-semibold">Book / Test Drive</a>
@@ -149,6 +150,22 @@ export default function CretaEVPage() {
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Variants & Pricing</h2>
           <VariantsExplorer />
+        </div>
+      </section>
+
+      {/* Accessories CTA */}
+      <section className="py-12 md:py-20 bg-gradient-to-r from-emerald-600/10 via-black to-emerald-600/10">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h3 className="text-2xl md:text-3xl font-extrabold mb-4">Explore Creta EV Accessories</h3>
+          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+            Enhance your Creta EV with genuine accessories designed specifically for your electric SUV.
+          </p>
+          <a 
+            href="/creta-ev-accessories" 
+            className="inline-block px-6 py-3 rounded-lg bg-emerald-300/20 text-emerald-200 ring-1 ring-white/10 hover:bg-emerald-300/30 transition-colors font-semibold"
+          >
+            View All Accessories
+          </a>
         </div>
       </section>
 

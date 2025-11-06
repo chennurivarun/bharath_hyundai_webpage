@@ -412,8 +412,8 @@ export default function I20NLineRedesign() {
               Get set to play.
             </h3>
             <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-              Created to maximise driving fun every time you hit the road, the new Hyundai i20 N Line delivers a sporty experience that will make you want to play. Featuring the perfect balance of motorsport styling and innovative technology, this car is built for every day fun, with an ex-showroom price starting at just Rs. 9.14* Lakh.
-            </p>
+            Created to maximise driving fun every time you hit the road, the new Hyundai i20 N Line delivers a sporty experience that will make you want to play. Featuring the perfect balance of motorsport styling and innovative technology, this car is built for every day fun, with an ex-showroom price starting at just Rs. 9.14* Lakh.
+          </p>
           </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -430,8 +430,8 @@ export default function I20NLineRedesign() {
               Hyundai i20 N Line Car Exteriors: Built to Entice.
             </h3>
             <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-              Athletically aesthetic, the new Hyundai i20 N Line is built to command attention, all the way from the subtle chrome garnish on the foglamps to the tailgate spoiler with side wings. The sporty red highlights accentuate the performance inspired design, ensuring that all eyes are always on you.
-            </p>
+            Athletically aesthetic, the new Hyundai i20 N Line is built to command attention, all the way from the subtle chrome garnish on the foglamps to the tailgate spoiler with side wings. The sporty red highlights accentuate the performance inspired design, ensuring that all eyes are always on you.
+          </p>
           </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -457,8 +457,8 @@ export default function I20NLineRedesign() {
               Hyundai i20 N Line Interior: Always in Style on the Inside
             </h3>
             <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-              As you step into the cockpit of the you're graced by the sleek design that's packed with technology. The iconic N badging on the steering wheel, leather wrapped gear knob, and the seats, along with the all black interiors with red inserts add to the sporty appeal.
-            </p>
+            As you step into the cockpit of the you're graced by the sleek design that's packed with technology. The iconic N badging on the steering wheel, leather wrapped gear knob, and the seats, along with the all black interiors with red inserts add to the sporty appeal.
+          </p>
           </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -475,8 +475,8 @@ export default function I20NLineRedesign() {
               Hyundai i20 N Line Car Performance: Play anywhere.
             </h3>
             <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-              The distinctive roar of the exhaust sets the new Hyundai i20 N Line apart. It's the perfect blend of a finely tuned engine and highly responsive suspension and handling that delivers a smooth ride.
-            </p>
+            The distinctive roar of the exhaust sets the new Hyundai i20 N Line apart. It's the perfect blend of a finely tuned engine and highly responsive suspension and handling that delivers a smooth ride.
+          </p>
           </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -493,8 +493,8 @@ export default function I20NLineRedesign() {
               Hyundai i20 N Line Car Safety: Always play safe.
             </h3>
             <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-              Packed with Hyundai's most advanced safety systems, the is built to keep you in total comfort and peace of mind.
-            </p>
+            Packed with Hyundai's most advanced safety systems, the is built to keep you in total comfort and peace of mind.
+          </p>
           </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -511,8 +511,8 @@ export default function I20NLineRedesign() {
               Hyundai i20 N Line Car Convenience: Just press play.
             </h3>
             <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-              Connectivity comes easy in the Equipped with cutting edge technology like home-to-car (H2C) with Alexa, fully automated temperature control, advanced infotainment with multilingual user interface, you've got the world at your fingertips.
-            </p>
+            Connectivity comes easy in the Equipped with cutting edge technology like home-to-car (H2C) with Alexa, fully automated temperature control, advanced infotainment with multilingual user interface, you've got the world at your fingertips.
+          </p>
           </div>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">

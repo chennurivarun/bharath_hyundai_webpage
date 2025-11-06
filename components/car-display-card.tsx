@@ -122,15 +122,15 @@ export function CarDisplayCard({ model, variant = "default" }: CarDisplayCardPro
   return (
     <Card className={`group relative overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl ${
       isFeatured 
-        ? "bg-gradient-to-br from-white to-gray-50 border-gray-200 shadow-lg" 
-        : "bg-white border-gray-200 shadow-md hover:shadow-xl"
+        ? "bg-gradient-to-br from-gray-900/95 via-black/95 to-gray-900/95 border-white/20 shadow-lg backdrop-blur-sm" 
+        : "bg-gradient-to-br from-gray-900/90 via-black/90 to-gray-900/90 border-white/10 shadow-md hover:shadow-xl backdrop-blur-sm"
     }`}>
       {/* Car Image Section */}
-      <div className="relative h-64 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+      <div className="relative h-64 bg-gradient-to-br from-white/5 to-white/10 overflow-hidden">
         {/* Loading State */}
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-16 h-16 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin" />
+            <div className="w-16 h-16 border-4 border-white/20 border-t-red-600 rounded-full animate-spin" />
           </div>
         )}
         
@@ -145,13 +145,13 @@ export function CarDisplayCard({ model, variant = "default" }: CarDisplayCardPro
         />
         
         {/* Navigation Arrow (like in reference) */}
-        <button className="absolute top-4 right-4 w-10 h-10 bg-gray-600 hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors">
+        <button className="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-red-600/80 border border-white/20 rounded-full flex items-center justify-center transition-all backdrop-blur-sm">
           <ChevronRight className="h-5 w-5 text-white" />
         </button>
 
         {/* Featured Badge */}
         {isFeatured && (
-          <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+          <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg shadow-red-600/30">
             Featured
           </div>
         )}
@@ -162,47 +162,47 @@ export function CarDisplayCard({ model, variant = "default" }: CarDisplayCardPro
         {/* Model Name */}
         <div className="flex items-start justify-between mb-4">
           <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-1">{model.name}</h3>
+            <h3 className="text-xl font-bold text-white mb-1">{model.name}</h3>
             {model.priceBand && (
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">Starting At</span>
-                <span className="text-lg font-semibold text-gray-900">{model.priceBand}</span>
+                <span className="text-sm text-white/70">Starting At</span>
+                <span className="text-lg font-semibold text-white">{model.priceBand}</span>
               </div>
             )}
-            <p className="text-xs text-gray-500 mt-1">Ex-Showroom Price</p>
+            <p className="text-xs text-white/50 mt-1">Ex-Showroom Price</p>
           </div>
           
           {/* Rating */}
           <div className="text-right">
             <div className="flex items-center gap-1 mb-1">
               <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-              <span className="text-sm font-medium text-gray-700">{details.rating}</span>
+              <span className="text-sm font-medium text-white/90">{details.rating}</span>
             </div>
-            <p className="text-xs text-gray-500">{details.reviews} reviews</p>
+            <p className="text-xs text-white/50">{details.reviews} reviews</p>
           </div>
         </div>
 
         {/* Specifications */}
         <div className="grid grid-cols-2 gap-4 mb-6">
           <div className="flex items-center gap-2">
-            <Users className="h-4 w-4 text-blue-600" />
-            <span className="text-sm text-gray-700">{details.seating}</span>
+            <Users className="h-4 w-4 text-red-500" />
+            <span className="text-sm text-white/80">{details.seating}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Fuel className="h-4 w-4 text-green-600" />
-            <span className="text-sm text-gray-700">{details.engine}</span>
+            <Fuel className="h-4 w-4 text-red-500" />
+            <span className="text-sm text-white/80">{details.engine}</span>
           </div>
         </div>
 
         {/* Features */}
         {details.features.length > 0 && (
           <div className="mb-6">
-            <p className="text-sm text-gray-600 mb-2">Available Variants:</p>
+            <p className="text-sm text-white/70 mb-2">Available Variants:</p>
             <div className="flex flex-wrap gap-2">
               {details.features.map((feature, index) => (
                 <span
                   key={index}
-                  className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md"
+                  className="px-2 py-1 bg-white/5 border border-white/10 text-white/90 text-xs rounded-md"
                 >
                   {feature}
                 </span>
@@ -215,14 +215,14 @@ export function CarDisplayCard({ model, variant = "default" }: CarDisplayCardPro
         <div className="flex gap-3">
           <Button 
             asChild
-            className={`flex-1 ${isFeatured ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-900 hover:bg-gray-800"}`}
+            className="flex-1 bg-red-600 hover:bg-red-500 text-white shadow-lg shadow-red-600/30"
           >
             <a href="/test-drive">BOOK NOW</a>
           </Button>
           <Button 
             asChild
             variant="outline" 
-            className="flex-1 border-gray-300 text-gray-700 hover:bg-gray-50"
+            className="flex-1 border-white/20 text-white hover:bg-white/10"
           >
             <a href={
               model.id === "alcazar" ? "/alcazar" :
@@ -236,19 +236,19 @@ export function CarDisplayCard({ model, variant = "default" }: CarDisplayCardPro
         </div>
 
                   {/* Quick Actions */}
-                  <div className="mt-4 pt-4 border-t border-gray-200">
+                  <div className="mt-4 pt-4 border-t border-white/10">
                     <div className="flex items-center justify-between text-sm">
                       <button 
                         onClick={() => setShowDetailModal(true)}
-                        className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+                        className="text-red-400 hover:text-red-300 font-medium flex items-center gap-1 transition-colors"
                       >
                         <Eye className="h-4 w-4" />
                         View Details
                       </button>
-                      <button className="text-gray-600 hover:text-gray-700 font-medium">
+                      <button className="text-white/70 hover:text-white font-medium transition-colors">
                         Compare
                       </button>
-                      <button className="text-gray-600 hover:text-gray-700 font-medium">
+                      <button className="text-white/70 hover:text-white font-medium transition-colors">
                         Brochure
                       </button>
                     </div>

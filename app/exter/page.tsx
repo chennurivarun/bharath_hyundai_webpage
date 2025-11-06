@@ -307,6 +307,9 @@ export default function ExterFullImageSync() {
           {/* Top sticky nav */}
           <div className="fixed top-0 left-0 right-0 z-40 border-b border-white/20 bg-gradient-to-b from-black/30 via-black/20 to-black/30 backdrop-blur-2xl shadow-xl shadow-black/30 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
             <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
+            <a href="/exter-accessories" className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-red-600/20 text-white/80 hover:text-white transition-colors text-sm font-medium whitespace-nowrap">
+              Accessories
+            </a>
               {tabs.map((t) => (
                 <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : 'hover:bg-gray-50 dark:hover:bg-white/10')}>
                   {t.icon}
@@ -609,6 +612,22 @@ export default function ExterFullImageSync() {
           `}</style>
         </div>
         
+
+        {/* Accessories CTA */}
+        <section className="py-12 md:py-20 bg-gradient-to-r from-red-600/10 via-black to-red-600/10">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h3 className="text-2xl md:text-3xl font-extrabold mb-4">Explore Exter Accessories</h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              Enhance your Exter SUV's adventurous spirit with genuine accessories that combine style, safety, and convenience.
+            </p>
+            <a 
+              href="/exter-accessories" 
+              className="inline-block px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-white/10 hover:bg-red-600/30 transition-colors font-semibold"
+            >
+              View All Accessories
+            </a>
+          </div>
+        </section>
 
         {/* Quick Actions */}
         <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">

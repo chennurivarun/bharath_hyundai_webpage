@@ -1,11 +1,30 @@
+import type { Metadata } from "next"
 import { SiteNavigation } from "@/components/site-navigation"
 import { ModelsShowcase } from "@/components/models-showcase"
+
+export const metadata: Metadata = {
+  title: "Hyundai Models | Explore All Cars | Bharath Hyundai",
+  description: "Explore the complete range of Hyundai cars including hatchbacks, sedans, SUVs, and electric vehicles. Compare features, prices, and book a test drive at Bharath Hyundai.",
+  keywords: ["Hyundai models", "Hyundai cars", "Hyundai hatchback", "Hyundai SUV", "Hyundai sedan", "Hyundai electric", "car models", "car prices"],
+  openGraph: {
+    title: "Hyundai Models | Bharath Hyundai",
+    description: "Explore the complete range of Hyundai cars. Compare models and book a test drive.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hyundai Models | Bharath Hyundai",
+    description: "Explore the complete range of Hyundai cars.",
+  },
+}
 
 export default function ModelsOverviewPage() {
   return (
     <div className="min-h-screen bg-white">
       <SiteNavigation />
-      <main className="pt-[120px] container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      {/* Spacer to prevent content from going under fixed navigation */}
+      <div className="h-[140px]"></div>
+      <main className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
         <ModelsShowcase />
       </main>
       <footer className="bg-gray-900 text-white py-8">

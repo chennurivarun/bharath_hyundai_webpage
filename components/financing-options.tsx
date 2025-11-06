@@ -64,15 +64,15 @@ export function FinancingOptions({ modelName, priceRange }: FinancingOptionsProp
   const selectedFinancing = financingOptions.find(option => option.id === selectedOption)
 
   return (
-    <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
+    <Card className="bg-gradient-to-br from-gray-900/95 via-black/95 to-gray-900/95 border-white/10 backdrop-blur-sm">
       <CardContent className="p-6">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-blue-100 rounded-lg">
-            <Calculator className="h-6 w-6 text-blue-600" />
+          <div className="p-2 bg-red-600/20 rounded-lg border border-red-500/30">
+            <Calculator className="h-6 w-6 text-red-500" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-gray-900">Financing Options</h3>
-            <p className="text-gray-600">Flexible EMI plans for {modelName}</p>
+            <h3 className="text-xl font-bold text-white">Financing Options</h3>
+            <p className="text-white/80">Flexible EMI plans for {modelName}</p>
           </div>
         </div>
 
@@ -83,27 +83,27 @@ export function FinancingOptions({ modelName, priceRange }: FinancingOptionsProp
               onClick={() => setSelectedOption(option.id)}
               className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all ${
                 selectedOption === option.id
-                  ? "border-blue-500 bg-blue-50"
-                  : "border-gray-200 bg-white hover:border-blue-300"
+                  ? "border-red-500 bg-red-600/20 text-white"
+                  : "border-white/20 bg-white/5 hover:border-red-400/50 text-white/90"
               }`}
             >
               {option.badge && (
-                <Badge className="absolute -top-2 left-4 bg-red-500 text-white">
+                <Badge className="absolute -top-2 left-4 bg-red-600 text-white border-red-500/30">
                   {option.badge}
                 </Badge>
               )}
               
               <div className="text-center">
-                <h4 className="font-semibold text-gray-900 mb-2">{option.title}</h4>
+                <h4 className="font-semibold text-white mb-2">{option.title}</h4>
                 <div className="flex items-center justify-center gap-1 mb-2">
-                  <Percent className="h-4 w-4 text-green-600" />
-                  <span className="text-2xl font-bold text-green-600">{option.interestRate}</span>
+                  <Percent className="h-4 w-4 text-red-400" />
+                  <span className="text-2xl font-bold text-red-400">{option.interestRate}</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">{option.tenure}</p>
+                <p className="text-sm text-white/70 mb-3">{option.tenure}</p>
                 
                 <div className="space-y-1">
-                  <p className="text-lg font-bold text-gray-900">{option.emi}</p>
-                  <p className="text-sm text-gray-600">Down Payment: {option.downPayment}</p>
+                  <p className="text-lg font-bold text-white">{option.emi}</p>
+                  <p className="text-sm text-white/70">Down Payment: {option.downPayment}</p>
                 </div>
               </div>
             </div>
@@ -112,43 +112,43 @@ export function FinancingOptions({ modelName, priceRange }: FinancingOptionsProp
 
         {/* Selected Option Details */}
         {selectedFinancing && (
-          <div className="bg-white rounded-xl p-6 border border-gray-200">
+          <div className="bg-white/5 rounded-xl p-6 border border-white/10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-900 mb-4">Plan Benefits</h4>
+                <h4 className="font-semibold text-white mb-4">Plan Benefits</h4>
                 <ul className="space-y-2">
                   {selectedFinancing.features.map((feature, index) => (
                     <li key={index} className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
+                      <CheckCircle className="h-4 w-4 text-red-400 flex-shrink-0" />
+                      <span className="text-white/80">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
               
               <div>
-                <h4 className="font-semibold text-gray-900 mb-4">EMI Breakdown</h4>
+                <h4 className="font-semibold text-white mb-4">EMI Breakdown</h4>
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Principal Amount:</span>
-                    <span className="font-semibold">₹8,50,000</span>
+                    <span className="text-white/70">Principal Amount:</span>
+                    <span className="font-semibold text-white">₹8,50,000</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Interest Rate:</span>
-                    <span className="font-semibold">{selectedFinancing.interestRate}</span>
+                    <span className="text-white/70">Interest Rate:</span>
+                    <span className="font-semibold text-white">{selectedFinancing.interestRate}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Tenure:</span>
-                    <span className="font-semibold">48 months</span>
+                    <span className="text-white/70">Tenure:</span>
+                    <span className="font-semibold text-white">48 months</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Processing Fee:</span>
-                    <span className="font-semibold">₹2,999</span>
+                    <span className="text-white/70">Processing Fee:</span>
+                    <span className="font-semibold text-white">₹2,999</span>
                   </div>
-                  <div className="border-t border-gray-200 pt-3">
+                  <div className="border-t border-white/10 pt-3">
                     <div className="flex justify-between">
-                      <span className="font-semibold text-gray-900">Monthly EMI:</span>
-                      <span className="font-bold text-blue-600 text-lg">{selectedFinancing.emi}</span>
+                      <span className="font-semibold text-white">Monthly EMI:</span>
+                      <span className="font-bold text-red-400 text-lg">{selectedFinancing.emi}</span>
                     </div>
                   </div>
                 </div>
@@ -159,17 +159,17 @@ export function FinancingOptions({ modelName, priceRange }: FinancingOptionsProp
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 mt-6">
-          <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+          <Button className="flex-1 bg-red-600 hover:bg-red-500 text-white">
             <Calculator className="h-4 w-4 mr-2" />
             Calculate EMI
           </Button>
-          <Button variant="outline" className="flex-1">
+          <Button variant="outline" className="flex-1 border-white/20 text-white hover:bg-white/10">
             <TrendingUp className="h-4 w-4 mr-2" />
             Apply for Loan
           </Button>
         </div>
 
-        <p className="text-xs text-gray-500 mt-4 text-center">
+        <p className="text-xs text-white/50 mt-4 text-center">
           *EMI calculations are indicative. Final terms subject to bank approval and credit evaluation.
         </p>
       </CardContent>

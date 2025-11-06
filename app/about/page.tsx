@@ -1,8 +1,25 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Users, Award, MapPin, Phone, Mail, Clock, Star, TrendingUp } from "lucide-react"
 import { SiteNavigation } from "@/components/site-navigation"
+
+export const metadata: Metadata = {
+  title: "About Us | Bharath Hyundai - Authorized Dealer Since 2013",
+  description: "Learn about Bharath Hyundai - Authorized Hyundai dealer in Hyderabad & Khammam since 2013. 15,000+ happy customers, multiple branches, genuine parts & service.",
+  keywords: ["Bharath Hyundai", "Hyundai dealer", "about Hyundai dealer", "Hyundai dealer history", "authorized dealer Telangana"],
+  openGraph: {
+    title: "About Us | Bharath Hyundai",
+    description: "Authorized Hyundai dealer in Hyderabad & Khammam since 2013. 15,000+ happy customers.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "About Us | Bharath Hyundai",
+    description: "Authorized Hyundai dealer since 2013.",
+  },
+}
 
 const ACHIEVEMENTS = [
   {

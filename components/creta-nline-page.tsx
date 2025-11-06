@@ -600,6 +600,9 @@ export default function CretaNLinePage() {
         {/* Top fixed nav */}
         <div className="fixed top-0 left-0 right-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
           <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
+            <a href="/creta-nline-accessories" className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-red-600/20 text-white/80 hover:text-white transition-colors text-sm font-medium whitespace-nowrap">
+              Accessories
+            </a>
             {tabs.map((t) => (
               <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : 'hover:bg-gray-50 dark:hover:bg-white/10')}>
                 {t.icon}
@@ -935,6 +938,22 @@ export default function CretaNLinePage() {
           variant. For the latest details, please refer to Hyundai India.
         </p>
       </footer>
+
+      {/* Accessories CTA */}
+      <section className="py-12 md:py-20 bg-gradient-to-r from-red-600/10 via-black to-red-600/10">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h3 className="text-2xl md:text-3xl font-extrabold mb-4">Explore Creta N Line Accessories</h3>
+          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+            Elevate your Creta N Line's sporty appeal with genuine accessories designed to enhance performance, comfort, and style.
+          </p>
+          <a 
+            href="/creta-nline-accessories" 
+            className="inline-block px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-white/10 hover:bg-red-600/30 transition-colors font-semibold"
+          >
+            View All Accessories
+          </a>
+        </div>
+      </section>
 
       {/* Quick Actions */}
       <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">

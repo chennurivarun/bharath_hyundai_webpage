@@ -39,14 +39,14 @@ export default function HeroVideoLocal({ videoSrc = "/hero-video.mp4" }: Props) 
     }
   }, [])
 
-  // Control video to skip last 1 second
+  // Control video to skip last 4 seconds
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
     const handleTimeUpdate = () => {
-      if (video.duration && video.currentTime >= video.duration - 1) {
-        // Skip last 1 second by looping back to start
+      if (video.duration && video.currentTime >= video.duration - 4) {
+        // Skip last 4 seconds by looping back to start
         video.currentTime = 0
       }
     }

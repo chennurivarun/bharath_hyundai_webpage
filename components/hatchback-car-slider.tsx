@@ -11,17 +11,25 @@ interface HatchbackCarSliderProps {
 
 export function HatchbackCarSlider({ models }: HatchbackCarSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false) // Start with auto-play off to show first card
 
-  // Auto-slide functionality
+  // Auto-slide functionality - start after delay to ensure first card is visible
   useEffect(() => {
+    // Start auto-play after 3 seconds to ensure first card is fully visible
+    const startDelay = setTimeout(() => {
+      setIsAutoPlaying(true)
+    }, 3000)
+
     if (!isAutoPlaying) return
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % models.length)
-    }, 2000)
+    }, 4000) // Increased to 4 seconds for better visibility
 
-    return () => clearInterval(interval)
+    return () => {
+      clearTimeout(startDelay)
+      clearInterval(interval)
+    }
   }, [isAutoPlaying, models.length])
 
   const goToPrevious = () => {
@@ -35,38 +43,38 @@ export function HatchbackCarSlider({ models }: HatchbackCarSliderProps) {
   }
 
   return (
-    <div className="relative w-full bg-white">
+    <div className="relative w-full">
       {/* Navigation Arrows */}
       <button
         onClick={goToPrevious}
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors"
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-red-600/80 border border-white/20 flex items-center justify-center transition-all backdrop-blur-sm"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="h-6 w-6 text-gray-600" />
+        <ChevronLeft className="h-6 w-6 text-white" />
       </button>
 
       <button
         onClick={goToNext}
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors"
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-red-600/80 border border-white/20 flex items-center justify-center transition-all backdrop-blur-sm"
         aria-label="Next slide"
       >
-        <ChevronRight className="h-6 w-6 text-gray-600" />
+        <ChevronRight className="h-6 w-6 text-white" />
       </button>
 
       {/* Main Slider Container */}
-      <div className="relative w-full py-12 overflow-hidden">
-        <div className="flex items-center justify-center">
+      <div className="relative w-full py-6 overflow-hidden">
+        <div className="flex items-center justify-start pl-4">
           <div 
             className="flex gap-12 transition-transform duration-700 ease-in-out"
             style={{ 
-              transform: `translateX(-${currentIndex * (500 + 48)}px)` // 500px width + 48px gap
+              transform: `translateX(-${currentIndex * (500 + 48)}px)` // Start from left, no gap
             }}
           >
             {models.map((model, index) => (
               <div key={`${model.id}-${index}`} className="flex-shrink-0 w-[500px]">
-                <div className="bg-white shadow-2xl rounded-2xl overflow-hidden">
+                <div className="bg-gradient-to-br from-gray-900/95 via-black/95 to-gray-900/95 border border-white/10 shadow-2xl rounded-2xl overflow-hidden backdrop-blur-sm">
                   {/* Car Image */}
-                  <div className="relative h-[400px] w-[500px] bg-white flex items-center justify-center">
+                  <div className="relative h-[280px] w-[500px] bg-white/5 flex items-center justify-center">
                     <img
                       src={model.imageSrc}
                       alt={model.name}
@@ -76,37 +84,37 @@ export function HatchbackCarSlider({ models }: HatchbackCarSliderProps) {
                   </div>
 
                   {/* Information Panel */}
-                  <div className="p-8 space-y-6">
+                  <div className="p-6">
                     {/* Model Name */}
-                    <h3 className="text-3xl font-bold text-black">{model.name}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-3">{model.name}</h3>
 
                     {/* Price */}
-                    <div className="space-y-2">
-                      <p className="text-base text-gray-600">Starting At</p>
-                      <p className="text-3xl font-bold text-black">{model.priceBand}</p>
+                    <div className="mb-3">
+                      <p className="text-sm text-white/70 font-medium mb-0 leading-none">Starting At</p>
+                      <p className="text-2xl font-bold text-white leading-tight -mt-1">{model.priceBand || "Price on request"}</p>
                     </div>
 
                     {/* Specifications */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-4">
-                        <Users className="h-6 w-6 text-gray-600" />
-                        <span className="text-lg text-gray-800 font-medium">5 Seats</span>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center gap-3">
+                        <Users className="h-5 w-5 text-red-500" />
+                        <span className="text-base text-white/90 font-medium">5 Seats</span>
                       </div>
-                      <div className="flex items-center gap-4">
-                        <Fuel className="h-6 w-6 text-gray-600" />
-                        <span className="text-lg text-gray-800 font-medium">
+                      <div className="flex items-center gap-3">
+                        <Fuel className="h-5 w-5 text-red-500" />
+                        <span className="text-base text-white/90 font-medium">
                           {model.id === 'i20' ? 'Petrol' : model.id === 'i20-nline' ? 'petrol 7-speed DCT /petrol MT' : 'Petrol'}
                         </span>
                       </div>
-                      <p className="text-base text-gray-600">Ex- Showroom Price</p>
+                      <p className="text-sm text-white/70">Ex- Showroom Price</p>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="space-y-4 pt-6">
-                      <Button className="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold py-4 text-lg">
+                    <div className="space-y-2.5">
+                      <Button className="w-full bg-red-600 hover:bg-red-500 text-white font-semibold py-3 text-base shadow-lg shadow-red-600/30">
                         BOOK NOW
                       </Button>
-                      <Button className="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold py-4 text-lg">
+                      <Button className="w-full border border-white/20 text-white hover:bg-white/10 font-semibold py-3 text-base">
                         KNOW MORE
                       </Button>
                     </div>
@@ -128,7 +136,7 @@ export function HatchbackCarSlider({ models }: HatchbackCarSliderProps) {
               setIsAutoPlaying(false)
             }}
             className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentIndex ? "bg-blue-900" : "bg-gray-300"
+              index === currentIndex ? "bg-red-600" : "bg-white/30"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

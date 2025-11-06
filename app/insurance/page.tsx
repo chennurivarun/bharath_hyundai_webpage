@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -6,6 +7,22 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Shield, Phone, FileText, Clock, CheckCircle, Star, Users } from "lucide-react"
 import { SiteNavigation } from "@/components/site-navigation"
+
+export const metadata: Metadata = {
+  title: "Car Insurance | Comprehensive & Third Party Insurance | Bharath Hyundai",
+  description: "Get car insurance for your Hyundai. Compare comprehensive, third party, and zero depreciation insurance plans. Quick quotes from top insurance companies.",
+  keywords: ["car insurance", "Hyundai insurance", "comprehensive insurance", "third party insurance", "zero depreciation", "car insurance quote", "vehicle insurance"],
+  openGraph: {
+    title: "Car Insurance | Bharath Hyundai",
+    description: "Get car insurance for your Hyundai. Compare plans and get quick quotes.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Car Insurance | Bharath Hyundai",
+    description: "Get car insurance for your Hyundai.",
+  },
+}
 
 const INSURANCE_TYPES = [
   {

@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import { MODELS, type Model } from "@/lib/models"
@@ -11,6 +12,39 @@ import I20NLineRedesign from "@/components/i20-nline-page"
 import VenueFullRedesign from "@/components/venue-page"
 import CretaRedesignedPage from "@/components/creta-page"
 import CretaNLinePage from "@/components/creta-nline-page"
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const { id } = params
+  const model = MODELS.find((m) => m.id === id)
+  
+  if (!model) {
+    return {
+      title: "Model Not Found | Bharath Hyundai",
+      description: "The requested Hyundai model could not be found.",
+    }
+  }
+
+  const segmentLabel = model.segment === "hatchback" ? "Hatchback" 
+    : model.segment === "sedan" ? "Sedan" 
+    : model.segment === "suv" ? "SUV" 
+    : "Electric"
+
+  return {
+    title: `${model.name} | ${segmentLabel} | Bharath Hyundai`,
+    description: `Explore the ${model.name} - ${segmentLabel}. ${model.priceBand ? `Starting at ${model.priceBand}. ` : ""}Book a test drive, view specifications, and get the best price at Bharath Hyundai.`,
+    keywords: [`${model.name}`, `Hyundai ${model.name}`, `${model.name} price`, `${model.name} specifications`, `${segmentLabel}`, "Hyundai car"],
+    openGraph: {
+      title: `${model.name} | Bharath Hyundai`,
+      description: `Explore the ${model.name} - ${segmentLabel}. ${model.priceBand ? `Starting at ${model.priceBand}.` : ""}`,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${model.name} | Bharath Hyundai`,
+      description: `Explore the ${model.name} - ${segmentLabel}.`,
+    },
+  }
+}
 
 export default function ModelDetailPage({ params }: { params: { id: string } }) {
   const { id } = params

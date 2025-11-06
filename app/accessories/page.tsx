@@ -9,6 +9,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Search, ShoppingCart, Star, Truck, Shield, RotateCcw } from "lucide-react"
 import { SiteNavigation } from "@/components/site-navigation"
 
+// Note: Metadata export doesn't work in client components
+// This metadata should be added to a parent layout or server component wrapper
+
 const ACCESSORIES = [
   // Universal Accessories
   {
@@ -752,6 +755,14 @@ const ACCESSORIES = [
 const CATEGORIES = ["All", "Interior", "Exterior", "Electronics", "Protection", "Performance"]
 const CAR_MODELS = ["All", "Universal", "i20", "Creta", "Venue", "Verna", "Alcazar", "Tucson", "Grand i10 Nios", "Aura", "Exter", "Creta N Line", "IONIQ 5", "Creta EV"]
 
+// Quick links to model-specific accessories
+const CRETA_EV_ACCESSORIES_LINK = "/creta-ev-accessories"
+const ALCAZAR_ACCESSORIES_LINK = "/alcazar-accessories"
+const CRETA_NLINE_ACCESSORIES_LINK = "/creta-nline-accessories"
+const CRETA_ACCESSORIES_LINK = "/creta-accessories"
+const EXTER_ACCESSORIES_LINK = "/exter-accessories"
+const I20_ACCESSORIES_LINK = "/i20-accessories"
+
 export default function AccessoriesPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All")
@@ -777,9 +788,47 @@ export default function AccessoriesPage() {
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Genuine Accessories
             </h1>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto">
+            <p className="text-xl text-white/80 max-w-3xl mx-auto mb-6">
               Enhance your Hyundai with genuine accessories designed specifically for your vehicle.
             </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a 
+                href={CRETA_EV_ACCESSORIES_LINK}
+                className="px-6 py-3 rounded-lg bg-emerald-600/20 text-emerald-200 ring-1 ring-emerald-500/30 hover:bg-emerald-600/30 transition-colors font-semibold"
+              >
+                🚗 Creta EV Accessories
+              </a>
+              <a 
+                href={CRETA_ACCESSORIES_LINK}
+                className="px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-colors font-semibold"
+              >
+                🚙 Creta Accessories
+              </a>
+              <a 
+                href={ALCAZAR_ACCESSORIES_LINK}
+                className="px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-colors font-semibold"
+              >
+                🚙 Alcazar Accessories
+              </a>
+              <a 
+                href={CRETA_NLINE_ACCESSORIES_LINK}
+                className="px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-colors font-semibold"
+              >
+                🏎️ Creta N Line Accessories
+              </a>
+              <a 
+                href={EXTER_ACCESSORIES_LINK}
+                className="px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-colors font-semibold"
+              >
+                🚗 Exter Accessories
+              </a>
+              <a 
+                href={I20_ACCESSORIES_LINK}
+                className="px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-colors font-semibold"
+              >
+                🚙 i20 Accessories
+              </a>
+            </div>
           </div>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -6,6 +7,22 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Calendar, Clock, MapPin, Phone, Wrench, CheckCircle, Star } from "lucide-react"
 import { SiteNavigation } from "@/components/site-navigation"
+
+export const metadata: Metadata = {
+  title: "Car Service & Maintenance | Book Service Online | Bharath Hyundai",
+  description: "Book Hyundai car service online. Periodic maintenance, body & paint, quick check, and more. Professional service at multiple branches in Hyderabad & Khammam.",
+  keywords: ["Hyundai service", "car service", "car maintenance", "Hyundai service center", "book service online", "car repair", "periodic maintenance"],
+  openGraph: {
+    title: "Car Service & Maintenance | Bharath Hyundai",
+    description: "Book Hyundai car service online. Professional maintenance and repair services.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Car Service & Maintenance | Bharath Hyundai",
+    description: "Book Hyundai car service online.",
+  },
+}
 
 const SERVICES = [
   {

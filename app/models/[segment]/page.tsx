@@ -5,6 +5,7 @@ import type { Segment } from "@/lib/models"
 import { MODELS, segmentLabel } from "@/lib/models"
 import { CarDisplayCard } from "@/components/car-display-card"
 import { HatchbackCarSlider } from "@/components/hatchback-car-slider"
+import { CarSlider } from "@/components/car-slider"
 import { ModelFilters } from "@/components/model-filters"
 import { FinancingOptions } from "@/components/financing-options"
 import { ModelRecommendation } from "@/components/model-recommendation"
@@ -81,48 +82,52 @@ export default function SegmentPage({ params }: { params: { segment: Segment } }
   }, [params])
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
       <SiteNavigation />
       
-      <main className="pt-[120px] container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <main className="pt-[140px] container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-8">
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
-            <a href="/" className="hover:text-gray-900">Home</a>
-            <span>/</span>
-            <a href="/models" className="hover:text-gray-900">Models</a>
-            <span>/</span>
-            <span className="text-gray-900 font-medium">{segmentLabel(segment)}</span>
+          <div className="flex items-center space-x-2 text-sm text-white/70">
+            <a href="/" className="hover:text-white transition-colors">Home</a>
+            <span className="text-white/50">/</span>
+            <a href="/models" className="hover:text-white transition-colors">Models</a>
+            <span className="text-white/50">/</span>
+            <span className="text-white font-medium">{segmentLabel(segment)}</span>
           </div>
         </nav>
 
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             {segmentLabel(segment)} Models
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl">
+          <p className="text-lg text-white/80 max-w-2xl">
             Explore our premium {segmentLabel(segment).toLowerCase()} collection designed for modern lifestyle and performance.
           </p>
         </div>
 
-        {/* Car Slider - Only for Hatchback */}
-        {segment === "hatchback" && (
+        {/* Car Slider - For all segments */}
+        {filteredModels.length > 0 && (
           <div className="mb-16">
-            <HatchbackCarSlider models={filteredModels} />
+            {segment === "hatchback" ? (
+              <HatchbackCarSlider models={filteredModels} />
+            ) : (
+              <CarSlider models={filteredModels} />
+            )}
           </div>
         )}
 
         {/* Filters - Only show for non-hatchback segments */}
-        {segment !== "hatchback" && (
+        {segment !== "hatchback" && filteredModels.length > 0 && (
           <ModelFilters 
             onFiltersChange={setFilters}
             totalModels={filteredModels.length}
           />
         )}
 
-        {/* Models Grid - Only show for non-hatchback segments */}
-        {segment !== "hatchback" && (
+        {/* Models Grid - Hidden when slider is shown */}
+        {false && segment !== "hatchback" && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredModels.map((model, index) => (
               <CarDisplayCard 
@@ -137,17 +142,21 @@ export default function SegmentPage({ params }: { params: { segment: Segment } }
         {/* No Results */}
         {filteredModels.length === 0 && (
           <div className="text-center py-12">
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Car className="h-12 w-12 text-gray-400" />
+            <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10">
+              <Car className="h-12 w-12 text-white/40" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No models found</h3>
-            <p className="text-gray-600 mb-4">Try adjusting your filters to see more results</p>
-            <Button onClick={() => setFilters({
-              priceRange: "all",
-              sortBy: "name", 
-              transmission: "all",
-              fuelType: "all"
-            })} variant="outline">
+            <h3 className="text-xl font-semibold text-white mb-2">No models found</h3>
+            <p className="text-white/70 mb-4">Try adjusting your filters to see more results</p>
+            <Button 
+              onClick={() => setFilters({
+                priceRange: "all",
+                sortBy: "name", 
+                transmission: "all",
+                fuelType: "all"
+              })} 
+              variant="outline"
+              className="border-white/20 text-white hover:bg-white/10"
+            >
               Clear All Filters
             </Button>
           </div>
@@ -168,23 +177,23 @@ export default function SegmentPage({ params }: { params: { segment: Segment } }
 
         {/* CTA Section */}
         <div className="mt-16 text-center">
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <div className="bg-gradient-to-br from-gray-900/95 via-black/95 to-gray-900/95 rounded-2xl shadow-2xl p-8 border border-white/10 backdrop-blur-sm">
+            <h2 className="text-2xl font-bold text-white mb-4">
               Can't Find What You're Looking For?
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-white/80 mb-6">
               Our expert team can help you find the perfect {segmentLabel(segment).toLowerCase()} model for your needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/test-drive"
-                className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center justify-center px-6 py-3 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg transition-all shadow-lg shadow-red-600/30 hover:shadow-red-600/50"
               >
                 Schedule Test Drive
               </a>
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
+                className="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-all"
               >
                 Contact Expert
               </a>
