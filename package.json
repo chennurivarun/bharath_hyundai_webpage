@@ -7,8 +7,6 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "clean": "node scripts/clear-and-rebuild.js",
-    "rebuild": "npm run clean",
     "download-images": "node scripts/download-and-update-images.js",
     "download-images-all": "node scripts/download-images-comprehensive.js",
     "organize-images": "node scripts/organize-images.js",

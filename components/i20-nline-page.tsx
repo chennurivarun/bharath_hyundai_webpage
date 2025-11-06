@@ -1,4 +1,4 @@
-g"use client";
+"use client";
 
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
