@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Phone, Headset, Search, User } from "lucide-react"
+import { Phone, Headset, Search } from "lucide-react"
 import { MobileMenu } from "./mobile-menu"
 import { SearchDialog } from "./search-dialog"
 
@@ -43,27 +43,6 @@ export function AnnouncementBar() {
             </a>
           </div>
 
-          {/* Quick Action Links */}
-          <nav aria-label="Quick links" className="hidden lg:block">
-            <ul className="flex items-center gap-3">
-              <li>
-                <a 
-                  href="/test-drive" 
-                  className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-red-600 text-white/80 hover:text-white transition-all hover:scale-105 font-medium"
-                >
-                  Book Test Drive
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/service" 
-                  className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-red-600 text-white/80 hover:text-white transition-all hover:scale-105 font-medium"
-                >
-                  Book Service
-                </a>
-              </li>
-            </ul>
-          </nav>
         </div>
       </div>
     </div>
@@ -116,15 +95,6 @@ export function SiteHeader() {
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-2">
-              {/* CTA Button */}
-              <a
-                href="/contact"
-                className="hidden sm:flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-sm font-medium rounded-full transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-600/30"
-              >
-                <Phone className="h-4 w-4" />
-                <span>Contact</span>
-              </a>
-
               {/* Search */}
               <button
                 onClick={() => setSearchOpen(true)}
@@ -133,15 +103,6 @@ export function SiteHeader() {
               >
                 <Search className="h-5 w-5 text-white" />
               </button>
-
-              {/* Account */}
-              <a
-                href="#"
-                aria-label="Account"
-                className="p-2.5 rounded-full hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 ring-white/40 transition-all hover:scale-110"
-              >
-                <User className="h-5 w-5 text-white" />
-              </a>
 
               {/* Mobile Menu Button */}
               <button

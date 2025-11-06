@@ -1,20 +1,23 @@
 "use client"
 
-import { useState } from "react"
-import { X, ChevronRight, Phone, Mail, MapPin } from "lucide-react"
+import { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
+import { X, ChevronRight, Phone, Mail, MapPin, Headset } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+const SALES_PHONE = "+91 7733888999"
+const SERVICE_PHONE = "+91 7997806806"
+const EMAIL = "bharathyundaidm@gmail.com"
 
 const NAV_ITEMS = [
   { label: "Models", href: "/models", icon: "🚗" },
   { label: "Compare Models", href: "/compare", icon: "⚖️" },
   { label: "Service", href: "/service", icon: "🔧" },
-  { label: "Book Test Drive", href: "/test-drive", icon: "🏁" },
   { label: "Accessories", href: "/accessories", icon: "🛠️" },
   { label: "Insurance", href: "/insurance", icon: "🛡️" },
   { label: "Used Cars", href: "/used-cars", icon: "🚙" },
   { label: "About Us", href: "/about", icon: "ℹ️" },
   { label: "Locations", href: "/locations", icon: "📍" },
-  { label: "Contact", href: "/contact", icon: "📧" },
 ]
 
 interface MobileMenuProps {
@@ -23,22 +26,71 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  if (!isOpen) return null
+  const [mounted, setMounted] = useState(false)
 
-  return (
-    <>
+  useEffect(() => {
+    setMounted(true)
+    return () => setMounted(false)
+  }, [])
+
+  if (!isOpen || !mounted) return null
+
+  const sidebarContent = (
+    <div 
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 9999,
+        pointerEvents: 'none'
+      }}
+    >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          backdropFilter: 'blur(4px)',
+          pointerEvents: 'auto',
+          zIndex: 10000
+        }}
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* Menu Panel */}
-      <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-gradient-to-b from-gray-900 to-black border-l border-white/10 shadow-2xl animate-in slide-in-from-right duration-300">
-        <div className="flex flex-col h-full">
+      <div 
+        style={{ 
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          width: '100%',
+          maxWidth: '24rem',
+          height: '100dvh',
+          minHeight: '100dvh',
+          maxHeight: '100dvh',
+          margin: 0,
+          padding: 0,
+          backgroundColor: 'transparent',
+          backgroundImage: 'linear-gradient(to bottom, #000000, #111827, #000000)',
+          borderLeft: '1px solid rgba(255, 255, 255, 0.1)',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+          pointerEvents: 'auto',
+          zIndex: 10001,
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: '100%', overflow: 'hidden' }}>
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-white/10">
+          <div className="flex items-center justify-between p-6 border-b border-white/10 flex-shrink-0">
             <div className="flex items-center gap-3">
               <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center shadow-lg shadow-red-600/30">
                 <span className="text-white text-sm font-bold">H</span>
@@ -78,51 +130,87 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </ul>
 
             {/* Quick Contact */}
-            <div className="mt-8 p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
-              <p className="text-white font-semibold text-sm mb-3">Quick Contact</p>
-              <a
-                href="tel:+917733888999"
-                className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-              >
+            <div className="mt-8 p-4 rounded-xl bg-gradient-to-br from-red-600/10 via-black/50 to-red-600/10 border border-red-500/20 space-y-3">
+              <p className="text-white font-semibold text-sm mb-4 flex items-center gap-2">
                 <Phone className="h-4 w-4 text-red-500" />
-                <span className="text-sm">+91 7733888999</span>
+                Quick Contact
+              </p>
+              <a
+                href={`tel:${SALES_PHONE.replace(/\s/g, '')}`}
+                className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-red-600/20 border border-white/10 hover:border-red-500/30 transition-all group"
+              >
+                <Phone className="h-5 w-5 text-red-500 group-hover:scale-110 transition-transform" />
+                <div className="flex-1">
+                  <p className="text-white/60 text-xs">Sales</p>
+                  <p className="text-white font-medium text-sm">{SALES_PHONE}</p>
+                </div>
               </a>
               <a
-                href="mailto:bharathyundaidm@gmail.com"
-                className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+                href={`tel:${SERVICE_PHONE.replace(/\s/g, '')}`}
+                className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-red-600/20 border border-white/10 hover:border-red-500/30 transition-all group"
               >
-                <Mail className="h-4 w-4 text-red-500" />
-                <span className="text-sm">bharathyundaidm@gmail.com</span>
+                <Headset className="h-5 w-5 text-red-500 group-hover:scale-110 transition-transform" />
+                <div className="flex-1">
+                  <p className="text-white/60 text-xs">Service</p>
+                  <p className="text-white font-medium text-sm">{SERVICE_PHONE}</p>
+                </div>
+              </a>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-red-600/20 border border-white/10 hover:border-red-500/30 transition-all group"
+              >
+                <Mail className="h-5 w-5 text-red-500 group-hover:scale-110 transition-transform" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-white/60 text-xs">Email</p>
+                  <p className="text-white font-medium text-sm truncate">{EMAIL}</p>
+                </div>
               </a>
               <a
                 href="/locations"
-                className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+                className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-red-600/20 border border-white/10 hover:border-red-500/30 transition-all group"
               >
-                <MapPin className="h-4 w-4 text-red-500" />
-                <span className="text-sm">8 Branches</span>
+                <MapPin className="h-5 w-5 text-red-500 group-hover:scale-110 transition-transform" />
+                <div className="flex-1">
+                  <p className="text-white/60 text-xs">Locations</p>
+                  <p className="text-white font-medium text-sm">8 Branches</p>
+                </div>
               </a>
             </div>
           </nav>
 
           {/* Footer CTAs */}
-          <div className="p-6 border-t border-white/10 space-y-3">
+          <div className="p-6 border-t border-white/10 space-y-3 bg-gradient-to-t from-black/50 to-transparent">
             <Button
               asChild
-              className="w-full bg-red-600 hover:bg-red-500 text-white rounded-full"
+              className="w-full bg-red-600 hover:bg-red-500 text-white rounded-full font-semibold py-6 text-base shadow-lg shadow-red-600/30 hover:shadow-red-600/50 transition-all"
             >
-              <a href="/test-drive">Book Test Drive</a>
+              <a href="/test-drive" className="flex items-center justify-center gap-2">
+                <Phone className="h-5 w-5" />
+                Book Test Drive
+              </a>
+            </Button>
+            <Button
+              asChild
+              className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/30 rounded-full font-semibold py-6 text-base transition-all"
+            >
+              <a href="/service" className="flex items-center justify-center gap-2">
+                <Headset className="h-5 w-5" />
+                Book Service
+              </a>
             </Button>
             <Button
               asChild
               variant="outline"
-              className="w-full border-white/20 text-white hover:bg-white/10 rounded-full"
+              className="w-full border-white/20 text-white hover:bg-white/10 rounded-full font-medium py-5"
             >
               <a href="/contact">Get in Touch</a>
             </Button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
+
+  return createPortal(sidebarContent, document.body)
 }
 

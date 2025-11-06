@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Calendar, Clock, MapPin, Phone, Car, Users, Shield } from "lucide-react"
 import { SiteNavigation } from "@/components/site-navigation"
+import { MODELS, segmentLabel } from "@/lib/models"
 
 export const metadata: Metadata = {
   title: "Book Free Test Drive | Bharath Hyundai | Hyderabad & Khammam",
@@ -23,36 +24,14 @@ export const metadata: Metadata = {
   },
 }
 
-const TEST_DRIVE_MODELS = [
-  {
-    id: "i20",
-    name: "i20",
-    segment: "Hatchback",
-    price: "₹6.86–11.25L*",
-    image: "/images/hatchback2.jpg"
-  },
-  {
-    id: "verna",
-    name: "Verna",
-    segment: "Sedan",
-    price: "₹10.69–16.97L*",
-    image: "/images/sedan2.avif"
-  },
-  {
-    id: "creta",
-    name: "Creta",
-    segment: "SUV",
-    price: "₹10.72–20.09L*",
-    image: "/images/creata.avif"
-  },
-  {
-    id: "tucson",
-    name: "Tucson",
-    segment: "SUV",
-    price: "₹27.31–33.63L*",
-    image: "/images/tucson.avif"
-  }
-]
+// Map all models from MODELS array to test drive format
+const TEST_DRIVE_MODELS = MODELS.map(model => ({
+  id: model.id,
+  name: model.name,
+  segment: segmentLabel(model.segment),
+  price: model.priceBand || "Price on request",
+  image: model.imageSrc
+}))
 
 const BRANCHES = [
   { id: "gachibowli", name: "Gachibowli", address: "Gachibowli, Hyderabad, Telangana 500046", phone: "7997806806" },
@@ -89,7 +68,7 @@ export default function TestDrivePage() {
       <section className="py-16">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-white text-center mb-12">Available for Test Drive</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {TEST_DRIVE_MODELS.map((model) => (
               <Card key={model.id} className="bg-gray-800/50 border-gray-700 hover:border-red-500/50 transition-colors">
                 <CardHeader className="p-0">

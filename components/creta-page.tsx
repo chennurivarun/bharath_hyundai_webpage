@@ -375,14 +375,14 @@ export default function CretaPage() {
     load();
   }, []);
 
-  // Control video to skip last 3 seconds
+  // Control video to skip last 5 seconds
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleTimeUpdate = () => {
-      if (video.duration && video.currentTime >= video.duration - 3) {
-        // Skip last 3 seconds by looping back to start
+      if (video.duration && video.currentTime >= video.duration - 5) {
+        // Skip last 5 seconds by looping back to start
         video.currentTime = 0;
       }
     };

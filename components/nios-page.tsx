@@ -228,13 +228,13 @@ export default function NiosPage() {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
   }, []);
 
-  // Control video playback to restart 3 seconds before the end
+  // Control video playback to restart 5 seconds before the end
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleTimeUpdate = () => {
-      if (video.duration && video.currentTime >= video.duration - 3) {
+      if (video.duration && video.currentTime >= video.duration - 5) {
         video.currentTime = 0;
       }
     };

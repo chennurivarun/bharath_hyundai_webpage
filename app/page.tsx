@@ -1,7 +1,10 @@
-import type { Metadata } from "next"
+"use client"
+
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Headset, MapPin, Phone, Search, Tag, User, MessageCircle, Sparkles } from "lucide-react"
+import { Headset, MapPin, Phone, Search, Tag, MessageCircle, Sparkles } from "lucide-react"
+import { MobileMenu } from "@/components/mobile-menu"
 import HeroVideoLocal from "@/components/hero-video-local"
 import type { Model } from "@/lib/models"
 import CarAccordionSlider from "@/components/car-accordion-slider"
@@ -14,25 +17,8 @@ import { EMICalculator } from "@/components/emi-calculator"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { FloatingActions } from "@/components/floating-actions"
 
-export const metadata: Metadata = {
-  title: "Bharath Hyundai | Authorized Hyundai Dealer in Hyderabad & Khammam",
-  description: "Explore the latest Hyundai models, book a free test drive, and get service support across multiple branches in Telangana. Authorized Hyundai dealer since 2013.",
-  keywords: ["Hyundai dealer", "Hyundai Hyderabad", "Hyundai Khammam", "car dealer Telangana", "test drive", "Hyundai service"],
-  openGraph: {
-    title: "Bharath Hyundai | Authorized Hyundai Dealer",
-    description: "Authorized Hyundai dealer in Hyderabad & Khammam. Book test drive, service, and explore latest models.",
-    type: "website",
-    locale: "en_IN",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Bharath Hyundai | Authorized Hyundai Dealer",
-    description: "Authorized Hyundai dealer in Hyderabad & Khammam",
-  },
-  alternates: {
-    canonical: "https://bharathyundai.com",
-  },
-}
+// Note: Metadata export doesn't work in client components
+// Metadata should be added to a parent layout or server component wrapper
 
 type NavItem = { label: string; href: string }
 type Branch = { id: string; name: string; address: string; phone: string }
@@ -87,10 +73,7 @@ export default function Page() {
       </div>
 
       <div className="relative z-10">
-        <div className="fixed top-0 left-0 right-0 z-50">
-        <AnnouncementBar />
-        <SiteHeader />
-        </div>
+        <NavigationWithScroll />
 
         <main id="main" className="min-h-screen space-y-16 lg:space-y-24">
           <HeroBH />
@@ -127,51 +110,107 @@ export default function Page() {
 
 /* Components */
 
-function AnnouncementBar() {
+function NavigationWithScroll() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      
+      // Check if scrolled past a threshold (e.g., 50px)
+      if (currentScrollY > 50) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+
+      // Hide/show logic
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down - hide navbar
+        setIsVisible(false)
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up - show navbar
+        setIsVisible(true)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [lastScrollY])
+
+  // Hide navigation when mobile menu is open
+  const shouldShowNav = isVisible && !mobileMenuOpen
+
   return (
-    <div role="region" aria-label="Promotions" className="relative bg-gradient-to-r from-black/40 via-black/30 to-black/40 backdrop-blur-2xl text-white/90 text-xs shadow-lg shadow-black/20 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/10 before:via-transparent before:to-transparent before:pointer-events-none">
-      <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
-        <div className="flex items-center justify-between gap-4">
+    <div 
+      className={`fixed  rounded-b-lg  flex flex-col gap-0  top-0 justify-center items-center text-center left-0 right-0 transition-transform duration-300 ${
+        mobileMenuOpen ? "z-40" : "z-50"
+      } ${
+        shouldShowNav ? "translate-y-0" : "-translate-y-full"
+      } ${
+        isScrolled 
+          ? "bg-gradient-to-r from-black/70 via-black/60 to-black/70 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/10 before:via-transparent before:to-transparent before:pointer-events-none" 
+          : "bg-transparent backdrop-blur-none border-0 shadow-none"
+      }`}
+    >
+      <AnnouncementBar isScrolled={isScrolled} />
+      <SiteHeader isScrolled={isScrolled} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
+    </div>
+  )
+}
+
+function AnnouncementBar({ isScrolled }: { isScrolled: boolean }) {
+  return (
+    <div 
+      role="region" 
+      aria-label="Promotions" 
+      className={`relative w-fit rounded-b-lg text-white/90 text-xs transition-all duration-300`}
+    >
+      <div className="relative container mx-auto max-w-7xl px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
           {/* Contact Info */}
-          <div className="flex items-center gap-4 flex-wrap">
-            <a href={`tel:${SALES_PHONE}`} className="flex items-center gap-1.5 hover:text-red-400 transition-colors group">
-              <Phone className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
-              <span className="font-medium">Sales: {SALES_PHONE}</span>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4 text-[10px] sm:text-xs">
+            <a href={`tel:${SALES_PHONE}`} className="flex items-center gap-1 sm:gap-1.5 hover:text-red-400 transition-colors group whitespace-nowrap">
+              <Phone className="h-3 w-3 sm:h-3.5 sm:w-3.5 group-hover:scale-110 transition-transform flex-shrink-0" />
+              <span className="font-medium truncate">
+                <span className="hidden sm:inline">Sales: </span>
+                <span className="sm:hidden">S: </span>
+                {SALES_PHONE}
+              </span>
             </a>
             <span className="hidden sm:inline text-white/30">•</span>
-            <a href={`tel:${SERVICE_PHONE}`} className="hidden sm:flex items-center gap-1.5 hover:text-red-400 transition-colors group">
-              <Headset className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
-              <span className="font-medium">Service: {SERVICE_PHONE}</span>
+            <a href={`tel:${SERVICE_PHONE}`} className="hidden sm:flex items-center gap-1.5 hover:text-red-400 transition-colors group whitespace-nowrap">
+              <Headset className="h-3.5 w-3.5 group-hover:scale-110 transition-transform flex-shrink-0" />
+              <span className="font-medium truncate">Service: {SERVICE_PHONE}</span>
             </a>
             <span className="hidden md:inline text-white/30">•</span>
             <a 
               href={`mailto:${EMAIL}`}
-              className="hidden md:flex items-center gap-1.5 hover:text-red-400 transition-colors"
+              className="hidden md:flex items-center gap-1.5 hover:text-red-400 transition-colors truncate"
             >
-              {EMAIL}
+              <span className="truncate max-w-[200px] lg:max-w-none">{EMAIL}</span>
             </a>
           </div>
 
           {/* Quick Action Links */}
-          <nav aria-label="Quick links" className="hidden lg:block">
-            <ul className="flex items-center gap-3">
-              <li>
-                <a 
-                  href="#" 
-                  className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-red-600 text-white/80 hover:text-white transition-all hover:scale-105 font-medium"
-                >
-                  Book Test Drive
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#" 
-                  className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-red-600 text-white/80 hover:text-white transition-all hover:scale-105 font-medium"
-                >
-                  Book Service
-                </a>
-              </li>
-            </ul>
+          <nav aria-label="Quick links" className="hidden lg:flex items-center gap-2 xl:gap-3">
+            <a 
+              href="/test-drive" 
+              className="px-2 xl:px-3 py-1 xl:py-1.5 rounded-full bg-white/5 hover:bg-red-600 text-white/80 hover:text-white transition-all hover:scale-105 font-medium text-[10px] xl:text-xs whitespace-nowrap"
+            >
+              Book Test Drive
+            </a>
+            <a 
+              href="/service" 
+              className="px-2 xl:px-3 py-1 xl:py-1.5 rounded-full bg-white/5 hover:bg-red-600 text-white/80 hover:text-white transition-all hover:scale-105 font-medium text-[10px] xl:text-xs whitespace-nowrap"
+            >
+              Book Service
+            </a>
           </nav>
         </div>
       </div>
@@ -179,37 +218,41 @@ function AnnouncementBar() {
   )
 }
 
-function SiteHeader() {
+function SiteHeader({ isScrolled, mobileMenuOpen, setMobileMenuOpen }: { isScrolled: boolean; mobileMenuOpen: boolean; setMobileMenuOpen: (open: boolean) => void }) {
   return (
-    <header className="relative border-t-0 border-b border-white/30 bg-gradient-to-b from-black/20 via-black/15 to-black/20 supports-[backdrop-filter]:bg-black/10 backdrop-blur-3xl shadow-2xl shadow-black/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/15 before:via-white/5 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/20 after:via-transparent after:to-transparent after:pointer-events-none">
-      <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+    <>
+      <header 
+        className={`relative w-fit border-t-0 border-b transition-all duration-300 `}
+        style={{ marginTop: 0 }}
+      >
+      <div className="relative container mx-auto max-w-7xl px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-18 md:h-20 gap-2 sm:gap-4">
           {/* Logo */}
           <a 
-            href="#" 
-            className="flex items-center gap-3 font-bold text-white group transition-transform hover:scale-105"
+            href="/" 
+            className="flex items-center gap-2 sm:gap-3 font-bold text-white group transition-transform hover:scale-105 flex-shrink-0 min-w-0"
           >
-            <div className="relative">
+            <div className="relative flex-shrink-0">
               <span 
                 aria-hidden 
-                className="inline-block h-10 w-10 rounded-lg bg-gradient-to-br from-red-600 to-red-700 shadow-lg shadow-red-600/30 group-hover:shadow-red-600/50 transition-all" 
+                className="inline-block h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg bg-gradient-to-br from-red-600 to-red-700 shadow-lg shadow-red-600/30 group-hover:shadow-red-600/50 transition-all" 
               />
-              <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold">H</span>
+              <span className="absolute inset-0 flex items-center justify-center text-white text-[10px] sm:text-xs font-bold">H</span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg leading-tight tracking-tight">Bharath Hyundai</span>
-              <span className="text-[10px] text-white/60 uppercase tracking-wider">Authorized Dealer</span>
+            <div className="flex flex-col min-w-0">
+              <span className="text-sm sm:text-base md:text-lg leading-tight tracking-tight truncate">Bharath Hyundai</span>
+              <span className="text-[8px] sm:text-[9px] md:text-[10px] text-white/60 uppercase tracking-wider truncate">Authorized Dealer</span>
             </div>
           </a>
 
           {/* Desktop Navigation */}
-          <nav aria-label="Primary" className="hidden lg:block">
-            <ul className="flex items-center gap-1">
+          <nav aria-label="Primary" className="hidden lg:flex items-center">
+            <ul className="flex items-center gap-0.5 xl:gap-1">
               {NAV_ITEMS.map((n) => (
                 <li key={n.label}>
                   <a
                     href={n.href}
-                    className="relative px-4 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 ring-white/40 group"
+                    className="relative px-2 xl:px-3 2xl:px-4 py-2 text-xs xl:text-sm font-medium text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 ring-white/40 group whitespace-nowrap"
                   >
                     {n.label}
                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-500 group-hover:w-3/4 transition-all duration-300" />
@@ -220,55 +263,49 @@ function SiteHeader() {
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
             {/* CTA Button */}
             <a
-              href="#"
-              className="hidden sm:flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-sm font-medium rounded-full transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-600/30"
+              href="/contact"
+              className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-red-600 hover:bg-red-500 text-white text-xs sm:text-sm font-medium rounded-full transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-600/30 whitespace-nowrap"
             >
-              <Phone className="h-4 w-4" />
-              <span>Contact</span>
+              <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <span className="hidden md:inline">Contact</span>
             </a>
 
             {/* Search */}
             <button
               aria-label="Search"
-              className="p-2.5 rounded-full hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 ring-white/40 transition-all hover:scale-110"
+              className="p-2 sm:p-2.5 rounded-full hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 ring-white/40 transition-all hover:scale-110 flex-shrink-0"
             >
-              <Search className="h-5 w-5 text-white" />
+              <Search className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
             </button>
-
-            {/* Account */}
-            <a
-              href="#"
-              aria-label="Account"
-              className="p-2.5 rounded-full hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 ring-white/40 transition-all hover:scale-110"
-            >
-              <User className="h-5 w-5 text-white" />
-            </a>
 
             {/* Mobile Menu Button */}
             <button
+              onClick={() => setMobileMenuOpen(true)}
               aria-label="Menu"
-              className="lg:hidden p-2.5 rounded-full hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 ring-white/40 transition-all"
+              className="lg:hidden p-2 sm:p-2.5 rounded-full hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 ring-white/40 transition-all flex-shrink-0 cursor-pointer"
             >
-              <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
           </div>
         </div>
       </div>
-    </header>
+      </header>
+      <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+    </>
   )
 }
 
 function HeroBH() {
   return (
-    <section aria-labelledby="hero-heading" className="relative h-screen">
+    <section aria-labelledby="hero-heading" className="relative h-[100dvh] flex ">
       {/* Content overlay */}
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
-        <div className="max-w-3xl">
+      <div className="flex justify-center items-center mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
+        <div className="max-w-3xl  p-4 mt-10 text-center">
           <p className="text-white/80 text-xs md:text-sm uppercase tracking-[0.12em] mb-3">
             Authorized Hyundai Dealer
           </p>
@@ -276,13 +313,13 @@ function HeroBH() {
             id="hero-heading"
             className="text-pretty text-3xl md:text-6xl font-extrabold leading-tight text-white"
           >
-            Bharath Hyundai — Hyderabad & Khammam
+            Bharath Hyundai
           </h1>
           <p className="mt-3 md:mt-4 text-sm md:text-base text-white/80">
             Explore the latest Hyundai lineup, book a free test drive, and get service support across multiple
             branches in Telangana.
           </p>
-          <div className="mt-6 md:mt-8 flex flex-wrap items-center gap-3 md:gap-4">
+          <div className="mt-6 md:mt-8 flex flex-wrap items-center gap-3 md:gap-4 justify-center">
             <Button className="rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-6 text-sm md:text-base" asChild>
               <a href="/test-drive">Book Free Test Drive</a>
             </Button>

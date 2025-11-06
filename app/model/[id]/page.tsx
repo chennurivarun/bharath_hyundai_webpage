@@ -12,6 +12,7 @@ import I20NLineRedesign from "@/components/i20-nline-page"
 import VenueFullRedesign from "@/components/venue-page"
 import CretaRedesignedPage from "@/components/creta-page"
 import CretaNLinePage from "@/components/creta-nline-page"
+import VenuePageWithVideo from "@/components/venue-page-with-video"
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const { id } = params
@@ -78,22 +79,7 @@ export default function ModelDetailPage({ params }: { params: { id: string } }) 
   }
 
   if (id === "venue") {
-    return (
-      <div className="relative min-h-screen bg-transparent text-white">
-        {/* Sticky Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="fixed inset-0 w-full h-full object-cover -z-10"
-          src="/assets1/Hyundai VENUE _ Adventure Film.mp4"
-        />
-        <div className="relative z-10">
-          <VenueFullRedesign />
-        </div>
-      </div>
-    )
+    return <VenuePageWithVideo />
   }
 
   if (id === "creta") {

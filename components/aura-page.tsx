@@ -357,14 +357,14 @@ export default function AuraPage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Video playback control - skip last 3 seconds
+  // Video playback control - skip last 5 seconds
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleTimeUpdate = () => {
-      // If video is within 3 seconds of the end, restart it
-      if (video.duration - video.currentTime <= 3) {
+      // If video is within 5 seconds of the end, restart it
+      if (video.duration - video.currentTime <= 5) {
         video.currentTime = 0;
       }
     };

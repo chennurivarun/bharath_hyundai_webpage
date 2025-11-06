@@ -530,12 +530,12 @@ export default function CretaNLinePage() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  // Video playback control - skip last 2 seconds
+  // Video playback control - skip last 5 seconds
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     const handleTimeUpdate = () => {
-      if (video.duration - video.currentTime <= 2) {
+      if (video.duration - video.currentTime <= 5) {
         video.currentTime = 0;
       }
     };

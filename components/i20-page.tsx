@@ -302,13 +302,13 @@ export default function I20Page() {
     return () => clearInterval(interval);
   }, []);
 
-  // Control video to skip last 4 seconds
+  // Control video to skip last 5 seconds
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleTimeUpdate = () => {
-      if (video.duration && video.currentTime >= video.duration - 4) {
+      if (video.duration && video.currentTime >= video.duration - 5) {
         video.currentTime = 0;
       }
     };

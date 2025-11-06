@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Phone, TestTube } from "lucide-react";
+import { Phone, TestTube, Home } from "lucide-react";
+import Link from "next/link";
 
 // -----------------------------
 // HYUNDAI VENUE — FULL REDESIGN (ALL SUBPAGES)
@@ -151,6 +152,13 @@ const FeatureCard = ({ img, title, desc }: { img?: string; title: string; desc?:
 const StickyNav = () => (
   <nav className="sticky top-0 z-20 border-b border-white/10 bg-black/70 backdrop-blur">
     <div className="mx-auto flex max-w-7xl items-center gap-3 overflow-x-auto px-4 py-3 text-sm sm:px-6 lg:px-8">
+      <Link 
+        href="/" 
+        className="shrink-0 flex items-center gap-1.5 rounded-xl border border-red-500/30 bg-red-600/20 px-3 py-1.5 text-white/90 hover:bg-red-600/30 hover:border-red-500/50 transition-colors"
+      >
+        <Home className="h-4 w-4" />
+        <span>Home</span>
+      </Link>
       {[ 
         ["Highlights", "#highlights"],
         ["Exterior", "#exterior"],

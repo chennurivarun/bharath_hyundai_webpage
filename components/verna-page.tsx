@@ -133,14 +133,14 @@ export default function VernaPage() {
     v.play?.().catch(() => {})
   }
 
-  // Control video to skip last 2 seconds
+  // Control video to skip last 5 seconds
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
     const handleTimeUpdate = () => {
-      if (video.duration && video.currentTime >= video.duration - 2) {
-        // Skip last 2 seconds by looping back to 9 seconds
+      if (video.duration && video.currentTime >= video.duration - 5) {
+        // Skip last 5 seconds by looping back to 9 seconds
         video.currentTime = 9
       }
     }
@@ -269,6 +269,9 @@ export default function VernaPage() {
             </div>
           </div>
           <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
+            <a href="/verna-accessories" className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-red-600/20 text-white/80 hover:text-white transition-colors text-sm font-medium whitespace-nowrap">
+              Accessories
+            </a>
             {[
               { id: 'tech', label: 'Technology' },
               { id: 'smartsense', label: 'SmartSense' },
@@ -1405,6 +1408,22 @@ export default function VernaPage() {
         <p className="text-center text-[11px] text-white/50 mt-6">
           *Specifications, features and prices are indicative and subject to change. Images are for representation only.
         </p>
+      </section>
+
+      {/* Accessories CTA */}
+      <section className="py-12 md:py-20 bg-gradient-to-r from-red-600/10 via-black to-red-600/10">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h3 className="text-2xl md:text-3xl font-extrabold mb-4">Explore Verna Accessories</h3>
+          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+            Upgrade your sedan with genuine Hyundai Verna accessories designed to add comfort, elegance, and functionality to every drive.
+          </p>
+          <a 
+            href="/verna-accessories" 
+            className="inline-block px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-white/10 hover:bg-red-600/30 transition-colors font-semibold"
+          >
+            View All Accessories
+          </a>
+        </div>
       </section>
 
       {/* Quick Actions */}
