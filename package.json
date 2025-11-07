@@ -7,15 +7,15 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "download-images": "node scripts/download-and-update-images.js",
-    "download-images-all": "node scripts/download-images-comprehensive.js",
-    "organize-images": "node scripts/organize-images.js",
-    "download-exter-images": "node scripts/download-exter-images.js",
-    "download-creta-nline-images": "node scripts/download-creta-nline-images.js",
-    "download-i20-images": "node scripts/download-i20-images.js",
-    "download-aura-images": "node scripts/download-aura-images.js",
-    "download-nios-images": "node scripts/download-nios-images.js",
-    "download-i20-nline-images": "node scripts/download-i20-nline-images.js"
+    "download-images": "tsx scripts/download-and-update-images.ts",
+    "download-images-all": "tsx scripts/download-images-comprehensive.ts",
+    "organize-images": "tsx scripts/organize-images.ts",
+    "download-exter-images": "tsx scripts/download-exter-images.ts",
+    "download-creta-nline-images": "tsx scripts/download-creta-nline-images.ts",
+    "download-i20-images": "tsx scripts/download-i20-images.ts",
+    "download-aura-images": "tsx scripts/download-aura-images.ts",
+    "download-nios-images": "tsx scripts/download-nios-images.ts",
+    "download-i20-nline-images": "tsx scripts/download-i20-nline-images.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -80,6 +80,7 @@
     "@types/react-dom": "^19",
     "postcss": "^8.5",
     "tailwindcss": "^4.1.9",
+    "tsx": "^4.19.2",
     "tw-animate-css": "1.3.3",
     "typescript": "^5"
   }
