@@ -14,14 +14,14 @@ import {
   TestTube,
 } from "lucide-react";
 
-const brand = { primary: "#dc2626" } as const;
+const brand = { primary: "#0057B8", accent: "#00A9E0", dark: "#0B1F3A" } as const;
 const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(" ");
 
 const Section = ({ id, title, icon, children }: { id: string; title: string; icon?: React.ReactNode; children: React.ReactNode }) => (
   <section id={id} className="scroll-mt-24 py-12">
-    <div className="flex items-center gap-3 mb-6 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2">
-      <div className="p-2 rounded-xl bg-white/10 text-[color:var(--brand-primary)] border border-white/10">{icon}</div>
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+    <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+      <div className="p-2 rounded-xl bg-[#0057B8]/10 text-[color:var(--brand-primary)] border border-[#D6E4F5]">{icon}</div>
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">{title}</h2>
     </div>
     {children}
   </section>
@@ -241,18 +241,20 @@ export default function ExterFullImageSync() {
 
   useEffect(() => {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
+    document.documentElement.style.setProperty('--brand-accent', brand.accent);
+    document.documentElement.style.setProperty('--brand-dark', brand.dark);
   }, []);
 
   useEffect(() => {
     const handler = () => {
-      const ids = ['highlights', 'exterior', 'interior', 'performance', 'safety', 'convenience', 'pricing', 'specs'];
+      const ids = ['exterior', 'interior', 'performance', 'safety', 'convenience', 'pricing', 'specs'];
       const offsets = ids.map((id) => {
         const el = document.getElementById(id);
         if (!el) return { id, d: Infinity };
         return { id, d: Math.abs(el.getBoundingClientRect().top - 120) };
       });
       offsets.sort((a, b) => a.d - b.d);
-      setActiveTab(offsets[0]?.id ?? 'highlights');
+      setActiveTab(offsets[0]?.id ?? 'exterior');
     };
 
     window.addEventListener('scroll', handler);
@@ -279,7 +281,6 @@ export default function ExterFullImageSync() {
   }, []);
 
   const tabs = [
-    { id: 'highlights', label: 'Highlights', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'exterior', label: 'Exterior', icon: <Car className="w-4 h-4" /> },
     { id: 'interior', label: 'Interior', icon: <ImageIcon className="w-4 h-4" /> },
     { id: 'performance', label: 'Performance', icon: <Gauge className="w-4 h-4" /> },
@@ -302,21 +303,37 @@ export default function ExterFullImageSync() {
           src="/exter.mp4"
         />
         {/* Premium Light Black Overlay */}
-        <div className="fixed inset-0 bg-black/20 -z-10" />
+        <div className="fixed inset-0 bg-black/40 -z-10" />
         <header className="relative">
           {/* Top sticky nav */}
-          <div className="fixed top-0 left-0 right-0 z-40 border-b border-white/20 bg-gradient-to-b from-black/30 via-black/20 to-black/30 backdrop-blur-2xl shadow-xl shadow-black/30 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
-            <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
-            <a href="/exter-accessories" className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-red-600/20 text-white/80 hover:text-white transition-colors text-sm font-medium whitespace-nowrap">
-              Accessories
-            </a>
-              {tabs.map((t) => (
-                <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : 'hover:bg-gray-50 dark:hover:bg-white/10')}>
-                  {t.icon}
-                  <span>{t.label}</span>
-                </a>
-              ))}
-            </nav>
+          <div className="fixed top-0 left-0 right-0 z-40 border-b border-white/20 bg-gradient-to-b from-[#0B1F3A]/70 via-[#002C5F]/55 to-[#0B1F3A]/70 backdrop-blur-2xl shadow-xl shadow-[#0B1F3A]/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
+            <div className="max-w-7xl mx-auto px-4 flex items-center justify-between gap-4 py-2">
+              {/* Logo */}
+              <a
+                href="/"
+                className="flex items-center gap-2 sm:gap-3 font-bold text-white group transition-transform hover:scale-105 flex-shrink-0 min-w-0"
+              >
+                <div className="relative flex-shrink-0">
+                  <span
+                    aria-hidden
+                    className="inline-block h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg bg-gradient-to-br from-[#002C5F] to-[#0057B8] shadow-lg shadow-[#002C5F]/40 group-hover:shadow-[#0057B8]/50 transition-all"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center text-white text-[10px] sm:text-xs font-bold">H</span>
+                </div>
+                <div className="flex flex-col min-w-0 hidden sm:flex">
+                  <span className="text-sm sm:text-base md:text-lg leading-tight tracking-tight truncate">Bharat Hyundai</span>
+                  <span className="text-[8px] sm:text-[9px] md:text-[10px] text-white/60 uppercase tracking-wider truncate">Authorized Dealer</span>
+                </div>
+              </a>
+              <nav className="flex-1 overflow-x-auto flex gap-2 no-scrollbar">
+                {tabs.map((t) => (
+                  <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border text-white/80 hover:text-white border-white/20 hover:bg-white/10 whitespace-nowrap', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : '')}>
+                    {t.icon}
+                    <span>{t.label}</span>
+                  </a>
+                ))}
+              </nav>
+            </div>
             <div className="h-0.5 bg-gradient-to-r from-transparent via-[color:var(--brand-primary)] to-transparent" />
           </div>
           <div className="relative py-20 md:py-32">
@@ -355,11 +372,11 @@ export default function ExterFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 Hyundai EXTER symbolizes outdoor, travel and leisure. This all-new SUV draws inspiration from the natural world around it and reflects an identity that is external and focused on the outside. Hyundai EXTER has been designed to present a modern take on the Hyundai SUV life.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
                   Hyundai EXTER is designed for your adventures.
                 </p>
-                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                  <p className="text-base text-white/90 mt-2">
                   Experience the perfect blend of style, comfort, and technology at competitive prices.
                 </p>
               </div>
@@ -384,11 +401,11 @@ export default function ExterFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 The striking looks of the new Hyundai EXTER are a true delight to the eyes. Be it the signature H-LED DRLs, Hyundai EXTER branding on the front bumper, sporty bridge type painted black roof rails, dynamic painted black rear spoiler, everything makes this new SUV look spectacular and ready for outside.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
                   Experience the Hyundai EXTER exterior with bold and dynamic design.
                 </p>
-                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                  <p className="text-base text-white/90 mt-2">
                   Explore stunning EXTER images that redefine compact SUV aesthetics!
                 </p>
               </div>
@@ -412,11 +429,11 @@ export default function ExterFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 When you get inside Hyundai EXTER, you know there is room for you as well as everything you love. Its spacious interiors have been crafted to offer utmost comfort, so every moment of your journey is exhilarating, and you are all set for outside.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
                   Explore Hyundai EXTER interior images and experience comfort like never before
                 </p>
-                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                  <p className="text-base text-white/90 mt-2">
                   —where comfort meets adventure!
                 </p>
               </div>
@@ -440,11 +457,11 @@ export default function ExterFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 Hyundai EXTER that comes in three powertrain options - 1.2 l Kappa Petrol engine (E20 Fuel Ready) available with 5-speed manual transmission (5MT) and Smart Auto AMT (Automated Manual Transmission) and 1.2 l Bi-fuel Kappa petrol with CNG engine equipped with 5-speed Manual transmission.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
                   The Hyundai EXTER offers smooth performance with power and efficiency.
                 </p>
-                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                  <p className="text-base text-white/90 mt-2">
                   With impressive fuel economy, it lets you drive longer with fewer fuel stops.
                 </p>
               </div>
@@ -469,11 +486,11 @@ export default function ExterFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 Hyundai EXTER is all about making every drive exciting and keeping you safe. It comes with 6 airbags as standard. This SUV offers over 40 advanced safety features and 26 safety features available across all trims, so the only thing on your mind is making the most of your drive.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
                   The Hyundai EXTER car Safety Features ensure ultimate protection with 6 airbags, ESC, VSM, and more.
                 </p>
-                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                  <p className="text-base text-white/90 mt-2">
                   Drive confidently with the Hyundai EXTER car Safety Features, designed for your peace of mind.
                 </p>
               </div>
@@ -498,8 +515,8 @@ export default function ExterFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 Hyundai EXTER comes equipped with a host of high-tech features for your convenience, so you have absolute control over your many worlds even when on the go. From on-board navigation, smartphone connectivity to infotainment with multiple regional UI language support, the new SUV has everything to ensure you never miss anything when you are exploring outside.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
                   The Hyundai EXTER car comfort & convenience Features redefine every drive with smart connectivity, advanced infotainment, and thoughtful amenities.
                 </p>
               </div>
@@ -614,7 +631,7 @@ export default function ExterFullImageSync() {
         
 
         {/* Accessories CTA */}
-        <section className="py-12 md:py-20 bg-gradient-to-r from-red-600/10 via-black to-red-600/10">
+        <section className="py-12 md:py-20 bg-gradient-to-r from-[#002C5F]/10 via-[#0B1F3A]/85 to-[#0057B8]/15">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h3 className="text-2xl md:text-3xl font-extrabold mb-4">Explore Exter Accessories</h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
@@ -622,7 +639,7 @@ export default function ExterFullImageSync() {
             </p>
             <a 
               href="/exter-accessories" 
-              className="inline-block px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-white/10 hover:bg-red-600/30 transition-colors font-semibold"
+              className="inline-block px-6 py-3 rounded-lg bg-[#0057B8]/80 text-white ring-1 ring-white/10 hover:bg-[#00458A] transition-colors font-semibold shadow-[0_20px_40px_-24px_rgba(0,87,184,0.5)]"
             >
               View All Accessories
             </a>
@@ -633,14 +650,14 @@ export default function ExterFullImageSync() {
         <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
           <a 
             href="/test-drive"
-            className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+            className="flex items-center gap-2 rounded-full bg-[#0057B8] hover:bg-[#00458A] text-white px-6 py-3 shadow-lg shadow-[#0057B8]/40 font-medium text-base"
           >
             <TestTube className="h-5 w-5" />
             Test Drive
           </a>
           <a 
             href="tel:+917733888999"
-            className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+            className="flex items-center gap-2 rounded-full bg-white/10 border border-white/30 text-white hover:bg-white/20 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
           >
             <Phone className="h-5 w-5" />
             Call Now

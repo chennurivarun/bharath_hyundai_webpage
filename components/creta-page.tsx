@@ -16,15 +16,15 @@ import {
   TestTube,
 } from "lucide-react";
 
-const brand = { primary: "#dc2626" } as const;
+const brand = { primary: "#0057B8", accent: "#00A9E0", dark: "#0B1F3A" } as const;
 const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(" ");
 const isHttps = (url: string) => /^https:\/\//.test(url);
 
 const Section = ({ id, title, icon, children }: { id: string; title: string; icon?: React.ReactNode; children: React.ReactNode }) => (
   <section id={id} className="scroll-mt-24 py-12">
-    <div className="flex items-center gap-3 mb-6 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2">
-      <div className="p-2 rounded-xl bg-white/10 text-[color:var(--brand-primary)] border border-white/10">{icon}</div>
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+    <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+      <div className="p-2 rounded-xl bg-[#0057B8]/10 text-[color:var(--brand-primary)] border border-[#D6E4F5]">{icon}</div>
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">{title}</h2>
     </div>
     {children}
   </section>
@@ -36,7 +36,7 @@ const Card = ({ title, img, desc }: { title: string; img: string; desc?: string 
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.35 }}
-    className="group relative overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm"
+    className="group relative overflow-hidden rounded-3xl border border-[#D6E4F5] bg-white/95 shadow-[0_18px_32px_-24px_rgba(11,31,58,0.35)]"
   >
     <div className="relative aspect-[16/9]">
       <img
@@ -237,22 +237,22 @@ function VariantsPricingSection() {
       {Object.entries(groupedPricing).map(([variant, items]) => (
         <div
           key={variant}
-          className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md shadow-sm overflow-hidden"
+          className="rounded-2xl border border-[#D6E4F5] bg-white/95 shadow-[0_20px_40px_-24px_rgba(11,31,58,0.35)] overflow-hidden"
         >
           <button
             onClick={() => toggleVariant(variant)}
-            className="w-full flex items-center justify-between p-6 text-left hover:bg-white/10 transition-colors text-white"
+            className="w-full flex items-center justify-between p-6 text-left hover:bg-[#E6F0FA] transition-colors text-[#0B1F3A]"
           >
             <div>
-              <h3 className="text-xl font-semibold text-white">{variant}</h3>
-              <p className="text-sm text-white/70 mt-1">
+              <h3 className="text-xl font-semibold text-[#0B1F3A]">{variant}</h3>
+              <p className="text-sm text-[#4A6076] mt-1">
                 {items.length} powertrain option{items.length > 1 ? 's' : ''}
               </p>
             </div>
             <motion.div
               animate={{ rotate: expandedVariants.has(variant) ? 180 : 0 }}
               transition={{ duration: 0.2 }}
-              className="text-white/70"
+              className="text-[#0057B8]"
             >
               <ChevronRight className="w-6 h-6" />
             </motion.div>
@@ -267,19 +267,19 @@ function VariantsPricingSection() {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <div className="px-6 pb-6 pt-0 space-y-3 border-t border-white/10">
+            <div className="px-6 pb-6 pt-0 space-y-3 border-t border-[#D6E4F5] bg-white/40">
               {items.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm"
+                  className="flex items-center justify-between p-4 rounded-xl border border-[#D6E4F5] bg-white/85"
                 >
                   <div>
-                    <div className="text-sm font-medium text-white">{item.powertrain}</div>
-                    <div className="text-xs text-white/70 mt-1">Powertrain</div>
+                    <div className="text-sm font-medium text-[#0B1F3A]">{item.powertrain}</div>
+                    <div className="text-xs text-[#4A6076] mt-1">Powertrain</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xl font-bold text-white">{item.price}</div>
-                    <div className="text-xs text-white/70 mt-1">Ex-showroom*</div>
+                    <div className="text-xl font-bold text-[#0057B8]">{item.price}</div>
+                    <div className="text-xs text-[#4A6076] mt-1">Ex-showroom*</div>
                   </div>
                 </div>
               ))}
@@ -288,7 +288,7 @@ function VariantsPricingSection() {
         </div>
       ))}
       
-      <div className="mt-4 p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm text-sm text-white/80 text-center">
+      <div className="mt-4 p-4 rounded-xl border border-[#D6E4F5] bg-white/90 text-sm text-[#4A6076] text-center shadow-[0_18px_32px_-28px_rgba(11,31,58,0.4)]">
         *Ex-showroom prices. May vary by city. Please contact your nearest dealer for accurate pricing and availability.
       </div>
     </div>
@@ -334,11 +334,13 @@ export default function CretaPage() {
 
   useEffect(() => {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
+    document.documentElement.style.setProperty('--brand-accent', brand.accent);
+    document.documentElement.style.setProperty('--brand-dark', brand.dark);
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["highlights", "knight", "exterior", "interior", "performance", "safety", "convenience", "specs", "pricing", "features"];
+      const sections = ["knight", "exterior", "interior", "performance", "safety", "convenience", "specs", "pricing", "features"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -404,52 +406,59 @@ export default function CretaPage() {
         className="fixed inset-0 w-full h-full object-cover -z-10"
         src="/creta-interior.mp4"
       />
-      <div className="absolute inset-0 bg-black/20 -z-10" />
+      <div className="absolute inset-0 bg-black/35 -z-10" />
 
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-2">
-          <a href="/creta-accessories" className="inline-block px-3 py-1.5 rounded-lg bg-white/5 hover:bg-red-600/20 text-white/80 hover:text-white transition-colors text-sm font-medium">
-            Accessories
-          </a>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-white/10 text-[color:var(--brand-primary)] border border-white/10">
-                <Car className="h-6 w-6" />
+      <nav className="sticky top-0 z-50 border-b border-white/15 bg-gradient-to-b from-[#0B1F3A]/85 via-[#002C5F]/60 to-[#0B1F3A]/85 backdrop-blur-xl shadow-[0_8px_20px_-12px_rgba(11,31,58,0.55)]">
+        <div className="max-w-7xl mx-auto px-4 py-3">
+          <div className="flex items-center justify-between gap-4">
+            {/* Logo */}
+            <a
+              href="/"
+              className="flex items-center gap-2 sm:gap-3 font-bold text-white group transition-transform hover:scale-105 flex-shrink-0 min-w-0"
+            >
+              <div className="relative flex-shrink-0">
+                <span
+                  aria-hidden
+                  className="inline-block h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg bg-gradient-to-br from-[#002C5F] to-[#0057B8] shadow-lg shadow-[#002C5F]/40 group-hover:shadow-[#0057B8]/50 transition-all"
+                />
+                <span className="absolute inset-0 flex items-center justify-center text-white text-[10px] sm:text-xs font-bold">H</span>
               </div>
-              <h1 className="text-2xl font-bold">CRETA</h1>
-            </div>
-            <div className="hidden md:flex items-center gap-6">
-              {[
-                { id: "highlights", label: "Highlights" },
-                { id: "knight", label: "Knight" },
-                { id: "exterior", label: "Exterior" },
-                { id: "interior", label: "Interior" },
-                { id: "performance", label: "Performance" },
-                { id: "safety", label: "Safety" },
-                { id: "convenience", label: "Convenience" },
-                { id: "specs", label: "Specs" },
-                { id: "pricing", label: "Pricing" },
-                { id: "features", label: "Features" },
-              ].map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className={`px-3 py-2 rounded-lg transition-colors ${
-                    activeSection === item.id
-                      ? "bg-[color:var(--brand-primary)] text-white"
-                      : "text-white/70 hover:text-white hover:bg-red-600/20"
-                  }`}
-                >
-                  {item.label}
-                </a>
-              ))}
+              <div className="flex flex-col min-w-0 hidden sm:flex">
+                <span className="text-sm sm:text-base md:text-lg leading-tight tracking-tight truncate">Bharat Hyundai</span>
+                <span className="text-[8px] sm:text-[9px] md:text-[10px] text-white/60 uppercase tracking-wider truncate">Authorized Dealer</span>
+              </div>
+            </a>
+            <div className="flex items-center gap-3 flex-1 justify-end">
+              <div className="hidden md:flex items-center gap-2">
+                {[
+                  { id: "knight", label: "Knight" },
+                  { id: "exterior", label: "Exterior" },
+                  { id: "interior", label: "Interior" },
+                  { id: "performance", label: "Performance" },
+                  { id: "safety", label: "Safety" },
+                  { id: "convenience", label: "Convenience" },
+                  { id: "specs", label: "Specs" },
+                  { id: "pricing", label: "Pricing" },
+                  { id: "features", label: "Features" },
+                ].map((item) => (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    className={`px-3 py-2 rounded-lg transition-colors whitespace-nowrap ${
+                      activeSection === item.id
+                        ? "bg-[color:var(--brand-primary)] text-white shadow-[0_12px_30px_-18px_rgba(0,87,184,0.7)]"
+                        : "text-white/70 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-            </nav>
+      </nav>
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center">
@@ -460,7 +469,7 @@ export default function CretaPage() {
               <Chip>CRETA</Chip>
               <Chip>King • Knight • New</Chip>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight text-white">
               KING. KNIGHT. CRETA.
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto">
@@ -475,14 +484,14 @@ export default function CretaPage() {
             <div className="flex flex-wrap justify-center gap-3 mt-8">
               <a
                 href="#highlights"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[color:var(--brand-primary)] text-white rounded-full font-semibold hover:bg-red-700 transition-colors shadow-lg shadow-red-600/30"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[color:var(--brand-primary)] text-white rounded-full font-semibold hover:bg-[#00458A] transition-colors shadow-[0_20px_40px_-24px_rgba(0,87,184,0.6)]"
               >
                 Explore Highlights
                 <ChevronRight className="h-4 w-4" />
               </a>
               <a
                 href="#exterior"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-white/30 text-white rounded-full font-semibold hover:bg-white/10 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-white/40 text-white rounded-full font-semibold hover:bg-white/15 transition-colors backdrop-blur-sm"
               >
                 See Gallery
                 <ImageIcon className="h-4 w-4" />
@@ -528,9 +537,12 @@ export default function CretaPage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Bold. Charismatic. Extraordinary. The new Hyundai CRETA is symbolic of all things impressive no matter how you look at it. At first glance, its black chrome parametric grill makes a striking impression. Its new horizon LED positioning lamp & DRLs and quad beam LED headlamps in the front give the SUV an unmistakable presence on the road. The rear profile is also sculpted with refreshingly new elements like the connecting LED tail lamps that announce its departure.
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
                 Experience the Hyundai CRETA exterior with bold and dynamic design.
+              </p>
+              <p className="text-base text-white/90 mt-2">
+                Intelligent lighting signatures and sculpted lines crafted to impress.
               </p>
             </div>
           </div>
@@ -550,9 +562,12 @@ export default function CretaPage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Overwhelming presence and discreet glamour. With its symphony of space, the new Hyundai CRETA is a work of art. In the new Hyundai CRETA, every journey is a moving moment – even when stationary. Be it the refined cockpit or the comfortable second row, one always has the best seat. The interior is the soul of the new Hyundai CRETA.
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
                 Explore Hyundai CRETA interior images and experience comfort like never before.
+              </p>
+              <p className="text-base text-white/90 mt-2">
+                Premium materials, ambient lighting, and generous space make every seat the best seat.
               </p>
             </div>
           </div>
@@ -572,9 +587,12 @@ export default function CretaPage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Powerfully distinctive design impressive dimensions – The new Hyundai CRETA is an impressive example of what happens when technological vision becomes a reality. It is as intrepid as it is agile. With the 1.5l petrol turbo under the hood, you would never be left wanting for power.
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
                 The Hyundai CRETA offers smooth performance with power and efficiency.
+              </p>
+              <p className="text-base text-white/90 mt-2">
+                Pick your engine, pick your mood—CRETA responds with effortless acceleration.
               </p>
             </div>
           </div>
@@ -594,9 +612,9 @@ export default function CretaPage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               The new Hyundai CRETA comes equipped with 70+ advanced safety features including six airbags, as standard. This SUV is reassuringly secure sanctuary for its occupants.
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
-                The Hyundai CRETA car Safety Features ensure ultimate protection with 6 airbags, Hill-Start Assist, and more. Drive confidently with the Hyundai CRETA car Safety Features, designed for your peace of mind!
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
+                The Hyundai CRETA safety suite surrounds you with 6 airbags, ADAS SmartSense, and advanced braking tech for total peace of mind.
               </p>
             </div>
           </div>
@@ -616,9 +634,9 @@ export default function CretaPage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Stand above it all and yet stay completely connected with your world. When it comes to technology, connectivity and infotainment, the new Hyundai CRETA is equipped with the most advanced features. The innovative Hyundai Bluelink app, Home-to-Car with Alexa gives you the power to control your car from the comfort of your home or office.
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
-                The Hyundai CRETA car convenience features redefine every drive with smart connectivity and advanced infotainment.
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
+                CRETA keeps you seamlessly connected with Bluelink, voice-enabled tech, and personalized comfort.
               </p>
             </div>
           </div>
@@ -631,13 +649,13 @@ export default function CretaPage() {
 
         {/* Specifications Section */}
         <Section id="specs" title="Specifications" icon={<ListChecks className="h-6 w-6" />}>
-          <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+          <div className="bg-white/95 border border-[#D6E4F5] rounded-2xl p-6 shadow-[0_20px_40px_-24px_rgba(11,31,58,0.35)]">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {SPECS.map((spec, i) => (
-                <div key={i} className="bg-white/5 rounded-xl p-4">
-                  <h3 className="font-semibold text-white mb-2">{spec.category}</h3>
-                  <p className="text-white/80 text-sm">{spec.details}</p>
-              </div>
+                <div key={i} className="bg-[#F4F8FF] rounded-xl p-4 border border-[#D6E4F5]">
+                  <h3 className="font-semibold text-[#0B1F3A] mb-2">{spec.category}</h3>
+                  <p className="text-[#4A6076] text-sm">{spec.details}</p>
+                </div>
               ))}
             </div>
           </div>
@@ -650,12 +668,12 @@ export default function CretaPage() {
 
         {/* Features Section */}
         <Section id="features" title="Key Features" icon={<ListChecks className="h-6 w-6" />}>
-          <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+          <div className="bg-white/95 border border-[#D6E4F5] rounded-2xl p-6 shadow-[0_20px_40px_-24px_rgba(11,31,58,0.35)]">
             <div className="grid md:grid-cols-2 gap-6">
               {FEATURES.map((feature, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-white/60 rounded-full mt-2 flex-shrink-0" />
-                  <p className="text-white/90 text-sm">{feature}</p>
+                  <div className="w-2 h-2 bg-[#0057B8]/70 rounded-full mt-2 flex-shrink-0" />
+                  <p className="text-[#0B1F3A] text-sm">{feature}</p>
                 </div>
               ))}
             </div>
@@ -665,7 +683,7 @@ export default function CretaPage() {
 
       {/* Hero Section Image Above Sliding Toggle */}
       <section className="max-w-7xl mx-auto px-4 py-16">
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <div className="overflow-hidden rounded-2xl border border-[#D6E4F5] bg-white/95 shadow-[0_24px_48px_-24px_rgba(11,31,58,0.35)]">
           <img 
             src="/images/cars/creta/exterior/Hyundai-creta-suv-exterior-big-1120x600-front-2.jpg" 
             alt="CRETA Front View" 
@@ -676,7 +694,7 @@ export default function CretaPage() {
 
       {/* Bottom Image Strip */}
       <section className="max-w-7xl mx-auto px-4 pb-16">
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <div className="overflow-hidden rounded-2xl border border-[#D6E4F5] bg-white/95 shadow-[0_24px_48px_-24px_rgba(11,31,58,0.35)]">
           <div className="relative">
             <div className="flex gap-4 animate-scroll-slow">
               {strip.concat(strip).map((src, i) => (
@@ -709,7 +727,7 @@ export default function CretaPage() {
       </footer>
 
       {/* Accessories CTA */}
-      <section className="py-12 md:py-20 bg-gradient-to-r from-red-600/10 via-black to-red-600/10">
+      <section className="py-12 md:py-20 bg-gradient-to-r from-[#002C5F]/10 via-[#0B1F3A]/85 to-[#0057B8]/15">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h3 className="text-2xl md:text-3xl font-extrabold mb-4">Explore Creta Accessories</h3>
           <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
@@ -717,7 +735,7 @@ export default function CretaPage() {
           </p>
           <a 
             href="/creta-accessories" 
-            className="inline-block px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-white/10 hover:bg-red-600/30 transition-colors font-semibold"
+            className="inline-block px-6 py-3 rounded-lg bg-[#0057B8]/80 text-white ring-1 ring-white/10 hover:bg-[#00458A] transition-colors font-semibold shadow-[0_20px_40px_-24px_rgba(0,87,184,0.5)]"
           >
             View All Accessories
           </a>
@@ -728,14 +746,14 @@ export default function CretaPage() {
       <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
         <a 
           href="/test-drive"
-          className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+          className="flex items-center gap-2 rounded-full bg-[#0057B8] hover:bg-[#00458A] text-white px-6 py-3 shadow-lg shadow-[#0057B8]/40 font-medium text-base"
         >
           <TestTube className="h-5 w-5" />
           Test Drive
         </a>
         <a 
           href="tel:+917733888999"
-          className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+          className="flex items-center gap-2 rounded-full bg-white/10 border border-white/30 text-white hover:bg-white/20 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
         >
           <Phone className="h-5 w-5" />
           Call Now

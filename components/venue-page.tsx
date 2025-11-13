@@ -128,53 +128,67 @@ const Tag = ({ children }: { children: React.ReactNode }) => (
 const Section = ({ id, title, subtitle, children }: { id: string; title: string; subtitle?: string; children: React.ReactNode }) => (
   <section id={id} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
     <div className="mb-8">
-      <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
-      {subtitle && <p className="mt-2 max-w-3xl text-sm text-white/70">{subtitle}</p>}
+      <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+        <h2 className="text-2xl font-semibold tracking-tight text-[#0B1F3A] sm:text-3xl">{title}</h2>
+      </div>
+      {subtitle && <p className="mt-2 max-w-3xl text-sm text-gray-700 dark:text-gray-300">{subtitle}</p>}
     </div>
     {children}
   </section>
 );
 
 const FeatureCard = ({ img, title, desc }: { img?: string; title: string; desc?: string }) => (
-  <div className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-sm transition hover:bg-white/10">
+  <div className="group overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm transition hover:bg-white/90 dark:hover:bg-white/10">
     {img && (
-      <div className="relative h-44 w-full overflow-hidden bg-black/40">
+      <div className="relative h-44 w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
         <img src={img} alt={title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
       </div>
     )}
     <div className="space-y-1 p-4">
-      <h3 className="text-base font-medium text-white">{title}</h3>
-      {desc && <p className="text-sm text-white/70">{desc}</p>}
+      <h3 className="text-base font-medium text-gray-900 dark:text-white">{title}</h3>
+      {desc && <p className="text-sm text-gray-600 dark:text-gray-300">{desc}</p>}
     </div>
   </div>
 );
 
 const StickyNav = () => (
-  <nav className="sticky top-0 z-20 border-b border-white/10 bg-black/70 backdrop-blur">
-    <div className="mx-auto flex max-w-7xl items-center gap-3 overflow-x-auto px-4 py-3 text-sm sm:px-6 lg:px-8">
-      <Link 
-        href="/" 
-        className="shrink-0 flex items-center gap-1.5 rounded-xl border border-red-500/30 bg-red-600/20 px-3 py-1.5 text-white/90 hover:bg-red-600/30 hover:border-red-500/50 transition-colors"
+  <nav className="sticky top-0 z-20 border-b border-white/20 bg-gradient-to-b from-[#0B1F3A]/70 via-[#002C5F]/55 to-[#0B1F3A]/70 backdrop-blur-2xl shadow-xl shadow-[#0B1F3A]/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
+    <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 text-sm sm:px-6 lg:px-8 relative">
+      {/* Logo */}
+      <Link
+        href="/"
+        className="flex items-center gap-2 sm:gap-3 font-bold text-white group transition-transform hover:scale-105 flex-shrink-0 min-w-0"
       >
-        <Home className="h-4 w-4" />
-        <span>Home</span>
+        <div className="relative flex-shrink-0">
+          <span
+            aria-hidden
+            className="inline-block h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg bg-gradient-to-br from-[#002C5F] to-[#0057B8] shadow-lg shadow-[#002C5F]/40 group-hover:shadow-[#0057B8]/50 transition-all"
+          />
+          <span className="absolute inset-0 flex items-center justify-center text-white text-[10px] sm:text-xs font-bold">H</span>
+        </div>
+        <div className="flex flex-col min-w-0 hidden sm:flex">
+          <span className="text-sm sm:text-base md:text-lg leading-tight tracking-tight truncate">Bharat Hyundai</span>
+          <span className="text-[8px] sm:text-[9px] md:text-[10px] text-white/60 uppercase tracking-wider truncate">Authorized Dealer</span>
+        </div>
       </Link>
-      {[ 
-        ["Highlights", "#highlights"],
-        ["Exterior", "#exterior"],
-        ["Interior", "#interior"],
-        ["Performance", "#performance"],
-        ["Safety", "#safety"],
-        ["Convenience", "#convenience"],
-        ["Specifications", "#specifications"],
-        ["Features", "#features"],
-        ["Variants & Pricing", "#variants"],
-      ].map(([label, href]) => (
-        <a key={label} href={href} className="shrink-0 rounded-xl border border-white/15 px-3 py-1.5 text-white/90 hover:bg-white/10">
-          {label}
-        </a>
-      ))}
+      <div className="flex-1 flex items-center gap-3 overflow-x-auto">
+        {[ 
+          ["Exterior", "#exterior"],
+          ["Interior", "#interior"],
+          ["Performance", "#performance"],
+          ["Safety", "#safety"],
+          ["Convenience", "#convenience"],
+          ["Specifications", "#specifications"],
+          ["Features", "#features"],
+          ["Variants & Pricing", "#variants"],
+        ].map(([label, href]) => (
+          <a key={label} href={href} className="shrink-0 rounded-xl border border-white/20 px-3 py-1.5 text-white/90 hover:bg-white/10 whitespace-nowrap">
+            {label}
+          </a>
+        ))}
+      </div>
     </div>
+    <div className="h-0.5 bg-gradient-to-r from-transparent via-[#0057B8] to-transparent" />
   </nav>
 );
 
@@ -279,8 +293,8 @@ export default function VenueFullRedesign() {
             <h1 className="max-w-3xl text-3xl font-semibold leading-tight sm:text-5xl">The lit SUV that blends advanced tech, incredible connectivity & new‑age style.</h1>
             <p className="max-w-2xl text-white/80">Ex‑showroom price starts at <strong>₹7,26,381</strong>. Experience cutting‑edge technology and sleek design at a great price.</p>
             <div className="flex flex-wrap gap-3 pt-2">
-              <a href="https://clicktobuy.hyundai.co.in/" className="rounded-xl bg-white px-5 py-2 text-sm font-medium text-black transition hover:bg-white/90">Click to Buy</a>
-              <a href="#gallery" className="rounded-xl border border-white/20 px-5 py-2 text-sm font-medium text-white/90 hover:bg-white/10">Gallery</a>
+              <a href="https://clicktobuy.hyundai.co.in/" className="rounded-xl bg-[#0057B8] px-5 py-2 text-sm font-medium text-white transition hover:bg-[#00458A] shadow-lg shadow-[#0057B8]/30">Click to Buy</a>
+              <a href="#gallery" className="rounded-xl border border-white/30 px-5 py-2 text-sm font-medium text-white/90 hover:bg-white/20 bg-white/10 backdrop-blur">Gallery</a>
             </div>
           </div>
         </div>
@@ -361,10 +375,10 @@ export default function VenueFullRedesign() {
 
       {/* SAFETY */}
       <Section id="safety" title="Safety comes first" subtitle="Strong AHSS body, 6 airbags standard & Hyundai SmartSense (Level 1 ADAS).">
-        <div className="mb-6 overflow-hidden rounded-2xl border border-white/10">
+        <div className="mb-6 overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
           <img src={ASSETS.safety.banner} alt="VENUE Safety" className="h-64 w-full object-cover" />
         </div>
-        <h3 className="mb-3 text-lg font-medium">Standard & active safety</h3>
+        <h3 className="mb-3 text-lg font-medium text-gray-900 dark:text-white">Standard & active safety</h3>
          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
            <FeatureCard img={ASSETS.safety.banner} title="6 Airbags (standard)" />
            <FeatureCard img={ASSETS.safety.sixAirbags} title="Strong body structure with AHSS" />
@@ -376,7 +390,7 @@ export default function VenueFullRedesign() {
            <FeatureCard img={ASSETS.safety.tpms} title="Tyre pressure monitoring system (Highline)" />
          </div>
 
-        <h3 className="mt-10 mb-3 text-lg font-medium">Hyundai SmartSense — Level 1 ADAS</h3>
+        <h3 className="mt-10 mb-3 text-lg font-medium text-gray-900 dark:text-white">Hyundai SmartSense — Level 1 ADAS</h3>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
           <FeatureCard img={ASSETS.safety.adas.fcw} title="Forward Collision Warning (FCW)" />
           <FeatureCard img={ASSETS.safety.adas.fcaCar} title="FCA — Car" />
@@ -405,33 +419,33 @@ export default function VenueFullRedesign() {
           <FeatureCard img={ASSETS.convenience.gloveboxCooling} title="Glovebox cooling" />
           <FeatureCard img={ASSETS.convenience.rearACVents} title="Rear AC vents" />
         </div>
-        <p className="mt-4 text-xs text-white/60">*Alexa device not included; feature availability varies by trim.</p>
+        <p className="mt-4 text-xs text-gray-600 dark:text-gray-400">*Alexa device not included; feature availability varies by trim.</p>
       </Section>
 
       {/* SPECIFICATIONS */}
       <Section id="specifications" title="Specifications" subtitle="Key dimensions and powertrains (see e‑brochure for full technical sheet).">
         <div className="grid gap-8 lg:grid-cols-2">
           <div>
-            <h3 className="mb-3 text-lg font-medium">Dimensions</h3>
-            <ul className="divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10">
+            <h3 className="mb-3 text-lg font-medium text-gray-900 dark:text-white">Dimensions</h3>
+            <ul className="divide-y divide-gray-200 dark:divide-white/10 overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5">
               {DIMENSIONS.map((row) => (
-                <li key={row.label} className="flex items-center justify-between bg-white/5 px-4 py-3">
-                  <span className="text-sm text-white/80">{row.label}</span>
-                  <span className="text-sm font-medium text-white">{row.value}</span>
+                <li key={row.label} className="flex items-center justify-between bg-white/50 dark:bg-white/5 px-4 py-3">
+                  <span className="text-sm text-gray-700 dark:text-gray-300">{row.label}</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-white">{row.value}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-2 text-xs text-white/60">^With roof rails.</p>
+            <p className="mt-2 text-xs text-gray-600 dark:text-gray-400">^With roof rails.</p>
           </div>
           <div>
-            <h3 className="mb-3 text-lg font-medium">Engines & Transmissions</h3>
+            <h3 className="mb-3 text-lg font-medium text-gray-900 dark:text-white">Engines & Transmissions</h3>
             <div className="grid gap-4">
               {ENGINES.map((e) => (
-                <div key={e.name} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-sm font-medium text-white">{e.name}</p>
-                  <p className="text-sm text-white/80">Power: {e.power}</p>
-                  <p className="text-sm text-white/80">Torque: {e.torque}</p>
-                  <p className="text-sm text-white/80">Transmission: {e.transmissions.join(" • ")}</p>
+                <div key={e.name} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-4">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{e.name}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Power: {e.power}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Torque: {e.torque}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Transmission: {e.transmissions.join(" • ")}</p>
                 </div>
               ))}
             </div>
@@ -442,41 +456,41 @@ export default function VenueFullRedesign() {
       {/* FEATURES — compact summary (full matrix in brochure / website) */}
       <Section id="features" title="Features" subtitle="Highlights across safety, exterior, interior, seating and connectivity. For the full variant‑wise matrix, refer to the e‑brochure.">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <h3 className="mb-2 text-base font-medium">Safety</h3>
-            <ul className="list-disc space-y-1 pl-5 text-sm text-white/80">
+          <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-5">
+            <h3 className="mb-2 text-base font-medium text-gray-900 dark:text-white">Safety</h3>
+            <ul className="list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-300">
               <li>6 airbags standard; ABS with EBD; ESC, VSM & HAC</li>
               <li>TPMS (Highline), rear parking camera with dynamic guidelines</li>
               <li>Hyundai SmartSense Level‑1 ADAS (FCW, FCA‑Car/Ped/Cycle, LKA, LDW, LFA, HBA, DAW, LVDA)</li>
             </ul>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <h3 className="mb-2 text-base font-medium">Exterior</h3>
-            <ul className="list-disc space-y-1 pl-5 text-sm text-white/80">
+          <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-5">
+            <h3 className="mb-2 text-base font-medium text-gray-900 dark:text-white">Exterior</h3>
+            <ul className="list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-300">
               <li>Dark chrome grille, connecting LED tail lamps</li>
               <li>LED projector headlamps, cornering lamps, puddle lamps</li>
               <li>R16 diamond‑cut alloys, shark fin antenna, roof rails</li>
             </ul>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <h3 className="mb-2 text-base font-medium">Interior & Seating</h3>
-            <ul className="list-disc space-y-1 pl-5 text-sm text-white/80">
+          <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-5">
+            <h3 className="mb-2 text-base font-medium text-gray-900 dark:text-white">Interior & Seating</h3>
+            <ul className="list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-300">
               <li>Power driver seat (4‑way), ambient lighting, digital cluster</li>
               <li>2‑step rear reclining seat, 60:40 split rear seat</li>
               <li>Auto healthy air purifier, front seatback scoop</li>
             </ul>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <h3 className="mb-2 text-base font-medium">Connectivity & Convenience</h3>
-            <ul className="list-disc space-y-1 pl-5 text-sm text-white/80">
+          <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-5">
+            <h3 className="mb-2 text-base font-medium text-gray-900 dark:text-white">Connectivity & Convenience</h3>
+            <ul className="list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-300">
               <li>60+ Bluelink connected features; OTA updates</li>
               <li>Home‑to‑Car with Alexa*; 10 regional languages infotainment</li>
               <li>Wireless phone charger, glovebox cooling, rear AC vents</li>
             </ul>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <h3 className="mb-2 text-base font-medium">Knight Edition add‑ons</h3>
-            <ul className="list-disc space-y-1 pl-5 text-sm text-white/80">
+          <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-5">
+            <h3 className="mb-2 text-base font-medium text-gray-900 dark:text-white">Knight Edition add‑ons</h3>
+            <ul className="list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-300">
               <li>All‑black cabin with brass inserts; exclusive upholstery</li>
               <li>Black painted grille, alloys with red calipers; dashcam; ECM iRVM</li>
               <li>Brass accents on bumpers & roof rails; sporty metal pedals; 3D mats</li>
@@ -489,7 +503,7 @@ export default function VenueFullRedesign() {
       <Section id="gallery" title="Gallery">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {gallery.map((src, i) => (
-            <div key={i} className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+            <div key={i} className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
               <img src={src} alt={`VENUE gallery ${i + 1}`} className="h-56 w-full object-cover" />
             </div>
           ))}
@@ -498,10 +512,10 @@ export default function VenueFullRedesign() {
 
       {/* VARIANTS & PRICING */}
       <Section id="variants" title="Variants & Pricing (Ex‑showroom)" subtitle="Indicative ex‑showroom prices. City‑wise prices vary; confirm on Hyundai's Prices page.">
-        <div className="rounded-2xl border border-white/10 bg-white/5">
+        <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5">
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-white/10 text-white/80">
+              <thead className="bg-white/50 dark:bg-white/10 text-gray-900 dark:text-white/80">
                 <tr>
                   <th className="px-4 py-3 font-medium">Variant</th>
                   <th className="px-4 py-3 font-medium">Fuel</th>
@@ -512,22 +526,22 @@ export default function VenueFullRedesign() {
               </thead>
               <tbody>
                 {VARIANTS.map((v, i) => (
-                  <tr key={i} className="border-t border-white/10 even:bg-white/5">
-                    <td className="px-4 py-3 text-white">{v.name}</td>
-                    <td className="px-4 py-3 text-white/80">{v.fuel}</td>
-                    <td className="px-4 py-3 text-white/80">{v.engine}</td>
-                    <td className="px-4 py-3 text-white/80">{v.transmission}</td>
-                    <td className="px-4 py-3 font-medium text-white">{v.price.toFixed(2)}</td>
+                  <tr key={i} className="border-t border-gray-200 dark:border-white/10 even:bg-white/50 dark:even:bg-white/5">
+                    <td className="px-4 py-3 text-gray-900 dark:text-white">{v.name}</td>
+                    <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{v.fuel}</td>
+                    <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{v.engine}</td>
+                    <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{v.transmission}</td>
+                    <td className="px-4 py-3 font-medium text-[#0057B8] dark:text-[#00A9E0]">{v.price.toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="flex flex-wrap items-center justify-between gap-3 p-4 text-xs text-white/70">
+          <div className="flex flex-wrap items-center justify-between gap-3 p-4 text-xs text-gray-600 dark:text-gray-400">
             <span>Source: CarWale (list & prices). Official pricing tool: Hyundai &ldquo;Prices&rdquo; page.</span>
             <div className="flex gap-2">
-              <a href="https://www.hyundai.com/in/en/find-a-car/venue/price" className="rounded-lg border border-white/20 px-3 py-1.5 hover:bg-white/10">Hyundai Prices</a>
-              <a href="https://www.carwale.com/hyundai-cars/venue/" className="rounded-lg border border-white/20 px-3 py-1.5 hover:bg-white/10">CarWale Listing</a>
+              <a href="https://www.hyundai.com/in/en/find-a-car/venue/price" className="rounded-lg border border-gray-200 dark:border-white/20 px-3 py-1.5 hover:bg-white/70 dark:hover:bg-white/10 text-gray-900 dark:text-white">Hyundai Prices</a>
+              <a href="https://www.carwale.com/hyundai-cars/venue/" className="rounded-lg border border-gray-200 dark:border-white/20 px-3 py-1.5 hover:bg-white/70 dark:hover:bg-white/10 text-gray-900 dark:text-white">CarWale Listing</a>
             </div>
           </div>
         </div>
@@ -538,14 +552,14 @@ export default function VenueFullRedesign() {
 
       {/* Moved former hero image to the bottom */}
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
           <img src={ASSETS.hero} alt="Hyundai VENUE Knight Edition" className="h-[60vh] w-full object-cover object-center" />
         </div>
       </div>
 
 		{/* Knight images slow slider (same images & size as Knight cards) */}
 		<div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-			<div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+			<div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
 				<div className="relative">
 					<div className="flex gap-4 animate-scroll-slow">
 						{[
@@ -584,7 +598,7 @@ export default function VenueFullRedesign() {
       
 
       {/* FOOTER NOTES */}
-      <footer className="mx-auto max-w-7xl px-4 py-10 text-xs text-white/60 sm:px-6 lg:px-8">
+      <footer className="mx-auto max-w-7xl px-4 py-10 text-xs text-gray-600 dark:text-gray-400 sm:px-6 lg:px-8">
         <p>Disclaimers: Connected features & Alexa depend on device compatibility, software & network. Feature availability varies by trim. Prices are indicative and may vary by city/variant.</p>
       </footer>
 
@@ -592,14 +606,14 @@ export default function VenueFullRedesign() {
       <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
         <a 
           href="/test-drive"
-          className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+          className="flex items-center gap-2 rounded-full bg-[#0057B8] hover:bg-[#00458A] text-white px-6 py-3 shadow-lg shadow-[#0057B8]/40 font-medium text-base"
         >
           <TestTube className="h-5 w-5" />
           Test Drive
         </a>
         <a 
           href="tel:+917733888999"
-          className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+          className="flex items-center gap-2 rounded-full bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/20 text-gray-900 dark:text-white hover:bg-white/70 dark:hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
         >
           <Phone className="h-5 w-5" />
           Call Now

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "IONIQ 5 Accessories | Genuine Hyundai Accessories | Bharath Hyundai",
+  title: "IONIQ 5 Accessories | Genuine Hyundai Accessories | Bharat Hyundai",
   description: "Explore genuine Hyundai IONIQ 5 accessories. Enhance your electric SUV with premium interior, exterior, and electrical accessories. Free installation and warranty included.",
   keywords: [
     "IONIQ 5 accessories",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "IONIQ 5 interior accessories",
   ],
   openGraph: {
-    title: "IONIQ 5 Accessories | Bharath Hyundai",
+    title: "IONIQ 5 Accessories | Bharat Hyundai",
     description: "Genuine Hyundai IONIQ 5 accessories for style, comfort, and safety.",
     type: "website",
   },

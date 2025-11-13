@@ -20,7 +20,7 @@ import {
 // TailwindCSS required. Drop this component into a React/Next.js project with Tailwind configured.
 // Images will be served locally via manifest when available; falls back to existing local paths.
 
-const brand = { primary: "#dc2626" } as const;
+const brand = { primary: "#0057B8", accent: "#00A9E0", dark: "#0B1F3A" } as const;
 const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(" ");
 
 const EXTERIOR_IMAGES = [
@@ -259,8 +259,10 @@ const PERFORMANCE_CARDS = [
 function SectionHeading({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-8">
-      <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 shadow-lg">{title}</h2>
-      {subtitle && <p className="text-muted-foreground mt-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 shadow-lg">{subtitle}</p>}
+      <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">{title}</h2>
+      </div>
+      {subtitle && <p className="text-gray-700 dark:text-gray-300 mt-2">{subtitle}</p>}
     </div>
   );
 }
@@ -269,7 +271,7 @@ function ImageGrid({ items }: { items: { src: string; caption?: string }[] }) {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((img, i) => (
-        <figure key={i} className="group relative overflow-hidden rounded-2xl shadow hover:shadow-xl transition">
+        <figure key={i} className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm hover:shadow-lg transition">
           <img
             src={img.src}
             alt={img.caption || "CRETA N Line"}
@@ -290,13 +292,13 @@ function ImageGrid({ items }: { items: { src: string; caption?: string }[] }) {
 function KeyValueTable({ rows }: { rows: { label: string; value: string }[] }) {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="overflow-hidden rounded-2xl shadow">
+      <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm">
         <table className="w-full">
           <tbody>
             {rows.map((r, i) => (
-              <tr key={i} className={`text-sm md:text-base ${i % 2 ? "bg-gray-50" : "bg-white"}`}>
-                <td className="font-medium p-4 w-1/3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg shadow-lg">{r.label}</td>
-                <td className="p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg shadow-lg">{r.value}</td>
+              <tr key={i} className={`text-sm md:text-base ${i % 2 ? "bg-white/50 dark:bg-white/5" : "bg-white/80 dark:bg-white/5"}`}>
+                <td className="font-medium p-4 w-1/3 text-gray-900 dark:text-white border-r border-gray-200 dark:border-white/10">{r.label}</td>
+                <td className="p-4 text-gray-700 dark:text-gray-300">{r.value}</td>
               </tr>
             ))}
           </tbody>
@@ -364,22 +366,22 @@ function VariantsPricingSection() {
         {Object.entries(groupedPricing).map(([variant, items]) => (
           <div
             key={variant}
-            className="rounded-2xl border border-white/10 bg-white/10 backdrop-blur-md shadow-sm overflow-hidden"
+            className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 shadow-sm overflow-hidden"
           >
             <button
               onClick={() => toggleVariant(variant)}
-              className="w-full flex items-center justify-between p-6 text-left hover:bg-white/10 transition-colors text-gray-900"
+              className="w-full flex items-center justify-between p-6 text-left hover:bg-white/10 dark:hover:bg-white/5 transition-colors text-gray-900 dark:text-white"
             >
               <div>
-                <h3 className="text-xl font-semibold text-gray-900">{variant}</h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{variant}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                   {items.length} powertrain option{items.length > 1 ? 's' : ''}
                 </p>
               </div>
               <motion.div
                 animate={{ rotate: expandedVariants.has(variant) ? 180 : 0 }}
                 transition={{ duration: 0.2 }}
-                className="text-gray-600"
+                className="text-gray-600 dark:text-gray-400"
               >
                 <ChevronRight className="w-6 h-6" />
               </motion.div>
@@ -394,19 +396,19 @@ function VariantsPricingSection() {
               transition={{ duration: 0.3, ease: 'easeInOut' }}
               className="overflow-hidden"
             >
-              <div className="px-6 pb-6 pt-0 space-y-3 border-t border-white/10">
+              <div className="px-6 pb-6 pt-0 space-y-3 border-t border-gray-200 dark:border-white/10">
                 {items.map((item, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm"
+                    className="flex items-center justify-between p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5"
                   >
                     <div>
-                      <div className="text-sm font-medium text-gray-900">{item.powertrain}</div>
-                      <div className="text-xs text-gray-600 mt-1">Powertrain</div>
+                      <div className="text-sm font-medium text-gray-900 dark:text-white">{item.powertrain}</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Powertrain</div>
                     </div>
                     <div className="text-right">
-                      <div className="text-xl font-bold text-gray-900">{item.price}</div>
-                      <div className="text-xs text-gray-600 mt-1">Ex-showroom*</div>
+                      <div className="text-xl font-bold text-[#0057B8] dark:text-[#00A9E0]">{item.price}</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Ex-showroom*</div>
                     </div>
                   </div>
                 ))}
@@ -415,7 +417,7 @@ function VariantsPricingSection() {
           </div>
         ))}
         
-        <div className="mt-4 p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm text-sm text-gray-600 text-center">
+        <div className="mt-4 p-4 rounded-xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 text-sm text-gray-600 dark:text-gray-400 text-center">
           *Ex-showroom prices. May vary by city. Please contact your nearest dealer for accurate pricing and availability.
         </div>
       </div>
@@ -424,7 +426,7 @@ function VariantsPricingSection() {
 }
 
 export default function CretaNLinePage() {
-  const [activeTab, setActiveTab] = useState('highlights');
+  const [activeTab, setActiveTab] = useState('exterior');
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [manifestData, setManifestData] = useState<null | {
     categories: Record<string, { title?: string; src: string }[]>;
@@ -515,14 +517,14 @@ export default function CretaNLinePage() {
 
   useEffect(() => {
     const handler = () => {
-      const ids = ['highlights', 'exterior', 'interior', 'performance', 'safety', 'convenience', 'specifications', 'pricing', 'features'];
+      const ids = ['exterior', 'interior', 'performance', 'safety', 'convenience', 'specifications', 'pricing', 'features'];
       const offsets = ids.map((id) => {
         const el = document.getElementById(id);
         if (!el) return { id, d: Infinity };
         return { id, d: Math.abs(el.getBoundingClientRect().top - 120) };
       });
       offsets.sort((a, b) => a.d - b.d);
-      setActiveTab(offsets[0]?.id ?? 'highlights');
+      setActiveTab(offsets[0]?.id ?? 'exterior');
     };
 
     window.addEventListener('scroll', handler);
@@ -546,7 +548,6 @@ export default function CretaNLinePage() {
   }, []);
 
   const tabs = [
-    { id: 'highlights', label: 'Highlights', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'exterior', label: 'Exterior', icon: <Car className="w-4 h-4" /> },
     { id: 'interior', label: 'Interior', icon: <ImageIcon className="w-4 h-4" /> },
     { id: 'performance', label: 'Performance', icon: <Gauge className="w-4 h-4" /> },
@@ -594,23 +595,39 @@ export default function CretaNLinePage() {
         >
           <source src="/videos/creta-nline-bg.mp4" type="video/mp4" />
         </video>
-        <div className="fixed inset-0 bg-black/20 -z-10" />
+        <div className="fixed inset-0 bg-black/40 -z-10" />
       </div>
       <header className="relative">
         {/* Top fixed nav */}
-        <div className="fixed top-0 left-0 right-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
-          <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
-            <a href="/creta-nline-accessories" className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-red-600/20 text-white/80 hover:text-white transition-colors text-sm font-medium whitespace-nowrap">
-              Accessories
+        <div className="fixed top-0 left-0 right-0 z-40 border-b border-white/20 bg-gradient-to-b from-[#0B1F3A]/70 via-[#002C5F]/55 to-[#0B1F3A]/70 backdrop-blur-2xl shadow-xl shadow-[#0B1F3A]/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
+          <div className="max-w-7xl mx-auto px-4 flex items-center justify-between gap-4 py-2">
+            {/* Logo */}
+            <a
+              href="/"
+              className="flex items-center gap-2 sm:gap-3 font-bold text-white group transition-transform hover:scale-105 flex-shrink-0 min-w-0"
+            >
+              <div className="relative flex-shrink-0">
+                <span
+                  aria-hidden
+                  className="inline-block h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg bg-gradient-to-br from-[#002C5F] to-[#0057B8] shadow-lg shadow-[#002C5F]/40 group-hover:shadow-[#0057B8]/50 transition-all"
+                />
+                <span className="absolute inset-0 flex items-center justify-center text-white text-[10px] sm:text-xs font-bold">H</span>
+              </div>
+              <div className="flex flex-col min-w-0 hidden sm:flex">
+                <span className="text-sm sm:text-base md:text-lg leading-tight tracking-tight truncate">Bharat Hyundai</span>
+                <span className="text-[8px] sm:text-[9px] md:text-[10px] text-white/60 uppercase tracking-wider truncate">Authorized Dealer</span>
+              </div>
             </a>
-            {tabs.map((t) => (
-              <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : 'hover:bg-gray-50 dark:hover:bg-white/10')}>
-                {t.icon}
-                <span>{t.label}</span>
-              </a>
-            ))}
-          </nav>
-          <div className="h-0.5 bg-gradient-to-r from-transparent via-[color:var(--brand-primary)] to-transparent" />
+            <nav className="flex-1 overflow-x-auto flex gap-2 no-scrollbar relative">
+              {tabs.map((t) => (
+                <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border text-white/80 hover:text-white border-white/20 hover:bg-white/10 whitespace-nowrap', activeTab === t.id ? 'bg-[#0057B8] text-white border-transparent' : '')}>
+                  {t.icon}
+                  <span>{t.label}</span>
+                </a>
+              ))}
+            </nav>
+          </div>
+          <div className="h-0.5 bg-gradient-to-r from-transparent via-[#0057B8] to-transparent" />
         </div>
         <div className="h-[60px]"></div>
 
@@ -628,10 +645,10 @@ export default function CretaNLinePage() {
                 <Chip>6 Airbags</Chip>
               </div>
               <div className="mt-6 flex gap-2">
-                <a href="#highlights" className="inline-flex items-center gap-2 rounded-2xl bg-[color:var(--brand-primary)] px-5 py-2 text-sm font-medium text-white shadow-lg shadow-[color:var(--brand-primary)]/30">
+                <a href="#highlights" className="inline-flex items-center gap-2 rounded-2xl bg-[#0057B8] px-5 py-2 text-sm font-medium text-white shadow-lg shadow-[#0057B8]/30 hover:bg-[#00458A]">
                   Explore <ChevronRight className="w-4 h-4" />
                 </a>
-                <a href="#specifications" className="inline-flex items-center gap-2 rounded-2xl border px-5 py-2 text-sm font-medium bg-white/10 backdrop-blur">
+                <a href="#specifications" className="inline-flex items-center gap-2 rounded-2xl border border-white/30 px-5 py-2 text-sm font-medium bg-white/10 backdrop-blur text-white hover:bg-white/20">
                   Specs
                 </a>
               </div>
@@ -643,7 +660,9 @@ export default function CretaNLinePage() {
       {/* Highlights */}
       <section id="highlights">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 shadow-lg">Highlights</h2>
+          <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">Highlights</h2>
+          </div>
           <div className="mb-8 max-w-4xl mx-auto mt-8">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Hyundai CRETA N Line.
@@ -654,9 +673,12 @@ export default function CretaNLinePage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Unchain from the ordinary with Hyundai CRETA N Line. Powered by a spirited 1.5l turbo petrol engine that complements its furiously independent streak,
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
                 Hyundai CRETA N Line is designed for your adventures.
+              </p>
+              <p className="text-base text-white/90 mt-2">
+                Experience the perfect blend of style, comfort, and technology at competitive prices.
               </p>
             </div>
           </div>
@@ -667,7 +689,9 @@ export default function CretaNLinePage() {
       {/* Exterior */}
       <section id="exterior">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 shadow-lg">Exterior</h2>
+          <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">Exterior</h2>
+          </div>
           <div className="mb-8 max-w-4xl mx-auto mt-8">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Hyundai Creta N Line Car Exterior - Exhilarating outside.
@@ -675,9 +699,12 @@ export default function CretaNLinePage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Heads will turn, hearts will race. Hyundai CRETA N Line isn't just an SUV; it's an adrenaline shot on four wheels, and its design screams it as loud and clear as the roar of the engine. From the road gripping R18 (D=462 mm) diamond cut alloys with N logo, to the sleek aerodynamics, every detail exudes performance. Feast your eyes on the sleek, horizon LED positioning lamp & DRLs and rear horizon LED tail lamp flowing seamlessly into the unique design. They aren't just for aesthetics; they're a declaration of dominance.
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
                 Experience the Hyundai CRETA N Line exterior with bold and dynamic design.
+              </p>
+              <p className="text-base text-white/90 mt-2">
+                Explore stunning CRETA N Line images that redefine SUV aesthetics!
               </p>
             </div>
           </div>
@@ -696,11 +723,19 @@ export default function CretaNLinePage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Step inside the cockpit of the Hyundai CRETA N Line and lose yourself in the fusion of performance and precision. The exclusive sporty black interiors with athletic red inserts courses through every angle inside. Feel the command centre at your fingertips, the steering wheel, gear knob and seats sporting the iconic N logo.
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
                 Explore Hyundai CRETA N Line interior images and experience performance like never before.
               </p>
+              <p className="text-base text-white/90 mt-2">
+                —where comfort meets adventure!
+              </p>
             </div>
+          </div>
+        </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">Interior</h2>
           </div>
         </div>
         <ImageGrid items={getItems('interior', INTERIOR_IMAGES)} />
@@ -709,7 +744,9 @@ export default function CretaNLinePage() {
       {/* Performance */}
       <section id="performance">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 shadow-lg">Performance</h2>
+          <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">Performance</h2>
+          </div>
           <div className="mb-8 max-w-4xl mx-auto mt-8">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Hyundai Creta N Line Car Performance unleashed.
@@ -717,9 +754,12 @@ export default function CretaNLinePage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Feel the pulse-quickening surge of the 1.5l turbocharged engine, its raw horsepower clawing at the asphalt from the moment you hit the accelerator. Each shift providing a new level of exhilaration. But there's more than just power, Hyundai CRETA N Line
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
                 The Hyundai CRETA N Line offers smooth performance with power and efficiency.
+              </p>
+              <p className="text-base text-white/90 mt-2">
+                With impressive fuel economy, it lets you drive longer with fewer fuel stops.
               </p>
             </div>
           </div>
@@ -727,10 +767,10 @@ export default function CretaNLinePage() {
         {/* Performance image cards */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
           {getItems('performance', PERFORMANCE_CARDS.map((p) => ({ src: p.img, caption: p.title }))).map((p, i) => (
-            <figure key={i} className="rounded-2xl border bg-white overflow-hidden shadow-sm">
+            <figure key={i} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 overflow-hidden shadow-sm">
               <img src={p.src} alt={p.caption || 'Performance'} className="w-full h-40 object-cover" loading="lazy" />
               <figcaption className="p-5">
-                <div className="font-semibold text-sm bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{p.caption || 'Performance'}</div>
+                <div className="font-semibold text-sm text-gray-900 dark:text-white">{p.caption || 'Performance'}</div>
               </figcaption>
             </figure>
           ))}
@@ -748,9 +788,9 @@ export default function CretaNLinePage() {
             { k: "Drive", v: "FWD" },
             { k: "Suspension", v: "MacPherson Strut front / Twist Beam rear" },
           ].map((it, i) => (
-            <div key={i} className="rounded-2xl border bg-white p-5 shadow-sm">
-              <div className="text-xs uppercase text-gray-500 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{it.k}</div>
-              <div className="font-semibold bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{it.v}</div>
+            <div key={i} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-5 shadow-sm">
+              <div className="text-xs uppercase text-gray-600 dark:text-gray-400 mb-2">{it.k}</div>
+              <div className="font-semibold text-gray-900 dark:text-white">{it.v}</div>
             </div>
           ))}
         </div>
@@ -759,7 +799,9 @@ export default function CretaNLinePage() {
       {/* Safety */}
       <section id="safety">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 shadow-lg">Safety</h2>
+          <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">Safety</h2>
+          </div>
           <div className="mb-8 max-w-4xl mx-auto mt-8">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Hyundai Creta N Line Car Safety: Unleash responsibly.
@@ -767,30 +809,35 @@ export default function CretaNLinePage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               True dominance isn't just about power, it's also about control. The Hyundai CRETA N Line empowers you to conquer the asphalt while staying safe. Armoured with 6 airbags, Electronic Parking Brake (EPB), and disc brakes with red caliper that work behind the scenes for unwavering stability and safety.
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
-                The Hyundai CRETA N Line car Safety Features ensure ultimate protection with 6 airbags, Hill-Start Assist, and more. Drive confidently with the Hyundai CRETA N Line car Safety Features, designed for your peace of mind!
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
+                The Hyundai CRETA N Line car Safety Features ensure ultimate protection with 6 airbags, Hill-Start Assist, and more.
+              </p>
+              <p className="text-base text-white/90 mt-2">
+                Drive confidently with the Hyundai CRETA N Line car Safety Features, designed for your peace of mind!
               </p>
             </div>
           </div>
         </div>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
           {getItems('safety', SAFETY_CARDS).map((s, i) => (
-            <div key={i} className="rounded-2xl border bg-white overflow-hidden shadow-sm">
+            <div key={i} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 overflow-hidden shadow-sm">
               <img src={s.src || (s as any).img} alt={s.caption || (s as any).title} className="w-full h-40 object-cover" loading="lazy" />
               <div className="p-5">
-                <p className="text-sm font-medium bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{s.caption || (s as any).title}</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">{s.caption || (s as any).title}</p>
         </div>
             </div>
           ))}
         </div>
-        <p className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-gray-500 mt-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-4 py-3 shadow-lg">*Feature availability varies by variant. Always refer to official specification.</p>
+        <p className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-gray-600 dark:text-gray-400 mt-2">*Feature availability varies by variant. Always refer to official specification.</p>
       </section>
 
       {/* Convenience */}
       <section id="convenience">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 shadow-lg">Convenience</h2>
+          <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">Convenience</h2>
+          </div>
           <div className="mb-8 max-w-4xl mx-auto mt-8">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Unleash Connect Dominate with Hyundai Creta N Line
@@ -798,8 +845,8 @@ export default function CretaNLinePage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Hyundai CRETA N Line is a technologically advanced haven designed to keep you connected, informed and comfortable as you push the limits. Helping you navigate, access entertainment, and monitor performance data, all with intuitive ease.
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
                 The Hyundai CRETA N Line car convenience features redefine every drive with smart connectivity and advanced infotainment.
               </p>
             </div>
@@ -807,10 +854,10 @@ export default function CretaNLinePage() {
         </div>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
           {getItems('convenience', CONVENIENCE_CARDS.map((c) => ({ src: c.img, caption: c.title }))).map((s, i) => (
-            <div key={i} className="rounded-2xl border bg-white overflow-hidden shadow-sm">
+            <div key={i} className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 overflow-hidden shadow-sm">
               <img src={s.src} alt={s.caption} className="w-full h-40 object-cover" loading="lazy" />
               <div className="p-5">
-                <p className="text-sm font-medium bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{s.caption}</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">{s.caption}</p>
         </div>
           </div>
         ))}
@@ -820,7 +867,9 @@ export default function CretaNLinePage() {
       {/* Specifications */}
       <section id="specifications">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 shadow-lg">Specifications</h2>
+          <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">Specifications</h2>
+          </div>
           <div className="mb-8 max-w-4xl mx-auto mt-8">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Explore specifications of the Hyundai CRETA N LINE Car
@@ -828,8 +877,8 @@ export default function CretaNLinePage() {
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
               Explore specifications of the Hyundai CRETA N LINE Car, from its powerful engine options to boot space, precise dimensions, suspension, brakes, and fuel capacity etc.
             </p>
-            <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-              <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+            <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <p className="text-xl font-semibold text-white">
                 Detailed technical specifications for the Hyundai CRETA N LINE.
               </p>
             </div>
@@ -848,19 +897,19 @@ export default function CretaNLinePage() {
       <section id="features">
         <SectionHeading title="Features" subtitle="Tech, comfort & connectivity" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6">
-          <div className="rounded-2xl border bg-white p-5 shadow-sm">
-            <h3 className="font-semibold mb-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">Technology</h3>
+          <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-5 shadow-sm">
+            <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Technology</h3>
             <ul className="list-disc ml-5 text-sm space-y-1">
               {FEATURES.tech.map((f, i) => (
-                <li key={i} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{f}</li>
+                <li key={i} className="text-gray-600 dark:text-gray-300">{f}</li>
               ))}
             </ul>
                   </div>
-          <div className="rounded-2xl border bg-white p-5 shadow-sm">
-            <h3 className="font-semibold mb-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">Comfort</h3>
+          <div className="rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 p-5 shadow-sm">
+            <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Comfort</h3>
             <ul className="list-disc ml-5 text-sm space-y-1">
               {FEATURES.comfort.map((f, i) => (
-                <li key={i} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg">{f}</li>
+                <li key={i} className="text-gray-600 dark:text-gray-300">{f}</li>
               ))}
             </ul>
         </div>
@@ -884,14 +933,14 @@ export default function CretaNLinePage() {
 
       {/* Front view above strip */}
       <section className="max-w-7xl mx-auto px-4 mb-6">
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
           <img src="/images/cars/creta-nline/creata-nline.avif" alt="Creta N Line front view" className="h-[50vh] w-full object-cover" />
         </div>
       </section>
 
       {/* Bottom slow-scrolling strip - All page images */}
       <section className="max-w-7xl mx-auto px-4 pb-16">
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
           <div className="relative">
             <div className="flex gap-4 animate-scroll-slow">
               {[

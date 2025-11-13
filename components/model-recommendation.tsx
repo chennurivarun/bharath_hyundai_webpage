@@ -112,14 +112,14 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
                   onClick={() => updatePreferences('budget', option.value)}
                   className={`p-4 rounded-xl border-2 text-left transition-all ${
                     preferences.budget === option.value
-                      ? "border-red-500 bg-red-600/20 text-white"
-                      : "border-white/20 hover:border-red-400/50 text-white/90 bg-white/5"
+                      ? "border-[#0057B8] bg-[#0057B8]/20 text-white"
+                      : "border-white/20 hover:border-[#0057B8]/50 text-white/90 bg-white/5"
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-4 h-4 rounded-full border-2 ${
                       preferences.budget === option.value
-                        ? "border-red-500 bg-red-500"
+                        ? "border-[#0057B8] bg-[#0057B8]"
                         : "border-white/40"
                     }`} />
                     <span className="font-semibold">{option.label}</span>
@@ -145,8 +145,8 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
                   onClick={() => updatePreferences('usage', option.value)}
                   className={`p-4 rounded-xl border-2 text-left transition-all ${
                     preferences.usage === option.value
-                      ? "border-red-500 bg-red-600/20 text-white"
-                      : "border-white/20 hover:border-red-400/50 text-white/90 bg-white/5"
+                      ? "border-[#0057B8] bg-[#0057B8]/20 text-white"
+                      : "border-white/20 hover:border-[#0057B8]/50 text-white/90 bg-white/5"
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -179,8 +179,8 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
                   }}
                   className={`p-3 rounded-lg border-2 text-sm transition-all ${
                     preferences.features.includes(feature)
-                      ? "border-red-500 bg-red-600/20 text-white"
-                      : "border-white/20 hover:border-red-400/50 text-white/90 bg-white/5"
+                      ? "border-[#0057B8] bg-[#0057B8]/20 text-white"
+                      : "border-white/20 hover:border-[#0057B8]/50 text-white/90 bg-white/5"
                   }`}
                 >
                   {feature}
@@ -200,24 +200,25 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
             
             <div className="space-y-4">
               {recommendations.map((rec, index) => (
-                <Card key={rec.model.id} className="overflow-hidden bg-white/10 border-white/20 backdrop-blur-sm">
-                  <CardContent className="p-0">
+                <Card key={rec.model.id} className="relative overflow-hidden bg-[#0057B8]/20 border border-[#0057B8]/30 backdrop-blur-md rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  <CardContent className="p-0 relative">
                     <div className="flex">
-                      <div className="w-32 h-24 bg-white/5 flex-shrink-0 border-r border-white/10">
+                      <div className="w-32 h-24 bg-[#0057B8]/10 flex-shrink-0 border-r border-[#0057B8]/20 relative z-10">
                         <img
                           src={rec.model.imageSrc}
                           alt={rec.model.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="flex-1 p-4">
+                      <div className="flex-1 p-4 relative z-10">
                         <div className="flex items-start justify-between mb-2">
                           <div>
                             <h4 className="font-bold text-white">{rec.model.name}</h4>
                             <p className="text-white/80 text-sm">{rec.model.priceBand}</p>
                           </div>
                           <div className="text-right">
-                            <Badge className={index === 0 ? "bg-red-600 text-white" : "bg-white/20 text-white border-white/30"}>
+                            <Badge className={index === 0 ? "bg-gradient-to-r from-[#0057B8] to-[#00A9E0] text-white border border-[#00A9E0]/30 shadow-md shadow-[#0057B8]/20" : "bg-[#0057B8]/20 text-white border-[#0057B8]/30"}>
                               {index === 0 ? "Best Match" : `${Math.round(rec.score)}% Match`}
                             </Badge>
                             <div className="mt-1">
@@ -237,10 +238,11 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
                         </div>
                         <Button
                           size="sm"
-                          className="mt-3 bg-red-600 hover:bg-red-500 text-white"
+                          className="mt-3 bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden"
                           onClick={() => onModelSelect(rec.model)}
                         >
-                          View Details
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                          <span className="relative z-10">View Details</span>
                         </Button>
                       </div>
                     </div>
@@ -257,11 +259,12 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
   }
 
   return (
-    <Card className="bg-gradient-to-br from-gray-900/95 via-black/90 to-gray-900/95 border-white/20 backdrop-blur-sm shadow-2xl">
-      <CardContent className="p-6">
+    <Card className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-30 pointer-events-none" />
+      <CardContent className="p-6 relative">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-red-600/20 rounded-lg border border-red-500/30">
-            <TrendingUp className="h-6 w-6 text-red-500" />
+          <div className="p-2 bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 rounded-lg border border-[#0057B8]/30 shadow-md shadow-[#0057B8]/20">
+            <TrendingUp className="h-6 w-6 text-[#00A9E0]" />
           </div>
           <div>
             <h3 className="text-xl font-bold text-white">Find Your Perfect Car</h3>
@@ -297,16 +300,18 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
           {currentStep < 3 ? (
             <Button 
               onClick={() => setCurrentStep(currentStep + 1)}
-              className="bg-red-600 hover:bg-red-500 text-white"
+              className="bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden"
             >
-              Next
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="relative z-10">Next</span>
             </Button>
           ) : currentStep === 3 ? (
             <Button 
               onClick={generateRecommendations}
-              className="bg-red-600 hover:bg-red-500 text-white"
+              className="bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden"
             >
-              Get Recommendations
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="relative z-10">Get Recommendations</span>
             </Button>
           ) : (
             <Button 
@@ -322,9 +327,10 @@ export function ModelRecommendation({ onModelSelect }: ModelRecommendationProps)
                 })
                 setRecommendations([])
               }}
-              className="bg-red-600 hover:bg-red-500 text-white"
+              className="bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden"
             >
-              Start Over
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="relative z-10">Start Over</span>
             </Button>
           )}
         </div>

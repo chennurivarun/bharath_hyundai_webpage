@@ -16,15 +16,15 @@ import {
   TestTube,
 } from "lucide-react";
 
-const brand = { primary: "#dc2626" } as const;
+const brand = { primary: "#0057B8", accent: "#00A9E0", dark: "#0B1F3A" } as const;
 const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(" ");
 const isHttps = (url: string) => /^https:\/\//.test(url);
 
 const Section = ({ id, title, icon, children }: { id: string; title: string; icon?: React.ReactNode; children: React.ReactNode }) => (
   <section id={id} className="scroll-mt-24 py-12">
-    <div className="flex items-center gap-3 mb-6 bg-gradient-to-b from-black/20 via-black/15 to-black/20 backdrop-blur-md border border-white/30 rounded-xl px-3 py-2 shadow-lg shadow-black/20">
-      <div className="p-2 rounded-xl bg-black/20 text-red-600 border border-white/20">{icon}</div>
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">{title}</h2>
+    <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+      <div className="p-2 rounded-xl bg-[#0057B8]/10 text-[color:var(--brand-primary)] border border-[#D6E4F5]">{icon}</div>
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">{title}</h2>
     </div>
     {children}
   </section>
@@ -263,18 +263,20 @@ export default function I20Page() {
 
   useEffect(() => {
     document.documentElement.style.setProperty('--brand-primary', brand.primary);
+    document.documentElement.style.setProperty('--brand-accent', brand.accent);
+    document.documentElement.style.setProperty('--brand-dark', brand.dark);
   }, []);
 
   useEffect(() => {
     const handler = () => {
-      const ids = ['highlights', 'exterior', 'interior', 'performance', 'safety', 'convenience', 'knight', 'features', 'pricing', 'specs'];
+      const ids = ['exterior', 'interior', 'performance', 'safety', 'convenience', 'knight', 'features', 'pricing', 'specs'];
       const offsets = ids.map((id) => {
         const el = document.getElementById(id);
         if (!el) return { id, d: Infinity };
         return { id, d: Math.abs(el.getBoundingClientRect().top - 120) };
       });
       offsets.sort((a, b) => a.d - b.d);
-      setActiveTab(offsets[0]?.id ?? 'highlights');
+      setActiveTab(offsets[0]?.id ?? 'exterior');
     };
 
     window.addEventListener('scroll', handler);
@@ -318,7 +320,6 @@ export default function I20Page() {
   }, []);
 
   const tabs = [
-    { id: 'highlights', label: 'Highlights', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'exterior', label: 'Exterior', icon: <Car className="w-4 h-4" /> },
     { id: 'interior', label: 'Interior', icon: <ImageIcon className="w-4 h-4" /> },
     { id: 'performance', label: 'Performance', icon: <Gauge className="w-4 h-4" /> },
@@ -342,20 +343,38 @@ export default function I20Page() {
           className="fixed inset-0 w-full h-full object-cover -z-10"
           src="/videos/i20.mp4"
         />
+        {/* Premium Light Black Overlay */}
+        <div className="fixed inset-0 bg-black/40 -z-10" />
         <header className="relative">
           {/* Top fixed nav */}
-          <div className="fixed top-0 left-0 right-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
-            <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
-            <a href="/i20-accessories" className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-red-600/20 text-white/80 hover:text-white transition-colors text-sm font-medium whitespace-nowrap">
-              Accessories
-            </a>
-              {tabs.map((t) => (
-                <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : 'hover:bg-gray-50 dark:hover:bg-white/10')}>
-                  {t.icon}
-                  <span>{t.label}</span>
-                </a>
-            ))}
-          </nav>
+          <div className="fixed top-0 left-0 right-0 z-40 border-b border-white/20 bg-gradient-to-b from-[#0B1F3A]/70 via-[#002C5F]/55 to-[#0B1F3A]/70 backdrop-blur-2xl shadow-xl shadow-[#0B1F3A]/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
+            <div className="max-w-7xl mx-auto px-4 flex items-center justify-between gap-4 py-2">
+              {/* Logo */}
+              <a
+                href="/"
+                className="flex items-center gap-2 sm:gap-3 font-bold text-white group transition-transform hover:scale-105 flex-shrink-0 min-w-0"
+              >
+                <div className="relative flex-shrink-0">
+                  <span
+                    aria-hidden
+                    className="inline-block h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg bg-gradient-to-br from-[#002C5F] to-[#0057B8] shadow-lg shadow-[#002C5F]/40 group-hover:shadow-[#0057B8]/50 transition-all"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center text-white text-[10px] sm:text-xs font-bold">H</span>
+                </div>
+                <div className="flex flex-col min-w-0 hidden sm:flex">
+                  <span className="text-sm sm:text-base md:text-lg leading-tight tracking-tight truncate">Bharat Hyundai</span>
+                  <span className="text-[8px] sm:text-[9px] md:text-[10px] text-white/60 uppercase tracking-wider truncate">Authorized Dealer</span>
+                </div>
+              </a>
+              <nav className="flex-1 overflow-x-auto flex gap-2 no-scrollbar">
+                {tabs.map((t) => (
+                  <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border text-white/80 hover:text-white border-white/20 hover:bg-white/10 whitespace-nowrap', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : '')}>
+                    {t.icon}
+                    <span>{t.label}</span>
+                  </a>
+                ))}
+              </nav>
+            </div>
             <div className="h-0.5 bg-gradient-to-r from-transparent via-[color:var(--brand-primary)] to-transparent" />
           </div>
           <div className="h-[60px]"></div>
@@ -395,12 +414,18 @@ export default function I20Page() {
 
           <Section id="exterior" title="Exterior" icon={<Car className="w-5 h-5" />}>
             <div className="mb-8 text-center max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
-                  Hyundai i20 Car Exteriors: All Eyes on You
-                </h3>
-                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-                  The new Hyundai i20 has it all. A sensuous sporty design, a majestic new grille and lights that are a showstopper. Turn heads as you whizz by on those alloy wheels and make an impression with the chrome lines. It's simply stunning from tip to toe.
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Hyundai i20 Car Exteriors: All Eyes on You
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                The new Hyundai i20 has it all. A sensuous sporty design, a majestic new grille and lights that are a showstopper. Turn heads as you whizz by on those alloy wheels and make an impression with the chrome lines. It's simply stunning from tip to toe.
+              </p>
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
+                  Experience the Hyundai i20 exterior with bold and dynamic design.
+                </p>
+                  <p className="text-base text-white/90 mt-2">
+                  Explore stunning i20 images that redefine hatchback aesthetics!
                 </p>
               </div>
             </div>
@@ -429,12 +454,18 @@ export default function I20Page() {
 
           <Section id="interior" title="Interior" icon={<ImageIcon className="w-5 h-5" />}>
             <div className="mb-8 text-center max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
-                  Hyundai i20 Car Interior: Magnetic space.
-                </h3>
-                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-                  The interiors of the new Hyundai i20 mesmerize. Dual tone seats that look fabulous and enough space to lounge out in comfort. Ambient lighting that uplifts your mood and sliding front armrest that provides a more convenient way to relax.
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Hyundai i20 Car Interior: Magnetic space.
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                The interiors of the new Hyundai i20 mesmerize. Dual tone seats that look fabulous and enough space to lounge out in comfort. Ambient lighting that uplifts your mood and sliding front armrest that provides a more convenient way to relax.
+              </p>
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
+                  Explore Hyundai i20 interior images and experience comfort like never before
+                </p>
+                  <p className="text-base text-white/90 mt-2">
+                  —where comfort meets adventure!
                 </p>
               </div>
             </div>
@@ -447,15 +478,21 @@ export default function I20Page() {
 
           <Section id="performance" title="Performance" icon={<Gauge className="w-5 h-5" />}>
             <div className="mb-8 text-center max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
-                  Hyundai i20 Car Performance: Power on.
-                </h3>
-                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-                  Great looks come with great power. The new Hyundai i20 comes with a powerful petrol engine and 2 driving modes that enhance your drive.
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Hyundai i20 Car Performance: Power on.
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                Great looks come with great power. The new Hyundai i20 comes with a powerful petrol engine and 2 driving modes that enhance your drive.
+              </p>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                The thrilling performance is supplemented with great drivability in the form of two transmission options IVT & MT. Power on. Drive on.
+              </p>
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
+                  The Hyundai i20 offers smooth performance with power and efficiency.
                 </p>
-                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-                  The thrilling performance is supplemented with great drivability in the form of two transmission options IVT & MT. Power on. Drive on.
+                  <p className="text-base text-white/90 mt-2">
+                  With impressive fuel economy, it lets you drive longer with fewer fuel stops.
                 </p>
               </div>
             </div>
@@ -468,12 +505,18 @@ export default function I20Page() {
 
           <Section id="safety" title="Safety & ADAS" icon={<Shield className="w-5 h-5" />}>
             <div className="mb-8 text-center max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
-                  Hyundai i20 Car Safety: Go safe.
-                </h3>
-                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-                  The new Hyundai i20 ensures you drive safe wherever you go. It comes equipped with advanced safety features that are a cut above the rest. 6 airbags for maximum protection. Electronic stability control (ESC) with vehicle stability management (VSM) and emergency stop signal (ESS) ensure that you always drive stress free.
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Hyundai i20 Car Safety: Go safe.
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                The new Hyundai i20 ensures you drive safe wherever you go. It comes equipped with advanced safety features that are a cut above the rest. 6 airbags for maximum protection. Electronic stability control (ESC) with vehicle stability management (VSM) and emergency stop signal (ESS) ensure that you always drive stress free.
+              </p>
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
+                  The Hyundai i20 car Safety Features ensure ultimate protection with 6 airbags, ESC, VSM, and more.
+                </p>
+                  <p className="text-base text-white/90 mt-2">
+                  Drive confidently with the Hyundai i20 car Safety Features, designed for your peace of mind.
                 </p>
               </div>
             </div>
@@ -486,12 +529,15 @@ export default function I20Page() {
 
           <Section id="convenience" title="Convenience" icon={<Settings className="w-5 h-5" />}>
             <div className="mb-8 text-center max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
-                  Hyundai i20 Car Convenience: Smart. Connected.
-                </h3>
-                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-                  Cutting edge technology is at the core of the new Hyundai i20. From Bluelink connectivity to Home-to-car (H2C), our smart tech ensures you're connected to your car and your world all the time. What's more, the voice recognition technology with multi-lingual capabilities add convenience to everything you do. All in all, it's one smart car.
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Hyundai i20 Car Convenience: Smart. Connected.
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                Cutting edge technology is at the core of the new Hyundai i20. From Bluelink connectivity to Home-to-car (H2C), our smart tech ensures you're connected to your car and your world all the time. What's more, the voice recognition technology with multi-lingual capabilities add convenience to everything you do. All in all, it's one smart car.
+              </p>
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
+                  The Hyundai i20 car comfort & convenience Features redefine every drive with smart connectivity, advanced infotainment, and thoughtful amenities.
                 </p>
               </div>
             </div>
@@ -504,12 +550,18 @@ export default function I20Page() {
 
           <Section id="knight" title="Knight Edition" icon={<Sparkles className="w-5 h-5" />}>
             <div className="mb-8 text-center max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <h3 className="text-2xl md:text-3xl font-bold text-red-900 dark:text-red-100 mb-4">
-                  i20 Knight. Born head-turner
-                </h3>
-                <p className="text-lg text-red-800 dark:text-red-200 mb-4">
-                  There are cars, and then, there is the i20 Knight. Sleek, black, mystical. A stylish way to stand out among the ordinary. Designed to turn heads with its uber cool looks, blacked-out elements, and exclusive badging.
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                i20 Knight. Born head-turner
+              </h3>
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                There are cars, and then, there is the i20 Knight. Sleek, black, mystical. A stylish way to stand out among the ordinary. Designed to turn heads with its uber cool looks, blacked-out elements, and exclusive badging.
+              </p>
+                <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                  <p className="text-xl font-semibold text-white">
+                  Experience the i20 Knight Edition with its exclusive blacked-out design and premium features.
+                </p>
+                  <p className="text-base text-white/90 mt-2">
+                  Stand out from the crowd with the i20 Knight Edition.
                 </p>
               </div>
             </div>
@@ -626,7 +678,7 @@ export default function I20Page() {
         </div>
         {/* Quick Actions */}
         {/* Accessories CTA */}
-        <section className="py-12 md:py-20 bg-gradient-to-r from-red-600/10 via-black to-red-600/10">
+        <section className="py-12 md:py-20 bg-gradient-to-r from-[#002C5F]/10 via-[#0B1F3A]/85 to-[#0057B8]/15">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h3 className="text-2xl md:text-3xl font-extrabold mb-4">Explore i20 Accessories</h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
@@ -634,7 +686,7 @@ export default function I20Page() {
             </p>
             <a 
               href="/i20-accessories" 
-              className="inline-block px-6 py-3 rounded-lg bg-red-600/20 text-red-200 ring-1 ring-white/10 hover:bg-red-600/30 transition-colors font-semibold"
+              className="inline-block px-6 py-3 rounded-lg bg-[#0057B8]/80 text-white ring-1 ring-white/10 hover:bg-[#00458A] transition-colors font-semibold shadow-[0_20px_40px_-24px_rgba(0,87,184,0.5)]"
             >
               View All Accessories
             </a>
@@ -644,14 +696,14 @@ export default function I20Page() {
         <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
           <a 
             href="/test-drive"
-            className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+            className="flex items-center gap-2 rounded-full bg-[#0057B8] hover:bg-[#00458A] text-white px-6 py-3 shadow-lg shadow-[#0057B8]/40 font-medium text-base"
           >
             <TestTube className="h-5 w-5" />
             Test Drive
           </a>
           <a 
             href="tel:+917733888999"
-            className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+            className="flex items-center gap-2 rounded-full bg-white/10 border border-white/30 text-white hover:bg-white/20 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
           >
             <Phone className="h-5 w-5" />
             Call Now

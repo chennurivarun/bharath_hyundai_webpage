@@ -49,7 +49,10 @@ export default function HeroVideoLocal({ videoSrc = "/hero-video.mp4" }: Props) 
         autoPlay
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
+        loop
+        aria-label="Hyundai car showcase video background"
+        aria-hidden="true"
       >
         <source src={videoSrc} type="video/mp4" />
         Your browser does not support the video tag.

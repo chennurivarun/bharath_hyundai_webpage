@@ -110,17 +110,17 @@ export function ModelComparison() {
       aria-labelledby="comparison-heading"
       className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
     >
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/90 via-black/80 to-gray-900/90 border border-white/10 backdrop-blur-sm">
+      <div className="relative overflow-hidden rounded-3xl bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
         {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" aria-hidden />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-600/10 rounded-full blur-3xl" aria-hidden />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#0057B8]/10 rounded-full blur-3xl" aria-hidden />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#00A9E0]/10 rounded-full blur-3xl" aria-hidden />
 
         <div className="relative z-10 p-8 lg:p-12">
           {/* Header */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 mb-4">
-              <AlertCircle className="h-6 w-6 text-purple-500" />
-              <span className="text-purple-500 font-semibold uppercase tracking-wider text-sm">
+              <AlertCircle className="h-6 w-6 text-[#00A9E0]" />
+              <span className="text-[#00A9E0] font-semibold uppercase tracking-wider text-sm">
                 Compare Models
               </span>
             </div>
@@ -162,7 +162,7 @@ export function ModelComparison() {
                         <div className="flex items-start justify-between mb-3">
                           <div>
                             <h3 className="text-white font-semibold">{model.name}</h3>
-                            <p className="text-purple-400 text-sm">{model.priceBand}</p>
+                            <p className="text-[#00A9E0] text-sm">{model.priceBand}</p>
                           </div>
                           <button
                             onClick={() => clearModel(index)}
@@ -259,9 +259,12 @@ export function ModelComparison() {
                     <div key={index} className="space-y-2">
                       <Button
                         asChild
-                        className="w-full bg-purple-600 hover:bg-purple-500 text-white"
+                        className="w-full bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden"
                       >
-                        <a href={`/models/${model.segment}#${model.id}`}>View Details</a>
+                        <a href={`/models/${model.segment}#${model.id}`}>
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                          <span className="relative z-10">View Details</span>
+                        </a>
                       </Button>
                       <Button
                         asChild

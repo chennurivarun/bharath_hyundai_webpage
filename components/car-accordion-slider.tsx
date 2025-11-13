@@ -1,244 +1,246 @@
 "use client"
 
 import type React from "react"
-import Image from "next/image"
-import cretaEv from "../assets1/creata electric.avif"
-import ioniq5 from "../assets1/ioniq 5.png"
+import Link from "next/link"
+import { useState } from "react"
+import Slider from "react-slick"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { MODELS } from "@/lib/models"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
-import { useState, useCallback, useEffect } from "react"
-import { ChevronRight } from "lucide-react"
-import { MODELS, type Segment, segmentLabel, segmentHeroImage } from "@/lib/models"
-import HatchbackImageSlider from "./hatchback-image-slider"
-import SedanImageSlider from "./sedan-image-slider"
-import SuvImageSlider from "./suv-image-slider"
+// Custom Arrow Components
+function PrevArrow({ onClick }: { onClick?: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      aria-label="Previous car"
+      className="absolute left-0 top-1/2 -translate-y-1/2 z-10 -translate-x-8 md:-translate-x-12 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center bg-transparent hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-gray-400 rounded-full cursor-pointer"
+    >
+      <ChevronLeft className="h-8 w-8 md:h-10 md:w-10 text-gray-900" strokeWidth={2.5} />
+    </button>
+  )
+}
 
-const SEGMENTS: Segment[] = ["hatchback", "sedan", "suv", "electric"]
+function NextArrow({ onClick }: { onClick?: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      aria-label="Next car"
+      className="absolute right-0 top-1/2 -translate-y-1/2 z-10 translate-x-8 md:translate-x-12 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center bg-transparent hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-gray-400 rounded-full cursor-pointer"
+    >
+      <ChevronRight className="h-8 w-8 md:h-10 md:w-10 text-gray-900" strokeWidth={2.5} />
+    </button>
+  )
+}
 
 export default function CarAccordionSlider() {
-  const ELECTRIC_IMAGES = [
-    { src: cretaEv as any, alt: "Creta Electric" },
-    { src: ioniq5 as any, alt: "IONIQ 5" },
-  ]
-  const counts: Record<Segment, number> = {
-    hatchback: MODELS.filter((m) => m.segment === "hatchback").length,
-    sedan: MODELS.filter((m) => m.segment === "sedan").length,
-    suv: MODELS.filter((m) => m.segment === "suv").length,
-    electric: MODELS.filter((m) => m.segment === "electric").length,
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: "0px",
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          centerPadding: "0px",
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          centerPadding: "0px",
+        },
+      },
+    ],
   }
-  const [active, setActive] = useState<number>(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true)
-  const [electricIndex, setElectricIndex] = useState<number>(0)
-
-  // Auto-play animation
-  useEffect(() => {
-    if (!isAutoPlaying) return
-    
-    const interval = setInterval(() => {
-      setActive((prev) => (prev + 1) % SEGMENTS.length)
-    }, 10000) // Changed to 10 seconds
-    
-    return () => clearInterval(interval)
-  }, [isAutoPlaying])
-
-  // Cycle electric images when Electric segment is active
-  useEffect(() => {
-    if (!isAutoPlaying) return
-    if (SEGMENTS[active] !== "electric") return
-
-    const id = setInterval(() => {
-      setElectricIndex((i) => (i + 1) % ELECTRIC_IMAGES.length)
-    }, 3000)
-
-    return () => clearInterval(id)
-  }, [active, isAutoPlaying])
-
-  const onKey = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
-    setIsAutoPlaying(false)
-    if (e.key === "ArrowRight") {
-      setActive((a) => (a < SEGMENTS.length - 1 ? a + 1 : 0))
-    } else if (e.key === "ArrowLeft") {
-      setActive((a) => (a > 0 ? a - 1 : SEGMENTS.length - 1))
-    }
-  }, [])
 
   return (
     <section
-      aria-labelledby="lineup-heading"
-      className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16 bg-black/40 backdrop-blur-sm rounded-3xl"
+      aria-labelledby="models-heading"
+      className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16 bg-white overflow-hidden"
     >
-      <h2 id="lineup-heading" className="text-2xl md:text-3xl font-semibold mb-6">
-        Explore Hyundai Lineup
+      {/* Title - Large, bold, black, centered */}
+      <h2 id="models-heading" className="text-4xl md:text-5xl font-bold mb-12 text-center text-gray-900">
+        Models
       </h2>
 
-      <div
-        role="list"
-        aria-roledescription="carousel"
-        tabIndex={0}
-        onKeyDown={onKey}
-        onMouseEnter={() => setIsAutoPlaying(false)}
-        onMouseLeave={() => setIsAutoPlaying(true)}
-        className="group relative flex gap-3 rounded-3xl p-2 bg-white/5 ring-1 ring-white/10 overflow-hidden"
-      >
-        {SEGMENTS.map((seg, i) => {
-          const isActive = i === active
-          const basisClass = isActive ? "basis-[55%] md:basis-[60%]" : "basis-[15%] md:basis-[13%]"
-          
-          return (
-            <a
-              role="listitem"
-              key={seg}
-              href={`/models/${seg}`}
-              onMouseEnter={() => {
-                setActive(i)
-                setIsAutoPlaying(false)
-              }}
-              onFocus={() => {
-                setActive(i)
-                setIsAutoPlaying(false)
-              }}
-              aria-label={`Explore ${segmentLabel(seg)} models`}
-              aria-selected={isActive}
-              className={[
-                "relative overflow-hidden rounded-2xl border",
-                isActive ? "border-red-500/30 shadow-lg shadow-red-500/20" : "border-white/10",
-                "transition-[flex-basis,filter,transform,border-color,box-shadow] duration-700 ease-in-out",
-                "focus-visible:outline-none focus-visible:ring-2 ring-white/40",
-                "hover:scale-[1.01]",
-                basisClass,
-              ].join(" ")}
-              style={{ minHeight: 380 }}
-            >
-              {/* Image with enhanced animations */}
-              <div className="absolute inset-0 overflow-hidden group">
-                {seg === "hatchback" && isActive ? (
-                  <HatchbackImageSlider />
-                ) : seg === "sedan" && isActive ? (
-                  <SedanImageSlider />
-                ) : seg === "suv" && isActive ? (
-                  <SuvImageSlider />
-                ) : seg === "electric" && isActive ? (
-                  <div className="absolute inset-0 overflow-hidden">
-                    {ELECTRIC_IMAGES.map((img, idx) => (
-                      <Image
-                        key={img.src + idx}
-                        src={img.src}
-                        alt={img.alt}
-                        fill
-                        sizes="100vw"
-                        className={`absolute inset-0 object-cover transition-opacity duration-500 ${
-                          idx === electricIndex ? "opacity-100" : "opacity-0"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  seg === "electric" ? (
-                    <div className="h-full w-full bg-gradient-to-br from-gray-900 via-black to-black" aria-hidden="true" />
-                  ) : (
+      <div className="relative min-h-[400px] md:min-h-[450px] lg:min-h-[500px] overflow-hidden">
+        <style jsx global>{`
+          /* Hide scrollbars */
+          .slick-slider {
+            position: relative;
+            overflow: hidden;
+          }
+          .slick-list {
+            overflow: hidden !important;
+            padding: 0 20px !important;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            margin: 0 auto;
+          }
+          .slick-list::-webkit-scrollbar {
+            display: none;
+          }
+          .slick-slide > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .slick-track {
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+          }
+          .slick-slide {
+            transition: transform 0.5s ease, opacity 0.5s ease;
+          }
+          .slick-slide:not(.slick-center) {
+            opacity: 0.7;
+            pointer-events: none;
+          }
+          .slick-slide.slick-center {
+            opacity: 1;
+            pointer-events: auto;
+          }
+          .slick-slide:not(.slick-center) a {
+            pointer-events: none;
+            cursor: default;
+          }
+          .slick-slide.slick-center a {
+            pointer-events: auto;
+            cursor: pointer;
+          }
+          .car-slide-wrapper {
+            position: relative;
+          }
+          /* Hide page scrollbar if present */
+          body {
+            overflow-x: hidden;
+          }
+          html {
+            overflow-x: hidden;
+          }
+          /* Center slide styling */
+          .car-image-container {
+            min-height: 180px;
+          }
+          @media (min-width: 768px) {
+            .car-image-container {
+              min-height: 200px;
+            }
+          }
+          @media (min-width: 1024px) {
+            .car-image-container {
+              min-height: 220px;
+            }
+          }
+          .slick-slide.slick-center .car-image-container {
+            min-height: 240px !important;
+          }
+          @media (min-width: 768px) {
+            .slick-slide.slick-center .car-image-container {
+              min-height: 300px !important;
+            }
+          }
+          @media (min-width: 1024px) {
+            .slick-slide.slick-center .car-image-container {
+              min-height: 380px !important;
+            }
+          }
+          .slick-slide.slick-center .car-image-container {
+            transform: scale(1.3);
+          }
+          .slick-slide:not(.slick-center) .car-image-container {
+            transform: scale(0.9);
+          }
+          .slick-slide:not(.slick-center) .car-image {
+            filter: grayscale(100%) brightness(1.2) contrast(0.9);
+          }
+          .slick-slide.slick-center .car-image {
+            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.2)) brightness(100%) contrast(100%) saturate(100%) grayscale(0%) !important;
+            transform: scale(1.1);
+          }
+          .slick-slide.slick-center .car-overlay {
+            display: none;
+          }
+          .slick-slide.slick-center .car-name {
+            font-size: 1.125rem !important;
+          }
+          @media (min-width: 768px) {
+            .slick-slide.slick-center .car-name {
+              font-size: 1.25rem !important;
+            }
+          }
+          @media (min-width: 1024px) {
+            .slick-slide.slick-center .car-name {
+              font-size: 1.5rem !important;
+            }
+          }
+          .slick-slide.slick-center .car-name {
+            opacity: 1 !important;
+          }
+          .slick-slide.slick-center .car-name-container {
+            transform: scale(1.05);
+          }
+        `}</style>
+        
+        <Slider {...settings}>
+          {MODELS.map((model, index) => (
+            <div key={model.id} className="px-2 md:px-4 car-slide-wrapper">
+              <Link
+                href={
+                  model.id === 'alcazar' ? '/alcazar' :
+                  model.id === 'exter' ? '/exter' :
+                  model.id === 'cretan' ? '/creta-nline' :
+                  model.id === 'venuen' ? '/model/venue-nline' :
+                  model.id === 'venue-all-new' ? '/model/venue-all-new' :
+                  model.id === 'tucson' ? '/tucson' :
+                  model.brochureHref || `/model/${model.id}`
+                }
+                className="group flex flex-col items-center text-center focus:outline-none car-slide"
+                onClick={(e) => {
+                  const slideElement = e.currentTarget.closest('.slick-slide')
+                  if (slideElement && !slideElement.classList.contains('slick-center')) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    return false
+                  }
+                }}
+              >
+                {/* Car Image Container */}
+                <div className="relative w-full mb-4 transition-all duration-500 car-image-container flex items-center justify-center" style={{ height: '180px' }}>
+                  <div className="relative w-full h-full flex items-center justify-center">
                     <img
-                      src={segmentHeroImage(seg) || "/placeholder.svg?height=760&width=1200&query=hyundai+segment"}
-                      alt=""
-                      aria-hidden="true"
-                      className={[
-                        "h-full w-full object-cover",
-                        "transition-[filter,transform] duration-700 ease-in-out",
-                        isActive 
-                          ? "scale-110 filter-none brightness-100" 
-                          : "scale-100 grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105",
-                      ].join(" ")}
+                      src={model.imageSrc || "/placeholder.svg"}
+                      alt={model.imageAlt}
+                      className="object-contain p-2 md:p-3 transition-all duration-500 car-image max-h-full max-w-full"
+                      loading="lazy"
                     />
-                  )
-                )}
-              </div>
-              
-              {/* Gradient overlay with animation */}
-              <div 
-                className={[
-                  "absolute inset-0 bg-gradient-to-b transition-opacity duration-700",
-                  isActive 
-                    ? "from-black/30 via-black/20 to-black/60 opacity-100" 
-                    : "from-black/60 via-black/50 to-black/80 opacity-100"
-                ].join(" ")} 
-                aria-hidden 
-              />
-              
-              {/* Content card with animation */}
-              <div className="relative z-10 mt-auto flex h-full w-full items-end p-4">
-                <div 
-                  className={[
-                    "w-full rounded-xl backdrop-blur-md border p-4",
-                    "transition-all duration-700 ease-in-out",
-                    "shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]",
-                    isActive 
-                      ? "bg-white/15 border-white/20 translate-y-0 opacity-100" 
-                      : "bg-white/5 border-white/10 translate-y-2 opacity-90"
-                  ].join(" ")}
-                >
-                  <p className={[
-                    "text-xs uppercase tracking-widest transition-colors duration-500",
-                    isActive ? "text-red-400" : "text-white/60"
-                  ].join(" ")}>
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className={[
-                    "mt-1 font-semibold transition-all duration-500",
-                    isActive ? "text-2xl text-white" : "text-xl text-white/90"
-                  ].join(" ")}>
-                    {segmentLabel(seg)}
-                  </h3>
-                  <p className={[
-                    "text-sm transition-colors duration-500",
-                    isActive ? "text-white/90" : "text-white/70"
-                  ].join(" ")}>
-                    {counts[seg]} models
-                  </p>
-                  <div className={[
-                    "mt-3 inline-flex items-center gap-1 text-sm transition-all duration-500",
-                    isActive ? "text-white opacity-100 translate-x-0" : "text-white/70 opacity-0 -translate-x-2"
-                  ].join(" ")}>
-                    Explore <ChevronRight className="h-4 w-4" />
+                    {/* White overlay for non-center images */}
+                    <div className="absolute inset-0 bg-white/40 pointer-events-none car-overlay" />
                   </div>
                 </div>
-              </div>
-
-              {/* Active indicator */}
-              {isActive && (
-                <div className="absolute top-2 right-2 z-20">
-                  <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse shadow-lg shadow-red-500/50" />
+                
+                {/* Car Name */}
+                <div className="transition-all duration-500 mt-3 min-h-[60px] md:min-h-[70px] lg:min-h-[80px] flex items-center justify-center car-name-container">
+                  <h3 className="font-semibold text-gray-900 transition-all duration-500 text-center leading-tight px-2 text-base md:text-lg opacity-70 car-name">
+                    {model.name}
+                  </h3>
                 </div>
-              )}
-            </a>
-          )
-        })}
-      </div>
-
-      {/* Auto-play indicator */}
-      <div className="mt-4 flex items-center justify-center gap-2">
-        {SEGMENTS.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => {
-              setActive(i)
-              setIsAutoPlaying(false)
-            }}
-            aria-label={`Go to slide ${i + 1}`}
-            className={[
-              "h-1.5 rounded-full transition-all duration-300",
-              i === active 
-                ? "w-8 bg-red-500" 
-                : "w-1.5 bg-white/30 hover:bg-white/50"
-            ].join(" ")}
-          />
-        ))}
-      </div>
-
-      <div className="mt-6 flex justify-end">
-        <a
-          href="/models"
-          className="inline-flex items-center gap-1 text-white/80 hover:text-white focus-visible:outline-none focus-visible:ring-2 ring-white/40 rounded-md px-2 py-1"
-        >
-          View all categories <ChevronRight className="h-4 w-4" />
-        </a>
+              </Link>
+            </div>
+          ))}
+        </Slider>
       </div>
     </section>
   )

@@ -157,7 +157,8 @@ export function CarSelectionPopup() {
             
             <button
               onClick={handleDismiss}
-              className="w-full py-4 text-white/60 hover:text-white text-sm font-medium transition-all duration-200 hover:bg-white/5 rounded-xl"
+              className="w-full py-4 text-white/60 hover:text-white text-sm font-medium transition-all duration-200 hover:bg-white/5 rounded-xl min-h-[44px]"
+              aria-label="Dismiss popup and show later"
             >
               Maybe Later
             </button>

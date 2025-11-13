@@ -50,9 +50,9 @@ export default function FindPerfectCarPage() {
       {/* Enhanced Background with Animated Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Animated gradient orbs */}
-        <div className="absolute top-20 left-10 w-96 h-96 bg-red-600/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-20 left-10 w-96 h-96 bg-[#0057B8]/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#00A9E0]/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#0057B8]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
         
         {/* Floating particles */}
         {particles.map((particle, i) => (
@@ -74,14 +74,14 @@ export default function FindPerfectCarPage() {
         <div className="relative perspective-1000">
           <div className="question-mark-3d animate-rotate3d">
             <div 
-              className="text-[200px] font-black text-red-500/30 select-none"
+              className="text-[200px] font-black text-[#0057B8]/30 select-none"
               style={{
                 textShadow: `
-                  10px 10px 0px rgba(239, 68, 68, 0.25),
-                  20px 20px 0px rgba(239, 68, 68, 0.2),
-                  30px 30px 0px rgba(239, 68, 68, 0.15),
-                  40px 40px 0px rgba(239, 68, 68, 0.1),
-                  50px 50px 0px rgba(239, 68, 68, 0.05)
+                  10px 10px 0px rgba(0, 87, 184, 0.25),
+                  20px 20px 0px rgba(0, 87, 184, 0.2),
+                  30px 30px 0px rgba(0, 87, 184, 0.15),
+                  40px 40px 0px rgba(0, 87, 184, 0.1),
+                  50px 50px 0px rgba(0, 87, 184, 0.05)
                 `,
                 transform: 'translateZ(50px)',
               }}
@@ -97,14 +97,14 @@ export default function FindPerfectCarPage() {
         <div className="relative perspective-1000">
           <div className="question-mark-3d animate-rotate3d" style={{ animationDelay: '1s' }}>
             <div 
-              className="text-[200px] font-black text-red-500/30 select-none"
+              className="text-[200px] font-black text-[#0057B8]/30 select-none"
               style={{
                 textShadow: `
-                  10px 10px 0px rgba(239, 68, 68, 0.25),
-                  20px 20px 0px rgba(239, 68, 68, 0.2),
-                  30px 30px 0px rgba(239, 68, 68, 0.15),
-                  40px 40px 0px rgba(239, 68, 68, 0.1),
-                  50px 50px 0px rgba(239, 68, 68, 0.05)
+                  10px 10px 0px rgba(0, 87, 184, 0.25),
+                  20px 20px 0px rgba(0, 87, 184, 0.2),
+                  30px 30px 0px rgba(0, 87, 184, 0.15),
+                  40px 40px 0px rgba(0, 87, 184, 0.1),
+                  50px 50px 0px rgba(0, 87, 184, 0.05)
                 `,
                 transform: 'translateZ(50px)',
               }}
@@ -118,7 +118,7 @@ export default function FindPerfectCarPage() {
       {/* Additional smaller 3D question marks for depth - Right Side */}
       <div className="fixed top-20 right-20 z-0 pointer-events-none hidden xl:block">
         <div 
-          className="text-[80px] font-black text-red-500/20 select-none animate-float3d"
+          className="text-[80px] font-black text-[#0057B8]/20 select-none animate-float3d"
           style={{
             animationDuration: '8s',
             animationDelay: '1s',
@@ -131,7 +131,7 @@ export default function FindPerfectCarPage() {
 
       <div className="fixed bottom-32 right-32 z-0 pointer-events-none hidden xl:block">
         <div 
-          className="text-[60px] font-black text-blue-500/20 select-none animate-float3d"
+          className="text-[60px] font-black text-[#00A9E0]/20 select-none animate-float3d"
           style={{
             animationDuration: '7s',
             animationDelay: '2s',
@@ -145,7 +145,7 @@ export default function FindPerfectCarPage() {
       {/* Additional smaller 3D question marks for depth - Left Side */}
       <div className="fixed top-20 left-20 z-0 pointer-events-none hidden xl:block">
         <div 
-          className="text-[80px] font-black text-red-500/20 select-none animate-float3d"
+          className="text-[80px] font-black text-[#0057B8]/20 select-none animate-float3d"
           style={{
             animationDuration: '8s',
             animationDelay: '2s',
@@ -158,7 +158,7 @@ export default function FindPerfectCarPage() {
 
       <div className="fixed bottom-32 left-32 z-0 pointer-events-none hidden xl:block">
         <div 
-          className="text-[60px] font-black text-blue-500/20 select-none animate-float3d"
+          className="text-[60px] font-black text-[#00A9E0]/20 select-none animate-float3d"
           style={{
             animationDuration: '7s',
             animationDelay: '1.5s',
@@ -192,7 +192,7 @@ export default function FindPerfectCarPage() {
       <footer className="relative z-10 bg-gray-900/80 backdrop-blur-sm text-white py-8 mt-16">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center text-sm text-gray-400">
-            © {new Date().getFullYear()} Bharath Hyundai. All rights reserved.
+            © {new Date().getFullYear()} Bharat Hyundai. All rights reserved.
           </div>
         </div>
       </footer>

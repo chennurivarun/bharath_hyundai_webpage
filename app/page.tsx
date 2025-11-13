@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Headset, MapPin, Phone, Search, Tag, MessageCircle, Sparkles } from "lucide-react"
 import { MobileMenu } from "@/components/mobile-menu"
+import { ThemeToggle } from "@/components/theme-toggle"
 import HeroVideoLocal from "@/components/hero-video-local"
 import type { Model } from "@/lib/models"
 import CarAccordionSlider from "@/components/car-accordion-slider"
@@ -57,6 +58,14 @@ const BRANCHES: Branch[] = [
   },
 ]
 
+const HYUNDAI_COLORS = {
+  primary: "#002C5F",
+  secondary: "#0057B8",
+  accent: "#00A9E0",
+  neutral: "#F4F6F9",
+  dark: "#0B1F3A",
+} as const
+
 export default function Page() {
   return (
     <>
@@ -88,7 +97,7 @@ export default function Page() {
 
           <EMICalculator />
 
-          <WhyBharathHyundai />
+          <WhyBharatHyundai />
 
           <TestimonialsSection />
 
@@ -147,14 +156,14 @@ function NavigationWithScroll() {
   const shouldShowNav = isVisible && !mobileMenuOpen
 
   return (
-    <div 
+    <div
       className={`fixed  rounded-b-lg  flex flex-col gap-0  top-0 justify-center items-center text-center left-0 right-0 transition-transform duration-300 ${
         mobileMenuOpen ? "z-40" : "z-50"
       } ${
         shouldShowNav ? "translate-y-0" : "-translate-y-full"
       } ${
-        isScrolled 
-          ? "bg-gradient-to-r from-black/70 via-black/60 to-black/70 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/10 before:via-transparent before:to-transparent before:pointer-events-none" 
+        isScrolled
+          ? "bg-gradient-to-r from-[#002C5F]/95 via-[#002C5F]/90 to-[#002C5F]/95 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-[#002C5F]/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/10 before:via-transparent before:to-transparent before:pointer-events-none"
           : "bg-transparent backdrop-blur-none border-0 shadow-none"
       }`}
     >
@@ -175,7 +184,7 @@ function AnnouncementBar({ isScrolled }: { isScrolled: boolean }) {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
           {/* Contact Info */}
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4 text-[10px] sm:text-xs">
-            <a href={`tel:${SALES_PHONE}`} className="flex items-center gap-1 sm:gap-1.5 hover:text-red-400 transition-colors group whitespace-nowrap">
+            <a href={`tel:${SALES_PHONE}`} className="flex items-center gap-1 sm:gap-1.5 hover:text-[#00A9E0] transition-colors group whitespace-nowrap">
               <Phone className="h-3 w-3 sm:h-3.5 sm:w-3.5 group-hover:scale-110 transition-transform flex-shrink-0" />
               <span className="font-medium truncate">
                 <span className="hidden sm:inline">Sales: </span>
@@ -184,14 +193,14 @@ function AnnouncementBar({ isScrolled }: { isScrolled: boolean }) {
               </span>
             </a>
             <span className="hidden sm:inline text-white/30">•</span>
-            <a href={`tel:${SERVICE_PHONE}`} className="hidden sm:flex items-center gap-1.5 hover:text-red-400 transition-colors group whitespace-nowrap">
+            <a href={`tel:${SERVICE_PHONE}`} className="hidden sm:flex items-center gap-1.5 hover:text-[#00A9E0] transition-colors group whitespace-nowrap">
               <Headset className="h-3.5 w-3.5 group-hover:scale-110 transition-transform flex-shrink-0" />
               <span className="font-medium truncate">Service: {SERVICE_PHONE}</span>
             </a>
             <span className="hidden md:inline text-white/30">•</span>
-            <a 
+            <a
               href={`mailto:${EMAIL}`}
-              className="hidden md:flex items-center gap-1.5 hover:text-red-400 transition-colors truncate"
+              className="hidden md:flex items-center gap-1.5 hover:text-[#00A9E0] transition-colors truncate"
             >
               <span className="truncate max-w-[200px] lg:max-w-none">{EMAIL}</span>
             </a>
@@ -199,15 +208,15 @@ function AnnouncementBar({ isScrolled }: { isScrolled: boolean }) {
 
           {/* Quick Action Links */}
           <nav aria-label="Quick links" className="hidden lg:flex items-center gap-2 xl:gap-3">
-            <a 
-              href="/test-drive" 
-              className="px-2 xl:px-3 py-1 xl:py-1.5 rounded-full bg-white/5 hover:bg-red-600 text-white/80 hover:text-white transition-all hover:scale-105 font-medium text-[10px] xl:text-xs whitespace-nowrap"
+            <a
+              href="/test-drive"
+              className="px-2 xl:px-3 py-1 xl:py-1.5 rounded-full bg-white/10 hover:bg-[#0057B8] text-white/80 hover:text-white transition-all hover:scale-105 font-medium text-[10px] xl:text-xs whitespace-nowrap"
             >
               Book Test Drive
             </a>
-            <a 
-              href="/service" 
-              className="px-2 xl:px-3 py-1 xl:py-1.5 rounded-full bg-white/5 hover:bg-red-600 text-white/80 hover:text-white transition-all hover:scale-105 font-medium text-[10px] xl:text-xs whitespace-nowrap"
+            <a
+              href="/service"
+              className="px-2 xl:px-3 py-1 xl:py-1.5 rounded-full bg-white/10 hover:bg-[#0057B8] text-white/80 hover:text-white transition-all hover:scale-105 font-medium text-[10px] xl:text-xs whitespace-nowrap"
             >
               Book Service
             </a>
@@ -228,19 +237,19 @@ function SiteHeader({ isScrolled, mobileMenuOpen, setMobileMenuOpen }: { isScrol
       <div className="relative container mx-auto max-w-7xl px-3 sm:px-4 md:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20 gap-2 sm:gap-4">
           {/* Logo */}
-          <a 
-            href="/" 
+          <a
+            href="/"
             className="flex items-center gap-2 sm:gap-3 font-bold text-white group transition-transform hover:scale-105 flex-shrink-0 min-w-0"
           >
             <div className="relative flex-shrink-0">
-              <span 
-                aria-hidden 
-                className="inline-block h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg bg-gradient-to-br from-red-600 to-red-700 shadow-lg shadow-red-600/30 group-hover:shadow-red-600/50 transition-all" 
+              <span
+                aria-hidden
+                className="inline-block h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg bg-gradient-to-br from-[#002C5F] to-[#0057B8] shadow-lg shadow-[#002C5F]/40 group-hover:shadow-[#0057B8]/50 transition-all"
               />
               <span className="absolute inset-0 flex items-center justify-center text-white text-[10px] sm:text-xs font-bold">H</span>
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="text-sm sm:text-base md:text-lg leading-tight tracking-tight truncate">Bharath Hyundai</span>
+              <span className="text-sm sm:text-base md:text-lg leading-tight tracking-tight truncate">Bharat Hyundai</span>
               <span className="text-[8px] sm:text-[9px] md:text-[10px] text-white/60 uppercase tracking-wider truncate">Authorized Dealer</span>
             </div>
           </a>
@@ -255,7 +264,7 @@ function SiteHeader({ isScrolled, mobileMenuOpen, setMobileMenuOpen }: { isScrol
                     className="relative px-2 xl:px-3 2xl:px-4 py-2 text-xs xl:text-sm font-medium text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 ring-white/40 group whitespace-nowrap"
                   >
                     {n.label}
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-500 group-hover:w-3/4 transition-all duration-300" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#00A9E0] group-hover:w-3/4 transition-all duration-300" />
                   </a>
                 </li>
               ))}
@@ -264,10 +273,13 @@ function SiteHeader({ isScrolled, mobileMenuOpen, setMobileMenuOpen }: { isScrol
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
             {/* CTA Button */}
             <a
               href="/contact"
-              className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-red-600 hover:bg-red-500 text-white text-xs sm:text-sm font-medium rounded-full transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-600/30 whitespace-nowrap"
+              className="hidden sm:flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#002C5F] hover:bg-[#0057B8] text-white text-xs sm:text-sm font-medium rounded-full transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#002C5F]/30 whitespace-nowrap"
             >
               <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               <span className="hidden md:inline">Contact</span>
@@ -313,14 +325,14 @@ function HeroBH() {
             id="hero-heading"
             className="text-pretty text-3xl md:text-6xl font-extrabold leading-tight text-white"
           >
-            Bharath Hyundai
+            Bharat Hyundai
           </h1>
           <p className="mt-3 md:mt-4 text-sm md:text-base text-white/80">
             Explore the latest Hyundai lineup, book a free test drive, and get service support across multiple
             branches in Telangana.
           </p>
           <div className="mt-6 md:mt-8 flex flex-wrap items-center gap-3 md:gap-4 justify-center">
-            <Button className="rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-6 text-sm md:text-base" asChild>
+            <Button className="rounded-full bg-[#002C5F] hover:bg-[#0057B8] text-white px-6 py-6 text-sm md:text-base" asChild>
               <a href="/test-drive">Book Free Test Drive</a>
             </Button>
             <Button variant="secondary" className="rounded-full text-sm md:text-base" asChild>
@@ -349,7 +361,7 @@ function FeatureBadgesBH() {
           </span>
           <div>
             <p className="text-sm font-medium text-white">{title}</p>
-            <p className="text-sm text-white/70">{desc}</p>
+            <p className="text-sm text-white/80">{desc}</p>
           </div>
         </li>
       ))}
@@ -412,29 +424,29 @@ function NLineSection() {
       aria-labelledby="nline-heading"
       className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
     >
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-950/40 via-black/50 to-black/60 border border-red-500/20 backdrop-blur-sm">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0B1F3A]/70 via-[#002C5F]/65 to-[#004081]/60 border border-[#00A9E0]/20 backdrop-blur-sm">
         {/* Decorative background elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl" aria-hidden />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl" aria-hidden />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#00A9E0]/15 rounded-full blur-3xl" aria-hidden />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#0057B8]/15 rounded-full blur-3xl" aria-hidden />
         
         <div className="relative z-10 p-8 lg:p-12">
           {/* Header */}
           <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
             <div>
               <div className="inline-flex items-center gap-2 mb-3">
-                <span className="text-red-500 font-bold text-4xl md:text-5xl tracking-tighter">N</span>
+                <span className="text-[#D3002C] font-bold text-4xl md:text-5xl tracking-tighter">N</span>
                 <span className="text-white/60 text-sm uppercase tracking-[0.2em]">Line</span>
               </div>
               <h2 id="nline-heading" className="text-2xl md:text-3xl font-semibold text-white">
                 Performance Meets Style
               </h2>
-              <p className="text-white/70 mt-2 max-w-2xl">
+              <p className="text-white/80 mt-2 max-w-2xl">
                 Experience the thrill of N Line — Hyundai's performance-oriented lineup with sporty design, enhanced handling, and race-inspired details.
               </p>
             </div>
-            <a 
-              href="/models?filter=nline" 
-              className="px-6 py-3 bg-red-600 hover:bg-red-500 text-white font-medium rounded-full transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-600/30"
+            <a
+              href="/models?filter=nline"
+              className="px-6 py-3 bg-[#002C5F] hover:bg-[#0057B8] text-white font-medium rounded-full transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#002C5F]/30"
             >
               Explore N Line
             </a>
@@ -442,7 +454,7 @@ function NLineSection() {
 
           {/* N Line Image Slider */}
           <div className="mb-8">
-            <div className="relative h-96 rounded-2xl overflow-hidden border border-red-500/20">
+            <div className="relative h-96 rounded-2xl overflow-hidden border border-[#00A9E0]/20">
               <NLineImageSlider />
             </div>
           </div>
@@ -450,38 +462,44 @@ function NLineSection() {
           {/* Models Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {nLineModels.map((model) => (
-              <div 
+              <div
                 key={model.name}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black/30 backdrop-blur-sm hover:border-red-500/50 transition-all duration-300"
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black/25 backdrop-blur-sm hover:border-[#00A9E0]/50 transition-all duration-300"
               >
                 <div className="p-6">
                   {/* Badge */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600/20 border border-red-500/30 mb-4">
-                    <span className="text-red-500 font-bold text-sm">N</span>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#002C5F]/20 border border-[#00A9E0]/30 mb-4">
+                    <span className="text-[#D3002C] font-bold text-sm">N</span>
                     <span className="text-white/80 text-xs uppercase tracking-wider">Line</span>
                   </div>
                   
                   {/* Content */}
                   <h3 className="text-xl font-semibold text-white mb-1">{model.name}</h3>
-                  <p className="text-red-400 font-medium mb-2">{model.priceBand}</p>
-                  <p className="text-white/60 text-sm mb-4">{model.desc}</p>
+                  <p className="text-[#00A9E0] font-medium mb-2">{model.priceBand}</p>
+                  <p className="text-white/80 text-sm mb-4">{model.desc}</p>
                   
                   {/* Features */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="px-2 py-1 text-xs rounded-md bg-white/5 text-white/70 border border-white/10">
+                    <span className="px-2 py-1 text-xs rounded-md bg-white/5 text-white/80 border border-white/10">
                       Sporty Design
                     </span>
-                    <span className="px-2 py-1 text-xs rounded-md bg-white/5 text-white/70 border border-white/10">
+                    <span className="px-2 py-1 text-xs rounded-md bg-white/5 text-white/80 border border-white/10">
                       Enhanced Performance
                     </span>
                   </div>
 
                   {/* CTA */}
                   <div className="flex gap-2">
-                    <button className="flex-1 px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm rounded-lg transition-colors border border-white/10">
+                    <button 
+                      className="flex-1 px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm rounded-lg transition-colors border border-white/10 min-h-[44px]"
+                      aria-label={`Enquire about ${model.name}`}
+                    >
                       Enquire
                     </button>
-                    <button className="px-4 py-2 bg-red-600/20 hover:bg-red-600/30 text-red-400 text-sm rounded-lg transition-colors border border-red-500/30">
+                    <button 
+                      className="px-4 py-2 bg-[#002C5F]/15 hover:bg-[#002C5F]/25 text-[#00A9E0] text-sm rounded-lg transition-colors border border-[#00A9E0]/30 min-h-[44px]"
+                      aria-label={`Book test drive for ${model.name}`}
+                    >
                       Test Drive
                     </button>
                     <a
@@ -491,7 +509,7 @@ function NLineSection() {
                         model.id === 'i20-nline' ? '/model/i20-nline' :
                         `/model/${(model as any).id}`
                       }
-                      className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm rounded-lg transition-colors border border-white/10"
+                      className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm rounded-lg transition-colors border border-white/10 min-h-[44px] flex items-center justify-center"
                       aria-label={`Know more about ${model.name}`}
                     >
                       Know More
@@ -500,7 +518,7 @@ function NLineSection() {
                 </div>
 
                 {/* Hover Effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" aria-hidden />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0057B8]/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" aria-hidden />
               </div>
             ))}
           </div>
@@ -515,7 +533,7 @@ function NLineSection() {
             ].map((item) => (
               <div key={item.label} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
                 <p className="text-white font-semibold">{item.label}</p>
-                <p className="text-white/60 text-sm">{item.desc}</p>
+                <p className="text-white/80 text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -525,7 +543,7 @@ function NLineSection() {
   )
 }
 
-function WhyBharathHyundai() {
+function WhyBharatHyundai() {
   const bullets = [
     { title: "Authorized Dealer", desc: "Hyundai Motor India Ltd." },
     { title: "Multiple Branches", desc: "Hyderabad & Khammam regions" },
@@ -535,27 +553,27 @@ function WhyBharathHyundai() {
   return (
     <section
       aria-labelledby="value-heading"
-      className="relative bg-black/40 backdrop-blur-sm bg-[radial-gradient(80%_60%_at_80%_50%,rgba(239,68,68,0.20),transparent)]"
+      className="relative bg-black/40 backdrop-blur-sm bg-[radial-gradient(80%_60%_at_80%_50%,rgba(0,169,224,0.18),transparent)]"
     >
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div>
           <h2 id="value-heading" className="text-3xl md:text-4xl font-semibold text-pretty">
-            Why Bharath Hyundai
+            Why Bharat Hyundai
           </h2>
-          <p className="mt-4 text-white/70 max-w-prose">
-            Since 2013, we’ve served customers across Telangana with transparent pricing, professional advice, and
+          <p className="mt-4 text-white/80 max-w-prose">
+            Since 2013, we've served customers across Telangana with transparent pricing, professional advice, and
             reliable service.
           </p>
           <div className="mt-8 rounded-lg border border-white/10 p-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
             {bullets.map((b) => (
               <div key={b.title}>
                 <p className="text-white font-medium">{b.title}</p>
-                <p className="text-white/70 text-sm">{b.desc}</p>
+                <p className="text-white/80 text-sm">{b.desc}</p>
               </div>
             ))}
           </div>
           <div className="mt-8 flex gap-3">
-            <Button className="rounded-full bg-red-600 hover:bg-red-500 text-white">Get Offers</Button>
+            <Button className="rounded-full bg-[#002C5F] hover:bg-[#0057B8] text-white">Get Offers</Button>
             <Button variant="secondary" className="rounded-full">
               Visit a Branch
             </Button>
@@ -565,7 +583,7 @@ function WhyBharathHyundai() {
           <div className="aspect-[4/3] w-full overflow-hidden rounded-lg ring-1 ring-white/10">
             <img
               src="/images/poster.png"
-              alt="Bharath Hyundai showroom"
+              alt="Bharat Hyundai showroom"
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
@@ -579,7 +597,7 @@ function ServiceCTA() {
   return (
     <section aria-labelledby="service-heading" className="relative">
       <div className="relative isolate overflow-hidden bg-black/30 backdrop-blur-sm">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002C5F]/90 via-[#0057B8]/60 to-transparent" aria-hidden />
         <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 items-center gap-10">
           <div className="max-w-xl rounded-2xl glass-black p-6 md:p-8">
             <h2 id="service-heading" className="text-3xl md:text-4xl font-semibold text-pretty">
@@ -589,7 +607,7 @@ function ServiceCTA() {
               Schedule periodic maintenance, body & paint, or quick checks at your nearest branch.
             </p>
             <div className="mt-8">
-              <Button className="rounded-full bg-red-600 hover:bg-red-500 text-white">Book Service</Button>
+              <Button className="rounded-full bg-[#002C5F] hover:bg-[#0057B8] text-white">Book Service</Button>
             </div>
           </div>
         </div>
@@ -614,7 +632,7 @@ function LocationsRow({ branches }: { branches: Branch[] }) {
               <MapPin className="h-5 w-5 text-white/70 mt-0.5" aria-hidden />
               <div>
                 <p className="font-medium">{b.name}</p>
-                <p className="text-sm text-white/70">{b.address}</p>
+                <p className="text-sm text-white/80">{b.address}</p>
               </div>
             </div>
             <div className="mt-3">
@@ -648,7 +666,7 @@ function FindPerfectCarFab() {
     <a
       href="/find-perfect-car"
       aria-label="Find Your Perfect Car"
-      className="fixed left-4 bottom-6 z-50 rounded-full bg-gradient-to-br from-red-600 to-red-700 p-4 text-white shadow-lg shadow-red-600/40 hover:shadow-red-600/60 focus-visible:outline-none focus-visible:ring-2 ring-white/40 transition-all hover:scale-110 group"
+      className="fixed left-4 bottom-6 z-50 rounded-full bg-gradient-to-br from-[#002C5F] to-[#0057B8] p-4 text-white shadow-lg shadow-[#002C5F]/40 hover:shadow-[#0057B8]/60 focus-visible:outline-none focus-visible:ring-2 ring-white/40 transition-all hover:scale-110 group"
     >
       <div className="relative">
         <Sparkles className="h-6 w-6" />

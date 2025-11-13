@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { createPortal } from "react-dom"
 import { X, ChevronRight, Phone, Mail, MapPin, Headset } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const SALES_PHONE = "+91 7733888999"
 const SERVICE_PHONE = "+91 7997806806"
@@ -92,21 +93,24 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-white/10 flex-shrink-0">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center shadow-lg shadow-red-600/30">
+              <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#002C5F] to-[#0057B8] flex items-center justify-center shadow-lg shadow-[#002C5F]/40">
                 <span className="text-white text-sm font-bold">H</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-white font-bold text-sm leading-tight">Bharath Hyundai</span>
+                <span className="text-white font-bold text-sm leading-tight">Bharat Hyundai</span>
                 <span className="text-white/60 text-[10px] uppercase tracking-wider">Menu</span>
               </div>
             </div>
-            <button
-              onClick={onClose}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
-              aria-label="Close menu"
-            >
-              <X className="h-6 w-6 text-white" />
-            </button>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                onClick={onClose}
+                className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                aria-label="Close menu"
+              >
+                <X className="h-6 w-6 text-white" />
+              </button>
+            </div>
           </div>
 
           {/* Navigation */}

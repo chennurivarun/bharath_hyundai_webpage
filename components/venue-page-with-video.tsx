@@ -36,6 +36,8 @@ export default function VenuePageWithVideo() {
         className="fixed inset-0 w-full h-full object-cover -z-10"
         src="/assets1/Hyundai VENUE _ Adventure Film.mp4"
       />
+      {/* Premium Light Black Overlay */}
+      <div className="fixed inset-0 bg-black/40 -z-10" />
       <div className="relative z-10">
         <VenueFullRedesign />
       </div>

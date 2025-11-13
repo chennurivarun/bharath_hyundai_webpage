@@ -7,6 +7,8 @@ import { Suspense } from "react"
 import WhatsAppButton from "@/components/whatsapp-button"
 import GlobalFooter from "@/components/global-footer"
 import { CarSelectionPopup } from "@/components/car-selection-popup"
+import { ThemeProvider } from "@/components/theme-provider"
+import { PerformanceHints } from "@/components/performance-hints"
 import "./globals.css"
 
 import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
@@ -17,9 +19,9 @@ const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200"
 const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"] })
 
 export const metadata: Metadata = {
-  title: "Bharath Hyundai | Authorized Hyundai Dealer in Telangana",
+  title: "Bharat Hyundai | Authorized Hyundai Dealer in Telangana",
   description:
-    "Official Bharath Hyundai dealership across Hyderabad & Khammam. Explore models, book a free test drive, and schedule service online.",
+    "Official Bharat Hyundai dealership across Hyderabad & Khammam. Explore models, book a free test drive, and schedule service online.",
   generator: "v0.app",
 }
 
@@ -29,13 +31,21 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en-IN" className="dark" suppressHydrationWarning>
+    <html lang="en-IN" suppressHydrationWarning>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
-        <Suspense fallback={null}>{children}</Suspense>
-        <GlobalFooter />
-        <WhatsAppButton />
-        <CarSelectionPopup />
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <PerformanceHints />
+          <Suspense fallback={null}>{children}</Suspense>
+          <GlobalFooter />
+          <WhatsAppButton />
+          <CarSelectionPopup />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Tucson Accessories | Genuine Hyundai Accessories | Bharath Hyundai",
+  title: "Tucson Accessories | Genuine Hyundai Accessories | Bharat Hyundai",
   description: "Explore genuine Hyundai Tucson accessories. Enhance your SUV with premium interior, exterior, and electrical accessories. Free installation and warranty included.",
   keywords: [
     "Tucson accessories",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "Tucson interior accessories",
   ],
   openGraph: {
-    title: "Tucson Accessories | Bharath Hyundai",
+    title: "Tucson Accessories | Bharat Hyundai",
     description: "Genuine Hyundai Tucson accessories for style, comfort, and safety.",
     type: "website",
   },

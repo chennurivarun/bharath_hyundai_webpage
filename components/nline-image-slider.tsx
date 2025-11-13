@@ -68,6 +68,9 @@ export default function NLineImageSlider() {
             <img
               src={image.src}
               alt={image.alt}
+              loading={index === 0 ? "eager" : "lazy"}
+              width="1200"
+              height="800"
               className="w-full h-full object-cover"
               onError={() => {
                 const newErrors = [...imageErrors]

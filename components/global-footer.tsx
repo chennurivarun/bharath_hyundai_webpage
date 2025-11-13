@@ -137,7 +137,7 @@ export function GlobalFooter() {
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <p>© {new Date().getFullYear()} Bharath Hyundai. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Bharat Hyundai. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-4">
             <span className="text-white/40">Hyundai Motor India Ltd. Authorized Dealer</span>
           </div>

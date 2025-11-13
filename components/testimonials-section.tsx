@@ -11,7 +11,7 @@ const TESTIMONIALS = [
     location: "Gachibowli, Hyderabad",
     model: "Creta",
     rating: 5,
-    text: "Excellent service from Bharath Hyundai! The team was very professional and helped me choose the perfect Creta. The delivery was on time and the finance process was smooth.",
+    text: "Excellent service from Bharat Hyundai! The team was very professional and helped me choose the perfect Creta. The delivery was on time and the finance process was smooth.",
     date: "2 weeks ago",
   },
   {
@@ -38,7 +38,7 @@ const TESTIMONIALS = [
     location: "Vikarabad",
     model: "Verna",
     rating: 5,
-    text: "Professional team at Bharath Hyundai. They helped me get a great finance deal on my Verna. The entire process was transparent and hassle-free. Thank you!",
+    text: "Professional team at Bharat Hyundai. They helped me get a great finance deal on my Verna. The entire process was transparent and hassle-free. Thank you!",
     date: "1 week ago",
   },
   {
@@ -47,7 +47,7 @@ const TESTIMONIALS = [
     location: "Gopanpally, Hyderabad",
     model: "Alcazar",
     rating: 5,
-    text: "Purchased Alcazar for my family. Spacious, comfortable, and loaded with features. Bharath Hyundai's team made the entire buying process smooth and enjoyable.",
+    text: "Purchased Alcazar for my family. Spacious, comfortable, and loaded with features. Bharat Hyundai's team made the entire buying process smooth and enjoyable.",
     date: "2 months ago",
   },
   {
@@ -56,7 +56,7 @@ const TESTIMONIALS = [
     location: "Kothagudem",
     model: "Exter",
     rating: 5,
-    text: "Great experience with Bharath Hyundai! They offered competitive pricing and excellent after-sales service. My Exter is perfect for city driving. Highly satisfied!",
+    text: "Great experience with Bharat Hyundai! They offered competitive pricing and excellent after-sales service. My Exter is perfect for city driving. Highly satisfied!",
     date: "3 weeks ago",
   },
 ]
@@ -95,25 +95,25 @@ export function TestimonialsSection() {
       aria-labelledby="testimonials-heading"
       className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16"
     >
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/90 via-black/80 to-gray-900/90 border border-white/10 backdrop-blur-sm">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/95 via-[#F4F6F9]/95 to-white/95 border border-[#D6E4F5] shadow-[0_24px_48px_-24px_rgba(11,31,58,0.35)]">
         {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl" aria-hidden />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl" aria-hidden />
+        <div className="absolute top-[-3rem] right-[-4rem] w-96 h-96 bg-[#C8D9F2]/60 rounded-full blur-3xl" aria-hidden />
+        <div className="absolute bottom-[-4rem] left-[-3rem] w-64 h-64 bg-[#A8DBF5]/50 rounded-full blur-3xl" aria-hidden />
 
-        <div className="relative z-10 p-8 lg:p-12">
+        <div className="relative z-10 p-6 sm:p-8 lg:p-12">
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <div className="inline-flex items-center gap-2 mb-4">
-              <Star className="h-6 w-6 text-yellow-500 fill-yellow-500" />
-              <span className="text-yellow-500 font-semibold uppercase tracking-wider text-sm">
+              <Star className="h-6 w-6 text-[#F7B500] fill-[#F7B500]" />
+              <span className="text-[#F7B500] font-semibold uppercase tracking-wider text-sm">
                 Customer Reviews
               </span>
             </div>
-            <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 id="testimonials-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B1F3A] mb-4">
               What Our Customers Say
             </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Hear from satisfied customers who chose Bharath Hyundai for their dream car
+            <p className="text-[#4A6076] text-base sm:text-lg max-w-2xl mx-auto">
+              Hear from satisfied customers who chose Bharat Hyundai for their dream car
             </p>
           </div>
 
@@ -124,21 +124,21 @@ export function TestimonialsSection() {
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
             <div className="max-w-4xl mx-auto">
-              <div className="relative min-h-[300px] flex items-center">
+              <div className="relative min-h-[280px] sm:min-h-[300px] flex items-center">
                 {TESTIMONIALS.map((testimonial, index) => (
                   <div
                     key={testimonial.id}
                     className={`absolute inset-0 transition-all duration-500 ${
                       index === currentIndex
-                        ? "opacity-100 translate-x-0"
+                        ? "opacity-100 translate-x-0 z-20"
                         : index < currentIndex
-                        ? "opacity-0 -translate-x-full"
-                        : "opacity-0 translate-x-full"
+                        ? "opacity-0 -translate-x-full z-10"
+                        : "opacity-0 translate-x-full z-10"
                     }`}
                   >
-                    <div className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10 backdrop-blur-sm">
+                    <div className="bg-white/90 border border-[#D6E4F5] rounded-2xl p-6 sm:p-8 md:p-10 shadow-[0_18px_32px_-24px_rgba(11,31,58,0.35)] backdrop-blur-sm">
                       {/* Quote Icon */}
-                      <Quote className="h-10 w-10 text-red-500/30 mb-6" />
+                      <Quote className="h-10 w-10 text-[#0057B8]/35 mb-6" />
 
                       {/* Rating */}
                       <div className="flex items-center gap-1 mb-4">
@@ -148,19 +148,19 @@ export function TestimonialsSection() {
                       </div>
 
                       {/* Testimonial Text */}
-                      <blockquote className="text-white text-lg md:text-xl leading-relaxed mb-6">
+                      <blockquote className="text-[#1C2A3A] text-base sm:text-lg md:text-xl leading-relaxed mb-6">
                         "{testimonial.text}"
                       </blockquote>
 
                       {/* Customer Info */}
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-white font-semibold text-lg">{testimonial.name}</p>
-                          <p className="text-white/60 text-sm">{testimonial.location}</p>
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div className="text-left sm:text-left">
+                          <p className="text-[#0B1F3A] font-semibold text-base sm:text-lg">{testimonial.name}</p>
+                          <p className="text-[#6B7C92] text-sm">{testimonial.location}</p>
                         </div>
-                        <div className="text-right">
-                          <p className="text-red-500 font-semibold">{testimonial.model}</p>
-                          <p className="text-white/60 text-sm">{testimonial.date}</p>
+                        <div className="text-left sm:text-right">
+                          <p className="text-[#0057B8] font-semibold text-sm sm:text-base">{testimonial.model}</p>
+                          <p className="text-[#6B7C92] text-sm">{testimonial.date}</p>
                         </div>
                       </div>
                     </div>
@@ -169,12 +169,12 @@ export function TestimonialsSection() {
               </div>
 
               {/* Navigation Arrows */}
-              <div className="flex items-center justify-center gap-4 mt-8">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-4 mt-8 relative z-30">
                 <Button
                   onClick={goToPrevious}
                   variant="outline"
                   size="icon"
-                  className="rounded-full border-white/20 hover:bg-white/10 text-white"
+                  className="rounded-full border-[#D6E4F5] hover:bg-[#EEF4FB] text-[#0B1F3A]"
                   aria-label="Previous testimonial"
                 >
                   <ChevronLeft className="h-5 w-5" />
@@ -189,8 +189,8 @@ export function TestimonialsSection() {
                       aria-label={`Go to testimonial ${index + 1}`}
                       className={`transition-all duration-300 rounded-full ${
                         index === currentIndex
-                          ? "w-8 h-2 bg-red-500"
-                          : "w-2 h-2 bg-white/30 hover:bg-white/50"
+                          ? "w-8 h-2 bg-[#0057B8]"
+                          : "w-2 h-2 bg-[#B7C6DA] hover:bg-[#94ABC9]"
                       }`}
                     />
                   ))}
@@ -200,7 +200,7 @@ export function TestimonialsSection() {
                   onClick={goToNext}
                   variant="outline"
                   size="icon"
-                  className="rounded-full border-white/20 hover:bg-white/10 text-white"
+                  className="rounded-full border-[#D6E4F5] hover:bg-[#EEF4FB] text-[#0B1F3A]"
                   aria-label="Next testimonial"
                 >
                   <ChevronRight className="h-5 w-5" />
@@ -212,20 +212,20 @@ export function TestimonialsSection() {
           {/* Trust Badges */}
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
-              <p className="text-3xl font-bold text-white mb-1">10+</p>
-              <p className="text-white/60 text-sm">Years in Business</p>
+              <p className="text-3xl font-bold text-[#0B1F3A] mb-1">10+</p>
+              <p className="text-[#6B7C92] text-sm">Years in Business</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-white mb-1">15,000+</p>
-              <p className="text-white/60 text-sm">Happy Customers</p>
+              <p className="text-3xl font-bold text-[#0B1F3A] mb-1">15,000+</p>
+              <p className="text-[#6B7C92] text-sm">Happy Customers</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-white mb-1">8</p>
-              <p className="text-white/60 text-sm">Branches</p>
+              <p className="text-3xl font-bold text-[#0B1F3A] mb-1">8</p>
+              <p className="text-[#6B7C92] text-sm">Branches</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-white mb-1">4.9/5</p>
-              <p className="text-white/60 text-sm">Customer Rating</p>
+              <p className="text-3xl font-bold text-[#0B1F3A] mb-1">4.9/5</p>
+              <p className="text-[#6B7C92] text-sm">Customer Rating</p>
             </div>
           </div>
         </div>

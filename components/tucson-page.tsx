@@ -16,15 +16,15 @@ import {
   TestTube,
 } from "lucide-react";
 
-const brand = { primary: "#dc2626" } as const;
+const brand = { primary: "#0057B8", accent: "#00A9E0", dark: "#0B1F3A" } as const;
 const cn = (...c: Array<string | false | undefined>) => c.filter(Boolean).join(" ");
 const isHttps = (url: string) => /^https:\/\//.test(url);
 
 const Section = ({ id, title, icon, children }: { id: string; title: string; icon?: React.ReactNode; children: React.ReactNode }) => (
   <section id={id} className="scroll-mt-24 py-12">
-    <div className="flex items-center gap-3 mb-6 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2">
-      <div className="p-2 rounded-xl bg-white/10 text-[color:var(--brand-primary)] border border-white/10">{icon}</div>
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+    <div className="flex items-center gap-3 mb-6 bg-white/70 backdrop-blur-md border border-[#D6E4F5] rounded-xl px-3 py-2 shadow-[0_10px_30px_-20px_rgba(11,31,58,0.45)]">
+      <div className="p-2 rounded-xl bg-[#0057B8]/10 text-[#0057B8] border border-[#D6E4F5]">{icon}</div>
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-[#0B1F3A]">{title}</h2>
     </div>
     {children}
   </section>
@@ -245,7 +245,7 @@ function VariantsPricingSection() {
                     <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Powertrain</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xl font-bold text-[color:var(--brand-primary)]">{item.price}</div>
+                    <div className="text-xl font-bold text-[#0057B8] dark:text-[#00A9E0]">{item.price}</div>
                     <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Ex-showroom*</div>
                   </div>
                 </div>
@@ -273,14 +273,14 @@ export default function TucsonFullImageSync() {
 
   useEffect(() => {
     const handler = () => {
-      const ids = ['highlet', 'exterior', 'interior', 'performance', 'safety', 'convenience', 'features', 'pricing', 'specs'];
+      const ids = ['exterior', 'interior', 'performance', 'safety', 'convenience', 'features', 'pricing', 'specs'];
       const offsets = ids.map((id) => {
         const el = document.getElementById(id);
         if (!el) return { id, d: Infinity };
         return { id, d: Math.abs(el.getBoundingClientRect().top - 120) };
       });
       offsets.sort((a, b) => a.d - b.d);
-      setActiveTab(offsets[0]?.id ?? 'highlet');
+      setActiveTab(offsets[0]?.id ?? 'exterior');
     };
 
     window.addEventListener('scroll', handler);
@@ -328,7 +328,6 @@ export default function TucsonFullImageSync() {
   }, []);
 
   const tabs = [
-    { id: 'highlet', label: 'Highlights', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'exterior', label: 'Exterior', icon: <Car className="w-4 h-4" /> },
     { id: 'interior', label: 'Interior', icon: <ImageIcon className="w-4 h-4" /> },
     { id: 'performance', label: 'Performance', icon: <Gauge className="w-4 h-4" /> },
@@ -408,19 +407,38 @@ export default function TucsonFullImageSync() {
           src="/assets1/Hyundai TUCSON _ Wrap doors.mp4"
         />
         {/* Premium Light Black Overlay */}
-        <div className="fixed inset-0 bg-black/20 -z-10" />
+        <div className="fixed inset-0 bg-black/40 -z-10" />
         <header className="relative">
           {/* Top fixed nav */}
-          <div className="fixed top-0 left-0 right-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/75 dark:supports-[backdrop-filter]:bg-black/30 border-b border-gray-200 dark:border-white/10">
-            <nav className="max-w-7xl mx-auto px-4 overflow-x-auto flex gap-2 py-2 no-scrollbar">
-              {tabs.map((t) => (
-                <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border', activeTab === t.id ? 'bg-[color:var(--brand-primary)] text-white border-transparent' : 'hover:bg-gray-50 dark:hover:bg-white/10')}>
-                  {t.icon}
-                  <span>{t.label}</span>
-                </a>
-              ))}
-            </nav>
-            <div className="h-0.5 bg-gradient-to-r from-transparent via-[color:var(--brand-primary)] to-transparent" />
+          <div className="fixed top-0 left-0 right-0 z-40 border-b border-white/20 bg-gradient-to-b from-[#0B1F3A]/70 via-[#002C5F]/55 to-[#0B1F3A]/70 backdrop-blur-2xl shadow-xl shadow-[#0B1F3A]/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
+            <div className="max-w-7xl mx-auto px-4 flex items-center justify-between gap-4 py-2">
+              {/* Logo */}
+              <a
+                href="/"
+                className="flex items-center gap-2 sm:gap-3 font-bold text-white group transition-transform hover:scale-105 flex-shrink-0 min-w-0"
+              >
+                <div className="relative flex-shrink-0">
+                  <span
+                    aria-hidden
+                    className="inline-block h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg bg-gradient-to-br from-[#002C5F] to-[#0057B8] shadow-lg shadow-[#002C5F]/40 group-hover:shadow-[#0057B8]/50 transition-all"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center text-white text-[10px] sm:text-xs font-bold">H</span>
+                </div>
+                <div className="flex flex-col min-w-0 hidden sm:flex">
+                  <span className="text-sm sm:text-base md:text-lg leading-tight tracking-tight truncate">Bharat Hyundai</span>
+                  <span className="text-[8px] sm:text-[9px] md:text-[10px] text-white/60 uppercase tracking-wider truncate">Authorized Dealer</span>
+                </div>
+              </a>
+              <nav className="flex-1 overflow-x-auto flex gap-2 no-scrollbar relative">
+                {tabs.map((t) => (
+                  <a key={t.id} href={`#${t.id}`} className={cn('inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border text-white/80 hover:text-white border-white/20 hover:bg-white/10 whitespace-nowrap', activeTab === t.id ? 'bg-[#0057B8]/30 text-white border-[#0057B8]/50' : '')}>
+                    {t.icon}
+                    <span>{t.label}</span>
+                  </a>
+                ))}
+              </nav>
+            </div>
+            <div className="h-0.5 bg-gradient-to-r from-transparent via-[#0057B8] to-transparent" />
           </div>
           <div className="h-[60px]"></div>
           <div className="relative aspect-[21/9] overflow-hidden">
@@ -442,10 +460,10 @@ export default function TucsonFullImageSync() {
                   <Chip>2.0 Diesel 8AT</Chip>
                 </div>
                 <div className="mt-6 flex gap-2">
-                  <a href="#highlet" className="inline-flex items-center gap-2 rounded-2xl bg-[color:var(--brand-primary)] px-5 py-2 text-sm font-medium text-white shadow-lg shadow-[color:var(--brand-primary)]/30">
+                  <a href="#highlet" className="inline-flex items-center gap-2 rounded-2xl bg-[#0057B8] px-5 py-2 text-sm font-medium text-white shadow-lg shadow-[#0057B8]/30 hover:bg-[#00458A]">
                     Explore <ChevronRight className="w-4 h-4" />
                   </a>
-                  <a href="#specs" className="inline-flex items-center gap-2 rounded-2xl border px-5 py-2 text-sm font-medium bg-white/10 backdrop-blur">
+                  <a href="#specs" className="inline-flex items-center gap-2 rounded-2xl border border-white/30 px-5 py-2 text-sm font-medium bg-white/10 backdrop-blur text-white hover:bg-white/20">
                     Specs
                   </a>
                 </div>
@@ -468,11 +486,11 @@ export default function TucsonFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 Truly, the cutting-edge SUV design with advanced technology.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+              <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                <p className="text-xl font-semibold text-white">
                   Hyundai TUCSON Car starts at an ex-showroom price of just ₹.27.31* Lakh.
                 </p>
-                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                <p className="text-base text-white/90 mt-2">
                   Experience cutting-edge technology and sleek design at a good price.
                 </p>
               </div>
@@ -500,11 +518,11 @@ export default function TucsonFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 Add the unique Hyundai SmartSense features and it is virtually intuition on wheels. Truly, the next gen of SUVs.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+              <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                <p className="text-xl font-semibold text-white">
                   Experience the Hyundai TUCSON exterior with a futuristic design that turns heads.
                 </p>
-                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                <p className="text-base text-white/90 mt-2">
                   Look at the 360° view of TUCSON and explore stunning TUCSON images that redefine elegance and innovation!
                 </p>
               </div>
@@ -545,11 +563,11 @@ export default function TucsonFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 Hit the right spot in your driving position with 10-way power adjustable ventilated & heated driver seat with memory function. The epitome of comfort, the embodiment of elegance.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
-                  Explore Hyundai TUCSON interior images and explore every angle with the stunning TUCSON 360 view
+              <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                <p className="text-xl font-semibold text-white">
+                  Explore Hyundai TUCSON interior images and explore every angle
                 </p>
-                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                <p className="text-base text-white/90 mt-2">
                   —where innovation meets elegance!
                 </p>
               </div>
@@ -576,11 +594,11 @@ export default function TucsonFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 The all-new Hyundai TUCSON is ready for everything. HTRAC empowers you to take on challenging roads while different modes ensure all your journeys go smooth.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+              <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                <p className="text-xl font-semibold text-white">
                   The Hyundai TUCSON offers smooth performance with instant power and efficiency.
                 </p>
-                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                <p className="text-base text-white/90 mt-2">
                   With impressive TUCSON mileage, it lets you drive longer with fewer stops for charging.
                 </p>
               </div>
@@ -600,16 +618,16 @@ export default function TucsonFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 The all-new Hyundai TUCSON is loaded with advanced tech that ensures a better driving experience and a range of features to ensure your safety.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800 mb-4">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+              <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20 mb-4">
+                <p className="text-xl font-semibold text-white">
                   Hyundai TUCSON petrol has been awarded with 5 star BNCAP safety for adult and child occupants both which make it more safer than before.
                 </p>
               </div>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+              <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                <p className="text-xl font-semibold text-white">
                   The Hyundai TUCSON car Safety Features ensure ultimate protection with 6 airbags, Hill-Start Assist, and more.
                 </p>
-                <p className="text-base text-red-800 dark:text-red-200 mt-2">
+                <p className="text-base text-white/90 mt-2">
                   Drive confidently with the Hyundai TUCSON car Safety Features, designed for your peace of mind.
                 </p>
               </div>
@@ -631,8 +649,8 @@ export default function TucsonFullImageSync() {
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 Connections go beyond in the all-new Hyundai TUCSON. The 26.03 cm (10.25") HD audio video navigation system will always get an encore. The home to car (H2C) with Alexa allows you to stay connected with your car from home, while 60+ Bluelink connected features ensure you're connected with the world while on the move.
               </p>
-              <div className="bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-                <p className="text-xl font-semibold text-red-900 dark:text-red-100">
+              <div className="bg-[#0057B8]/20 backdrop-blur-md rounded-lg p-6 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+                <p className="text-xl font-semibold text-white">
                   The Hyundai TUCSON car comfort & convenience Features redefine every drive with a spacious cabin, advanced climate control, and smart connectivity.
                 </p>
               </div>
@@ -736,14 +754,14 @@ export default function TucsonFullImageSync() {
 
         {/* Front view image above strip */}
         <div className="max-w-7xl mx-auto px-4 mb-6">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+          <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
             <img src={(ex.find(e=>e.title.toLowerCase().includes('front'))||ex[0]).img} alt="Tucson front view" className="h-[50vh] w-full object-cover" />
           </div>
         </div>
 
         {/* Bottom slow-scrolling strip */}
         <div className="max-w-7xl mx-auto px-4">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 mb-24">
+          <div className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5 mb-24">
             <div className="relative">
               <div className="flex gap-4 animate-scroll-slow">
                 {[...hl, ...ex, ...inn, ...pf, ...sf, ...con, ...hl, ...ex].map((c, i) => (
@@ -766,14 +784,14 @@ export default function TucsonFullImageSync() {
         <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
           <a 
             href="/test-drive"
-            className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 text-white px-6 py-3 shadow-lg font-medium text-base"
+            className="flex items-center gap-2 rounded-full bg-[#0057B8] hover:bg-[#00458A] text-white px-6 py-3 shadow-lg shadow-[#0057B8]/40 font-medium text-base"
           >
             <TestTube className="h-5 w-5" />
             Test Drive
           </a>
           <a 
             href="tel:+917733888999"
-            className="flex items-center gap-2 rounded-full bg-white/5 border border-white/20 text-white hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
+            className="flex items-center gap-2 rounded-full bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/20 text-gray-900 dark:text-white hover:bg-white/70 dark:hover:bg-white/10 px-6 py-3 shadow-lg font-medium text-base backdrop-blur-sm"
           >
             <Phone className="h-5 w-5" />
             Call Now

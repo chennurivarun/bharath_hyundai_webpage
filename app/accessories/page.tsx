@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, ShoppingCart, Star, Truck, Shield, RotateCcw } from "lucide-react"
 import { SiteNavigation } from "@/components/site-navigation"
+import { AccessoryEnquiryModal } from "@/components/accessory-enquiry-modal"
 
 // Note: Metadata export doesn't work in client components
 // This metadata should be added to a parent layout or server component wrapper
@@ -146,6 +147,8 @@ export default function AccessoriesPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [selectedModel, setSelectedModel] = useState("All")
+  const [selectedAccessory, setSelectedAccessory] = useState<typeof ACCESSORIES[0] | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   
   const filteredAccessories = ACCESSORIES.filter((accessory) => {
     const matchesSearch = accessory.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -155,13 +158,23 @@ export default function AccessoriesPage() {
     
     return matchesSearch && matchesCategory && matchesModel
   })
+
+  const handleEnquire = (accessory: typeof ACCESSORIES[0]) => {
+    setSelectedAccessory(accessory)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedAccessory(null)
+  }
   
   return (
     <>
       <SiteNavigation />
       <main className="pt-[120px] min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-red-600/20 via-black to-red-600/20">
+      <section className="relative py-20 bg-gradient-to-r from-[#0057B8]/20 via-black to-[#0057B8]/20">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
@@ -173,7 +186,7 @@ export default function AccessoriesPage() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
               <a 
                 href={CRETA_EV_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-emerald-600/20 ring-1 ring-emerald-500/30 hover:bg-emerald-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -184,12 +197,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-emerald-200 font-semibold text-sm">Creta EV Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">Creta EV Accessories</p>
                 </div>
               </a>
               <a 
                 href={CRETA_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-red-600/20 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -200,12 +213,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-red-200 font-semibold text-sm">Creta Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">Creta Accessories</p>
                 </div>
               </a>
               <a 
                 href={ALCAZAR_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-red-600/20 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -216,12 +229,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-red-200 font-semibold text-sm">Alcazar Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">Alcazar Accessories</p>
                 </div>
               </a>
               <a 
                 href={CRETA_NLINE_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-red-600/20 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -232,12 +245,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-red-200 font-semibold text-sm">Creta N Line Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">Creta N Line Accessories</p>
                 </div>
               </a>
               <a 
                 href={EXTER_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-red-600/20 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -248,12 +261,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-red-200 font-semibold text-sm">Exter Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">Exter Accessories</p>
                 </div>
               </a>
               <a 
                 href={I20_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-red-600/20 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -264,12 +277,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-red-200 font-semibold text-sm">i20 Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">i20 Accessories</p>
                 </div>
               </a>
               <a 
                 href={I10_NIOS_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-red-600/20 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -280,12 +293,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-red-200 font-semibold text-sm">Grand i10 Nios Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">Grand i10 Nios Accessories</p>
                 </div>
               </a>
               <a 
                 href={AURA_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-red-600/20 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -296,12 +309,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-red-200 font-semibold text-sm">Aura Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">Aura Accessories</p>
                 </div>
               </a>
               <a 
                 href={VENUE_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-red-600/20 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -312,12 +325,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-red-200 font-semibold text-sm">Venue Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">Venue Accessories</p>
                 </div>
               </a>
               <a 
                 href={TUCSON_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-red-600/20 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -328,12 +341,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-red-200 font-semibold text-sm">Tucson Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">Tucson Accessories</p>
                 </div>
               </a>
               <a 
                 href={IONIQ5_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-emerald-600/20 ring-1 ring-emerald-500/30 hover:bg-emerald-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -344,12 +357,12 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-emerald-200 font-semibold text-sm">IONIQ 5 Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">IONIQ 5 Accessories</p>
                 </div>
               </a>
               <a 
                 href={VERNA_ACCESSORIES_LINK}
-                className="group relative overflow-hidden rounded-xl bg-red-600/20 ring-1 ring-red-500/30 hover:bg-red-600/30 transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-[#0057B8]/20 ring-1 ring-[#0057B8]/30 hover:bg-[#0057B8]/30 transition-all hover:scale-105"
               >
                 <div className="aspect-[4/3] relative">
                   <Image
@@ -360,7 +373,7 @@ export default function AccessoriesPage() {
                   />
                 </div>
                 <div className="p-4 bg-gradient-to-t from-black/90 to-transparent absolute bottom-0 left-0 right-0">
-                  <p className="text-red-200 font-semibold text-sm">Verna Accessories</p>
+                  <p className="text-[#00A9E0] font-semibold text-sm">Verna Accessories</p>
                 </div>
               </a>
             </div>
@@ -423,51 +436,55 @@ export default function AccessoriesPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredAccessories.map((accessory) => (
-              <Card key={accessory.id} className="bg-gray-800/50 border-gray-700 hover:border-red-500/50 transition-colors group">
-                <CardHeader className="p-0">
+              <Card key={accessory.id} className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 group overflow-hidden">
+                {/* Glossy overlay effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                
+                <CardHeader className="p-0 relative">
                   <div className="relative">
-                    <div className="aspect-square overflow-hidden rounded-t-lg">
+                    <div className="aspect-square overflow-hidden rounded-t-xl bg-gradient-to-br from-[#0057B8]/10 to-[#00A9E0]/5 border-b border-[#0057B8]/20">
                       <img
                         src={accessory.image}
                         alt={accessory.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
-                    <Badge className="absolute top-2 left-2 bg-red-600">
-                      {Math.round(((parseFloat(accessory.originalPrice.replace(/[₹,]/g, '')) - parseFloat(accessory.price.replace(/[₹,]/g, ''))) / parseFloat(accessory.originalPrice.replace(/[₹,]/g, ''))) * 100)}% OFF
-                    </Badge>
                   </div>
                 </CardHeader>
-                <CardContent className="p-6">
+                <CardContent className="p-6 relative">
                   <div className="flex items-center gap-2 mb-2 flex-wrap">
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="text-xs border-[#0057B8]/40 text-white/90 bg-[#0057B8]/10 backdrop-blur-sm">
                       {accessory.category}
                     </Badge>
                     {accessory.compatibility !== "Universal" && (
-                      <Badge className="text-xs bg-emerald-600 hover:bg-emerald-500">
+                      <Badge className="text-xs bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-md shadow-[#0057B8]/30 border border-[#00A9E0]/30">
                         {accessory.compatibility}
                       </Badge>
                     )}
                   </div>
                   <CardTitle className="text-white mb-2">{accessory.name}</CardTitle>
-                  <p className="text-gray-300 text-sm mb-4">{accessory.description}</p>
+                  <p className="text-white/80 text-sm mb-4">{accessory.description}</p>
                   
                   <div className="flex items-center gap-2 mb-4">
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 text-yellow-400 fill-current" />
                       <span className="text-white text-sm">{accessory.rating}</span>
                     </div>
-                    <span className="text-gray-400 text-sm">({accessory.reviews} reviews)</span>
+                    <span className="text-white/60 text-sm">({accessory.reviews} reviews)</span>
                   </div>
 
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="text-red-400 font-bold text-lg">{accessory.price}</span>
-                    <span className="text-gray-400 line-through text-sm">{accessory.originalPrice}</span>
+                    <span className="text-[#00A9E0] font-bold text-lg drop-shadow-[0_0_8px_rgba(0,169,224,0.5)]">{accessory.price}</span>
+                    <span className="text-white/50 line-through text-sm">{accessory.originalPrice}</span>
                   </div>
 
-                  <Button className="w-full bg-red-600 hover:bg-red-500 group">
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    Add to Cart
+                  <Button 
+                    onClick={() => handleEnquire(accessory)}
+                    className="w-full bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                    <ShoppingCart className="h-4 w-4 mr-2 relative z-10" />
+                    <span className="relative z-10">Enquire Now</span>
                   </Button>
                 </CardContent>
               </Card>
@@ -482,22 +499,22 @@ export default function AccessoriesPage() {
           <h2 className="text-3xl font-bold text-white text-center mb-12">Why Choose Genuine Accessories?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="p-4 bg-red-600/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Shield className="h-8 w-8 text-red-500" />
+              <div className="p-4 bg-[#0057B8]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <Shield className="h-8 w-8 text-[#00A9E0]" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Genuine Quality</h3>
               <p className="text-gray-300">Designed and tested specifically for Hyundai vehicles to ensure perfect fit and performance.</p>
             </div>
             <div className="text-center">
-              <div className="p-4 bg-red-600/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <Truck className="h-8 w-8 text-red-500" />
+              <div className="p-4 bg-[#0057B8]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <Truck className="h-8 w-8 text-[#00A9E0]" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Free Installation</h3>
               <p className="text-gray-300">Professional installation by certified technicians at our service centers.</p>
             </div>
             <div className="text-center">
-              <div className="p-4 bg-red-600/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                <RotateCcw className="h-8 w-8 text-red-500" />
+              <div className="p-4 bg-[#0057B8]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                <RotateCcw className="h-8 w-8 text-[#00A9E0]" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Warranty Coverage</h3>
               <p className="text-gray-300">All genuine accessories come with manufacturer warranty for peace of mind.</p>
@@ -509,7 +526,7 @@ export default function AccessoriesPage() {
       {/* Installation Services */}
       <section className="py-16">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-red-600/10 via-gray-800/50 to-red-600/10 rounded-3xl p-8 md:p-12">
+          <div className="bg-gradient-to-r from-[#0057B8]/10 via-gray-800/50 to-[#0057B8]/10 rounded-3xl p-8 md:p-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-white mb-4">Professional Installation</h2>
               <p className="text-gray-300 max-w-2xl mx-auto">
@@ -522,25 +539,25 @@ export default function AccessoriesPage() {
                 <h3 className="text-xl font-semibold text-white mb-4">Installation Services Include:</h3>
                 <ul className="space-y-2 text-gray-300">
                   <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-[#0057B8] rounded-full"></div>
                     Free installation for most accessories
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-[#0057B8] rounded-full"></div>
                     Certified technician service
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-[#0057B8] rounded-full"></div>
                     Quality assurance testing
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-[#0057B8] rounded-full"></div>
                     Warranty protection maintained
                   </li>
                 </ul>
               </div>
               <div className="text-center">
-                <Button className="bg-red-600 hover:bg-red-500 px-8 py-3">
+                <Button className="bg-[#0057B8] hover:bg-[#00458A] px-8 py-3">
                   Schedule Installation
                 </Button>
               </div>
@@ -549,6 +566,18 @@ export default function AccessoriesPage() {
         </div>
       </section>
       </main>
+
+      {/* Enquiry Modal */}
+      {selectedAccessory && (
+        <AccessoryEnquiryModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          accessoryName={selectedAccessory.name}
+          carModel={selectedAccessory.compatibility || "Hyundai"}
+          accessoryPrice={selectedAccessory.price}
+          accessoryImage={selectedAccessory.image}
+        />
+      )}
     </>
   )
 }

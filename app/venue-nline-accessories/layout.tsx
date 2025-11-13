@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Venue N Line Accessories | Genuine Hyundai Accessories | Bharath Hyundai",
+  title: "Venue N Line Accessories | Genuine Hyundai Accessories | Bharat Hyundai",
   description:
-    "Explore genuine Hyundai Venue N Line accessories. Enhance your sporty compact SUV with premium interior, exterior, and electronics accessories from Bharath Hyundai.",
+    "Explore genuine Hyundai Venue N Line accessories. Enhance your sporty compact SUV with premium interior, exterior, and electronics accessories from Bharat Hyundai.",
   keywords: [
     "Venue N Line accessories",
     "Hyundai Venue N Line parts",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Venue N Line Accessories | Bharath Hyundai",
-    description: "Discover Hyundai Venue N Line accessories with Bharath Hyundai."
+    title: "Venue N Line Accessories | Bharat Hyundai",
+    description: "Discover Hyundai Venue N Line accessories with Bharat Hyundai."
   }
 }
 

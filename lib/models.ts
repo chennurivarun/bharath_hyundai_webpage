@@ -8,6 +8,7 @@ export type Model = {
   imageAlt: string
   brochureHref?: string
   segment: Segment
+  isNew?: boolean
 }
 
 export const MODELS: Model[] = [
@@ -66,6 +67,16 @@ export const MODELS: Model[] = [
     segment: "suv",
   },
   {
+    id: "venue-all-new",
+    name: "Venue (All New)",
+    priceBand: "₹7.94–14.68L*",
+    imageSrc: "/images/venue-all-new-hero.avif",
+    imageAlt: "Hyundai Venue All New SUV",
+    brochureHref: "/model/venue-all-new",
+    segment: "suv",
+    isNew: true,
+  },
+  {
     id: "venue",
     name: "Venue",
     priceBand: "₹7.26–12.45L*",
@@ -77,11 +88,12 @@ export const MODELS: Model[] = [
   {
     id: "venuen",
     name: "Venue N Line",
-    priceBand: "₹11.24–12.45L*",
-    imageSrc: "/images/venue-nline.avif",
-    imageAlt: "Hyundai Venue N Line",
-    brochureHref: "#",
+    priceBand: "₹11.24–13.48L*",
+    imageSrc: "/images/venue-nline-hero.avif",
+    imageAlt: "Hyundai Venue N Line SUV",
+    brochureHref: "/model/venue-nline",
     segment: "suv",
+    isNew: true,
   },
   {
     id: "creta",

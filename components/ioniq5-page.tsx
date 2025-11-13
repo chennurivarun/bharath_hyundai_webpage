@@ -29,15 +29,27 @@ export default function Ioniq5Page() {
     <div className="text-gray-200 relative">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/20 bg-gradient-to-b from-black/30 via-black/20 to-black/30 backdrop-blur-2xl shadow-xl shadow-black/30 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
-        <div className="relative max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded bg-white/10 grid place-items-center text-xs font-bold">I5</div>
-            <span className="text-sm text-gray-300">IONIQ 5 — Exterior</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-3 text-sm text-gray-300 overflow-x-auto">
+        <div className="relative max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+          {/* Logo */}
+          <a
+            href="/"
+            className="flex items-center gap-2 sm:gap-3 font-bold text-white group transition-transform hover:scale-105 flex-shrink-0 min-w-0"
+          >
+            <div className="relative flex-shrink-0">
+              <span
+                aria-hidden
+                className="inline-block h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg bg-gradient-to-br from-[#002C5F] to-[#0057B8] shadow-lg shadow-[#002C5F]/40 group-hover:shadow-[#0057B8]/50 transition-all"
+              />
+              <span className="absolute inset-0 flex items-center justify-center text-white text-[10px] sm:text-xs font-bold">H</span>
+            </div>
+            <div className="flex flex-col min-w-0 hidden sm:flex">
+              <span className="text-sm sm:text-base md:text-lg leading-tight tracking-tight truncate">Bharat Hyundai</span>
+              <span className="text-[8px] sm:text-[9px] md:text-[10px] text-white/60 uppercase tracking-wider truncate">Authorized Dealer</span>
+            </div>
+          </a>
+          <nav className="hidden md:flex items-center gap-3 text-sm text-gray-300 overflow-x-auto flex-1 justify-center">
             <a href="#overview" className="hover:text-white whitespace-nowrap">Overview</a>
             <a href="#angles" className="hover:text-white whitespace-nowrap">Angles</a>
-            <a href="#highlights" className="hover:text-white whitespace-nowrap">Highlights</a>
             <a href="#egmp" className="hover:text-white whitespace-nowrap">E-GMP</a>
             <a href="#exterior" className="hover:text-white whitespace-nowrap">Exterior</a>
             <a href="#interior" className="hover:text-white whitespace-nowrap">Interior</a>
@@ -49,7 +61,7 @@ export default function Ioniq5Page() {
             <a href="#variants" className="hover:text-white whitespace-nowrap">Pricing</a>
             <a href="#cta" className="hover:text-white whitespace-nowrap">Enquire</a>
           </nav>
-          <a href="#cta" className="px-3 py-2 text-sm rounded-lg bg-white text-black font-semibold">Book / Test Drive</a>
+          <a href="#cta" className="px-3 py-2 text-sm rounded-lg bg-white text-black font-semibold flex-shrink-0 whitespace-nowrap">Book / Test Drive</a>
         </div>
       </header>
 

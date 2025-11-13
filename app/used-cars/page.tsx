@@ -34,7 +34,7 @@ export default function UsedCarsPage() {
       <main className="pt-[120px] min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
         
         {/* Hero Section */}
-        <section className="relative py-20 lg:py-32 bg-gradient-to-r from-red-600/20 via-black to-red-600/20 overflow-hidden">
+        <section className="relative py-20 lg:py-32 bg-gradient-to-r from-[#0057B8]/20 via-black to-[#0057B8]/20 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/images/creata.avif')] opacity-10 bg-cover bg-center" />
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
@@ -49,9 +49,10 @@ export default function UsedCarsPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Button 
                   onClick={() => setShowBuyForm(true)}
-                  className="bg-red-600 hover:bg-red-500 text-white px-8 py-6 text-lg rounded-full"
+                  className="bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white px-8 py-6 text-lg rounded-full shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden"
                 >
-                  Tell Us What You Need
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <span className="relative z-10">Tell Us What You Need</span>
                 </Button>
                 <Button 
                   onClick={() => setShowSellForm(true)}
@@ -107,30 +108,31 @@ export default function UsedCarsPage() {
               
               {/* Buy a Car */}
               <Card 
-                className="bg-gradient-to-br from-red-600/20 to-gray-800/50 border-red-500/30 hover:border-red-500 transition-all cursor-pointer group"
+                className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 cursor-pointer group overflow-hidden"
                 onClick={() => setShowBuyForm(true)}
               >
-                <CardContent className="p-8 text-center">
-                  <div className="p-4 bg-red-600/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <TrendingUp className="h-8 w-8 text-red-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <CardContent className="p-8 text-center relative">
+                  <div className="p-4 bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[#0057B8]/30 shadow-md shadow-[#0057B8]/20 group-hover:scale-110 transition-transform">
+                    <TrendingUp className="h-8 w-8 text-[#00A9E0]" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-3">Buy a Car</h3>
-                  <p className="text-white/70 mb-4">Tell us budget & must-haves. We'll shortlist today.</p>
-                  <ul className="text-left text-white/60 text-sm space-y-2 mb-4">
+                  <p className="text-white/80 mb-4">Tell us budget & must-haves. We'll shortlist today.</p>
+                  <ul className="text-left text-white/70 text-sm space-y-2 mb-4">
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <CheckCircle className="h-4 w-4 text-[#00A9E0]" />
                       Certified & inspected
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <CheckCircle className="h-4 w-4 text-[#00A9E0]" />
                       Warranty included
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <CheckCircle className="h-4 w-4 text-[#00A9E0]" />
                       Finance available
                     </li>
                   </ul>
-                  <Badge className="bg-green-600/20 text-green-400 border-green-500/30">
+                  <Badge className="bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 text-[#00A9E0] border border-[#0057B8]/30 shadow-md shadow-[#0057B8]/20">
                     Start in 30s
                   </Badge>
                 </CardContent>
@@ -138,59 +140,61 @@ export default function UsedCarsPage() {
 
               {/* Sell / Exchange */}
               <Card 
-                className="bg-gradient-to-br from-blue-600/20 to-gray-800/50 border-blue-500/30 hover:border-blue-500 transition-all cursor-pointer group"
+                className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 cursor-pointer group overflow-hidden"
                 onClick={() => setShowSellForm(true)}
               >
-                <CardContent className="p-8 text-center">
-                  <div className="p-4 bg-blue-600/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <TrendingUp className="h-8 w-8 text-blue-500 rotate-180" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <CardContent className="p-8 text-center relative">
+                  <div className="p-4 bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[#0057B8]/30 shadow-md shadow-[#0057B8]/20 group-hover:scale-110 transition-transform">
+                    <TrendingUp className="h-8 w-8 text-[#00A9E0] rotate-180" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-3">Sell / Exchange</h3>
-                  <p className="text-white/70 mb-4">Free evaluation • Quick payment • Clean documentation.</p>
-                  <ul className="text-left text-white/60 text-sm space-y-2 mb-4">
+                  <p className="text-white/80 mb-4">Free evaluation • Quick payment • Clean documentation.</p>
+                  <ul className="text-left text-white/70 text-sm space-y-2 mb-4">
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <CheckCircle className="h-4 w-4 text-[#00A9E0]" />
                       Best market price
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <CheckCircle className="h-4 w-4 text-[#00A9E0]" />
                       Instant evaluation
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <CheckCircle className="h-4 w-4 text-[#00A9E0]" />
                       Hassle-free process
                     </li>
                   </ul>
-                  <Badge className="bg-green-600/20 text-green-400 border-green-500/30">
+                  <Badge className="bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 text-[#00A9E0] border border-[#0057B8]/30 shadow-md shadow-[#0057B8]/20">
                     Start in 30s
                   </Badge>
                 </CardContent>
               </Card>
 
               {/* Just Exploring */}
-              <Card className="bg-gradient-to-br from-green-600/20 to-gray-800/50 border-green-500/30 hover:border-green-500 transition-all cursor-pointer group">
-                <CardContent className="p-8 text-center">
+              <Card className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 cursor-pointer group overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <CardContent className="p-8 text-center relative">
                   <a href="https://wa.me/917733888999" target="_blank" rel="noopener noreferrer" className="block">
-                    <div className="p-4 bg-green-600/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <MessageCircle className="h-8 w-8 text-green-500" />
+                    <div className="p-4 bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[#0057B8]/30 shadow-md shadow-[#0057B8]/20 group-hover:scale-110 transition-transform">
+                      <MessageCircle className="h-8 w-8 text-[#00A9E0]" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-3">Just Exploring</h3>
-                    <p className="text-white/70 mb-4">Chat with our expert on WhatsApp.</p>
-                    <ul className="text-left text-white/60 text-sm space-y-2 mb-4">
+                    <p className="text-white/80 mb-4">Chat with our expert on WhatsApp.</p>
+                    <ul className="text-left text-white/70 text-sm space-y-2 mb-4">
                       <li className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <CheckCircle className="h-4 w-4 text-[#00A9E0]" />
                         Instant responses
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <CheckCircle className="h-4 w-4 text-[#00A9E0]" />
                         No pressure
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <CheckCircle className="h-4 w-4 text-[#00A9E0]" />
                         Expert guidance
                       </li>
                     </ul>
-                    <Badge className="bg-green-600/20 text-green-400 border-green-500/30">
+                    <Badge className="bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 text-[#00A9E0] border border-[#0057B8]/30 shadow-md shadow-[#0057B8]/20">
                       Start in 30s
                     </Badge>
                   </a>
@@ -210,11 +214,11 @@ export default function UsedCarsPage() {
           <SellCarForm onClose={() => setShowSellForm(false)} />
         )}
 
-        {/* Why Bharath Hyundai Pre-Owned */}
+        {/* Why Bharat Hyundai Pre-Owned */}
         <section className="py-16">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-              Why Bharath Hyundai Pre-Owned
+              Why Bharat Hyundai Pre-Owned
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
@@ -251,13 +255,14 @@ export default function UsedCarsPage() {
               ].map((item, index) => {
                 const Icon = item.icon
                 return (
-                  <Card key={index} className="bg-gray-800/50 border-gray-700 hover:border-red-500/50 transition-colors">
-                    <CardContent className="p-6 text-center">
-                      <div className="p-4 bg-red-600/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                        <Icon className="h-8 w-8 text-red-500" />
+                  <Card key={index} className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 group overflow-hidden text-center">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <CardContent className="p-6 relative">
+                      <div className="p-4 bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[#0057B8]/30 shadow-md shadow-[#0057B8]/20">
+                        <Icon className="h-8 w-8 text-[#00A9E0]" />
                       </div>
                       <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                      <p className="text-white/70">{item.desc}</p>
+                      <p className="text-white/80">{item.desc}</p>
                     </CardContent>
                   </Card>
                 )
@@ -274,25 +279,25 @@ export default function UsedCarsPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               <div className="text-center">
-                <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-[#0057B8] to-[#00A9E0] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4 shadow-lg shadow-[#0057B8]/40 border border-[#00A9E0]/30">
                   1
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">Tell us your need</h3>
-                <p className="text-white/70">30s form</p>
+                <p className="text-white/80">30s form</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-[#0057B8] to-[#00A9E0] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4 shadow-lg shadow-[#0057B8]/40 border border-[#00A9E0]/30">
                   2
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">We shortlist / evaluate</h3>
-                <p className="text-white/70">Same day</p>
+                <p className="text-white/80">Same day</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-[#0057B8] to-[#00A9E0] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4 shadow-lg shadow-[#0057B8]/40 border border-[#00A9E0]/30">
                   3
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">Test drive & paperwork</h3>
-                <p className="text-white/70">48–72 hrs</p>
+                <p className="text-white/80">48–72 hrs</p>
               </div>
             </div>
           </div>
@@ -305,16 +310,16 @@ export default function UsedCarsPage() {
               Deals You Can Expect
             </h2>
             <div className="flex flex-wrap justify-center gap-4 mb-6">
-              <Badge className="bg-red-600/20 text-red-400 border-red-500/30 px-6 py-3 text-base">
+              <Badge className="bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 text-[#00A9E0] border border-[#0057B8]/30 px-6 py-3 text-base shadow-md shadow-[#0057B8]/20">
                 Under ₹6L hatchbacks
               </Badge>
-              <Badge className="bg-red-600/20 text-red-400 border-red-500/30 px-6 py-3 text-base">
+              <Badge className="bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 text-[#00A9E0] border border-[#0057B8]/30 px-6 py-3 text-base shadow-md shadow-[#0057B8]/20">
                 Under ₹10L SUVs
               </Badge>
-              <Badge className="bg-red-600/20 text-red-400 border-red-500/30 px-6 py-3 text-base">
+              <Badge className="bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 text-[#00A9E0] border border-[#0057B8]/30 px-6 py-3 text-base shadow-md shadow-[#0057B8]/20">
                 Auto-transmission picks
               </Badge>
-              <Badge className="bg-red-600/20 text-red-400 border-red-500/30 px-6 py-3 text-base">
+              <Badge className="bg-gradient-to-r from-[#0057B8]/20 to-[#00A9E0]/20 text-[#00A9E0] border border-[#0057B8]/30 px-6 py-3 text-base shadow-md shadow-[#0057B8]/20">
                 Low-KM company-owned cars
               </Badge>
             </div>
@@ -328,23 +333,27 @@ export default function UsedCarsPage() {
         <section className="py-16 bg-gray-900/50">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card className="bg-gradient-to-br from-blue-600/20 to-gray-800/50 border-blue-500/30">
-                <CardContent className="p-8">
-                  <Calculator className="h-12 w-12 text-blue-500 mb-4" />
+              <Card className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 group overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <CardContent className="p-8 relative">
+                  <Calculator className="h-12 w-12 text-[#00A9E0] mb-4" />
                   <h3 className="text-2xl font-bold text-white mb-3">Finance Options</h3>
-                  <p className="text-white/70 mb-4">EMI from ₹1,500 per ₹1L loan</p>
-                  <Button className="bg-blue-600 hover:bg-blue-500" onClick={() => setShowBuyForm(true)}>
-                    Check Eligibility
+                  <p className="text-white/80 mb-4">EMI from ₹1,500 per ₹1L loan</p>
+                  <Button className="bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden" onClick={() => setShowBuyForm(true)}>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                    <span className="relative z-10">Check Eligibility</span>
                   </Button>
                 </CardContent>
               </Card>
-              <Card className="bg-gradient-to-br from-green-600/20 to-gray-800/50 border-green-500/30">
-                <CardContent className="p-8">
-                  <TrendingUp className="h-12 w-12 text-green-500 mb-4" />
+              <Card className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 group overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <CardContent className="p-8 relative">
+                  <TrendingUp className="h-12 w-12 text-[#00A9E0] mb-4" />
                   <h3 className="text-2xl font-bold text-white mb-3">Instant Upgrade Offer</h3>
-                  <p className="text-white/70 mb-4">Exchange your old car for the best value</p>
-                  <Button className="bg-green-600 hover:bg-green-500" onClick={() => setShowSellForm(true)}>
-                    Get Exchange Value
+                  <p className="text-white/80 mb-4">Exchange your old car for the best value</p>
+                  <Button className="bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden" onClick={() => setShowSellForm(true)}>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                    <span className="relative z-10">Get Exchange Value</span>
                   </Button>
                 </CardContent>
               </Card>
@@ -376,14 +385,15 @@ export default function UsedCarsPage() {
                   rating: 5
                 }
               ].map((testimonial, index) => (
-                <Card key={index} className="bg-gray-800/50 border-gray-700">
-                  <CardContent className="p-6">
+                <Card key={index} className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 group overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  <CardContent className="p-6 relative">
                     <div className="flex gap-1 mb-3">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
                       ))}
                     </div>
-                    <p className="text-white/80 mb-4">"{testimonial.text}"</p>
+                    <p className="text-white/90 mb-4">"{testimonial.text}"</p>
                     <p className="text-white font-semibold">— {testimonial.name}</p>
                   </CardContent>
                 </Card>
@@ -408,25 +418,28 @@ export default function UsedCarsPage() {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {BRANCHES.map((branch) => (
-                <Card key={branch} className="bg-gray-800/50 border-gray-700 hover:border-red-500/50 transition-colors">
-                  <CardContent className="p-4 text-center">
-                    <MapPin className="h-6 w-6 text-red-500 mx-auto mb-2" />
+                <Card key={branch} className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 group overflow-hidden text-center">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  <CardContent className="p-4 relative">
+                    <MapPin className="h-6 w-6 text-[#00A9E0] mx-auto mb-2" />
                     <p className="text-white font-semibold">{branch}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button className="bg-red-600 hover:bg-red-500" asChild>
+              <Button className="bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden" asChild>
                 <a href="tel:+917733888999">
-                  <Phone className="h-5 w-5 mr-2" />
-                  Call: +91 7733888999
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <Phone className="h-5 w-5 mr-2 relative z-10" />
+                  <span className="relative z-10">Call: +91 7733888999</span>
                 </a>
               </Button>
-              <Button className="bg-green-600 hover:bg-green-500" asChild>
+              <Button className="bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden" asChild>
                 <a href="https://wa.me/917733888999" target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="h-5 w-5 mr-2" />
-                  WhatsApp Now
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <MessageCircle className="h-5 w-5 mr-2 relative z-10" />
+                  <span className="relative z-10">WhatsApp Now</span>
                 </a>
               </Button>
             </div>
@@ -441,7 +454,7 @@ export default function UsedCarsPage() {
         <FAQSection />
 
         {/* Final CTA Band */}
-        <section className="py-16 bg-gradient-to-r from-red-600/20 via-black to-red-600/20">
+        <section className="py-16 bg-gradient-to-r from-[#0057B8]/20 via-black to-[#0057B8]/20">
           <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Get Your Shortlist Today
@@ -450,10 +463,11 @@ export default function UsedCarsPage() {
               <Input 
                 type="tel" 
                 placeholder="Enter your phone number"
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/40 text-lg py-6"
+                className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20 text-lg py-6"
               />
-              <Button className="bg-red-600 hover:bg-red-500 px-8 py-6 text-lg" onClick={() => setShowBuyForm(true)}>
-                Get Shortlist
+              <Button className="bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 px-8 py-6 text-lg group relative overflow-hidden" onClick={() => setShowBuyForm(true)}>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <span className="relative z-10">Get Shortlist</span>
               </Button>
             </div>
             <div className="flex flex-wrap justify-center gap-3">
@@ -479,20 +493,23 @@ export default function UsedCarsPage() {
         {/* Sticky Bottom Bar (Mobile) */}
         <div className="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-lg border-t border-white/10 p-4 lg:hidden z-50">
           <div className="flex gap-2">
-            <Button className="flex-1 bg-green-600 hover:bg-green-500" asChild>
+            <Button className="flex-1 bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden" asChild>
               <a href="https://wa.me/917733888999" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="h-5 w-5 mr-2" />
-                WhatsApp
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <MessageCircle className="h-5 w-5 mr-2 relative z-10" />
+                <span className="relative z-10">WhatsApp</span>
               </a>
             </Button>
-            <Button className="flex-1 bg-blue-600 hover:bg-blue-500" asChild>
+            <Button className="flex-1 bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden" asChild>
               <a href="tel:+917733888999">
-                <Phone className="h-5 w-5 mr-2" />
-                Call
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <Phone className="h-5 w-5 mr-2 relative z-10" />
+                <span className="relative z-10">Call</span>
               </a>
             </Button>
-            <Button className="flex-1 bg-red-600 hover:bg-red-500" onClick={() => setShowBuyForm(true)}>
-              Get Shortlist
+            <Button className="flex-1 bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden" onClick={() => setShowBuyForm(true)}>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="relative z-10">Get Shortlist</span>
             </Button>
           </div>
         </div>
@@ -516,29 +533,30 @@ function BuyCarForm({ onClose }: { onClose: () => void }) {
 
           {step === 1 && (
             <div className="space-y-4">
-              <div>
-                <Label htmlFor="name" className="text-white">Full Name</Label>
-                <Input id="name" className="bg-gray-800 border-gray-700 text-white" />
-              </div>
-              <div>
-                <Label htmlFor="phone" className="text-white">Phone Number</Label>
-                <Input id="phone" type="tel" className="bg-gray-800 border-gray-700 text-white" />
-              </div>
-              <div>
-                <Label htmlFor="branch" className="text-white">Preferred Branch</Label>
-                <Select>
-                  <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
-                    <SelectValue placeholder="Select branch" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {BRANCHES.map((branch) => (
-                      <SelectItem key={branch} value={branch}>{branch}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <Button className="w-full bg-red-600 hover:bg-red-500" onClick={() => setStep(2)}>
-                Continue
+            <div>
+              <Label htmlFor="name" className="text-white">Full Name</Label>
+              <Input id="name" className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20" />
+            </div>
+            <div>
+              <Label htmlFor="phone" className="text-white">Phone Number</Label>
+              <Input id="phone" type="tel" className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20" />
+            </div>
+            <div>
+              <Label htmlFor="branch" className="text-white">Preferred Branch</Label>
+              <Select>
+                <SelectTrigger className="bg-white/10 border-[#0057B8]/40 text-white focus:border-[#00A9E0] focus:ring-[#00A9E0]/20">
+                  <SelectValue placeholder="Select branch" />
+                </SelectTrigger>
+                <SelectContent>
+                  {BRANCHES.map((branch) => (
+                    <SelectItem key={branch} value={branch}>{branch}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+              <Button className="w-full bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden" onClick={() => setStep(2)}>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <span className="relative z-10">Continue</span>
               </Button>
             </div>
           )}
@@ -548,7 +566,7 @@ function BuyCarForm({ onClose }: { onClose: () => void }) {
               <div>
                 <Label htmlFor="budget" className="text-white">Budget Range</Label>
                 <Select>
-                  <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                  <SelectTrigger className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20">
                     <SelectValue placeholder="Select budget" />
                   </SelectTrigger>
                   <SelectContent>
@@ -561,7 +579,7 @@ function BuyCarForm({ onClose }: { onClose: () => void }) {
               <div>
                 <Label htmlFor="bodytype" className="text-white">Body Type</Label>
                 <Select>
-                  <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                  <SelectTrigger className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20">
                     <SelectValue placeholder="Select body type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -574,7 +592,7 @@ function BuyCarForm({ onClose }: { onClose: () => void }) {
               <div>
                 <Label htmlFor="fuel" className="text-white">Fuel Type</Label>
                 <Select>
-                  <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                  <SelectTrigger className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20">
                     <SelectValue placeholder="Select fuel type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -587,7 +605,7 @@ function BuyCarForm({ onClose }: { onClose: () => void }) {
               <div>
                 <Label htmlFor="transmission" className="text-white">Transmission</Label>
                 <Select>
-                  <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                  <SelectTrigger className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20">
                     <SelectValue placeholder="Select transmission" />
                   </SelectTrigger>
                   <SelectContent>
@@ -598,11 +616,12 @@ function BuyCarForm({ onClose }: { onClose: () => void }) {
                 </Select>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" className="flex-1 border-gray-700 text-white" onClick={() => setStep(1)}>
+                <Button variant="outline" className="flex-1 border-[#0057B8]/40 text-white hover:bg-[#0057B8]/20 hover:border-[#0057B8]/60" onClick={() => setStep(1)}>
                   Back
                 </Button>
-                <Button className="flex-1 bg-red-600 hover:bg-red-500">
-                  Submit Request
+                <Button className="flex-1 bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <span className="relative z-10">Submit Request</span>
                 </Button>
               </div>
             </div>
@@ -627,34 +646,34 @@ function SellCarForm({ onClose }: { onClose: () => void }) {
           <div className="space-y-4">
             <div>
               <Label htmlFor="sell-name" className="text-white">Full Name</Label>
-              <Input id="sell-name" className="bg-gray-800 border-gray-700 text-white" />
+              <Input id="sell-name" className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20" />
             </div>
             <div>
               <Label htmlFor="sell-phone" className="text-white">Phone Number</Label>
-              <Input id="sell-phone" type="tel" className="bg-gray-800 border-gray-700 text-white" />
+              <Input id="sell-phone" type="tel" className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20" />
             </div>
             <div>
               <Label htmlFor="car-number" className="text-white">Car Registration Number</Label>
-              <Input id="car-number" className="bg-gray-800 border-gray-700 text-white" placeholder="TS 09 XX 1234" />
+              <Input id="car-number" className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20" placeholder="TS 09 XX 1234" />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="year" className="text-white">Year</Label>
-                <Input id="year" type="number" className="bg-gray-800 border-gray-700 text-white" placeholder="2020" />
+                <Input id="year" type="number" className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20" placeholder="2020" />
               </div>
               <div>
                 <Label htmlFor="kms" className="text-white">Kilometers Driven</Label>
-                <Input id="kms" type="number" className="bg-gray-800 border-gray-700 text-white" placeholder="25000" />
+                <Input id="kms" type="number" className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20" placeholder="25000" />
               </div>
             </div>
             <div>
               <Label htmlFor="variant" className="text-white">Variant</Label>
-              <Input id="variant" className="bg-gray-800 border-gray-700 text-white" placeholder="e.g., Verna SX 1.5 Diesel" />
+              <Input id="variant" className="bg-white/10 border-[#0057B8]/40 text-white placeholder:text-white/50 focus:border-[#00A9E0] focus:ring-[#00A9E0]/20" placeholder="e.g., Verna SX 1.5 Diesel" />
             </div>
             <div>
               <Label htmlFor="condition" className="text-white">Condition</Label>
               <Select>
-                <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                <SelectTrigger className="bg-white/10 border-[#0057B8]/40 text-white focus:border-[#00A9E0] focus:ring-[#00A9E0]/20">
                   <SelectValue placeholder="Select condition" />
                 </SelectTrigger>
                 <SelectContent>
@@ -664,8 +683,9 @@ function SellCarForm({ onClose }: { onClose: () => void }) {
                 </SelectContent>
               </Select>
             </div>
-            <Button className="w-full bg-red-600 hover:bg-red-500">
-              Get Free Evaluation
+            <Button className="w-full bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="relative z-10">Get Free Evaluation</span>
             </Button>
           </div>
         </CardContent>
@@ -713,17 +733,18 @@ function FAQSection() {
         </h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <Card key={index} className="bg-gray-800/50 border-gray-700">
-              <CardContent className="p-0">
+            <Card key={index} className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 group overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <CardContent className="p-0 relative">
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-700/30 transition-colors"
+                  className="w-full p-6 text-left flex justify-between items-center hover:bg-[#0057B8]/30 transition-colors relative z-10"
                 >
                   <span className="text-white font-semibold pr-4">{faq.q}</span>
-                  <ChevronDown className={`h-5 w-5 text-white transition-transform ${openIndex === index ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`h-5 w-5 text-[#00A9E0] transition-transform ${openIndex === index ? 'rotate-180' : ''}`} />
                 </button>
                 {openIndex === index && (
-                  <div className="px-6 pb-6 text-white/70">
+                  <div className="px-6 pb-6 text-white/80 relative z-10">
                     {faq.a}
                   </div>
                 )}

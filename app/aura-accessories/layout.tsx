@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Aura Accessories | Genuine Hyundai Accessories | Bharath Hyundai",
+  title: "Aura Accessories | Genuine Hyundai Accessories | Bharat Hyundai",
   description: "Explore genuine Hyundai Aura accessories. Enhance your sedan with premium interior, exterior, and electrical accessories. Free installation and warranty included.",
   keywords: [
     "Aura accessories",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "Aura interior accessories",
   ],
   openGraph: {
-    title: "Aura Accessories | Bharath Hyundai",
+    title: "Aura Accessories | Bharat Hyundai",
     description: "Genuine Hyundai Aura accessories for style, comfort, and safety.",
     type: "website",
   },

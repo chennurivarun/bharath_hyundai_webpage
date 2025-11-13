@@ -82,7 +82,7 @@ export default function SegmentPage({ params }: { params: { segment: Segment } }
   }, [params])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#0057B8]/5 via-black to-[#00A9E0]/5">
       <SiteNavigation />
       
       <main className="pt-[140px] container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -142,8 +142,8 @@ export default function SegmentPage({ params }: { params: { segment: Segment } }
         {/* No Results */}
         {filteredModels.length === 0 && (
           <div className="text-center py-12">
-            <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10">
-              <Car className="h-12 w-12 text-white/40" />
+            <div className="w-24 h-24 bg-[#0057B8]/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-[#0057B8]/30 shadow-lg shadow-[#0057B8]/20">
+              <Car className="h-12 w-12 text-[#00A9E0]" />
             </div>
             <h3 className="text-xl font-semibold text-white mb-2">No models found</h3>
             <p className="text-white/70 mb-4">Try adjusting your filters to see more results</p>
@@ -155,7 +155,7 @@ export default function SegmentPage({ params }: { params: { segment: Segment } }
                 fuelType: "all"
               })} 
               variant="outline"
-              className="border-white/20 text-white hover:bg-white/10"
+              className="border-[#0057B8]/40 text-white hover:bg-[#0057B8]/20 hover:border-[#0057B8]/60"
             >
               Clear All Filters
             </Button>
@@ -177,23 +177,25 @@ export default function SegmentPage({ params }: { params: { segment: Segment } }
 
         {/* CTA Section */}
         <div className="mt-16 text-center">
-          <div className="bg-gradient-to-br from-gray-900/95 via-black/95 to-gray-900/95 rounded-2xl shadow-2xl p-8 border border-white/10 backdrop-blur-sm">
-            <h2 className="text-2xl font-bold text-white mb-4">
+          <div className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-2xl shadow-lg shadow-[#0057B8]/20 p-8 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-50 pointer-events-none" />
+            <h2 className="text-2xl font-bold text-white mb-4 relative z-10">
               Can't Find What You're Looking For?
             </h2>
-            <p className="text-white/80 mb-6">
+            <p className="text-white/80 mb-6 relative z-10">
               Our expert team can help you find the perfect {segmentLabel(segment).toLowerCase()} model for your needs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
               <a
                 href="/test-drive"
-                className="inline-flex items-center justify-center px-6 py-3 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-lg transition-all shadow-lg shadow-red-600/30 hover:shadow-red-600/50"
+                className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white font-semibold rounded-lg transition-all shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 border border-[#00A9E0]/30 group relative overflow-hidden"
               >
-                Schedule Test Drive
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <span className="relative z-10">Schedule Test Drive</span>
               </a>
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-all"
+                className="inline-flex items-center justify-center px-6 py-3 border border-[#0057B8]/40 text-white font-semibold rounded-lg hover:bg-[#0057B8]/20 hover:border-[#0057B8]/60 transition-all"
               >
                 Contact Expert
               </a>
@@ -203,10 +205,10 @@ export default function SegmentPage({ params }: { params: { segment: Segment } }
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-black/80 backdrop-blur-md border-t border-[#0057B8]/20 text-white py-8">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-sm text-gray-400">
-            © {new Date().getFullYear()} Bharath Hyundai. All rights reserved.
+          <div className="text-center text-sm text-white/60">
+            © {new Date().getFullYear()} Bharat Hyundai. All rights reserved.
           </div>
         </div>
       </footer>

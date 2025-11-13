@@ -167,6 +167,11 @@
   
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  
+  body {
+    overflow-x: hidden;
   }
   
   @media (prefers-reduced-motion: reduce) {
@@ -309,5 +314,19 @@
 
   .animate-float3d {
     animation: float3d 6s ease-in-out infinite;
+  }
+
+  /* Shine animation for cards */
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(200%) translateY(200%) rotate(45deg);
+    }
+  }
+
+  .animate-shine {
+    animation: shine 2s ease-in-out infinite;
   }
 }

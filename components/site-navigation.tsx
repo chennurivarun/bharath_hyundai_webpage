@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Phone, Headset, Search } from "lucide-react"
 import { MobileMenu } from "./mobile-menu"
 import { SearchDialog } from "./search-dialog"
+import { ThemeToggle } from "./theme-toggle"
 
 const SALES_PHONE = "+91 7733888999"
 const SERVICE_PHONE = "+91 7997806806"
@@ -20,24 +21,24 @@ const NAV_ITEMS = [
 
 export function AnnouncementBar() {
   return (
-    <div role="region" aria-label="Promotions" className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-black/70 via-black/60 to-black/70 backdrop-blur-xl text-white/90 text-xs border-b border-white/10 shadow-sm shadow-black/10">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+    <div role="region" aria-label="Promotions" className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#002C5F]/95 via-[#002C5F]/90 to-[#002C5F]/95 backdrop-blur-xl text-white/90 text-xs border-b border-white/10 shadow-lg shadow-[#002C5F]/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/10 before:via-transparent before:to-transparent before:pointer-events-none">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 relative">
         <div className="flex items-center justify-between gap-4">
           {/* Contact Info */}
           <div className="flex items-center gap-4 flex-wrap">
-            <a href={`tel:${SALES_PHONE}`} className="flex items-center gap-1.5 hover:text-red-400 transition-colors group">
+            <a href={`tel:${SALES_PHONE}`} className="flex items-center gap-1.5 hover:text-[#00A9E0] transition-colors group">
               <Phone className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
               <span className="font-medium">Sales: {SALES_PHONE}</span>
             </a>
             <span className="hidden sm:inline text-white/30">•</span>
-            <a href={`tel:${SERVICE_PHONE}`} className="hidden sm:flex items-center gap-1.5 hover:text-red-400 transition-colors group">
+            <a href={`tel:${SERVICE_PHONE}`} className="hidden sm:flex items-center gap-1.5 hover:text-[#00A9E0] transition-colors group">
               <Headset className="h-3.5 w-3.5 group-hover:scale-110 transition-transform" />
               <span className="font-medium">Service: {SERVICE_PHONE}</span>
             </a>
             <span className="hidden md:inline text-white/30">•</span>
             <a 
               href={`mailto:${EMAIL}`}
-              className="hidden md:flex items-center gap-1.5 hover:text-red-400 transition-colors"
+              className="hidden md:flex items-center gap-1.5 hover:text-[#00A9E0] transition-colors"
             >
               {EMAIL}
             </a>
@@ -55,7 +56,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="fixed top-[40px] left-0 right-0 z-40 border-b border-white/20 bg-gradient-to-b from-black/30 via-black/20 to-black/30 supports-[backdrop-filter]:bg-black/20 backdrop-blur-2xl shadow-xl shadow-black/30 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/5 before:via-transparent before:to-transparent before:pointer-events-none">
+      <header className="fixed top-[40px] left-0 right-0 z-40 border-b border-white/10 bg-gradient-to-r from-[#002C5F]/95 via-[#002C5F]/90 to-[#002C5F]/95 backdrop-blur-xl shadow-lg shadow-[#002C5F]/40 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/10 before:via-transparent before:to-transparent before:pointer-events-none">
         <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
@@ -66,12 +67,12 @@ export function SiteHeader() {
               <div className="relative">
                 <span 
                   aria-hidden 
-                  className="inline-block h-10 w-10 rounded-lg bg-gradient-to-br from-red-600 to-red-700 shadow-lg shadow-red-600/30 group-hover:shadow-red-600/50 transition-all" 
+                  className="inline-block h-10 w-10 rounded-lg bg-gradient-to-br from-[#002C5F] to-[#0057B8] shadow-lg shadow-[#002C5F]/40 group-hover:shadow-[#0057B8]/50 transition-all" 
                 />
                 <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold">H</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-lg leading-tight tracking-tight">Bharath Hyundai</span>
+                <span className="text-lg leading-tight tracking-tight">Bharat Hyundai</span>
                 <span className="text-[10px] text-white/60 uppercase tracking-wider">Authorized Dealer</span>
               </div>
             </a>
@@ -86,7 +87,7 @@ export function SiteHeader() {
                       className="relative px-4 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors rounded-lg hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 ring-white/40 group"
                     >
                       {n.label}
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-red-500 group-hover:w-3/4 transition-all duration-300" />
+                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#00A9E0] group-hover:w-3/4 transition-all duration-300" />
                     </a>
                   </li>
                 ))}
@@ -95,6 +96,9 @@ export function SiteHeader() {
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-2">
+              {/* Theme Toggle */}
+              <ThemeToggle />
+
               {/* Search */}
               <button
                 onClick={() => setSearchOpen(true)}

@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, ShoppingCart, Star, Truck, Shield, RotateCcw } from "lucide-react"
+import { AccessoryEnquiryModal } from "@/components/accessory-enquiry-modal"
 
 const VENUE_NLINE_ACCESSORIES = [
   {
@@ -149,6 +150,8 @@ const CATEGORIES = ["All", "Interior", "Exterior", "Electronics"]
 export default function VenueNLineAccessoriesPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All")
+  const [selectedAccessory, setSelectedAccessory] = useState<typeof VENUE_NLINE_ACCESSORIES[0] | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const filteredAccessories = VENUE_NLINE_ACCESSORIES.filter((accessory) => {
     const matchesSearch =
@@ -159,12 +162,22 @@ export default function VenueNLineAccessoriesPage() {
     return matchesSearch && matchesCategory
   })
 
+  const handleEnquire = (accessory: typeof VENUE_NLINE_ACCESSORIES[0]) => {
+    setSelectedAccessory(accessory)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedAccessory(null)
+  }
+
   return (
     <>
       <SiteNavigation />
       <main className="pt-[120px] min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white">
         {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-r from-red-600/20 via-black to-red-600/20">
+        <section className="relative py-20 bg-gradient-to-r from-[#0057B8]/20 via-black to-[#0057B8]/20">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4">
               <h1 className="text-4xl md:text-6xl font-bold">
@@ -222,56 +235,54 @@ export default function VenueNLineAccessoriesPage() {
               {filteredAccessories.map((accessory) => (
                 <Card
                   key={accessory.id}
-                  className="border-gray-700 bg-gray-800/50 transition-colors hover:border-red-500/50"
+                  className="relative bg-[#0057B8]/20 backdrop-blur-md border border-[#0057B8]/30 rounded-xl shadow-lg shadow-[#0057B8]/20 hover:shadow-[#0057B8]/40 hover:border-[#0057B8]/50 hover:bg-[#0057B8]/25 transition-all duration-300 group overflow-hidden"
                 >
-                  <CardHeader className="p-0">
+                  {/* Glossy overlay effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#00A9E0]/10 via-transparent to-[#0057B8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  
+                  <CardHeader className="p-0 relative">
                     <div className="relative">
-                      <div className="aspect-square overflow-hidden rounded-t-lg bg-white/5">
+                      <div className="aspect-square overflow-hidden rounded-t-xl bg-gradient-to-br from-[#0057B8]/10 to-[#00A9E0]/5 border-b border-[#0057B8]/20">
                         <img
                           src={accessory.image}
                           alt={accessory.name}
                           className="h-full w-full object-contain p-4 transition-transform duration-300 group-hover:scale-105"
                         />
                       </div>
-                      <Badge className="absolute left-2 top-2 bg-red-600">
-                        {Math.round(
-                          ((parseFloat(accessory.originalPrice.replace(/[₹,]/g, "")) -
-                            parseFloat(accessory.price.replace(/[₹,]/g, ""))) /
-                            parseFloat(accessory.originalPrice.replace(/[₹,]/g, ""))) *
-                            100
-                        )}
-                        % OFF
-                      </Badge>
                     </div>
                   </CardHeader>
-                  <CardContent className="p-6 text-white">
+                  <CardContent className="p-6 text-white relative">
                     <div className="mb-2 flex flex-wrap items-center gap-2">
-                      <Badge variant="outline" className="text-xs">
+                      <Badge variant="outline" className="text-xs border-[#0057B8]/40 text-white/90 bg-[#0057B8]/10 backdrop-blur-sm">
                         {accessory.category}
                       </Badge>
-                      <Badge className="bg-red-600 text-xs hover:bg-red-500">
+                      <Badge className="bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-md shadow-[#0057B8]/30 border border-[#00A9E0]/30 text-xs">
                         Venue N Line
                       </Badge>
                     </div>
                     <CardTitle className="mb-2">{accessory.name}</CardTitle>
-                    <p className="mb-4 text-sm text-gray-300">{accessory.description}</p>
+                    <p className="mb-4 text-sm text-white/80">{accessory.description}</p>
 
                     <div className="mb-4 flex items-center gap-2 text-sm">
                       <div className="flex items-center gap-1">
                         <Star className="h-4 w-4 text-yellow-400" />
                         <span>{accessory.rating}</span>
                       </div>
-                      <span className="text-gray-400">({accessory.reviews} reviews)</span>
+                      <span className="text-white/60">({accessory.reviews} reviews)</span>
                     </div>
 
                     <div className="mb-4 flex items-center gap-2">
-                      <span className="text-lg font-bold text-red-400">{accessory.price}</span>
-                      <span className="text-sm text-gray-400 line-through">{accessory.originalPrice}</span>
+                      <span className="text-lg font-bold text-[#00A9E0] drop-shadow-[0_0_8px_rgba(0,169,224,0.5)]">{accessory.price}</span>
+                      <span className="text-sm text-white/50 line-through">{accessory.originalPrice}</span>
                     </div>
 
-                    <Button className="w-full bg-red-600 hover:bg-red-500">
-                      <ShoppingCart className="mr-2 h-4 w-4" />
-                      Add to Cart
+                    <Button 
+                      onClick={() => handleEnquire(accessory)}
+                      className="w-full bg-gradient-to-r from-[#0057B8] to-[#00A9E0] hover:from-[#00458A] hover:to-[#0057B8] text-white shadow-lg shadow-[#0057B8]/40 hover:shadow-[#0057B8]/60 transition-all duration-300 border border-[#00A9E0]/30 group relative overflow-hidden"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                      <ShoppingCart className="mr-2 h-4 w-4 relative z-10" />
+                      <span className="relative z-10">Enquire Now</span>
                     </Button>
                   </CardContent>
                 </Card>
@@ -288,8 +299,8 @@ export default function VenueNLineAccessoriesPage() {
             </h2>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
               <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-600/20 p-4">
-                  <Shield className="h-8 w-8 text-red-500" />
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#0057B8]/20 p-4">
+                  <Shield className="h-8 w-8 text-[#00A9E0]" />
                 </div>
                 <h3 className="mb-2 text-xl font-semibold">Genuine Quality</h3>
                 <p className="text-gray-300">
@@ -297,8 +308,8 @@ export default function VenueNLineAccessoriesPage() {
                 </p>
               </div>
               <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-600/20 p-4">
-                  <Truck className="h-8 w-8 text-red-500" />
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#0057B8]/20 p-4">
+                  <Truck className="h-8 w-8 text-[#00A9E0]" />
                 </div>
                 <h3 className="mb-2 text-xl font-semibold">Professional Support</h3>
                 <p className="text-gray-300">
@@ -306,8 +317,8 @@ export default function VenueNLineAccessoriesPage() {
                 </p>
               </div>
               <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-600/20 p-4">
-                  <RotateCcw className="h-8 w-8 text-red-500" />
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#0057B8]/20 p-4">
+                  <RotateCcw className="h-8 w-8 text-[#00A9E0]" />
                 </div>
                 <h3 className="mb-2 text-xl font-semibold">Comprehensive Warranty</h3>
                 <p className="text-gray-300">
@@ -318,6 +329,18 @@ export default function VenueNLineAccessoriesPage() {
           </div>
         </section>
       </main>
+
+      {/* Enquiry Modal */}
+      {selectedAccessory && (
+        <AccessoryEnquiryModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          accessoryName={selectedAccessory.name}
+          carModel="Venue N Line"
+          accessoryPrice={selectedAccessory.price}
+          accessoryImage={selectedAccessory.image}
+        />
+      )}
     </>
   )
 }
